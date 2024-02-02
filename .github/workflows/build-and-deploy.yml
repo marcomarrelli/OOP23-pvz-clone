@@ -1,0 +1,33 @@
+name: CI
+on:
+  push:
+    tags: '*'
+    branches-ignore:
+      - 'autodelivery**'
+      - 'bump-**'
+      - 'renovate/**'
+    paths-ignore:
+      - 'CHANGELOG.md'
+      - 'LICENSE'
+      - 'README.md'
+      - 'renovate.json'
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  Build:
+    if: contains(github.repository, 'sample-javafx-project') && !github.event.repository.fork
+    strategy:
+      matrix:
+        os: [windows, macos, ubuntu]
+        jvm_version: [17, 18, 19]
+    runs-on: ${{ matrix.os }}-latest
+    steps:
+      - name: Checkout
+        uses: DanySK/action-checkout@0.2.14
+      - uses: DanySK/build-check-deploy-gradle-action@2.2.19
+        with:
+          java-version: ${{ matrix.jvm_version }}
+          should-run-codecov: false
+          should-deploy: false
+          should-validate-wrapper: ${{ matrix.os == 'ubuntu' && matrix.jvm_version == '17' }}
