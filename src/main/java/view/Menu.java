@@ -1,14 +1,24 @@
 package view;
 
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCombination;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 /**
@@ -26,8 +36,8 @@ public class Menu extends Application {
 
     private final String FULLSCREEN_KEY_COMBINATION = "ESC";
     private final String FULLSCREEN_MESSAGE = "Press " + FULLSCREEN_KEY_COMBINATION + " to exit Fullscreen Mode!";
-    private final String SCENE_BACKGROUND = "menuBackground.jpeg";
-    private final String BUTTON_BACKGROUND = "tombstoneTexture.jpg";
+    private final String SCENE_BACKGROUND = "/images/menuBackground.jpeg";
+    private final String BUTTON_BACKGROUND = "/images/tombstoneTexture.jpg";
 
     /**
      * Initialize the Stage, settings his bounds and properties.
@@ -76,6 +86,7 @@ public class Menu extends Application {
         return box;
     }
 
+
     @Override
     public void start(Stage stage) throws Exception {
         initStage(stage);
@@ -85,6 +96,16 @@ public class Menu extends Application {
         //if(!Files.exists(Paths.get(SCENE_BACKGROUND))) throw new FileNotFoundException("File " + SCENE_BACKGROUND + " was not found in your System!");
 
         Button startButton = new Button("Start Adventure");
+        startButton.setOnAction(e -> {
+            try {
+                Parent p = FXMLLoader.load(getClass().getResource("/fxml/gameField.fxml"));
+                System.out.println("hello");
+                stage.setScene(new Scene(p));
+                stage.show();
+            } catch (Exception exc) {
+                exc.printStackTrace();
+            }
+        });
         
         Button fullscreenButton = new Button("Fullscreen (Settings)");
         fullscreenButton.setOnAction(e -> stage.setFullScreen(!stage.isFullScreen()));
