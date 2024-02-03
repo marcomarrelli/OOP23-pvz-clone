@@ -4,7 +4,7 @@ import model.api.Zombie;
 
 public class ZombieImpl implements Zombie {
 
-    private final double powerAttack;
+    private final double damage;
     private final double zombieSpeed;
     private final double timeRechargeAttack; //tempo che impiega per togliere un tot (powerattack) di vita alla pianta
     private double remainingLife;
@@ -12,8 +12,8 @@ public class ZombieImpl implements Zombie {
     // position
 
 
-    public ZombieImpl(double pA, double tRA, double maxLife, boolean ZA, double zS){
-        this.powerAttack = pA;
+    public ZombieImpl(double damage, double tRA, double maxLife, boolean ZA, double zS){
+        this.damage = damage;
         this.timeRechargeAttack = tRA;
         this.zombieSpeed = zS;
         this.remainingLife = maxLife;
@@ -22,7 +22,7 @@ public class ZombieImpl implements Zombie {
     }
 
     @Override
-    public double getPowerAttack() {
+    public double getDamage() {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getPowerAttack'");
     }

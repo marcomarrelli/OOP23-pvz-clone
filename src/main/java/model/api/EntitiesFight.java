@@ -6,7 +6,7 @@ public interface EntitiesFight extends Entities {
      * 
      * @return entity's attack points;
      */
-    public double getPowerAttack();
+    public double getDamage();
 
     /**
      * @return entity's health points
