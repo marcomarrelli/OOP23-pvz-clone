@@ -12,7 +12,7 @@ public class PlantImpl implements Plant{
     private double remainingLife;
     private final Pair<Double,Double> position;
     
-    public PlantImpl(double damage, double remainingLife, String entityName, double timeBetweenAttacks, Pair<Double, Double> position){
+    public PlantImpl(final double damage, final double remainingLife, final String entityName, final double timeBetweenAttacks, final Pair<Double, Double> position){
         this.damage = damage;
         this.remainingLife = remainingLife;
         this.entityName = entityName;
@@ -22,17 +22,17 @@ public class PlantImpl implements Plant{
 
     @Override
     public double getDamage() {
-        return damage;
+        return this.damage;
     }
 
     @Override
     public double getRemainingLife() {
-        return remainingLife;
+        return this.remainingLife;
     }
 
     @Override
     public Pair<Double,Double> getPosition() {
-        return position;
+        return this.position;
     }
 
     @Override
@@ -43,17 +43,17 @@ public class PlantImpl implements Plant{
 
     @Override
     public String getEntityName() {
-       return entityName;
+       return this.entityName;
     }
 
     @Override
     public double getTimeBetweenAttacks() {
-        return timeBetweenAttacks;
+        return this.timeBetweenAttacks;
     }
 
     @Override
     public void receiveDamage(double damageReceived) {
-        remainingLife = remainingLife -damageReceived;
+        remainingLife = remainingLife - damageReceived;
     }
 
 }
