@@ -1,11 +1,13 @@
 package model.api;
 
+import javafx.util.Pair;
+
 public interface Entities {
     
     /**
      * must change return
      */
-    public void getPosition();
+    public Pair<Double,Double> getPosition();
 
     /**
      * 

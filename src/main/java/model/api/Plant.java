@@ -1,6 +1,6 @@
 package model.api;
 
-public interface Plants extends EntitiesFight {
+public interface Plant extends EntitiesFight {
 
     /**
      * 
