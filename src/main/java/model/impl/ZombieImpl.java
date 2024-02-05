@@ -1,5 +1,6 @@
 package model.impl;
 
+import javafx.util.Pair;
 import model.api.Zombie;
 
 public class ZombieImpl implements Zombie {
@@ -9,52 +10,52 @@ public class ZombieImpl implements Zombie {
     private final double timeRechargeAttack; //tempo che impiega per togliere un tot (powerattack) di vita alla pianta
     private double remainingLife;
     private boolean isZombieAlive;
-    // position
+    private Pair<Double,Double> position;
 
 
-    public ZombieImpl(double damage, double tRA, double maxLife, boolean ZA, double zS){
-        this.damage = damage;
+    public ZombieImpl(final double dmg, final double tRA, final double zS,
+            final double maxLife, final boolean ZA, final Pair<Double,Double> pstn){
+        this.damage = dmg;
         this.timeRechargeAttack = tRA;
         this.zombieSpeed = zS;
         this.remainingLife = maxLife;
         this.isZombieAlive = ZA;
-        
+        this.position = pstn;
     }
 
     @Override
     public double getDamage() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPowerAttack'");
+        return this.damage;
     }
 
     @Override
     public double getRemainingLife() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getRemainingLife'");
+        return this.remainingLife;
     }
 
     @Override
-    public void getPosition() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPosition'");
+    public Pair<Double,Double> getPosition() {
+        return this.position;
     }
 
     @Override
     public boolean isAlive() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isAlive'");
+        return this.remainingLife > 0 ? true : false;
     }
 
     @Override
     public String getEntityName() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getEntityName'");
+        return "Zombie";
     }
 
     @Override
     public double getZombieSpeed() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getZombieSpeed'");
+        return this.getZombieSpeed();
+    }
+
+    @Override
+    public void receiveDamage(double damageReceived) {
+        this.remainingLife = this.remainingLife - damageReceived;
     }
     
 }
