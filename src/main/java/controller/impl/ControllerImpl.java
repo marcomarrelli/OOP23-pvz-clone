@@ -1,6 +1,7 @@
 package controller.impl;
 
 import controller.api.Controller;
+import input.api.MouseEvent;
 import model.api.WorldEvent;
 
 public class ControllerImpl implements Controller {
@@ -18,7 +19,13 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
-    public void notifyEvent(WorldEvent ev) {
+    public void notifyMouseEvent(MouseEvent me) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'notifyMouseEvent'");
+    }
+
+    @Override
+    public void notifyWorldEvent(WorldEvent ev) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'notifyEvent'");
     }

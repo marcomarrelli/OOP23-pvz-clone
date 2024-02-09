@@ -1,13 +1,12 @@
 package controller.api;
 
-import model.api.WorldEvent;
+import input.api.ViewEventListener;
+import model.api.WorldEventListener;
 
-public interface Controller {
+public interface Controller extends ViewEventListener, WorldEventListener {
 
     void initGame();
 
     void mainLoop();
-
-    void notifyEvent(WorldEvent ev);
 
 }
