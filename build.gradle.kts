@@ -55,9 +55,7 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
-val main: String by project
-
 application {
     // Define the main class for the application
-    mainClass.set(main)
+    mainClass.set("PvzStart")
 }
