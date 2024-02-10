@@ -9,7 +9,7 @@ public class ZombieImpl implements Zombie {
 
     private final double damage;
     private final double zombieSpeed;
-    private final long timeRechargeAttack;
+    private final long cooldown;
 
     private double remainingLife;
     private long lastTimeAttack;
@@ -23,10 +23,10 @@ public class ZombieImpl implements Zombie {
      * @param maxLife Zombie's inital life.
      * @param position Zombie's position.
      */
-    public ZombieImpl(final double damage, final long timeRA, final double zombieSpeed,
+    public ZombieImpl(final double damage, final long cooldown, final double zombieSpeed,
         final double maxLife, final Pair<Double,Double> position){
         this.damage = damage;
-        this.timeRechargeAttack = timeRA;
+        this.cooldown = cooldown;
         this.zombieSpeed = zombieSpeed;
         this.remainingLife = maxLife;
         this.position = position;
@@ -64,7 +64,7 @@ public class ZombieImpl implements Zombie {
     
     @Override
     public long getCooldown() {
-        return this.timeRechargeAttack;
+        return this.cooldown;
     }
     
     @Override
