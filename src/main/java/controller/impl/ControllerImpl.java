@@ -2,6 +2,7 @@ package controller.impl;
 
 import controller.api.Controller;
 import javafx.application.Application;
+import javafx.scene.Scene;
 import javafx.util.Pair;
 import model.api.Game;
 import model.api.WorldEvent;
@@ -10,23 +11,33 @@ import view.impl.ViewImpl;
 
 public class ControllerImpl implements Controller {
     
-    GameImpl game;
+    private static final long PERIOD = 20;
+    private Game game;
+    //private ViewImpl view = new ViewImpl();
+    //private Scene scene;
 
     @Override
     public void initGame() {
+        // this.view = new ViewImpl();
+        // Application.launch(view.getClass(), "");
         Application.launch(ViewImpl.class);
-        game = new GameImpl();
+        this.game = new GameImpl();
     }
 
     @Override
     public void mainLoop() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'mainLoop'");
+        long startTime = System.currentTimeMillis();
+        while (game.isOver()) {
+            long currentStartTime = System.currentTimeMillis();
+            game.update();
+            // view.update(this.scene);
+
+        }
     }
 
     @Override
     public void notifyMouseEvent(Pair<Double, Double> clickPos) {
-        game.mouseEvent(clickPos);
+        this.game.mouseEvent(clickPos);
     }
 
     @Override

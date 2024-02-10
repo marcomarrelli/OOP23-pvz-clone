@@ -12,6 +12,5 @@ public interface GameState {
 
     int getSunScore();
 
-    boolean isGameOver();
 
 }

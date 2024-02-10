@@ -46,10 +46,5 @@ public class GameStateImpl implements GameState {
         throw new UnsupportedOperationException("Unimplemented method 'getSunScore'");
     }
 
-    @Override
-    public boolean isGameOver() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isGameOver'");
-    }
     
 }

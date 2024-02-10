@@ -1,5 +1,7 @@
 package view.impl;
 
+import controller.api.Controller;
+import controller.impl.ControllerImpl;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCombination;
@@ -23,6 +25,8 @@ public class ViewImpl extends Application implements View {
     
     private Scene currentScene;
 
+    private Controller controller;
+
     public ViewImpl() {
         this.APPLICATION_STAGE = new Stage();
 
@@ -36,6 +40,8 @@ public class ViewImpl extends Application implements View {
         this.setScene(INITIAL_SCENE);
 
         this.APPLICATION_STAGE.show();
+
+        this.controller = new ControllerImpl();
     }
 
     @Override

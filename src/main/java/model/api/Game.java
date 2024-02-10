@@ -25,5 +25,9 @@ public interface Game {
      */
     public void createPlant(Pair<Double, Double> position);
 
+    public void mouseEvent(Pair<Double, Double> posClick);
+
+    public void checkCollision();
+
 
 }
