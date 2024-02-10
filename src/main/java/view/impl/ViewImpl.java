@@ -1,4 +1,4 @@
-package view.impl;
+/*package view.impl;
 
 import controller.api.Controller;
 import controller.impl.ControllerImpl;
@@ -8,6 +8,7 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import view.api.View;
+
 
 public class ViewImpl extends Application implements View {
     private static final double APPLICATION_WIDTH = 800.0;
@@ -65,3 +66,5 @@ public class ViewImpl extends Application implements View {
         primaryStage = this.APPLICATION_STAGE;
     }
 }
+
+*/
