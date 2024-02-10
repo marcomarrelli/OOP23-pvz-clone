@@ -1,24 +1,16 @@
 package view;
 
-import java.io.IOException;
-
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCombination;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 /**
@@ -99,7 +91,6 @@ public class Menu extends Application {
         startButton.setOnAction(e -> {
             try {
                 Parent p = FXMLLoader.load(getClass().getResource("/fxml/gameField.fxml"));
-                System.out.println("hello");
                 stage.setScene(new Scene(p));
                 stage.show();
             } catch (Exception exc) {

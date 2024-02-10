@@ -1,9 +1,8 @@
-import view.Menu;
-
-import javafx.application.Application;
+import controller.impl.ControllerImpl;
 
 public class PvzStart {
     public static void main(String[] args) {
-        Application.launch(Menu.class, args);
+        ControllerImpl controller = new ControllerImpl();
+        controller.initGame();
     }
 }
