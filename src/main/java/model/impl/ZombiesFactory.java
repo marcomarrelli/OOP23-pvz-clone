@@ -9,13 +9,11 @@ public class ZombiesFactory implements EntitiesFactory {
 
     @Override
     public Entities createEntity() {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'createEntity'");
     }
 
     @Override
     public Set<Entities> createEntities(int n) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'createEntities'");
     }
     

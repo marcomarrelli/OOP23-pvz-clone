@@ -22,14 +22,14 @@ import javafx.stage.Stage;
 public class Menu extends Application {
     //private final double SCREEN_WIDTH = Screen.getPrimary().getBounds().getWidth();
     //private final double SCREEN_HEIGHT = Screen.getPrimary().getBounds().getHeight();
-    private double APPLICATION_WIDTH = 800;
-    private double APPLICATION_HEIGHT = 600;
-    private final double MARGINS = Math.min(APPLICATION_WIDTH*0.03, APPLICATION_HEIGHT*0.03);
+    private static final double APPLICATION_WIDTH = 800;
+    private static final double APPLICATION_HEIGHT = 600;
+    private static final double MARGINS = Math.min(APPLICATION_WIDTH*0.03, APPLICATION_HEIGHT*0.03);
 
-    private final String FULLSCREEN_KEY_COMBINATION = "ESC";
-    private final String FULLSCREEN_MESSAGE = "Press " + FULLSCREEN_KEY_COMBINATION + " to exit Fullscreen Mode!";
-    private final String SCENE_BACKGROUND = "/images/menuBackground.jpeg";
-    private final String BUTTON_BACKGROUND = "/images/tombstoneTexture.jpg";
+    private static final String FULLSCREEN_KEY_COMBINATION = "ESC";
+    private static final String FULLSCREEN_MESSAGE = "Press " + FULLSCREEN_KEY_COMBINATION + " to exit Fullscreen Mode!";
+    private static final String SCENE_BACKGROUND = "/images/menuBackground.jpeg";
+    private static final String BUTTON_BACKGROUND = "/images/tombstoneTexture.jpg";
 
     /**
      * Initialize the Stage, settings his bounds and properties.

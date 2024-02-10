@@ -7,20 +7,19 @@ public class ZombieImpl implements Zombie {
 
     private final double damage;
     private final double zombieSpeed;
-    private final double timeRechargeAttack; //tempo che impiega per togliere un tot (powerattack) di vita alla pianta
+    private final double timeRechargeAttack; /*long? */
+
     private double remainingLife;
-    private boolean isZombieAlive;
     private Pair<Double,Double> position;
 
 
-    public ZombieImpl(final double dmg, final double tRA, final double zS,
-            final double maxLife, final boolean ZA, final Pair<Double,Double> pstn){
-        this.damage = dmg;
-        this.timeRechargeAttack = tRA;
-        this.zombieSpeed = zS;
+    public ZombieImpl(final double damage, final double timeRA, final double zombieSpeed,
+        final double maxLife, final Pair<Double,Double> position){
+        this.damage = damage;
+        this.timeRechargeAttack = timeRA;
+        this.zombieSpeed = zombieSpeed;
         this.remainingLife = maxLife;
-        this.isZombieAlive = ZA;
-        this.position = pstn;
+        this.position = position;
     }
 
     @Override

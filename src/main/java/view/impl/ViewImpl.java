@@ -8,16 +8,16 @@ import javafx.stage.Stage;
 import view.api.View;
 
 public class ViewImpl extends Application implements View {
-    private final Double APPLICATION_WIDTH = 800.0;
-    private final Double APPLICATION_HEIGHT = 600.0;
+    private static final double APPLICATION_WIDTH = 800.0;
+    private static final double APPLICATION_HEIGHT = 600.0;
 
-    private final String APPLICATION_TITLE = "Plants Vs Zombies";
-    private final boolean IS_APPLICATION_RESIZABLE = false;
+    private static final String APPLICATION_TITLE = "Plants Vs Zombies";
+    private static final boolean IS_APPLICATION_RESIZABLE = false;
     
-    private final KeyCombination EXIT_FULLSCREEN_KEY_COMBINATION = KeyCombination.valueOf("ESC");
-    private final String EXIT_FULLSCREEN_MESSAGE = "Press " + EXIT_FULLSCREEN_KEY_COMBINATION + " to exit Fullscreen Mode!";
+    private static final KeyCombination EXIT_FULLSCREEN_KEY_COMBINATION = KeyCombination.valueOf("ESC");
+    private static final String EXIT_FULLSCREEN_MESSAGE = "Press " + EXIT_FULLSCREEN_KEY_COMBINATION + " to exit Fullscreen Mode!";
 
-    private final Scene INITIAL_SCENE = new Scene(new BorderPane());
+    private static final Scene INITIAL_SCENE = new Scene(new BorderPane());
 
     private final Stage APPLICATION_STAGE;
     
@@ -26,14 +26,14 @@ public class ViewImpl extends Application implements View {
     public ViewImpl() {
         this.APPLICATION_STAGE = new Stage();
 
-        this.APPLICATION_STAGE.setTitle(this.APPLICATION_TITLE);
-        this.APPLICATION_STAGE.setResizable(this.IS_APPLICATION_RESIZABLE);
-        this.APPLICATION_STAGE.setWidth(this.APPLICATION_WIDTH);
-        this.APPLICATION_STAGE.setHeight(this.APPLICATION_HEIGHT);
-        this.APPLICATION_STAGE.setFullScreenExitKeyCombination(this.EXIT_FULLSCREEN_KEY_COMBINATION);
-        this.APPLICATION_STAGE.setFullScreenExitHint(this.EXIT_FULLSCREEN_MESSAGE);
+        this.APPLICATION_STAGE.setTitle(APPLICATION_TITLE);
+        this.APPLICATION_STAGE.setResizable(IS_APPLICATION_RESIZABLE);
+        this.APPLICATION_STAGE.setWidth(APPLICATION_WIDTH);
+        this.APPLICATION_STAGE.setHeight(APPLICATION_HEIGHT);
+        this.APPLICATION_STAGE.setFullScreenExitKeyCombination(EXIT_FULLSCREEN_KEY_COMBINATION);
+        this.APPLICATION_STAGE.setFullScreenExitHint(EXIT_FULLSCREEN_MESSAGE);
 
-        this.setScene(this.INITIAL_SCENE);
+        this.setScene(INITIAL_SCENE);
 
         this.APPLICATION_STAGE.show();
     }
