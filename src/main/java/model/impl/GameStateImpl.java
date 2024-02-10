@@ -2,10 +2,12 @@ package model.impl;
 
 import model.api.GameState;
 import model.api.World;
+
 /**
  * Class that implements GameState.
  * 
  * This class supports reading and writing operations on fields.
+ * @author Sofia Lotti.
  */
 public class GameStateImpl implements GameState {
 
