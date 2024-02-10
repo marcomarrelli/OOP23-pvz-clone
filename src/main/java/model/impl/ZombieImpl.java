@@ -49,7 +49,7 @@ public class ZombieImpl implements Zombie {
 
     @Override
     public double getZombieSpeed() {
-        return this.getZombieSpeed();
+        return this.zombieSpeed;
     }
 
     @Override

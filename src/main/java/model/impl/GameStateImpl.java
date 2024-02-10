@@ -30,20 +30,17 @@ public class GameStateImpl implements GameState {
 
     @Override
     public void decSunScore(int costPlant) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'decSunScore'");
+        this.sunScore = this.sunScore - costPlant;
     }
 
     @Override
     public int getKilledZombies() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getKilledZombies'");
+        return this.killedZombies;
     }
 
     @Override
     public int getSunScore() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getSunScore'");
+        return this.sunScore;
     }
 
     
