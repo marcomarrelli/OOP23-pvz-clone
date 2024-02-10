@@ -1,7 +1,9 @@
 package input.api;
 
+import javafx.util.Pair;
+
 public interface ViewEventListener {
 
-    void notifyMouseEvent(MouseEvent me);
+    void notifyMouseEvent(Pair<Double, Double> pos);
 
 }
