@@ -2,14 +2,15 @@ package controller.impl;
 
 import controller.api.Controller;
 import input.api.MouseEvent;
+import javafx.application.Application;
 import model.api.WorldEvent;
+import view.impl.ViewImpl;
 
 public class ControllerImpl implements Controller {
 
     @Override
     public void initGame() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'initGame'");
+        Application.launch(ViewImpl.class);
     }
 
     @Override
