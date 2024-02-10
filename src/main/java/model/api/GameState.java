@@ -1,7 +1,7 @@
 package model.api;
 
 /**
- * This interface model a GameState.
+ * This interface models a GameState.
  * Works on the main information related to the game.
  * @author Sofia Lotti.
  */
