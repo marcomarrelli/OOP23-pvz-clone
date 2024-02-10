@@ -5,6 +5,7 @@ import model.api.World;
 
 public class GameStateImpl implements GameState {
 
+    private static final int INC_SUN = 25;
     private final World world;
     private final int totZombies;
     private int killedZombies;
@@ -19,14 +20,12 @@ public class GameStateImpl implements GameState {
 
     @Override
     public void incKilledZombies() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'incKilledZombies'");
+        this.killedZombies = this.killedZombies + 1;    
     }
 
     @Override
     public void incSunScore() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'incSunScore'");
+        this.sunScore = this.sunScore + INC_SUN;
     }
 
     @Override
