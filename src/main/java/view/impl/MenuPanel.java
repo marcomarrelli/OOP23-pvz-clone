@@ -1,5 +1,6 @@
 package view.impl;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -14,8 +15,9 @@ public class MenuPanel extends JPanel {
     Image background;
 
     public MenuPanel(final int width, final int height) {
-        setSize(width, height);
-        this.background= new ImageIcon(MENU_BACKGROUND).getImage();
+        this.setSize(width, height);
+        this.setBackground(Color.BLACK);
+        this.background= new ImageIcon(getClass().getResource(MENU_BACKGROUND)).getImage();
     }
 
     @Override
@@ -23,7 +25,7 @@ public class MenuPanel extends JPanel {
         super.paint(g);
 
         Graphics2D g2D= (Graphics2D) g;
-        g2D.drawImage(background, 0, 0, null);
+        g2D.drawImage(this.background, 0, 0, null);
 
     }
 

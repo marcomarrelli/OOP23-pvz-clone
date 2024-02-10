@@ -25,7 +25,7 @@ public class ControllerImpl implements Controller {
         // Application.launch(view.getClass(), "");
         //Application.launch(ViewImpl.class);
         this.game = new GameImpl();
-        this.view= new SwingViewImpl(600, 800);
+        this.view= new SwingViewImpl(1000, 700);
     }
 
     @Override

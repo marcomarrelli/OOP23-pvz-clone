@@ -14,10 +14,12 @@ public class SwingViewImpl implements View {
 
     public SwingViewImpl(int width, int height) {
         frame = new JFrame("PVZ clone");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(width, height);
         frame.setMinimumSize(new Dimension(width,height));
         frame.setResizable(false);
         panel= new MenuPanel(width, height);
+        frame.getContentPane().add(panel);
         frame.setVisible(true);
     }
 
