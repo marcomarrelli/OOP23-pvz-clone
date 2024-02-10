@@ -9,9 +9,9 @@ public interface View {
     /**
      * Sets the current scene to the stage.
      * 
-     * @param scene The scene to load.
+     * @param scene The scene name to load.
      */
-    void setScene(JPanel scene);
+    void setScene(String scene);
     
     /**
      * Gets the current scene
@@ -20,10 +20,17 @@ public interface View {
      */
     JPanel getScene();
 
-    /**
-     * Updates the current scene.
+        /**
+     * Gets the current scene
      * 
-     * @param scene
+     * @return The currently loaded scene constraint.
+     */
+    String getSceneConstraint();
+
+    /**
+     * Updates the scene.
+     * 
+     * @param scene the scene to update
      */
     void update(JPanel scene);
 }

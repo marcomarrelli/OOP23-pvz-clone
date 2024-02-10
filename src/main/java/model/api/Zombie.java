@@ -1,7 +1,9 @@
 package model.api;
-
-public interface Zombie extends EntitiesFight {
-    
+/**
+ * This interface models a Zombie Entity.
+ * @author Sofia Lotti.
+ */
+public interface Zombie extends ActiveEntities {
     /**
      * @return the speed of Zombies
      */

@@ -61,22 +61,21 @@ public class GameImpl implements Game{
            
         }
     }
-
+    
     /**
-     * @author Zanchini Margherita
-     * @param zombie the zombie that eats the plant
-     * @param plant the plant that is eaten by the zombie
-     * 
      * this method handles the case of collision of a zombie and a plant
      * the plant takes damage
      * and then we check if the plant is still alive after the damage received
      * if not we remove it from the list of all the plants
-     *  
+     * 
+     * @author Zanchini Margherita
+     * @param zombie the zombie that eats the plant
+     * @param plant  the plant that is eaten by the zombie
      */
     private void zombieEatPlant(Zombie zombie, Plant plant){
-        long zombieTime = zombie.getTimeRechargeAttack();
+        long zombieLastAttack = zombie.getLastTimeAttack();
         long currentTime = System.currentTimeMillis();
-        if( currentTime-zombieTime > timeRechargeAttackZombie){
+        if( currentTime-zombieLastAttack > timeRechargeAttackZombie){
             plant.receiveDamage(zombie.getDamage());
             if(!plant.isAlive()){
                 plants.remove(plant);
