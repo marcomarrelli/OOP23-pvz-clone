@@ -3,11 +3,13 @@ package controller.impl;
 import controller.api.Controller;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.util.Pair;
 import model.api.Game;
 import model.api.WorldEvent;
 import model.impl.GameImpl;
-import view.impl.ViewImpl;
+import model.impl.Pair;
+import view.api.View;
+//import view.impl.ViewImpl;
+import view.impl.SwingViewImpl;
 
 public class ControllerImpl implements Controller {
     
@@ -15,13 +17,15 @@ public class ControllerImpl implements Controller {
     private Game game;
     //private ViewImpl view = new ViewImpl();
     //private Scene scene;
+    private View view;
 
     @Override
     public void initGame() {
         // this.view = new ViewImpl();
         // Application.launch(view.getClass(), "");
-        Application.launch(ViewImpl.class);
+        //Application.launch(ViewImpl.class);
         this.game = new GameImpl();
+        this.view= new SwingViewImpl(600, 800);
     }
 
     @Override

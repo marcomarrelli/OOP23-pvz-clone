@@ -1,6 +1,6 @@
 package view.api;
 
-import javafx.scene.Scene;
+import javax.swing.JPanel;
 
 /**
  * View Interface, gets/sets the current Scene and updates it.
@@ -11,19 +11,19 @@ public interface View {
      * 
      * @param scene The scene to load.
      */
-    void setScene(Scene scene);
+    void setScene(JPanel scene);
     
     /**
      * Gets the current scene
      * 
      * @return The currently loaded scene.
      */
-    Scene getScene();
+    JPanel getScene();
 
     /**
      * Updates the current scene.
      * 
      * @param scene
      */
-    void update(Scene scene);
+    void update(JPanel scene);
 }
