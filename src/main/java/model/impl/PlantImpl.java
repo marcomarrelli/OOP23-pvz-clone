@@ -1,6 +1,5 @@
 package model.impl;
 
-import model.impl.Pair;
 import model.api.Plant;
 
 public class PlantImpl implements Plant{
@@ -11,13 +10,15 @@ public class PlantImpl implements Plant{
     private final double timeBetweenAttacks;
     private double remainingLife;
     private final Pair<Double,Double> position;
+    private final long timeRechargeAttack;
     
-    public PlantImpl(final double damage, final double remainingLife, final String entityName, final double timeBetweenAttacks, final Pair<Double, Double> position){
+    public PlantImpl(final double damage, final double remainingLife, final String entityName, final double timeBetweenAttacks, final Pair<Double, Double> position, final long timeRechargeAttack){
         this.damage = damage;
         this.remainingLife = remainingLife;
         this.entityName = entityName;
         this.timeBetweenAttacks = timeBetweenAttacks;
         this.position = position;
+        this.timeRechargeAttack = timeRechargeAttack;
     }
 
     @Override
@@ -53,7 +54,12 @@ public class PlantImpl implements Plant{
 
     @Override
     public void receiveDamage(double damageReceived) {
-        remainingLife = remainingLife - damageReceived;
+        this.remainingLife = this.remainingLife - damageReceived;
+    }
+
+    @Override
+    public long getTimeRechargeAttack() {
+        return this.timeRechargeAttack;
     }
 
 }

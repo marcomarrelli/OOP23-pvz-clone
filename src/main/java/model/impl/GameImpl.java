@@ -36,7 +36,7 @@ public class GameImpl implements Game{
 
     @Override
     public void createPlant(Pair<Double, Double> position) {
-        plants.add(new PlantImpl(20, 100, "base plant", 2, position));
+        plants.add(new PlantImpl(20, 100, "base plant", 2, position, 5));
     }
 
     public void mouseEvent(Pair<Double, Double> posClick){

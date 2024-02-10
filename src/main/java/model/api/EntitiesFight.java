@@ -18,4 +18,10 @@ public interface EntitiesFight extends Entities {
      * @param damageReceived is the damage our Entities has received
      */
     public void receiveDamage(double damageReceived);
+
+    /**
+     * 
+     * @return the time that a zombie takes to recharge the attack (eat a plant)
+     */
+    public long getTimeRechargeAttack();
 }

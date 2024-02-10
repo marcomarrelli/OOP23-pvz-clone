@@ -1,6 +1,6 @@
 package model.api;
 
-public interface Bullet extends Entities {
+public interface BulletImpl extends Entities {
 
     /**
      * 
