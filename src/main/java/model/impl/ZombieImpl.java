@@ -6,13 +6,13 @@ public class ZombieImpl implements Zombie {
 
     private final double damage;
     private final double zombieSpeed;
-    private final double timeRechargeAttack; /*long? */
+    private final long timeRechargeAttack;
 
     private double remainingLife;
     private Pair<Double,Double> position;
 
 
-    public ZombieImpl(final double damage, final double timeRA, final double zombieSpeed,
+    public ZombieImpl(final double damage, final long timeRA, final double zombieSpeed,
         final double maxLife, final Pair<Double,Double> position){
         this.damage = damage;
         this.timeRechargeAttack = timeRA;
@@ -50,10 +50,17 @@ public class ZombieImpl implements Zombie {
     public double getZombieSpeed() {
         return this.zombieSpeed;
     }
+    
+    @Override
+    public long getTimeRechargeAttack() {
+        return this.timeRechargeAttack;
+    }
 
     @Override
     public void receiveDamage(double damageReceived) {
         this.remainingLife = this.remainingLife - damageReceived;
     }
+
+    
     
 }

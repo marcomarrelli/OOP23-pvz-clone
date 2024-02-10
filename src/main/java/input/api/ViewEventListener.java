@@ -1,6 +1,6 @@
 package input.api;
 
-import javafx.util.Pair;
+import model.impl.Pair;
 
 public interface ViewEventListener {
 

@@ -7,4 +7,10 @@ public interface Zombie extends EntitiesFight {
      */
     public double getZombieSpeed();
 
+    /**
+     * 
+     * @return the time that a zombie takes to recharge the attack (eat a plant)
+     */
+    public long getTimeRechargeAttack();
+
 }
