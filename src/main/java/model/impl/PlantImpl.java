@@ -1,6 +1,6 @@
 package model.impl;
 
-import javafx.util.Pair;
+import model.impl.Pair;
 import model.api.Plant;
 
 public class PlantImpl implements Plant{

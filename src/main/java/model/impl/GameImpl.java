@@ -1,6 +1,5 @@
 package model.impl;
 
-import javafx.util.Pair;
 import model.api.Game;
 import java.util.List;
 import java.util.ArrayList;
@@ -41,11 +40,15 @@ public class GameImpl implements Game{
         //se è stato fatto su un sole o sulla pianta o il secondo click della pianta
     }
 
+    /**
+     * this method checks all of the collisions
+     * if a zombie is in the same position of the plant then it should eat it
+     * if a bullet collides with a zombie
+     * 
+     * @author Zanchini Margherita
+     */
     public void checkCollision(){
-        //questo è un metodo che controlla che non ci siano collisioni
-        //tipo uno zombie che arriva ad una pianta
-        //uno zombie che arriva alla casa
-        //il proiettile che colpisce lo zombie
+        
     }
     
 }

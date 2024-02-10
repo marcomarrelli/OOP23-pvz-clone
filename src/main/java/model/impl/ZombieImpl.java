@@ -1,6 +1,5 @@
 package model.impl;
 
-import javafx.util.Pair;
 import model.api.Zombie;
 
 public class ZombieImpl implements Zombie {

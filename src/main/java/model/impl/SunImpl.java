@@ -1,6 +1,5 @@
 package model.impl;
 
-import javafx.util.Pair;
 import model.api.Sun;
 
 public class SunImpl implements Sun {
@@ -37,7 +36,7 @@ public class SunImpl implements Sun {
 
     @Override
     public Integer getPoints() {
-        if(!this.isAlive && !(this.position.getValue()==SCREEN_BOTTOM)){
+        if(!this.isAlive && !(this.position.getY()==SCREEN_BOTTOM)){
             return POINTS;
         }
         return 0;
@@ -45,8 +44,8 @@ public class SunImpl implements Sun {
 
     @Override
     public void moveDown() {
-        this.position= new Pair<>(this.position.getKey(), this.position.getValue()+1.0);
-        if(this.position.getValue()==SCREEN_BOTTOM) {
+        this.position= new Pair<>(this.position.getX(), this.position.getY()+1.0);
+        if(this.position.getY()==SCREEN_BOTTOM) {
             this.kill();
         }
     }
