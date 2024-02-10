@@ -16,6 +16,7 @@ public class GameStateImpl implements GameState {
     private final int totZombies;
     private int killedZombies;
     private int sunScore;
+    
     /**
      * Constructor of GameStateImpl.
      * 
@@ -23,10 +24,10 @@ public class GameStateImpl implements GameState {
      * @param world World class istance.
      */
     public GameStateImpl(final int totZombies, final World world) {
-        this.world= world;
-        this.totZombies=totZombies;
-        this.killedZombies=0;
-        this.sunScore=0;
+        this.world = world;
+        this.totZombies = totZombies;
+        this.killedZombies = 0;
+        this.sunScore = 0;
     }
     
     @Override
@@ -53,6 +54,4 @@ public class GameStateImpl implements GameState {
     public int getSunScore() {
         return this.sunScore;
     }
-
-    
 }

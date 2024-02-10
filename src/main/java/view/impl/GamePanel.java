@@ -5,17 +5,17 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import javax.swing.ImageIcon;
 
-public class MenuPanel extends JPanel {
-    private static final String MENU_BACKGROUND = "/images/menuBackground.jpeg";
+public class GamePanel extends JPanel {
+    private static final String GAME_BACKGROUND = "/images/gameField.jpeg";
     Image background;
 
-    public MenuPanel(final int width, final int height) {
+    public GamePanel(final int width, final int height) {
         this.setSize(width, height);
         this.setBackground(Color.BLACK);
-        this.background = new ImageIcon(getClass().getResource(MENU_BACKGROUND)).getImage();
+        this.background = new ImageIcon(getClass().getResource(GAME_BACKGROUND)).getImage();
     }
 
     @Override
