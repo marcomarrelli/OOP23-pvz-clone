@@ -7,6 +7,11 @@ import java.util.Set;
 import model.api.Entities;
 import model.api.EntitiesFactory;
 
+/**
+ * This class contains methods to create Sun entities.
+ * 
+ * @author Sofia Caberletti
+ */
 public class SunsFactory implements EntitiesFactory {
     private final double screenWidth;
     private final double screenHeight;

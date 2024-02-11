@@ -14,6 +14,7 @@ import view.api.GenericPanel;
 
 
 /**
+ * Panel used in the starting Menu Section.
  * 
  * @author Sofia Caberletti
  */

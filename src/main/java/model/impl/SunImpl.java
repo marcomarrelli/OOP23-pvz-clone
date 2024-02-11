@@ -2,10 +2,15 @@ package model.impl;
 
 import model.api.Sun;
 
+/**
+ * Implementation of the Sun interface.
+ * 
+ * @author Sofia Caberletti
+ */
 public class SunImpl implements Sun {
     private final static String NAME= "Sun";
     private final static int POINTS= 25;
-    private final  double speedYAxis;
+    private final double speedYAxis;
     private final static double SCREEN_BOTTOM= 700.0;
     private boolean isAlive;
     private Pair<Double, Double> position;
@@ -49,12 +54,12 @@ public class SunImpl implements Sun {
         return this.speedYAxis;
     }
 
-    /*@Override
+    @Override
     public void moveDown() {
-        this.position= new Pair<>(this.position.getX(), this.position.getY()+1.0);
-        if(this.position.getY()==screenHeight) {
+        this.position= new Pair<>(this.position.getX(), this.position.getY()+this.speedYAxis);
+        if(this.position.getY()==SCREEN_BOTTOM) {
             this.kill();
         }
-    }*/
+    }
     
 }
