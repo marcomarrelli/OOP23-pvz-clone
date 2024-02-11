@@ -3,47 +3,49 @@ package model.impl;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class FieldCell implements MouseListener {
+import javax.swing.JButton;
+import javax.swing.JComponent;
+
+import view.impl.GamePanel; // Used for JavaDoc
+
+/**
+ * Cell used in Game Panel for placing Plants Entities.
+ * The center of the cell is saved and its bounds will be calculated
+ * using the constants declared inside {@link GamePanel}
+ * 
+ * @see {@link GamePanel}
+ * @author Marco Marrelli
+ */
+public class FieldCell extends JButton {
     private final Pair<Integer, Integer> coord;
-
-    public FieldCell(Pair<Integer, Integer> coord) {
-        this.coord = coord;
-    }
+    public static final String CELL_TEXT_INITIALIZER = "";
 
     /**
-     * @see {@link FieldCell#muouseReleased()}
-     */
-    @Override
-    public void mouseClicked(MouseEvent e) { }
-
-    /**
-     * @see {@link FieldCell#muouseReleased()}
-     */
-    @Override
-    public void mousePressed(MouseEvent e) { }
-
-    /**
-     * Click and Press Event
+     * Field Cell Constructor.
      * 
-     * @author Marco Marrelli
+     * @param coord The central coordinate of the Cell.
      */
-    @Override
-    public void mouseReleased(MouseEvent e) {
+    public FieldCell(Pair<Integer, Integer> coord, String text) {
+        super(text);
+        this.coord = coord;
         
+        this.setBounds(coord.getX(), coord.getY(), GamePanel.CELL_WIDTH, GamePanel.CELL_HEIGHT);
+        this.setButtonInvisible();
+
+        this.addMouseListener(new FieldCellListener());
     }
 
-    @Override
-    public void mouseEntered(MouseEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'mouseEntered'");
+    private void setButtonInvisible() {
+        this.setOpaque(false);
+        this.setContentAreaFilled(false);
+        this.setBorderPainted(false);
+        this.setFocusPainted(false);
     }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'mouseExited'");
-    }
-
+    /**
+     * Returns the center coordinate of the FieldCell.
+     * 
+     * @return The center coordinate of the Cell
+     */
     public Pair<Integer, Integer> getCoord() {
         return this.coord;
     }

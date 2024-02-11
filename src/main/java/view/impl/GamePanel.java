@@ -2,7 +2,6 @@ package view.impl;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 
 import model.impl.FieldCell;
 import model.impl.Pair;
@@ -15,21 +14,20 @@ import view.api.GenericPanel;
  */
 public class GamePanel extends GenericPanel {
     private final int ROW_COUNT = 5;
-    private final int COLUMN_COUNT = 9; 
+    private final int COLUMN_COUNT = 9;
     
-    private final int X_OFFSET = 70;
-    private final int Y_OFFSET = 110;
-    private final int X_MARGIN = 20/2;
-    private final int Y_MARGIN = 30/2;
+    private static final int X_OFFSET = 70;
+    private static final int Y_OFFSET = 110;
+    public static final int X_MARGIN = 10; // 20/2
+    public static final int Y_MARGIN = 15; // 30/2
 
-    private final int CELL_WIDTH = X_OFFSET-X_MARGIN;
-    private final int CELL_HEIGHT = Y_OFFSET-Y_MARGIN;
+    public static final int CELL_WIDTH = X_OFFSET-X_MARGIN;
+    public static final int CELL_HEIGHT = Y_OFFSET-Y_MARGIN;
 
-    private final int STARTING_X = 225;
-    private final int STARTING_Y = 120;
+    private final int STARTING_X = 220;
+    private final int STARTING_Y = 110;
 
-    private FieldCell[][] fieldMatrix = new FieldCell[ROW_COUNT][COLUMN_COUNT];
-
+    private final FieldCell[][] fieldMatrix;
 
     /**
      * GamePanel Constructor
@@ -40,9 +38,14 @@ public class GamePanel extends GenericPanel {
     public GamePanel(SwingViewImpl parent, String backgroundSource) {
         super(parent, backgroundSource);
         
+        this.fieldMatrix = new FieldCell[ROW_COUNT][COLUMN_COUNT];
         for(int i=0; i<ROW_COUNT; i++) {
             for(int j=0; j<COLUMN_COUNT; j++) {
-                fieldMatrix[i][j] = new FieldCell(new Pair(i, j));
+                int xCoord = STARTING_X+(X_OFFSET*j); //j == 0 ? STARTING_X+(X_OFFSET*j) : STARTING_X+(X_OFFSET*j)+X_MARGIN;
+                int yCoord = i == 0 ? (STARTING_Y+(Y_OFFSET*i)) : (STARTING_Y+(Y_OFFSET*i)+(Y_MARGIN/4));
+                
+                this.fieldMatrix[i][j] = new FieldCell(new Pair(xCoord, yCoord), FieldCell.CELL_TEXT_INITIALIZER);
+                this.add(this.fieldMatrix[i][j]);
             }
         }
     }
