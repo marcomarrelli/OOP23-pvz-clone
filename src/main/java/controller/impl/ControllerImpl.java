@@ -2,6 +2,7 @@ package controller.impl;
 
 import controller.api.Controller;
 import model.api.Game;
+import model.api.Level;
 import model.api.World;
 import model.api.WorldEvent;
 import model.impl.GameImpl;
@@ -23,7 +24,7 @@ public class ControllerImpl implements Controller {
     public void initGame() {
         this.world = new WorldImpl();
         this.view = new SwingViewImpl();
-        this.game = this.world.getGame();
+        //this.game = this.world.getGame();
         
         // this.game = new GameImpl();
         // this.view.setScene(SwingViewImpl.GAME_PANEL_CONSTRAINT);
