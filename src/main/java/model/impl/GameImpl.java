@@ -5,20 +5,20 @@ import model.api.GameState;
 import model.api.Plant;
 import model.api.Zombie;
 
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
 
 
 public class GameImpl implements Game{
 
-    private static final int DELTA=1;
+    private static final int DELTA_PLANT=35;
+    private static final int DELTA_ZOMBIE=10;
     private static final int timeRechargeAttackZombie = 2000;
 
     private final GameState gameState;
-    private List<PlantImpl> plants = new ArrayList<>();
-    private List<ZombieImpl> zombies = new ArrayList<>();
-    private List<SunImpl> suns= new ArrayList<>();
-    private List<BulletImpl> bullets = new ArrayList<>();
+    private Set<PlantImpl> plants = new HashSet<>();
+    private Set<ZombieImpl> zombies = new HashSet<>();
+    private Set<SunImpl> suns= new HashSet<>();
+    private Set<BulletImpl> bullets = new HashSet<>();
 
     public GameImpl(){
         this.gameState = new GameStateImpl(timeRechargeAttackZombie);
@@ -62,8 +62,20 @@ public class GameImpl implements Game{
     public void checkCollision(){
         for (ZombieImpl zombie : zombies) {
             for (PlantImpl plant : plants) {
-                if(zombie.getPosition().getX() < plant.getPosition().getX() + DELTA){
-                    zombieEatPlant(zombie, plant);
+                if(zombie.getPosition().getY() == plant.getPosition().getY()){
+                    if(zombie.getPosition().getX() <= plant.getPosition().getX() + DELTA_PLANT){
+                        zombieEatPlant(zombie, plant);
+                    }
+                }
+            }
+        }
+        for (BulletImpl bullet : bullets) {
+            for (ZombieImpl zombie : zombies) {
+                if(zombie.getPosition().getY() == bullet.getPosition().getY()){
+                    if(bullet.getPosition().getX() >= zombie.getPosition().getX() - DELTA_ZOMBIE){
+                        zombie.receiveDamage(bullet.getDamage());
+                        bullets.remove(bullet);
+                    }
                 }
             }
         }
