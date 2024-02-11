@@ -27,9 +27,10 @@ public class ControllerImpl implements Controller {
 
     @Override
     public void mainLoop() {
-        this.game = this.world.getGame();
+        this.game = new GameImpl();
+        this.world.setGame(game);
         long startTime = System.currentTimeMillis();
-        while (this.game.isOver()) {
+        while (!this.game.isOver()) {
             long currentStartTime = System.currentTimeMillis();
             //long elapsed = startTime - currentStartTime;
             this.game.update();
@@ -39,14 +40,18 @@ public class ControllerImpl implements Controller {
     }
 
     private void waitForNextFrame(long currentStartTime){
-        long dt = System.currentTimeMillis();
+        long dt = System.currentTimeMillis(); // - currentStartTime
+        System.out.println(dt);
         if (dt < PERIOD){
             try {
+                System.out.println(dt);
                 Thread.sleep(PERIOD - dt);
-            } catch (Exception e) {
-
+            } catch (InterruptedException e) {
+                System.exit(1);
             } 
+            
         }
+        System.out.println(dt);
     }
 
     @Override
