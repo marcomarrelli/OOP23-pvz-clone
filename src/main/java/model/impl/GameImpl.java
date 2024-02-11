@@ -1,6 +1,7 @@
 package model.impl;
 
 import model.api.Game;
+import model.api.GameState;
 import model.api.Plant;
 import model.api.Zombie;
 
@@ -13,10 +14,15 @@ public class GameImpl implements Game{
     private static final int DELTA=1;
     private static final int timeRechargeAttackZombie = 2000;
 
+    private final GameState gameState;
     private List<PlantImpl> plants = new ArrayList<>();
     private List<ZombieImpl> zombies = new ArrayList<>();
     private List<SunImpl> suns= new ArrayList<>();
     private List<BulletImpl> bullets = new ArrayList<>();
+
+    public GameImpl(){
+        this.gameState = new GameStateImpl(timeRechargeAttackZombie);
+    }
 
     @Override
     public boolean isOver() {
@@ -83,5 +89,10 @@ public class GameImpl implements Game{
                 plants.remove(plant);
             }
         }
+    }
+
+    @Override
+    public GameState getGameState() {
+        return this.gameState;
     }    
 }

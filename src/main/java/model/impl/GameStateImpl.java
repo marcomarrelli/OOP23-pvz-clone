@@ -14,7 +14,6 @@ import model.api.World;
 public class GameStateImpl implements GameState {
 
     private static final int INC_SUN = 25;
-    private final World world;
     private final int totZombies;
     private int killedZombies;
     private int sunScore;
@@ -22,10 +21,8 @@ public class GameStateImpl implements GameState {
      * Constructor of GameStateImpl.
      * 
      * @param totZombies number of zombies in the level.
-     * @param world World class istance.
      */
-    public GameStateImpl(final int totZombies, final World world) {
-        this.world = world;
+    public GameStateImpl(final int totZombies) {
         this.totZombies = totZombies;
         this.killedZombies = 0;
         this.sunScore = 0;
