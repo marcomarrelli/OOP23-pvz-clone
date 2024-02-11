@@ -22,43 +22,44 @@ public class MenuPanel extends JPanel {
     private static final String BUTTON_TEXTURE = "/images/tombstoneTexture.jpg";
     private Image background;
     private ImageIcon texture;
+    private final int width;
+    private final int height;
 
     public MenuPanel(final int width, final int height) {
 
+        this.width= width;
+        this.height= height;
         this.setSize(width, height);
         this.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 275));
         this.background= new ImageIcon(getClass().getResource(MENU_BACKGROUND)).getImage();
         this.texture= new ImageIcon(getClass().getResource(BUTTON_TEXTURE));
 
         JButton startButton = new JButton("Start Adventure", this.texture);
-        startButton.setHorizontalTextPosition(JButton.CENTER);
-        startButton.setVerticalTextPosition(JButton.CENTER);
-        startButton.setPreferredSize(new Dimension(width/6, height/8));
-        startButton.setFont(new Font(null, Font.BOLD, 16));
-        startButton.setForeground(Color.BLACK);
-        this.add(startButton);
-
         JButton fullButton = new JButton("Full Screen", this.texture);
-        fullButton.setHorizontalTextPosition(JButton.CENTER);
-        fullButton.setVerticalTextPosition(JButton.CENTER);
-        fullButton.setPreferredSize(new Dimension(width/6, height/8));
-        fullButton.setFont(new Font(null, Font.BOLD, 16));
-        fullButton.setForeground(Color.BLACK);
-        this.add(fullButton);
-
         JButton exitButton = new JButton("Exit Game", this.texture);
-        exitButton.setHorizontalTextPosition(JButton.CENTER);
-        exitButton.setVerticalTextPosition(JButton.CENTER);
-        exitButton.setPreferredSize(new Dimension(width/6, height/8));
-        exitButton.setFont(new Font(null, Font.BOLD, 16));
+
+        this.setButton(startButton);
+        this.setButton(fullButton);
+        this.setButton(exitButton);
+
         exitButton.addActionListener( e -> System.exit(0));
-        exitButton.setForeground(Color.BLACK);
+
+        this.add(startButton);
+        this.add(fullButton);
         this.add(exitButton);
     }
 
+    private void setButton(final JButton button) {
+        button.setHorizontalTextPosition(JButton.CENTER);
+        button.setVerticalTextPosition(JButton.CENTER);
+        button.setPreferredSize(new Dimension(this.width/6, this.height/8));
+        button.setFont(new Font(null, Font.BOLD, 16));
+        button.setForeground(Color.BLACK);
+    }
+
     @Override
-    public void paint(Graphics g) {
-        super.paint(g);
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
 
         Graphics2D g2D = (Graphics2D) g;
         g2D.drawImage(this.background, 0, 0, null);
