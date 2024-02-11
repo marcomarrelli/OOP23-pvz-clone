@@ -48,13 +48,13 @@ public class GameImpl implements Game{
      */
     private void moveEntities() {
         for (var zombie : this.zombies) {
-            //move zombie
+            zombie.moveLeft();
         }
         for (var sun : this.suns) {
             sun.moveDown();
         }
         for (var bullet : bullets) {
-            //move bullet
+            bullet.move();
         }
     }
 

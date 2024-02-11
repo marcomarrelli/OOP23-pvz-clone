@@ -8,7 +8,6 @@ import model.impl.GameImpl;
 import model.impl.Pair;
 import model.impl.WorldImpl;
 import view.api.View;
-import view.impl.GamePanel;
 import view.impl.SwingViewImpl;
 
 public class ControllerImpl implements Controller {
@@ -23,20 +22,35 @@ public class ControllerImpl implements Controller {
     public void initGame() {
         this.world = new WorldImpl();
         this.view = new SwingViewImpl();
-        //this.game = this.world.getGame();
-        
-        // this.game = new GameImpl();
-        // this.view.setScene(SwingViewImpl.GAME_PANEL_CONSTRAINT);
     }
 
     @Override
     public void mainLoop() {
+        this.game = new GameImpl(this.world);
+        this.world.setGame(game);
         long startTime = System.currentTimeMillis();
-        while (this.game.isOver()) {
+        while (!this.game.isOver()) {
             long currentStartTime = System.currentTimeMillis();
+            //long elapsed = startTime - currentStartTime;
             this.game.update();
             this.view.update(null);
+            waitForNextFrame(currentStartTime);
         }
+    }
+
+    private void waitForNextFrame(long currentStartTime){
+        long dt = System.currentTimeMillis(); // - currentStartTime
+        System.out.println(dt);
+        if (dt < PERIOD){
+            try {
+                System.out.println(dt);
+                Thread.sleep(PERIOD - dt);
+            } catch (InterruptedException e) {
+                System.exit(1);
+            } 
+            
+        }
+        System.out.println(dt);
     }
 
     @Override

@@ -6,24 +6,24 @@ public interface Game {
     /**
      * @return if the game is over (true) or not (false)
      */
-    public boolean isOver();
+    boolean isOver();
     /**
      * update the game
      */
-    public void update();
+    void update();
     /**
      * create a wave of zombie
      */
-    public void createWave();
+    void createWave();
     /**
      * create a new Plant
      */
-    public void createPlant(Pair<Double, Double> position);
+    void createPlant(Pair<Double, Double> position);
 
-    public void mouseEvent(Pair<Double, Double> posClick);
+    void mouseEvent(Pair<Double, Double> posClick);
 
-    public void checkCollision();
+    void checkCollision();
 
-    public GameState getGameState();
+    GameState getGameState();
 
 }
