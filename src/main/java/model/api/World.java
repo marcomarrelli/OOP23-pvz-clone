@@ -8,29 +8,25 @@ package model.api;
  * @author Sofia Caberletti
  */
 public interface World {
-
     /**
      * Sets the level
+     * 
      * @param level 
      */
-    public void setLevel(Level level);
-
+    void setLevel(Level level);
     /**
      * Sets the game
+     * 
      * @param game
      */
-    public void setGame(Game game);
-
-    /**
-     * 
+    void setGame(Game game);
+    /** 
      * @return the level
      */
-    public Level getLevel();
-
+    Level getLevel();
     /**
-     * 
      * @return the game
      */
-    public Game getGame();
+    Game getGame();
     
 }
