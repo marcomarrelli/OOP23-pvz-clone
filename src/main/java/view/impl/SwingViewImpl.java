@@ -8,6 +8,11 @@ import javax.swing.JPanel;
 
 import view.api.View;
 
+/**
+ * Implementation of the View.
+ * 
+ * @author Sofia Caberletti, Marco Marrelli
+ */
 public class SwingViewImpl implements View {
     public static final int APPLICATION_WIDTH = 1000;
     public static final int APPLICATION_HEIGHT = 700;

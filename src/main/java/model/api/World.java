@@ -1,5 +1,12 @@
 package model.api;
 
+/**
+ * Interface of the Model of the game.
+ * It contains methods to set the Level and Game that will
+ * be used to start the game.
+ * 
+ * @author Sofia Caberletti
+ */
 public interface World {
 
     /**

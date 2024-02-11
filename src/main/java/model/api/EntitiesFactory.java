@@ -3,7 +3,7 @@ package model.api;
 import java.util.Set;
 
 /**
- * Factory Pattern for Generated Entities, such as Zombies and Suns.
+ * Factory Pattern for auomatically generated Entities, such as Zombies and Suns.
  */
 public interface EntitiesFactory {
     /**

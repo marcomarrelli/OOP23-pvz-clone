@@ -6,7 +6,8 @@ import model.api.World;
 
 
 /**
- * Main class of the model of the Game
+ * Implementation of the World Interface.
+ * 
  * @author Sofia Caberletti
  */
 public class WorldImpl implements World {
