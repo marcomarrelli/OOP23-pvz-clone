@@ -59,7 +59,6 @@ public class GameImpl implements Game{
                     zombieEatPlant(zombie, plant);
                 }
             }
-           
         }
     }
     

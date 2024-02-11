@@ -20,6 +20,7 @@ public class SwingViewImpl implements View {
     private static final boolean IS_APPLICATION_RESIZABLE = false;
     
     protected static final String MENU_BACKGROUND = "/images/menuBackground.jpeg";
+    protected static final String GAME_BACKGROUND = "/images/gameBackground.png";
     //private static final KeyCombination EXIT_FULLSCREEN_KEY_COMBINATION = KeyCombination.valueOf("ESC");
     //private static final String EXIT_FULLSCREEN_MESSAGE = "Press " + EXIT_FULLSCREEN_KEY_COMBINATION + " to exit Fullscreen Mode!";
 
@@ -38,7 +39,7 @@ public class SwingViewImpl implements View {
         this.panel = new JPanel(sceneManager);
         this.panel.setSize(APPLICATION_WIDTH, APPLICATION_HEIGHT);
         this.panel.add(new MenuPanel(this, MENU_BACKGROUND), MENU_PANEL_CONSTRAINT);
-        this.panel.add(new GamePanel(APPLICATION_WIDTH, APPLICATION_HEIGHT), GAME_PANEL_CONSTRAINT);
+        this.panel.add(new GamePanel(this, GAME_BACKGROUND), GAME_PANEL_CONSTRAINT);
         
         this.frame.getContentPane().add(panel);
 
