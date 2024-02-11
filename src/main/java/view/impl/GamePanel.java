@@ -4,6 +4,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 
+import model.impl.FieldCell;
+import model.impl.Pair;
 import view.api.GenericPanel;
 
 /**
@@ -17,8 +19,8 @@ public class GamePanel extends GenericPanel {
     
     private final int X_OFFSET = 70;
     private final int Y_OFFSET = 110;
-    private final int X_MARGIN = 20;
-    private final int Y_MARGIN = 30;
+    private final int X_MARGIN = 20/2;
+    private final int Y_MARGIN = 30/2;
 
     private final int CELL_WIDTH = X_OFFSET-X_MARGIN;
     private final int CELL_HEIGHT = Y_OFFSET-Y_MARGIN;
@@ -26,15 +28,23 @@ public class GamePanel extends GenericPanel {
     private final int STARTING_X = 225;
     private final int STARTING_Y = 120;
 
+    private FieldCell[][] fieldMatrix = new FieldCell[ROW_COUNT][COLUMN_COUNT];
+
+
     /**
      * GamePanel Constructor
      * 
      * @see {@link GenericPanel}
      */
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     public GamePanel(SwingViewImpl parent, String backgroundSource) {
         super(parent, backgroundSource);
-
-
+        
+        for(int i=0; i<ROW_COUNT; i++) {
+            for(int j=0; j<COLUMN_COUNT; j++) {
+                fieldMatrix[i][j] = new FieldCell(new Pair(i, j));
+            }
+        }
     }
 
     @Override

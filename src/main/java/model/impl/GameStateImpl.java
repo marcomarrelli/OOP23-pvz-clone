@@ -52,4 +52,9 @@ public class GameStateImpl implements GameState {
     public int getSunScore() {
         return this.sunScore;
     }
+
+    @Override
+    public boolean areZombieAllKilled() {
+        return this.totZombies == this.killedZombies;
+    }
 }

@@ -27,6 +27,12 @@ public interface GameState {
      * @return Suns counter.
      */
     int getSunScore();
+    /**
+     * @return {@true} number of zombies killed is equals
+     * to the effective number to be killed.
+     */
+    boolean areZombieAllKilled();
+    
 
 
 }
