@@ -2,6 +2,12 @@ package model.impl;
 
 import model.api.Plant;
 
+/**
+ * class that implements Plant interface
+ * 
+ * @author Zanchini Margherita
+ */
+
 public class PlantImpl implements Plant{
 
     private final double damage;
@@ -21,6 +27,7 @@ public class PlantImpl implements Plant{
         this.timeBetweenAttacks = timeBetweenAttacks;
         this.position = position;
         this.cooldown = cooldown;
+        this.lastTimeAttack = 0;
     }
 
     @Override

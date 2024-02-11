@@ -16,6 +16,7 @@ public class GameImpl implements Game{
     private List<PlantImpl> plants = new ArrayList<>();
     private List<ZombieImpl> zombies = new ArrayList<>();
     private List<SunImpl> suns= new ArrayList<>();
+    private List<BulletImpl> bullets = new ArrayList<>();
 
     @Override
     public boolean isOver() {
@@ -59,8 +60,8 @@ public class GameImpl implements Game{
                     zombieEatPlant(zombie, plant);
                 }
             }
-           
         }
+
     }
     
     /**
@@ -76,7 +77,7 @@ public class GameImpl implements Game{
     private void zombieEatPlant(Zombie zombie, Plant plant){
         long zombieLastAttack = zombie.getLastTimeAttack();
         long currentTime = System.currentTimeMillis();
-        if( currentTime-zombieLastAttack > timeRechargeAttackZombie){
+        if( currentTime-zombieLastAttack > zombie.getCooldown()){
             plant.receiveDamage(zombie.getDamage());
             if(!plant.isAlive()){
                 plants.remove(plant);
