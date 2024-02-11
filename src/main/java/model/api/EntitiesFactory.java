@@ -12,7 +12,6 @@ public interface EntitiesFactory {
      * @return the generated entity.
      */
     Entities createEntity();
-    
     /**
      * Generates a Set of Entities.
      * Calls {@link #createEntity()} n times.

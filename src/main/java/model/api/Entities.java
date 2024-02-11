@@ -11,15 +11,15 @@ public interface Entities {
     /**
      * @return position of the entity
      */
-    public Pair<Double,Double> getPosition();
+    Pair<Double,Double> getPosition();
     /**
      * @return state alive of the entity.
      */
-    public boolean isAlive();
+    boolean isAlive();
     /**
      * @return name of the entity.
      */
-    public String getEntityName();
+    String getEntityName();
 
 
 }
