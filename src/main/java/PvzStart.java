@@ -2,7 +2,7 @@ import controller.impl.ControllerImpl;
 
 
 /**
- * 
+ * Application's Entry Point
  */
 public class PvzStart {    
     public static void main(String[] args) {

@@ -3,6 +3,7 @@ package model.impl;
 import model.api.Game;
 import model.api.GameState;
 import model.api.Plant;
+import model.api.World;
 import model.api.Zombie;
 
 import java.util.List;
@@ -14,26 +15,52 @@ public class GameImpl implements Game{
     private static final int DELTA=1;
     private static final int timeRechargeAttackZombie = 2000;
 
+    private final World world;
     private final GameState gameState;
     private List<PlantImpl> plants = new ArrayList<>();
     private List<ZombieImpl> zombies = new ArrayList<>();
     private List<SunImpl> suns= new ArrayList<>();
     private List<BulletImpl> bullets = new ArrayList<>();
 
-    public GameImpl(){
+    public GameImpl(final World world){
+        this.world= world;
         this.gameState = new GameStateImpl(timeRechargeAttackZombie);
     }
 
     @Override
     public boolean isOver() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'isOver'");
+        if(this.gameState.areZombieAllKilled()) {
+            return true;
+        }
+        for (var zombie : zombies) {
+            if(zombie.getPosition().getX()<=200) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Method that updates the positions of every entity
+     * present in the game.
+     * 
+     * @author Sofia Caberletti
+     */
+    private void moveEntities() {
+        for (var zombie : this.zombies) {
+            //move zombie
+        }
+        for (var sun : this.suns) {
+            sun.moveDown();
+        }
+        for (var bullet : bullets) {
+            //move bullet
+        }
     }
 
     @Override
     public void update() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        this.moveEntities();
     }
 
     @Override
