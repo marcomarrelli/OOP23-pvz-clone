@@ -8,7 +8,7 @@ import model.api.Zombie;
 public class ZombieImpl implements Zombie {
 
     private final double damage;
-    private final double zombieSpeed;
+    private final double xShift;
     private final long cooldown;
 
     private double remainingLife;
@@ -19,15 +19,15 @@ public class ZombieImpl implements Zombie {
      * 
      * @param damage damage that Zombie causes with each bite.
      * @param cooldown time needed to start and finish a bite.
-     * @param zombieSpeed speed of the Zombie.
+     * @param xShift speed of the Zombie.
      * @param maxLife Zombie's inital life.
      * @param position Zombie's position.
      */
-    public ZombieImpl(final double damage, final long cooldown, final double zombieSpeed,
+    public ZombieImpl(final double damage, final long cooldown, final double xShift,
         final double maxLife, final Pair<Double,Double> position){
         this.damage = damage;
         this.cooldown = cooldown;
-        this.zombieSpeed = zombieSpeed;
+        this.xShift = xShift;
         this.remainingLife = maxLife;
         this.lastTimeAttack = 0;
         this.position = position;
@@ -59,8 +59,8 @@ public class ZombieImpl implements Zombie {
     }
     
     @Override
-    public double getZombieSpeed() {
-        return this.zombieSpeed;
+    public double getXShift() {
+        return this.xShift;
     }   
     
     @Override
@@ -81,5 +81,10 @@ public class ZombieImpl implements Zombie {
     @Override
     public long getLastTimeAttack() {
         return this.lastTimeAttack;
+    }
+
+    @Override
+    public void moveLeft() {
+        this.position = new Pair<Double,Double>(this.position.getX() - this.xShift, this.position.getY());
     }
 }
