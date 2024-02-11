@@ -18,7 +18,7 @@ public class ZombieImpl implements Zombie {
      * Constructor of Zombies.
      * 
      * @param damage damage that Zombie causes with each bite.
-     * @param timeRA time needed to start and finish a bite.
+     * @param cooldown time needed to start and finish a bite.
      * @param zombieSpeed speed of the Zombie.
      * @param maxLife Zombie's inital life.
      * @param position Zombie's position.
@@ -29,6 +29,7 @@ public class ZombieImpl implements Zombie {
         this.cooldown = cooldown;
         this.zombieSpeed = zombieSpeed;
         this.remainingLife = maxLife;
+        this.lastTimeAttack = 0;
         this.position = position;
     }
     

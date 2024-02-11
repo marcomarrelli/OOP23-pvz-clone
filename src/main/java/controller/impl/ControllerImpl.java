@@ -2,7 +2,6 @@ package controller.impl;
 
 import controller.api.Controller;
 import model.api.Game;
-import model.api.Level;
 import model.api.World;
 import model.api.WorldEvent;
 import model.impl.GameImpl;
