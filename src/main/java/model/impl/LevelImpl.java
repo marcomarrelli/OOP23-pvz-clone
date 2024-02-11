@@ -2,20 +2,26 @@ package model.impl;
 
 import model.api.Level;
 import model.api.World;
-
+/**
+ * Class that implements a Level
+ * 
+ * @author Sofia Lotti.
+ */
 public class LevelImpl implements Level {
 
     private final World world;
-
+    /**
+     * Constructor of LevelImpl
+     * 
+     * @param world World created by ControllerImpl.
+     */
     public LevelImpl(final World world){
         this.world = world;
     }
 
     @Override
     public int getZombieCount() {
-        //dobbiamo legare in qualche modo GameState alle altre classi...da world possiamo arrivare a Game, ma non ha un metodo di
-        //Zombie count. Quel metodo ce l'ha GameState, quindi potremmo creare un metodo getGameState nella classe Game
-        return 0;    
+        return this.world.getGame().getGameState().getKilledZombies();    
     }
     
 }
