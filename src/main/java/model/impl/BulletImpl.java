@@ -41,8 +41,7 @@ public class BulletImpl implements Bullet{
 
     @Override
     public void move() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'move'");
+        this.position = new Pair<Double,Double>(position.getX() + speed, position.getY());
     }
     
 }
