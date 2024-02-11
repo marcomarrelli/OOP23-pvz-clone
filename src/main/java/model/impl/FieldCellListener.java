@@ -3,6 +3,8 @@ package model.impl;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.JButton;
+
 /**
  * Mouse Event Listener for the {@link FieldCell} Component
  * 
@@ -10,11 +12,13 @@ import java.awt.event.MouseListener;
  * @author Marco Marrelli
  */
 public class FieldCellListener implements MouseListener {
+    private final FieldCell parent;
+    
     /**
      * Field Cell Listener Constructor.
      */
-    public FieldCellListener() {
-
+    public FieldCellListener(FieldCell parent) {
+        this.parent = parent;
     }
 
     /**
@@ -36,12 +40,26 @@ public class FieldCellListener implements MouseListener {
      */
     @Override
     public void mouseReleased(MouseEvent e) {
-        
+        if(this.parent.hasPlant()) {
+            return;
+        }
+        this.parent.setPlant();
     }
 
     @Override
-    public void mouseEntered(MouseEvent e) { /* To Be Implemented Soon ... Hover: ON */ }
+    public void mouseEntered(MouseEvent e) {
+        hoverHandler(true);
+    }
 
     @Override
-    public void mouseExited(MouseEvent e) { /* To Be Implemented Soon ... Hover: OFF */ }
+    public void mouseExited(MouseEvent e) {
+        hoverHandler(false);
+    }
+
+    private void hoverHandler(boolean hover) {
+        if(this.parent.hasPlant()) {
+            return;
+        }
+        this.parent.cellHover(hover);
+    }
 }
