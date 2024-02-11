@@ -37,7 +37,7 @@ public class SwingViewImpl implements View {
         
         this.panel = new JPanel(sceneManager);
         this.panel.setSize(APPLICATION_WIDTH, APPLICATION_HEIGHT);
-        this.panel.add(new MenuPanel(APPLICATION_WIDTH, APPLICATION_HEIGHT), MENU_PANEL_CONSTRAINT);
+        this.panel.add(new MenuPanel(this, MENU_BACKGROUND), MENU_PANEL_CONSTRAINT);
         this.panel.add(new GamePanel(APPLICATION_WIDTH, APPLICATION_HEIGHT), GAME_PANEL_CONSTRAINT);
         
         this.frame.getContentPane().add(panel);

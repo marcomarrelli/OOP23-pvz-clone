@@ -6,31 +6,25 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JPanel;
+
+import view.api.GenericPanel;
 
 
 /**
  * 
  * @author Sofia Caberletti
  */
-public class MenuPanel extends JPanel {
-    private static final String MENU_BACKGROUND = "/images/menuBackground.jpeg";
+public class MenuPanel extends GenericPanel {
+    
     private static final String BUTTON_TEXTURE = "/images/tombstoneTexture.jpg";
-    private Image background;
     private ImageIcon texture;
-    private final int width;
-    private final int height;
 
-    public MenuPanel(final int width, final int height) {
-        this.width= width;
-        this.height= height;
-        this.setSize(width, height);
-        this.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 275));
-        this.background= new ImageIcon(getClass().getResource(MENU_BACKGROUND)).getImage();
+    public MenuPanel(SwingViewImpl parent, String backgroundSource) {
+        super(parent, backgroundSource);
+        this.setLayout(new FlowLayout(FlowLayout.CENTER, 20, (SwingViewImpl.APPLICATION_HEIGHT/2)-50));
         this.texture= new ImageIcon(getClass().getResource(BUTTON_TEXTURE));
 
         JButton startButton = new JButton("Start Adventure", this.texture);
@@ -41,6 +35,7 @@ public class MenuPanel extends JPanel {
         this.setButton(fullButton);
         this.setButton(exitButton);
 
+        startButton.addActionListener( e -> parent.setScene(SwingViewImpl.GAME_PANEL_CONSTRAINT));
         exitButton.addActionListener( e -> System.exit(0));
 
         this.add(startButton);
@@ -51,7 +46,7 @@ public class MenuPanel extends JPanel {
     private void setButton(final JButton button) {
         button.setHorizontalTextPosition(JButton.CENTER);
         button.setVerticalTextPosition(JButton.CENTER);
-        button.setPreferredSize(new Dimension(this.width/6, this.height/8));
+        button.setPreferredSize(new Dimension(SwingViewImpl.APPLICATION_WIDTH/6, SwingViewImpl.APPLICATION_HEIGHT/8));
         button.setFont(new Font(null, Font.BOLD, 16));
         button.setForeground(Color.BLACK);
     }
