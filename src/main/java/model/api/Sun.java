@@ -4,8 +4,10 @@ public interface Sun extends Entities {
     
     void kill();
 
-    Integer getPoints();
+    int getPoints();
 
-    void moveDown();
+    double getSpeed();
+
+    //void moveDown();
     
 }

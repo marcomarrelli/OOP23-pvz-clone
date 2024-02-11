@@ -15,6 +15,7 @@ public class GameImpl implements Game{
 
     private List<PlantImpl> plants = new ArrayList<>();
     private List<ZombieImpl> zombies = new ArrayList<>();
+    private List<SunImpl> suns= new ArrayList<>();
 
     @Override
     public boolean isOver() {
