@@ -2,9 +2,11 @@ package controller.impl;
 
 import controller.api.Controller;
 import model.api.Game;
+import model.api.World;
 import model.api.WorldEvent;
 import model.impl.GameImpl;
 import model.impl.Pair;
+import model.impl.WorldImpl;
 import view.api.View;
 import view.impl.GamePanel;
 import view.impl.SwingViewImpl;
@@ -12,23 +14,27 @@ import view.impl.SwingViewImpl;
 public class ControllerImpl implements Controller {
     
     private static final long PERIOD = 20;
-    private Game game;
+
+    private World world;
     private View view;
+    private Game game;
 
     @Override
     public void initGame() {
-        this.game = new GameImpl();
+        this.world = new WorldImpl();
         this.view = new SwingViewImpl();
+        this.game = this.world.getGame();
         
-        //this.view.setScene(SwingViewImpl.GAME_PANEL_CONSTRAINT);
+        // this.game = new GameImpl();
+        // this.view.setScene(SwingViewImpl.GAME_PANEL_CONSTRAINT);
     }
 
     @Override
     public void mainLoop() {
         long startTime = System.currentTimeMillis();
-        while (game.isOver()) {
+        while (this.game.isOver()) {
             long currentStartTime = System.currentTimeMillis();
-            game.update();
+            this.game.update();
         }
     }
 
