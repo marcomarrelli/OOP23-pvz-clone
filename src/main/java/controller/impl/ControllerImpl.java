@@ -23,19 +23,29 @@ public class ControllerImpl implements Controller {
     public void initGame() {
         this.world = new WorldImpl();
         this.view = new SwingViewImpl();
-        //this.game = this.world.getGame();
-        
-        // this.game = new GameImpl();
-        // this.view.setScene(SwingViewImpl.GAME_PANEL_CONSTRAINT);
     }
 
     @Override
     public void mainLoop() {
+        this.game = this.world.getGame();
         long startTime = System.currentTimeMillis();
         while (this.game.isOver()) {
             long currentStartTime = System.currentTimeMillis();
+            //long elapsed = startTime - currentStartTime;
             this.game.update();
             this.view.update(null);
+            waitForNextFrame(currentStartTime);
+        }
+    }
+
+    private void waitForNextFrame(long currentStartTime){
+        long dt = System.currentTimeMillis();
+        if (dt < PERIOD){
+            try {
+                Thread.sleep(PERIOD - dt);
+            } catch (Exception e) {
+
+            } 
         }
     }
 
