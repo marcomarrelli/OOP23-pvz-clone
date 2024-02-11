@@ -24,7 +24,7 @@ public class GameImpl implements Game{
 
     public GameImpl(final World world){
         this.world= world;
-        this.gameState = new GameStateImpl(timeRechargeAttackZombie);
+        this.gameState = new GameStateImpl(this.world.getLevel().getZombieCount());
     }
 
     @Override
