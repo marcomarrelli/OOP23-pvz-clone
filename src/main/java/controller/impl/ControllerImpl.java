@@ -35,6 +35,7 @@ public class ControllerImpl implements Controller {
         while (this.game.isOver()) {
             long currentStartTime = System.currentTimeMillis();
             this.game.update();
+            this.view.update(null);
         }
     }
 

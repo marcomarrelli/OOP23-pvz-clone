@@ -5,8 +5,12 @@ package model.api;
  */
 public interface Zombie extends ActiveEntities {
     /**
-     * @return the speed of Zombies
+     * Moves Zombie to the left.
      */
-    public double getZombieSpeed();
+    void moveLeft();
+    /**
+     * @return delta, the shift of the Zombie in X axis.
+     */
+    double getXShift();
 
 }
