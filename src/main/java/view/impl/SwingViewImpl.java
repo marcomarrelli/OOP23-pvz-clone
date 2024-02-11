@@ -19,6 +19,7 @@ public class SwingViewImpl implements View {
     
     private static final boolean IS_APPLICATION_RESIZABLE = false;
     
+    protected static final String MENU_BACKGROUND = "/images/menuBackground.jpeg";
     //private static final KeyCombination EXIT_FULLSCREEN_KEY_COMBINATION = KeyCombination.valueOf("ESC");
     //private static final String EXIT_FULLSCREEN_MESSAGE = "Press " + EXIT_FULLSCREEN_KEY_COMBINATION + " to exit Fullscreen Mode!";
 
@@ -40,6 +41,7 @@ public class SwingViewImpl implements View {
         this.panel.add(new GamePanel(APPLICATION_WIDTH, APPLICATION_HEIGHT), GAME_PANEL_CONSTRAINT);
         
         this.frame.getContentPane().add(panel);
+
         this.frame.setVisible(true);
     }
 

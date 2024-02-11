@@ -26,7 +26,6 @@ public class MenuPanel extends JPanel {
     private final int height;
 
     public MenuPanel(final int width, final int height) {
-
         this.width= width;
         this.height= height;
         this.setSize(width, height);
