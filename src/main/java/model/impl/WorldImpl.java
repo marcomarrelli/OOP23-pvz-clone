@@ -17,12 +17,12 @@ public class WorldImpl implements World {
 
     @Override
     public void setLevel(Level level) {
-        this.level= level;
+        this.level = level;
     }
 
     @Override
     public void setGame(Game game) {
-        this.game= game;
+        this.game = game;
     }
 
     @Override

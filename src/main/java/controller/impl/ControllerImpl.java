@@ -5,6 +5,7 @@ import model.api.Game;
 import model.api.World;
 import model.api.WorldEvent;
 import model.impl.GameImpl;
+import model.impl.LevelImpl;
 import model.impl.Pair;
 import model.impl.WorldImpl;
 import view.api.View;
@@ -26,6 +27,7 @@ public class ControllerImpl implements Controller {
 
     @Override
     public void mainLoop() {
+        this.world.setLevel(new LevelImpl(world));
         this.game = new GameImpl(this.world);
         this.world.setGame(game);
         long startTime = System.currentTimeMillis();

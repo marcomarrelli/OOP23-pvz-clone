@@ -9,6 +9,7 @@ import model.api.World;
  */
 public class LevelImpl implements Level {
 
+    private static final int TOTAL_ZOMBIES = 20;
     private final World world;
     /**
      * Constructor of LevelImpl
@@ -21,7 +22,7 @@ public class LevelImpl implements Level {
 
     @Override
     public int getZombieCount() {
-        return this.world.getGame().getGameState().getKilledZombies();    
+        return TOTAL_ZOMBIES;  //momentaneo, andrà cambiato in base al livello magari come abbiamo detto l'11 sera  
     }
     
 }
