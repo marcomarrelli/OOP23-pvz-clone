@@ -6,7 +6,6 @@ import model.api.Plant;
 import model.api.World;
 import model.api.Zombie;
 import view.impl.SwingViewImpl;
-import model.api.Entities;
 import model.api.EntitiesFactory;
 
 import java.util.*;
@@ -17,25 +16,22 @@ public class GameImpl implements Game{
     private static final int DELTA_PLANT=35;
     private static final int DELTA_ZOMBIE=10;
     private static final long DELTA_TIME_SUN= 10000;
-    //private static final long DELTA_TIME_ZOMBIE= 45000;
-    private static final int timeRechargeAttackZombie = 2000;
-    private static final int BULLET_SPEED = 2; //numero a caso
+    private static final long DELTA_TIME_ZOMBIE= 15000;
     //private static final long DELTA_TIME_BULLET= 2000;
+    //private static final int timeRechargeAttackZombie = 2000;
 
     private final World world;
     private final GameState gameState;
-    private final SunsFactory sunFactory;
-    private final ZombiesFactory zombiesFactory;
-    
     private Set<PlantImpl> plants = new HashSet<>();
     private Set<ZombieImpl> zombies = new HashSet<>();
     private Set<SunImpl> suns= new HashSet<>();
     private Set<BulletImpl> bullets = new HashSet<>();
+    private SunsFactory sunFactory;
     
     private long timeOfLastCreatedSun= 0;
-    //private long timeOfLastCreatedZombie= 0;
     private long timeOfLastCreatedZombie= 0;
-    private long deltaTimeZombie = 15000;
+
+    private EntitiesFactory createZombie = new ZombiesFactory();
 
     //private long timeOfLastCreatedBullet= 0;
 
@@ -44,7 +40,6 @@ public class GameImpl implements Game{
         this.world= world;
         this.gameState = new GameStateImpl(this.world.getLevel().getZombieCount());
         this.sunFactory= new SunsFactory(SwingViewImpl.APPLICATION_WIDTH, SwingViewImpl.APPLICATION_HEIGHT);
-        this.zombiesFactory = new ZombiesFactory();
     }
 
     @Override
@@ -113,24 +108,32 @@ public class GameImpl implements Game{
         return (currentTime - previousTime)>=delta;
     }
 
+    private void newSunGenerate(final long currentTime) {
+        if(this.hasDeltaTimePassed(this.timeOfLastCreatedSun, currentTime, DELTA_TIME_SUN)) {
+            this.suns.add((SunImpl) this.sunFactory.createEntity());
+            this.timeOfLastCreatedSun= currentTime;
+        }
+    } 
+
     private void newZombieGenerate(long elapsed){
-        if (hasDeltaTimePassed(this.timeOfLastCreatedZombie, elapsed, deltaTimeZombie)){
+        if (hasDeltaTimePassed(this.timeOfLastCreatedZombie, elapsed, DELTA_TIME_ZOMBIE)){
             this.timeOfLastCreatedZombie = elapsed;
-            this.zombies.add((ZombieImpl) this.zombiesFactory.createEntity());
-            this.deltaTimeZombie = this.deltaTimeZombie - 500;
         }
     }
 
     @Override
     public void update(long elapsed) {
+        this.checkCollision();
         this.removeKilledEntities();
         this.moveEntities();
+        this.newSunGenerate(elapsed);
+        this.newZombieGenerate(elapsed);
     }
 
     @Override
     public void createWave() {
-        int percentage = this.world.getLevel().getZombieCount();
-        Set<Entities> newWave = this.zombiesFactory.createEntities(percentage);
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'createWave'");
     }
 
     @Override
@@ -189,24 +192,6 @@ public class GameImpl implements Game{
         if( currentTime-zombieLastAttack > zombie.getCooldown()){
             plant.receiveDamage(zombie.getDamage());
             zombie.setLastTimeAttack(currentTime);
-        }
-    }
-
-    /**
-     * method that check all the plants that need to shoot
-     * and if they have to shoot creates a new bullet
-     * 
-     * @authore Zanchini Margherita
-     */
-    private void plantsShoot(){
-        for (PlantImpl plant : plants) {
-            long plantLastAttack = plant.getLastTimeAttack();
-            long currentTime = System.currentTimeMillis();
-            if(currentTime - plantLastAttack > plant.getCooldown()){
-                //da riguardare la posizione da passare al bullet, non sarà esattamente quella della pianta ma un pelo più avanti
-                bullets.add(new BulletImpl(BULLET_SPEED, plant.getDamage(), plant.getPosition()));
-                plant.setLastTimeAttack(currentTime);
-            }
         }
     }
 
