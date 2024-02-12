@@ -109,7 +109,7 @@ public class GameImpl implements Game{
      * 
      * @author Zanchini Margherita
      */
-    public void checkCollision(){
+    private void checkCollision(){
         for (ZombieImpl zombie : zombies) {
             for (PlantImpl plant : plants) {
                 if(zombie.getPosition().getY() == plant.getPosition().getY()){
@@ -124,7 +124,7 @@ public class GameImpl implements Game{
                 if(zombie.getPosition().getY() == bullet.getPosition().getY()){
                     if(bullet.getPosition().getX() >= zombie.getPosition().getX() - DELTA_ZOMBIE){
                         zombie.receiveDamage(bullet.getDamage());
-                        bullets.remove(bullet);
+                        bullet.killBullet();
                     }
                 }
             }
@@ -147,9 +147,7 @@ public class GameImpl implements Game{
         long currentTime = System.currentTimeMillis();
         if( currentTime-zombieLastAttack > zombie.getCooldown()){
             plant.receiveDamage(zombie.getDamage());
-            if(!plant.isAlive()){
-                plants.remove(plant);
-            }
+            zombie.setLastTimeAttack(currentTime);
         }
     }
 
