@@ -17,6 +17,9 @@ public class GameImpl implements Game{
     private static final int DELTA_PLANT=35;
     private static final int DELTA_ZOMBIE=10;
     private static final long DELTA_TIME_SUN= 10000;
+    //private static final long DELTA_TIME_ZOMBIE= 45000;
+    private static final int timeRechargeAttackZombie = 2000;
+    private static final int BULLET_SPEED = 2; //numero a caso
     //private static final long DELTA_TIME_BULLET= 2000;
 
     private final World world;
@@ -30,6 +33,7 @@ public class GameImpl implements Game{
     private Set<BulletImpl> bullets = new HashSet<>();
     
     private long timeOfLastCreatedSun= 0;
+    //private long timeOfLastCreatedZombie= 0;
     private long timeOfLastCreatedZombie= 0;
     private long deltaTimeZombie = 15000;
 
@@ -119,13 +123,8 @@ public class GameImpl implements Game{
 
     @Override
     public void update(long elapsed) {
-        this.checkCollision();
         this.removeKilledEntities();
         this.moveEntities();
-        if(this.hasDeltaTimePassed(this.timeOfLastCreatedSun, elapsed, DELTA_TIME_SUN)) {
-            this.suns.add((SunImpl) this.sunFactory.createEntity());
-            this.timeOfLastCreatedSun= elapsed;
-        }
     }
 
     @Override
@@ -190,6 +189,24 @@ public class GameImpl implements Game{
         if( currentTime-zombieLastAttack > zombie.getCooldown()){
             plant.receiveDamage(zombie.getDamage());
             zombie.setLastTimeAttack(currentTime);
+        }
+    }
+
+    /**
+     * method that check all the plants that need to shoot
+     * and if they have to shoot creates a new bullet
+     * 
+     * @authore Zanchini Margherita
+     */
+    private void plantsShoot(){
+        for (PlantImpl plant : plants) {
+            long plantLastAttack = plant.getLastTimeAttack();
+            long currentTime = System.currentTimeMillis();
+            if(currentTime - plantLastAttack > plant.getCooldown()){
+                //da riguardare la posizione da passare al bullet, non sarà esattamente quella della pianta ma un pelo più avanti
+                bullets.add(new BulletImpl(BULLET_SPEED, plant.getDamage(), plant.getPosition()));
+                plant.setLastTimeAttack(currentTime);
+            }
         }
     }
 

@@ -9,9 +9,10 @@ public class BulletImpl implements Bullet{
     private final double damage;
     private boolean alive;
 
-    public BulletImpl(final double speed, final double damage){
+    public BulletImpl(final double speed, final double damage, final Pair<Double, Double> pos){
         this.speed = speed;
         this.damage = damage;
+        this.position = pos;
         alive = true;
     }
 
