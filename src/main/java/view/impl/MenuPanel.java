@@ -39,7 +39,9 @@ public class MenuPanel extends GenericPanel {
         startButton.addActionListener( e -> {
             
             parent.setScene(SwingViewImpl.GAME_PANEL_CONSTRAINT);
-            parent.getController().mainLoop();
+            parent.getController().richiamaMainloop();
+
+            // parent.getController().mainLoop();
             /*try {
                 // System.out.println(dt);
                 Thread.sleep(10000);

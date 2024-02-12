@@ -18,11 +18,20 @@ public class ControllerImpl implements Controller {
     private World world;
     private View view;
     private Game game;
+    private boolean menuCalled;
 
     @Override
     public void initGame() {
         this.world = new WorldImpl();
         this.view = new SwingViewImpl(this);
+        while (menuCalled == false){
+            System.out.println("");
+        }
+        mainLoop();
+    }
+
+    public void richiamaMainloop(){
+        menuCalled = true;
     }
 
     @Override
@@ -35,7 +44,7 @@ public class ControllerImpl implements Controller {
         System.out.println("tempo di inizio gioco: " + startTime);
         while (!this.game.isOver()) {
             long currentStartTime = System.currentTimeMillis();
-            //System.out.println("tempo di inizio ciclo: " + currentStartTime);
+            System.out.println("tempo di inizio ciclo: " + currentStartTime);
             long elapsed = currentStartTime - startTime;
             //System.out.println("tempo delta: " + elapsed);
             this.game.update(elapsed);
