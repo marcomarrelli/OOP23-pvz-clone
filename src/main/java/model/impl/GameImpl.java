@@ -5,6 +5,7 @@ import model.api.GameState;
 import model.api.Plant;
 import model.api.World;
 import model.api.Zombie;
+import view.impl.SwingViewImpl;
 import model.api.EntitiesFactory;
 
 import java.util.*;
@@ -25,8 +26,10 @@ public class GameImpl implements Game{
     private Set<ZombieImpl> zombies = new HashSet<>();
     private Set<SunImpl> suns= new HashSet<>();
     private Set<BulletImpl> bullets = new HashSet<>();
+    private SunsFactory sunFactory;
     
     private long timeOfLastCreatedSun= 0;
+    //private long timeOfLastCreatedZombie= 0;
     private long timeOfLastCreatedZombie= 0;
 
     private EntitiesFactory createZombie = new ZombiesFactory();
@@ -37,6 +40,7 @@ public class GameImpl implements Game{
     public GameImpl(final World world){
         this.world= world;
         this.gameState = new GameStateImpl(this.world.getLevel().getZombieCount());
+        this.sunFactory= new SunsFactory(SwingViewImpl.APPLICATION_WIDTH, SwingViewImpl.APPLICATION_HEIGHT);
     }
 
     @Override
@@ -116,6 +120,10 @@ public class GameImpl implements Game{
         this.checkCollision();
         this.removeKilledEntities();
         this.moveEntities();
+        if(this.hasDeltaTimePassed(this.timeOfLastCreatedSun, elapsed, DELTA_TIME_SUN)) {
+            this.suns.add((SunImpl) this.sunFactory.createEntity());
+            this.timeOfLastCreatedSun= elapsed;
+        }
     }
 
     @Override
@@ -141,7 +149,7 @@ public class GameImpl implements Game{
      * 
      * @author Zanchini Margherita
      */
-    public void checkCollision(){
+    private void checkCollision(){
         for (ZombieImpl zombie : zombies) {
             for (PlantImpl plant : plants) {
                 if(zombie.getPosition().getY() == plant.getPosition().getY()){
@@ -156,7 +164,7 @@ public class GameImpl implements Game{
                 if(zombie.getPosition().getY() == bullet.getPosition().getY()){
                     if(bullet.getPosition().getX() >= zombie.getPosition().getX() - DELTA_ZOMBIE){
                         zombie.receiveDamage(bullet.getDamage());
-                        bullets.remove(bullet);
+                        bullet.killBullet();
                     }
                 }
             }
@@ -179,9 +187,7 @@ public class GameImpl implements Game{
         long currentTime = System.currentTimeMillis();
         if( currentTime-zombieLastAttack > zombie.getCooldown()){
             plant.receiveDamage(zombie.getDamage());
-            if(!plant.isAlive()){
-                plants.remove(plant);
-            }
+            zombie.setLastTimeAttack(currentTime);
         }
     }
 

@@ -22,8 +22,6 @@ public interface Game {
 
     void mouseEvent(Pair<Double, Double> posClick);
 
-    void checkCollision();
-
     GameState getGameState();
 
 }
