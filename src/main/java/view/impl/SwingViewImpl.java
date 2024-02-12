@@ -75,6 +75,10 @@ public class SwingViewImpl implements View {
 
     @Override
     public void update(JPanel scene) {
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        try {
+	    	frame.repaint();
+    	} catch (Exception ex){
+    		ex.printStackTrace();
+    	}
     }
 }

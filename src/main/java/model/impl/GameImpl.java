@@ -58,8 +58,31 @@ public class GameImpl implements Game{
         }
     }
 
+    private void removeKilledEntities() {
+        Set<ZombieImpl> remainingZombies = new HashSet<>();
+        Set<SunImpl> remainingSuns = new HashSet<>();
+        Set<BulletImpl> remainingBullets = new HashSet<>();
+        for (var zombie : this.zombies) {
+            if(zombie.isAlive()) {
+                remainingZombies.add(zombie);
+            }
+        }
+        for (var sun : this.suns) {
+            if(sun.isAlive()) {
+                remainingSuns.add(sun);
+            }
+        }
+        for (var bullet : bullets) {
+            remainingBullets.add(bullet);
+        }
+        this.zombies= remainingZombies;
+        this.suns= remainingSuns;
+        this.bullets= remainingBullets;
+    }
+
     @Override
     public void update() {
+        this.removeKilledEntities();
         this.moveEntities();
     }
 
