@@ -31,9 +31,12 @@ public class ControllerImpl implements Controller {
         this.game = new GameImpl(this.world);
         this.world.setGame(game);
         long startTime = System.currentTimeMillis();
+        System.out.println("tempo di inizio gioco: " + startTime);
         while (!this.game.isOver()) {
             long currentStartTime = System.currentTimeMillis();
-            //long elapsed = startTime - currentStartTime;
+            System.out.println("tempo di inizio ciclo: " + currentStartTime);
+            long elapsed = currentStartTime - startTime;
+            System.out.println("tempo delta: " + elapsed);
             this.game.update();
             this.view.update(null);
             waitForNextFrame(currentStartTime);
