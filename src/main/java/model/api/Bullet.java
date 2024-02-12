@@ -12,10 +12,5 @@ public interface Bullet extends Entities {
     /**
      * moves the position of the bullet
      */
-    void move();
-
-    /**
-     * a method that sets the state of the bullet from alive to death
-     */
-    void killBullet();    
+    void move();    
 }

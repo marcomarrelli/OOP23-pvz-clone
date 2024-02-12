@@ -7,13 +7,11 @@ public class BulletImpl implements Bullet{
     private Pair<Double, Double> position;
     private final double speed;
     private final double damage;
-    private boolean alive;
 
     public BulletImpl(final double speed, final double damage, final Pair<Double, Double> pos){
         this.speed = speed;
         this.damage = damage;
         this.position = pos;
-        alive = true;
     }
 
     @Override
@@ -23,7 +21,7 @@ public class BulletImpl implements Bullet{
 
     @Override
     public boolean isAlive() {
-        return alive;
+        return true;
     }
 
     @Override
@@ -44,11 +42,5 @@ public class BulletImpl implements Bullet{
     @Override
     public void move() {
         this.position = new Pair<Double,Double>(position.getX() + speed, position.getY());
-    }
-
-    @Override
-    public void killBullet() {
-        this.alive = false;
-    }
-    
+    }    
 }

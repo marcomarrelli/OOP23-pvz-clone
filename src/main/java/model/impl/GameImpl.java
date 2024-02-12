@@ -149,6 +149,9 @@ public class GameImpl implements Game{
                 if(zombie.getPosition().getY() == plant.getPosition().getY()){
                     if(zombie.getPosition().getX() <= plant.getPosition().getX() + DELTA_PLANT){
                         zombieEatPlant(zombie, plant);
+                        if(!plant.isAlive()){
+                            plants.remove(plant); //togliere un oggetto da un set in foeach potrebbe dare problemi
+                        }
                     }
                 }
             }
@@ -158,7 +161,10 @@ public class GameImpl implements Game{
                 if(zombie.getPosition().getY() == bullet.getPosition().getY()){
                     if(bullet.getPosition().getX() >= zombie.getPosition().getX() - DELTA_ZOMBIE){
                         zombie.receiveDamage(bullet.getDamage());
-                        bullet.killBullet();
+                        bullets.remove(bullet);
+                        if(!zombie.isAlive()){
+                            zombies.remove(zombie);
+                        }
                     }
                 }
             }
