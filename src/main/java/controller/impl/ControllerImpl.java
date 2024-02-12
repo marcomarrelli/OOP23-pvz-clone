@@ -21,7 +21,7 @@ public class ControllerImpl implements Controller {
     @Override
     public void initGame() {
         this.world = new WorldImpl();
-        this.view = new SwingViewImpl();
+        this.view = new SwingViewImpl(this);
     }
 
     @Override
@@ -58,10 +58,11 @@ public class ControllerImpl implements Controller {
         this.game.mouseEvent(clickPos);
     }
 
-    @Override
+    /*@Override
     public void notifyWorldEvent(WorldEvent ev) {
         //qua ho un dubbio, se è gia il model che gestisce le collisioni interne
         //già lui controlla che ci siano state cose
         //il controller lo comunica alla view?
     }
+    */
 }

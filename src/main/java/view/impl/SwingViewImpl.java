@@ -6,6 +6,7 @@ import java.awt.CardLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import controller.api.Controller;
 import view.api.View;
 
 /**
@@ -29,11 +30,13 @@ public class SwingViewImpl implements View {
     //private static final KeyCombination EXIT_FULLSCREEN_KEY_COMBINATION = KeyCombination.valueOf("ESC");
     //private static final String EXIT_FULLSCREEN_MESSAGE = "Press " + EXIT_FULLSCREEN_KEY_COMBINATION + " to exit Fullscreen Mode!";
 
+    private final Controller controller;
     private JFrame frame;
     private JPanel panel;
     private CardLayout sceneManager = new CardLayout();
 
-    public SwingViewImpl() {
+    public SwingViewImpl(final Controller controller) {
+        this.controller= controller;
         this.frame = new JFrame(APPLICATION_TITLE);
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.frame.setSize(APPLICATION_WIDTH, APPLICATION_HEIGHT);
@@ -49,6 +52,10 @@ public class SwingViewImpl implements View {
         this.frame.getContentPane().add(panel);
 
         this.frame.setVisible(true);
+    }
+
+    public Controller getController() {
+        return this.controller;
     }
 
     @Override

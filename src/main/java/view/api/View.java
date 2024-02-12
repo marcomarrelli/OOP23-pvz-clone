@@ -2,6 +2,8 @@ package view.api;
 
 import javax.swing.JPanel;
 
+import controller.api.Controller;
+
 /**
  * View Interface, gets/sets the current Scene and updates it.
  */
@@ -33,4 +35,11 @@ public interface View {
      * @param scene the scene to update
      */
     void update(JPanel scene);
+
+    /**
+     * 
+     * @return the controller associated with the view
+     */
+    Controller getController();
+
 }
