@@ -22,6 +22,8 @@ public class GameImpl implements Game{
     private Set<SunImpl> suns= new HashSet<>();
     private Set<BulletImpl> bullets = new HashSet<>();
 
+    private long lastTimeZombieCreated = 0;
+
     public GameImpl(final World world){
         this.world= world;
         this.gameState = new GameStateImpl(this.world.getLevel().getZombieCount());
@@ -80,8 +82,15 @@ public class GameImpl implements Game{
         this.bullets= remainingBullets;
     }
 
+    private void newZombieGenerate(long elapsed){
+        if ((elapsed - this.lastTimeZombieCreated)>0){
+            this.lastTimeZombieCreated = elapsed;
+        }
+    }
+
     @Override
     public void update(long elapsed) {
+        this.checkCollision();
         this.removeKilledEntities();
         this.moveEntities();
     }
