@@ -9,6 +9,6 @@ public interface Controller extends ViewEventListener, WorldEventListener {
 
     void mainLoop();
 
-    public void richiamaMainloop();
+    void callMainloop();
 
 }

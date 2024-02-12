@@ -18,20 +18,15 @@ public class ControllerImpl implements Controller {
     private World world;
     private View view;
     private Game game;
-    private boolean menuCalled;
 
     @Override
     public void initGame() {
         this.world = new WorldImpl();
         this.view = new SwingViewImpl(this);
-        while (menuCalled == false){
-            System.out.println("");
-        }
-        mainLoop();
     }
 
-    public void richiamaMainloop(){
-        menuCalled = true;
+    public void callMainloop(){
+        new Thread(this::mainLoop).start();
     }
 
     @Override
