@@ -11,8 +11,8 @@ public final class ZombieTest {
     
     private static final double ATK = 20.0;
     private static final double MAX_LIFE = 100.0;
-    private static final long X_SHIFT = 2; /* metri al secondo */
-    private static final long COOLDOWN = 10;
+    private static final int X_SHIFT = 2; /* metri al secondo */
+    private static final int COOLDOWN = 10;
     
     private Zombie ZombieEntity(){
         return new ZombieImpl(ATK, COOLDOWN, X_SHIFT, MAX_LIFE, null);

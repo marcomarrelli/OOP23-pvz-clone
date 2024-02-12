@@ -10,19 +10,19 @@ import model.api.Sun;
 public class SunImpl implements Sun {
     private final static String NAME= "Sun";
     private final static int POINTS= 25;
-    private final double speedYAxis;
+    private final Integer speedYAxis;
     private final static double SCREEN_BOTTOM= 700.0;
     private boolean isAlive;
-    private Pair<Double, Double> position;
+    private Pair<Integer, Integer> position;
 
-    public SunImpl(final Pair<Double, Double> position, final double speedYAxis) {
+    public SunImpl(final Pair<Integer, Integer> position, final Integer speedYAxis) {
         this.isAlive= true;
         this.position= position;
         this.speedYAxis= speedYAxis;
     }
 
     @Override
-    public Pair<Double, Double> getPosition() {
+    public Pair<Integer, Integer> getPosition() {
         return this.position;
     }
 
@@ -56,10 +56,9 @@ public class SunImpl implements Sun {
 
     @Override
     public void moveDown() {
-        this.position= new Pair<>(this.position.getX(), this.position.getY()+this.speedYAxis);
+        this.position= new Pair<Integer, Integer>(this.position.getX(), this.position.getY()+this.speedYAxis);
         if(this.position.getY()==SCREEN_BOTTOM) {
             this.kill();
         }
     }
-    
 }

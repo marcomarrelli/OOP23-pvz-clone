@@ -4,6 +4,6 @@ import model.impl.Pair;
 
 public interface ViewEventListener {
 
-    void notifyMouseEvent(Pair<Double, Double> pos);
+    void notifyMouseEvent(Pair<Integer, Integer> pos);
 
 }

@@ -13,13 +13,15 @@ import model.api.EntitiesFactory;
 
 import java.util.*;
 
+import javax.swing.ImageIcon;
+
 
 public class GameImpl implements Game{
 
     private static final int DELTA_PLANT=35;
     private static final int DELTA_ZOMBIE=10;
     private static final long DELTA_TIME_SUN= 10000;    
-    private static final double BULLET_SPEED = 2;
+    private static final int BULLET_SPEED = 2;
     //private static final long DELTA_TIME_ZOMBIE= 15000;
     //private static final long DELTA_TIME_BULLET= 2000;
     //private static final int timeRechargeAttackZombie = 2000;
@@ -74,7 +76,7 @@ public class GameImpl implements Game{
         for (var sun : this.suns) {
             sun.moveDown();
         }
-        for (var bullet : bullets) {
+        for (var bullet : this.bullets) {
             bullet.move();
         }
     }
@@ -127,11 +129,11 @@ public class GameImpl implements Game{
     }
 
     @Override
-    public void createPlant(Pair<Double, Double> position) {
+    public void createPlant(Pair<Integer, Integer> position) {
         plants.add(new PlantImpl(20, 100, "base plant", 2, position, 5));
     }
 
-    public void mouseEvent(Pair<Double, Double> posClick){
+    public void mouseEvent(Pair<Integer, Integer> posClick){
         //qua il model guarda dove è stato fatto il click e di conseguenza gestisce l'evento
         //se è stato fatto su un sole o sulla pianta o il secondo click della pianta
     }

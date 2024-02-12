@@ -1,8 +1,9 @@
 import controller.impl.ControllerImpl;
 
-
 /**
- * Application's Entry Point
+ * Plants Vs Zombies Application's Entry Point.
+ * 
+ * @author Sofia Caberletti, Margherita Zanchini, Sofia Lotti, Maco Marrelli
  */
 public class PvzStart {    
     public static void main(String[] args) {

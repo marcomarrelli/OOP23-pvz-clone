@@ -13,21 +13,21 @@ import model.api.EntitiesFactory;
  * @author Sofia Caberletti
  */
 public class SunsFactory implements EntitiesFactory {
-    private final double screenWidth;
-    private final double screenHeight;
-    private final static double SPEED_Y_AXIS= 1.0;
+    private final int screenWidth;
+    private final int screenHeight;
+    private final static int SPEED_Y_AXIS = 1;
     private Random random;
 
 
-    public SunsFactory(final double screenWidth, final double screenHeight) {
-        this.screenWidth= screenWidth;
-        this.screenHeight= screenHeight;
+    public SunsFactory(final int screenWidth, final int screenHeight) {
+        this.screenWidth = screenWidth;
+        this.screenHeight = screenHeight;
         this.random= new Random();
     }
 
     @Override
     public Entities createEntity() {
-        return new SunImpl(new Pair<Double, Double>(random.nextDouble(this.screenWidth), -10.0), SPEED_Y_AXIS);
+        return new SunImpl(new Pair<Integer, Integer>(random.nextInt(this.screenWidth), -10), SPEED_Y_AXIS);
     }
 
     @Override

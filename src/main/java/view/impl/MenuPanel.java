@@ -9,7 +9,9 @@ import java.awt.Graphics2D;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 
+import javafx.stage.Screen;
 import view.api.GenericPanel;
 
 
@@ -37,10 +39,12 @@ public class MenuPanel extends GenericPanel {
         this.setButton(exitButton);
 
         startButton.addActionListener( e -> {
-            
             parent.setScene(SwingViewImpl.GAME_PANEL_CONSTRAINT);
-            parent.getController().callMainloop();
-            
+            parent.getController().callMainloop(); 
+        });
+        fullButton.addActionListener( e -> {
+            // parent.getApplication().setExtendedState(JFrame.MAXIMIZED_BOTH);
+            // parent.getApplication().setUndecorated(true);
         });
         exitButton.addActionListener( e -> System.exit(0));
 

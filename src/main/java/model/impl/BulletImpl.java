@@ -4,18 +4,18 @@ import model.api.Bullet;
 
 public class BulletImpl implements Bullet{
 
-    private Pair<Double, Double> position;
-    private final double speed;
+    private Pair<Integer, Integer> position;
+    private final Integer speed;
     private final double damage;
 
-    public BulletImpl(final double speed, final double damage, final Pair<Double, Double> pos){
+    public BulletImpl(final Integer speed, final double damage, final Pair<Integer, Integer> pos){
         this.speed = speed;
         this.damage = damage;
         this.position = pos;
     }
 
     @Override
-    public Pair<Double, Double> getPosition() {
+    public Pair<Integer, Integer> getPosition() {
         return position;
     }
 
@@ -26,7 +26,7 @@ public class BulletImpl implements Bullet{
 
     @Override
     public String getEntityName() {
-        return "bullet";
+        return "Bullet";
     }
 
     @Override
@@ -41,6 +41,6 @@ public class BulletImpl implements Bullet{
 
     @Override
     public void move() {
-        this.position = new Pair<Double,Double>(position.getX() + speed, position.getY());
+        this.position = new Pair<Integer, Integer>(position.getX() + speed, position.getY());
     }    
 }

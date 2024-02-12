@@ -34,6 +34,7 @@ public class SwingViewImpl implements View {
     private JFrame frame;
     private JPanel panel;
     private CardLayout sceneManager = new CardLayout();
+    private String currentConstraint = "";
 
     public SwingViewImpl(final Controller controller) {
         this.controller= controller;
@@ -61,6 +62,7 @@ public class SwingViewImpl implements View {
     @Override
     public void setScene(String scene) {
         this.sceneManager.show(this.panel, scene);
+        this.currentConstraint = scene;
     }
 
     @Override
@@ -70,15 +72,11 @@ public class SwingViewImpl implements View {
 
     @Override
     public String getSceneConstraint() {
-        throw new UnsupportedOperationException("Unimplemented method 'getSceneContraint'");
+        return this.currentConstraint;
     }
 
     @Override
-    public void update(JPanel scene) {
-        try {
-	    	frame.repaint();
-    	} catch (Exception ex){
-    		ex.printStackTrace();
-    	}
+    public void update() {
+	    this.panel.repaint();
     }
 }

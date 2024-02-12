@@ -8,12 +8,12 @@ import model.api.Zombie;
 public class ZombieImpl implements Zombie {
 
     private final double damage;
-    private final double xShift;
+    private final int xShift;
     private final long cooldown;
 
     private double remainingLife;
     private long lastTimeAttack;
-    private Pair<Double,Double> position;
+    private Pair<Integer, Integer> position;
     /**
      * Constructor of Zombies.
      * 
@@ -23,8 +23,7 @@ public class ZombieImpl implements Zombie {
      * @param maxLife Zombie's inital life.
      * @param position Zombie's position.
      */
-    public ZombieImpl(final double damage, final long cooldown, final double xShift,
-        final double maxLife, final Pair<Double,Double> position){
+    public ZombieImpl(final double damage, final long cooldown, final int xShift, final double maxLife, final Pair<Integer, Integer> position){
         this.damage = damage;
         this.cooldown = cooldown;
         this.xShift = xShift;
@@ -44,7 +43,7 @@ public class ZombieImpl implements Zombie {
     }
     
     @Override
-    public Pair<Double,Double> getPosition() {
+    public Pair<Integer, Integer> getPosition() {
         return this.position;
     }
     
@@ -85,6 +84,6 @@ public class ZombieImpl implements Zombie {
 
     @Override
     public void moveLeft() {
-        this.position = new Pair<Double,Double>(this.position.getX() - this.xShift, this.position.getY());
+        this.position = new Pair<Integer, Integer>(this.position.getX() - this.xShift, this.position.getY());
     }
 }

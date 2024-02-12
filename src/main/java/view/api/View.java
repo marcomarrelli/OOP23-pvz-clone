@@ -22,7 +22,7 @@ public interface View {
      */
     JPanel getScene();
 
-        /**
+    /**
      * Gets the current scene
      * 
      * @return The currently loaded scene constraint.
@@ -30,16 +30,13 @@ public interface View {
     String getSceneConstraint();
 
     /**
-     * Updates the scene.
-     * 
-     * @param scene the scene to update
+     * Updates the current scene.
      */
-    void update(JPanel scene);
+    void update();
 
     /**
      * 
      * @return the controller associated with the view
      */
     Controller getController();
-
 }

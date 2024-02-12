@@ -3,12 +3,21 @@ package view.impl;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 
+import javafx.event.ActionEvent;
 import model.api.Bullet;
+import model.api.Entities;
 import model.api.Plant;
 import model.api.Sun;
 import model.api.Zombie;
@@ -30,6 +39,11 @@ public class GamePanel extends GenericPanel {
     public static final int X_MARGIN = 10; // 20/2
     public static final int Y_MARGIN = 15; // 30/2
 
+    private final String PLANT_IMAGE = "/images/plantEntity.png";
+    private final String ZOMBIE_IMAGE = "/images/zombieEntity.png";
+    private final String BULLET_IMAGE = "/images/bulletEntity.png";
+    private final String SUN_IMAGE = "/images/sunEntity.png";
+
     public static final int CELL_WIDTH = X_OFFSET-X_MARGIN;
     public static final int CELL_HEIGHT = Y_OFFSET-Y_MARGIN;
 
@@ -38,10 +52,13 @@ public class GamePanel extends GenericPanel {
 
     private final FieldCell[][] fieldMatrix;
 
+    private final Map<Entities, Image> entities = new HashMap<Entities, Image>();
+    private final Set<Pair<Image, Pair<Integer, Integer>>> images = new HashSet<Pair<Image, Pair<Integer, Integer>>>();
+
     Map<Zombie, Image> zombies = new HashMap<>();
     Map<Plant, Image> plants = new HashMap<>();
     Map<Bullet, Image> bullets = new HashMap<>();
-    Map<Sun, JButton> suns = new HashMap<>();
+    Map<Sun, Image> suns = new HashMap<>();
 
     /**
      * GamePanel Constructor
@@ -67,8 +84,46 @@ public class GamePanel extends GenericPanel {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
+        
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.drawImage(this.background, 0, 0, null);
 
-        Graphics2D g2D = (Graphics2D) g;
-        g2D.drawImage(this.background, 0, 0, null);
+        this.updateEntities();
+
+        this.entities.entrySet().forEach(e -> {
+            this.images.add(new Pair<Image, Pair<Integer, Integer>>(e.getValue(), e.getKey().getPosition()));
+        });
+
+        this.images.forEach(e -> {
+            g2d.drawImage(e.getX(), e.getY().getX(), e.getY().getY(), this);
+        });
+    }
+
+    private void updateEntities() {
+        this.entities.keySet().removeIf(e -> !this.parent.getController().getEntities().contains(e));
+        
+        this.parent.getController().getEntities().forEach(entity -> {
+            if(!this.entities.containsKey(entity)) {
+                this.createEntity(entity);
+            }
+
+            this.entities.get(entity);
+
+            //entity.translate(entity.getPosition().getX(), entity.getPosition().getY());
+        });
+    }
+
+    private Image getEntityImage(Entities entity) {
+        return switch(entity.getEntityName()) {
+            case "Plant" -> new ImageIcon(getClass().getResource(PLANT_IMAGE)).getImage();
+            case "Zombie" -> new ImageIcon(getClass().getResource(ZOMBIE_IMAGE)).getImage();
+            case "Bullet" -> new ImageIcon(getClass().getResource(BULLET_IMAGE)).getImage();
+            case "Sun" -> new ImageIcon(getClass().getResource(SUN_IMAGE)).getImage();
+            default -> throw new IllegalArgumentException("Unexpected value: " + entity.getClass().getName());
+        };
+    }
+
+    private void createEntity(Entities entity) {
+        this.entities.put(entity, getEntityImage(entity));
     }
 }
