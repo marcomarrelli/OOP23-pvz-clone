@@ -26,7 +26,6 @@ public class GameImpl implements Game{
     private Set<BulletImpl> bullets = new HashSet<>();
     private long timeOfLastCreatedSun= 0;
     //private long timeOfLastCreatedZombie= 0;
-    //private long timeOfLastCreatedBullet= 0;
 
     public GameImpl(final World world){
         this.world= world;
