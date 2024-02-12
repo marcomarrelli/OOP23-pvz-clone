@@ -1,6 +1,9 @@
 package controller.impl;
 
+import java.util.Set;
+
 import controller.api.Controller;
+import model.api.Entities;
 import model.api.Game;
 import model.api.World;
 import model.api.WorldEvent;
@@ -68,6 +71,11 @@ public class ControllerImpl implements Controller {
     @Override
     public void notifyMouseEvent(Pair<Double, Double> clickPos) {
         this.game.mouseEvent(clickPos);
+    }
+
+    @Override
+    public Set<Entities> getEntities() {
+        return this.game.getEntities();
     }
 
     /*@Override

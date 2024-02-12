@@ -212,5 +212,15 @@ public class GameImpl implements Game{
     @Override
     public GameState getGameState() {
         return this.gameState;
+    }
+
+    @Override
+    public Set<Entities> getEntities() {
+        Set<Entities> entities= new HashSet<>();
+        entities.addAll(plants);
+        entities.addAll(zombies);
+        entities.addAll(suns);
+        entities.addAll(bullets);
+        return entities;
     }    
 }

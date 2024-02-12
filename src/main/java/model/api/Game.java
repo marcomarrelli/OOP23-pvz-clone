@@ -1,5 +1,7 @@
 package model.api;
 
+import java.util.Set;
+
 import model.impl.Pair;
 
 public interface Game {
@@ -23,5 +25,7 @@ public interface Game {
     void mouseEvent(Pair<Double, Double> posClick);
 
     GameState getGameState();
+
+    Set<Entities> getEntities();
 
 }
