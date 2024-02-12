@@ -79,35 +79,14 @@ public class GameImpl implements Game{
         }
     }
 
-    private void removeKilledEntities() {
-        Set<Zombie> remainingZombies = new HashSet<>();
+    private void removeKilledSuns() {
         Set<Sun> remainingSuns = new HashSet<>();
-        Set<Bullet> remainingBullets = new HashSet<>();
-        Set<Plant> remainingPlants = new HashSet<>();
-        for (var zombie : this.zombies) {
-            if(zombie.isAlive()) {
-                remainingZombies.add(zombie);
-            }
-        }
         for (var sun : this.suns) {
             if(sun.isAlive()) {
                 remainingSuns.add(sun);
             }
         }
-        for (var bullet : bullets) {
-            if(bullet.isAlive()) {
-                remainingBullets.add(bullet);
-            }
-        }
-        for (var plant : plants) {
-            if(plant.isAlive()) {
-                remainingPlants.add(plant);
-            }
-        }
-        this.zombies= remainingZombies;
         this.suns= remainingSuns;
-        this.bullets= remainingBullets;
-        this.plants= remainingPlants;
     }
 
     private boolean hasDeltaTimePassed(final long previousTime, final long currentTime, final long delta){
@@ -132,7 +111,7 @@ public class GameImpl implements Game{
     @Override
     public void update(long elapsed) {
         this.checkCollision();
-        this.removeKilledEntities();
+        this.removeKilledSuns();
         this.moveEntities();
         this.newSunGenerate(elapsed);
         this.newZombieGenerate(elapsed);
