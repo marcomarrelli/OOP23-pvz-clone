@@ -3,9 +3,11 @@ package model.impl;
 import model.api.Game;
 import model.api.GameState;
 import model.api.Plant;
+import model.api.Sun;
 import model.api.World;
 import model.api.Zombie;
 import view.impl.SwingViewImpl;
+import model.api.Bullet;
 import model.api.Entities;
 import model.api.EntitiesFactory;
 
@@ -27,10 +29,10 @@ public class GameImpl implements Game{
     private final SunsFactory sunFactory;
     private final ZombiesFactory zombiesFactory;
     
-    private Set<PlantImpl> plants = new HashSet<>();
-    private Set<ZombieImpl> zombies = new HashSet<>();
-    private Set<SunImpl> suns= new HashSet<>();
-    private Set<BulletImpl> bullets = new HashSet<>();
+    private Set<Plant> plants = new HashSet<>();
+    private Set<Zombie> zombies = new HashSet<>();
+    private Set<Sun> suns= new HashSet<>();
+    private Set<Bullet> bullets = new HashSet<>();
     
     private long timeOfLastCreatedSun= 0;
     //private long timeOfLastCreatedZombie= 0;
@@ -79,10 +81,10 @@ public class GameImpl implements Game{
     }
 
     private void removeKilledEntities() {
-        Set<ZombieImpl> remainingZombies = new HashSet<>();
-        Set<SunImpl> remainingSuns = new HashSet<>();
-        Set<BulletImpl> remainingBullets = new HashSet<>();
-        Set<PlantImpl> remainingPlants = new HashSet<>();
+        Set<Zombie> remainingZombies = new HashSet<>();
+        Set<Sun> remainingSuns = new HashSet<>();
+        Set<Bullet> remainingBullets = new HashSet<>();
+        Set<Plant> remainingPlants = new HashSet<>();
         for (var zombie : this.zombies) {
             if(zombie.isAlive()) {
                 remainingZombies.add(zombie);
@@ -116,7 +118,7 @@ public class GameImpl implements Game{
     private void newZombieGenerate(long elapsed){
         if (hasDeltaTimePassed(this.timeOfLastCreatedZombie, elapsed, deltaTimeZombie)){
             this.timeOfLastCreatedZombie = elapsed;
-            this.zombies.add((ZombieImpl) this.zombiesFactory.createEntity());
+            this.zombies.add((Zombie) this.zombiesFactory.createEntity());
             this.deltaTimeZombie = this.deltaTimeZombie - 500;
         }
     }
@@ -131,6 +133,9 @@ public class GameImpl implements Game{
     public void createWave() {
         int percentage = this.world.getLevel().getZombieCount();
         Set<Entities> newWave = this.zombiesFactory.createEntities(percentage);
+        for (Entities singleZombieInWave : newWave){
+            this.zombies.add((Zombie) singleZombieInWave);
+        }
     }
 
     @Override
@@ -151,8 +156,8 @@ public class GameImpl implements Game{
      * @author Zanchini Margherita
      */
     private void checkCollision(){
-        for (ZombieImpl zombie : zombies) {
-            for (PlantImpl plant : plants) {
+        for (Zombie zombie : zombies) {
+            for (Plant plant : plants) {
                 if(zombie.getPosition().getY() == plant.getPosition().getY()){
                     if(zombie.getPosition().getX() <= plant.getPosition().getX() + DELTA_PLANT){
                         zombieEatPlant(zombie, plant);
@@ -160,8 +165,8 @@ public class GameImpl implements Game{
                 }
             }
         }
-        for (BulletImpl bullet : bullets) {
-            for (ZombieImpl zombie : zombies) {
+        for (Bullet bullet : bullets) {
+            for (Zombie zombie : zombies) {
                 if(zombie.getPosition().getY() == bullet.getPosition().getY()){
                     if(bullet.getPosition().getX() >= zombie.getPosition().getX() - DELTA_ZOMBIE){
                         zombie.receiveDamage(bullet.getDamage());
@@ -199,7 +204,7 @@ public class GameImpl implements Game{
      * @authore Zanchini Margherita
      */
     private void plantsShoot(){
-        for (PlantImpl plant : plants) {
+        for (Plant plant : plants) {
             long plantLastAttack = plant.getLastTimeAttack();
             long currentTime = System.currentTimeMillis();
             if(currentTime - plantLastAttack > plant.getCooldown()){

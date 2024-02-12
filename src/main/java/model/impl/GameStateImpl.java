@@ -9,8 +9,6 @@ import model.api.World;
  * This class supports reading and writing operations on fields.
  * @author Sofia Lotti.
  */
-//NOTA: probabilmente manca un metodo che torna un booleano che ti dice quando il numero di zombie uccisi diventa = a totZombies
-//una sorta di gameExit di vittoria
 public class GameStateImpl implements GameState {
 
     private static final int INC_SUN = 25;
