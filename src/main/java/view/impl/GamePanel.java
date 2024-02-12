@@ -2,7 +2,16 @@ package view.impl;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
+import java.util.HashMap;
+import java.util.Map;
 
+import javax.swing.JButton;
+
+import model.api.Bullet;
+import model.api.Plant;
+import model.api.Sun;
+import model.api.Zombie;
 import model.impl.FieldCell;
 import model.impl.Pair;
 import view.api.GenericPanel;
@@ -28,6 +37,11 @@ public class GamePanel extends GenericPanel {
     private final int STARTING_Y = 110;
 
     private final FieldCell[][] fieldMatrix;
+
+    Map<Zombie, Image> zombies = new HashMap<>();
+    Map<Plant, Image> plants = new HashMap<>();
+    Map<Bullet, Image> bullets = new HashMap<>();
+    Map<Sun, JButton> suns = new HashMap<>();
 
     /**
      * GamePanel Constructor
