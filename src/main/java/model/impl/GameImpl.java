@@ -5,6 +5,7 @@ import model.api.GameState;
 import model.api.Plant;
 import model.api.World;
 import model.api.Zombie;
+import view.impl.SwingViewImpl;
 
 import java.util.*;
 
@@ -24,12 +25,14 @@ public class GameImpl implements Game{
     private Set<ZombieImpl> zombies = new HashSet<>();
     private Set<SunImpl> suns= new HashSet<>();
     private Set<BulletImpl> bullets = new HashSet<>();
+    private SunsFactory sunFactory;
     private long timeOfLastCreatedSun= 0;
     //private long timeOfLastCreatedZombie= 0;
 
     public GameImpl(final World world){
         this.world= world;
         this.gameState = new GameStateImpl(this.world.getLevel().getZombieCount());
+        this.sunFactory= new SunsFactory(SwingViewImpl.APPLICATION_WIDTH, SwingViewImpl.APPLICATION_HEIGHT);
     }
 
     @Override
@@ -102,6 +105,10 @@ public class GameImpl implements Game{
     public void update(long elapsed) {
         this.removeKilledEntities();
         this.moveEntities();
+        if(this.hasDeltaTimePassed(this.timeOfLastCreatedSun, elapsed, DELTA_TIME_SUN)) {
+            this.suns.add((SunImpl) this.sunFactory.createEntity());
+            this.timeOfLastCreatedSun= elapsed;
+        }
     }
 
     @Override
