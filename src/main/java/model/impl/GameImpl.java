@@ -13,6 +13,9 @@ public class GameImpl implements Game{
 
     private static final int DELTA_PLANT=35;
     private static final int DELTA_ZOMBIE=10;
+    private static final long DELTA_TIME_SUN= 10000;
+    //private static final long DELTA_TIME_ZOMBIE= 45000;
+    //private static final long DELTA_TIME_BULLET= 2000;
     private static final int timeRechargeAttackZombie = 2000;
 
     private final World world;
@@ -21,6 +24,9 @@ public class GameImpl implements Game{
     private Set<ZombieImpl> zombies = new HashSet<>();
     private Set<SunImpl> suns= new HashSet<>();
     private Set<BulletImpl> bullets = new HashSet<>();
+    private long timeOfLastCreatedSun= 0;
+    //private long timeOfLastCreatedZombie= 0;
+    //private long timeOfLastCreatedBullet= 0;
 
     private long lastTimeZombieCreated = 0;
 
@@ -64,6 +70,7 @@ public class GameImpl implements Game{
         Set<ZombieImpl> remainingZombies = new HashSet<>();
         Set<SunImpl> remainingSuns = new HashSet<>();
         Set<BulletImpl> remainingBullets = new HashSet<>();
+        Set<PlantImpl> remainingPlants = new HashSet<>();
         for (var zombie : this.zombies) {
             if(zombie.isAlive()) {
                 remainingZombies.add(zombie);
@@ -75,11 +82,23 @@ public class GameImpl implements Game{
             }
         }
         for (var bullet : bullets) {
-            remainingBullets.add(bullet);
+            if(bullet.isAlive()) {
+                remainingBullets.add(bullet);
+            }
+        }
+        for (var plant : plants) {
+            if(plant.isAlive()) {
+                remainingPlants.add(plant);
+            }
         }
         this.zombies= remainingZombies;
         this.suns= remainingSuns;
         this.bullets= remainingBullets;
+        this.plants= remainingPlants;
+    }
+
+    private boolean hasDeltaTimePassed(final long previousTime, final long currentTime, final long delta){
+        return (currentTime - previousTime)>=delta;
     }
 
     private void newZombieGenerate(long elapsed){
