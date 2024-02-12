@@ -7,8 +7,6 @@ public interface Controller extends ViewEventListener, WorldEventListener {
 
     void initGame() throws Exception;
 
-    void mainLoop();
-
     void callMainloop();
 
 }

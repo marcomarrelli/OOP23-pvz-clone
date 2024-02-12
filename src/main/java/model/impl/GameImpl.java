@@ -5,6 +5,8 @@ import model.api.GameState;
 import model.api.Plant;
 import model.api.World;
 import model.api.Zombie;
+import view.impl.SwingViewImpl;
+import model.api.EntitiesFactory;
 
 import java.util.*;
 
@@ -14,6 +16,9 @@ public class GameImpl implements Game{
     private static final int DELTA_PLANT=35;
     private static final int DELTA_ZOMBIE=10;
     private static final long DELTA_TIME_SUN= 10000;
+    private static final long DELTA_TIME_ZOMBIE= 15000;
+    //private static final long DELTA_TIME_BULLET= 2000;
+    //private static final int timeRechargeAttackZombie = 2000;
     //private static final long DELTA_TIME_ZOMBIE= 45000;
     private static final long DELTA_TIME_BULLET= 2000;
     private static final int timeRechargeAttackZombie = 2000;
@@ -24,12 +29,21 @@ public class GameImpl implements Game{
     private Set<ZombieImpl> zombies = new HashSet<>();
     private Set<SunImpl> suns= new HashSet<>();
     private Set<BulletImpl> bullets = new HashSet<>();
+    private SunsFactory sunFactory;
+    
     private long timeOfLastCreatedSun= 0;
     //private long timeOfLastCreatedZombie= 0;
+    private long timeOfLastCreatedZombie= 0;
+
+    private EntitiesFactory createZombie = new ZombiesFactory();
+
+    //private long timeOfLastCreatedBullet= 0;
+
 
     public GameImpl(final World world){
         this.world= world;
         this.gameState = new GameStateImpl(this.world.getLevel().getZombieCount());
+        this.sunFactory= new SunsFactory(SwingViewImpl.APPLICATION_WIDTH, SwingViewImpl.APPLICATION_HEIGHT);
     }
 
     @Override
@@ -98,10 +112,25 @@ public class GameImpl implements Game{
         return (currentTime - previousTime)>=delta;
     }
 
+    private void newSunGenerate(final long currentTime) {
+        if(this.hasDeltaTimePassed(this.timeOfLastCreatedSun, currentTime, DELTA_TIME_SUN)) {
+            this.suns.add((SunImpl) this.sunFactory.createEntity());
+            this.timeOfLastCreatedSun= currentTime;
+        }
+    } 
+
+    private void newZombieGenerate(long elapsed){
+        if (hasDeltaTimePassed(this.timeOfLastCreatedZombie, elapsed, DELTA_TIME_ZOMBIE)){
+            this.timeOfLastCreatedZombie = elapsed;
+        }
+    }
+
     @Override
     public void update(long elapsed) {
+        this.checkCollision();
         this.removeKilledEntities();
         this.moveEntities();
+        this.newSunGenerate(elapsed);
     }
 
     @Override

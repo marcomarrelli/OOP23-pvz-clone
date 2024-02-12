@@ -25,12 +25,12 @@ public class ControllerImpl implements Controller {
         this.view = new SwingViewImpl(this);
     }
 
+    @Override
     public void callMainloop(){
         new Thread(this::mainLoop).start();
     }
 
-    @Override
-    public void mainLoop() {
+    private void mainLoop() {
         //this.view.setScene(SwingViewImpl.GAME_PANEL_CONSTRAINT);
         this.world.setLevel(new LevelImpl(world));
         this.game = new GameImpl(this.world);
@@ -39,9 +39,9 @@ public class ControllerImpl implements Controller {
         System.out.println("tempo di inizio gioco: " + startTime);
         while (!this.game.isOver()) {
             long currentStartTime = System.currentTimeMillis();
-            System.out.println("tempo di inizio ciclo: " + currentStartTime);
+            //System.out.println("tempo di inizio ciclo: " + currentStartTime);
             long elapsed = currentStartTime - startTime;
-            //System.out.println("tempo delta: " + elapsed);
+            System.out.println("tempo delta: " + elapsed);
             this.game.update(elapsed);
             //this.view.update(null);
             waitForNextFrame(currentStartTime);
@@ -53,7 +53,7 @@ public class ControllerImpl implements Controller {
         long dt = System.currentTimeMillis() - currentStartTime;
         //System.out.println(dt);
         if (dt < PERIOD){
-            System.out.println(dt);
+            //System.out.println(dt);
             try {
                 //System.out.println(dt);
                 Thread.sleep(PERIOD - dt);
