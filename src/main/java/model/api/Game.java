@@ -10,7 +10,7 @@ public interface Game {
     /**
      * update the game
      */
-    void update();
+    void update(long elapsed);
     /**
      * create a wave of zombie
      */

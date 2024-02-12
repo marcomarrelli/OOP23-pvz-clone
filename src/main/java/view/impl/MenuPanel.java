@@ -37,8 +37,16 @@ public class MenuPanel extends GenericPanel {
         this.setButton(exitButton);
 
         startButton.addActionListener( e -> {
+            
             parent.setScene(SwingViewImpl.GAME_PANEL_CONSTRAINT);
             parent.getController().mainLoop();
+            /*try {
+                // System.out.println(dt);
+                Thread.sleep(10000);
+            } catch (InterruptedException ex) {
+                System.exit(1);
+            }*/
+            
         });
         exitButton.addActionListener( e -> System.exit(0));
 

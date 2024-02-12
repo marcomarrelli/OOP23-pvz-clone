@@ -81,7 +81,7 @@ public class GameImpl implements Game{
     }
 
     @Override
-    public void update() {
+    public void update(long elapsed) {
         this.removeKilledEntities();
         this.moveEntities();
     }

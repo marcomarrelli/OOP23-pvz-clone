@@ -13,7 +13,7 @@ import view.impl.SwingViewImpl;
 
 public class ControllerImpl implements Controller {
     
-    private static final long PERIOD = 20;
+    private static final long PERIOD = 1;
 
     private World world;
     private View view;
@@ -27,6 +27,7 @@ public class ControllerImpl implements Controller {
 
     @Override
     public void mainLoop() {
+        //this.view.setScene(SwingViewImpl.GAME_PANEL_CONSTRAINT);
         this.world.setLevel(new LevelImpl(world));
         this.game = new GameImpl(this.world);
         this.world.setGame(game);
@@ -34,28 +35,30 @@ public class ControllerImpl implements Controller {
         System.out.println("tempo di inizio gioco: " + startTime);
         while (!this.game.isOver()) {
             long currentStartTime = System.currentTimeMillis();
-            System.out.println("tempo di inizio ciclo: " + currentStartTime);
+            //System.out.println("tempo di inizio ciclo: " + currentStartTime);
             long elapsed = currentStartTime - startTime;
-            System.out.println("tempo delta: " + elapsed);
-            this.game.update();
-            this.view.update(null);
+            //System.out.println("tempo delta: " + elapsed);
+            this.game.update(elapsed);
+            //this.view.update(null);
             waitForNextFrame(currentStartTime);
+            startTime = currentStartTime - startTime;
         }
     }
 
     private void waitForNextFrame(long currentStartTime){
-        long dt = System.currentTimeMillis(); // - currentStartTime
-        System.out.println(dt);
+        long dt = System.currentTimeMillis() - currentStartTime;
+        //System.out.println(dt);
         if (dt < PERIOD){
+            System.out.println(dt);
             try {
-                System.out.println(dt);
+                //System.out.println(dt);
                 Thread.sleep(PERIOD - dt);
             } catch (InterruptedException e) {
                 System.exit(1);
-            } 
+            }
             
         }
-        System.out.println(dt);
+        //System.out.println(dt);
     }
 
     @Override
