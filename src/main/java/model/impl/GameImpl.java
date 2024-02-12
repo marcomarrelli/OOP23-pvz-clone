@@ -6,6 +6,7 @@ import model.api.Plant;
 import model.api.World;
 import model.api.Zombie;
 import view.impl.SwingViewImpl;
+import model.api.Entities;
 import model.api.EntitiesFactory;
 
 import java.util.*;
@@ -16,23 +17,21 @@ public class GameImpl implements Game{
     private static final int DELTA_PLANT=35;
     private static final int DELTA_ZOMBIE=10;
     private static final long DELTA_TIME_SUN= 10000;
-    private static final long DELTA_TIME_ZOMBIE= 15000;
     //private static final long DELTA_TIME_BULLET= 2000;
-    //private static final int timeRechargeAttackZombie = 2000;
 
     private final World world;
     private final GameState gameState;
+    private final SunsFactory sunFactory;
+    private final ZombiesFactory zombiesFactory;
+    
     private Set<PlantImpl> plants = new HashSet<>();
     private Set<ZombieImpl> zombies = new HashSet<>();
     private Set<SunImpl> suns= new HashSet<>();
     private Set<BulletImpl> bullets = new HashSet<>();
-    private SunsFactory sunFactory;
     
     private long timeOfLastCreatedSun= 0;
-    //private long timeOfLastCreatedZombie= 0;
     private long timeOfLastCreatedZombie= 0;
-
-    private EntitiesFactory createZombie = new ZombiesFactory();
+    private long deltaTimeZombie = 15000;
 
     //private long timeOfLastCreatedBullet= 0;
 
@@ -41,6 +40,7 @@ public class GameImpl implements Game{
         this.world= world;
         this.gameState = new GameStateImpl(this.world.getLevel().getZombieCount());
         this.sunFactory= new SunsFactory(SwingViewImpl.APPLICATION_WIDTH, SwingViewImpl.APPLICATION_HEIGHT);
+        this.zombiesFactory = new ZombiesFactory();
     }
 
     @Override
@@ -110,8 +110,10 @@ public class GameImpl implements Game{
     }
 
     private void newZombieGenerate(long elapsed){
-        if (hasDeltaTimePassed(this.timeOfLastCreatedZombie, elapsed, DELTA_TIME_ZOMBIE)){
+        if (hasDeltaTimePassed(this.timeOfLastCreatedZombie, elapsed, deltaTimeZombie)){
             this.timeOfLastCreatedZombie = elapsed;
+            this.zombies.add((ZombieImpl) this.zombiesFactory.createEntity());
+            this.deltaTimeZombie = this.deltaTimeZombie - 500;
         }
     }
 
@@ -128,8 +130,8 @@ public class GameImpl implements Game{
 
     @Override
     public void createWave() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'createWave'");
+        int percentage = this.world.getLevel().getZombieCount();
+        Set<Entities> newWave = this.zombiesFactory.createEntities(percentage);
     }
 
     @Override
