@@ -109,6 +109,13 @@ public class GameImpl implements Game{
         return (currentTime - previousTime)>=delta;
     }
 
+    private void newSunGenerate(final long currentTime) {
+        if(this.hasDeltaTimePassed(this.timeOfLastCreatedSun, currentTime, DELTA_TIME_SUN)) {
+            this.suns.add((SunImpl) this.sunFactory.createEntity());
+            this.timeOfLastCreatedSun= currentTime;
+        }
+    } 
+
     private void newZombieGenerate(long elapsed){
         if (hasDeltaTimePassed(this.timeOfLastCreatedZombie, elapsed, DELTA_TIME_ZOMBIE)){
             this.timeOfLastCreatedZombie = elapsed;
@@ -120,10 +127,7 @@ public class GameImpl implements Game{
         this.checkCollision();
         this.removeKilledEntities();
         this.moveEntities();
-        if(this.hasDeltaTimePassed(this.timeOfLastCreatedSun, elapsed, DELTA_TIME_SUN)) {
-            this.suns.add((SunImpl) this.sunFactory.createEntity());
-            this.timeOfLastCreatedSun= elapsed;
-        }
+        this.newSunGenerate(elapsed);
     }
 
     @Override
