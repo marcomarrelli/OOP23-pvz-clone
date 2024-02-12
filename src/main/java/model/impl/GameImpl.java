@@ -19,10 +19,9 @@ public class GameImpl implements Game{
     private static final int DELTA_PLANT=35;
     private static final int DELTA_ZOMBIE=10;
     private static final long DELTA_TIME_SUN= 10000;
-    //private static final long DELTA_TIME_ZOMBIE= 45000;
-    private static final int timeRechargeAttackZombie = 2000;
-    private static final int BULLET_SPEED = 2; //numero a caso
+    private static final long DELTA_TIME_ZOMBIE= 15000;
     //private static final long DELTA_TIME_BULLET= 2000;
+    //private static final int timeRechargeAttackZombie = 2000;
 
     private final World world;
     private final GameState gameState;
@@ -35,9 +34,9 @@ public class GameImpl implements Game{
     private Set<Bullet> bullets = new HashSet<>();
     
     private long timeOfLastCreatedSun= 0;
-    //private long timeOfLastCreatedZombie= 0;
     private long timeOfLastCreatedZombie= 0;
-    private long deltaTimeZombie = 15000;
+
+    private EntitiesFactory createZombie = new ZombiesFactory();
 
     //private long timeOfLastCreatedBullet= 0;
 
@@ -46,7 +45,6 @@ public class GameImpl implements Game{
         this.world= world;
         this.gameState = new GameStateImpl(this.world.getLevel().getZombieCount());
         this.sunFactory= new SunsFactory(SwingViewImpl.APPLICATION_WIDTH, SwingViewImpl.APPLICATION_HEIGHT);
-        this.zombiesFactory = new ZombiesFactory();
     }
 
     @Override
@@ -115,8 +113,15 @@ public class GameImpl implements Game{
         return (currentTime - previousTime)>=delta;
     }
 
+    private void newSunGenerate(final long currentTime) {
+        if(this.hasDeltaTimePassed(this.timeOfLastCreatedSun, currentTime, DELTA_TIME_SUN)) {
+            this.suns.add((SunImpl) this.sunFactory.createEntity());
+            this.timeOfLastCreatedSun= currentTime;
+        }
+    } 
+
     private void newZombieGenerate(long elapsed){
-        if (hasDeltaTimePassed(this.timeOfLastCreatedZombie, elapsed, deltaTimeZombie)){
+        if (hasDeltaTimePassed(this.timeOfLastCreatedZombie, elapsed, DELTA_TIME_ZOMBIE)){
             this.timeOfLastCreatedZombie = elapsed;
             this.zombies.add((Zombie) this.zombiesFactory.createEntity());
             this.deltaTimeZombie = this.deltaTimeZombie - 500;
@@ -125,8 +130,11 @@ public class GameImpl implements Game{
 
     @Override
     public void update(long elapsed) {
+        this.checkCollision();
         this.removeKilledEntities();
         this.moveEntities();
+        this.newSunGenerate(elapsed);
+        this.newZombieGenerate(elapsed);
     }
 
     @Override
