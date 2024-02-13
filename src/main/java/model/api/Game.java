@@ -5,11 +5,15 @@ import java.util.Set;
 import model.impl.Pair;
 
 /**
- * interface for the game.
+ * This interface models a Game.
+ * It represents the core functionality and mechanics of the game.
  */
 public interface Game {
+
     /**
-     * @return if the game is over (true) or not (false).
+     * Checks if the game is over.
+     *
+     * @return true if the game is over, false otherwise.
      */
     boolean isOver();
 
@@ -21,7 +25,8 @@ public interface Game {
     void update(long elapsed);
 
     /**
-     * create a wave of zombie.
+     * Creates a wave of zombies in the game.
+     * This method is responsible for spawning a new wave of zombies.
      */
     void createWave();
 
@@ -33,22 +38,25 @@ public interface Game {
     void createPlant(Pair<Integer, Integer> position);
 
     /**
-     * is check what type the mouse event is.
-     * 
-     * @param posClick is the position of the mouse click
+     * Handles mouse events in the game.
+     * This method is called when a mouse event occurs in the game window.
+     *
+     * @param posClick the position where the mouse click event occurred.
      */
     void mouseEvent(Pair<Integer, Integer> posClick);
 
     /**
-     * 
-     * @return the GameState
+     * Retrieves the current state of the game.
+     *
+     * @return the current state of the game.
      */
     GameState getGameState();
 
     /**
-     * 
-     * @return the set of all the entities
+     * Retrieves the set of entities present in the game.
+     * Entities represent the elements in the game world.
+     *
+     * @return a Set of Entities representing the elements in the game world.
      */
     Set<Entities> getEntities();
-
 }
