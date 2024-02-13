@@ -80,6 +80,11 @@ public final class ControllerImpl implements Controller {
         return this.game.getEntities();
     }
 
+    @Override
+    public World getWorld() {
+        return this.world;
+    }
+
     /*
      * @Override
      * public void notifyWorldEvent(WorldEvent ev) {

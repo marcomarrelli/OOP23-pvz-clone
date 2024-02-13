@@ -4,6 +4,7 @@ import java.util.Set;
 
 import pvzclone.input.api.ViewEventListener;
 import pvzclone.model.api.Entities;
+import pvzclone.model.api.World;
 
 /**
  * This interface models a Controller for the game.
@@ -31,4 +32,11 @@ public interface Controller extends ViewEventListener {
      * @return a Set of Entities representing the elements in the game world.
      */
     Set<Entities> getEntities();
+
+    /**
+     * Retrieves the pricipal class of the game model.
+     * 
+     * @return world of the game.
+     */
+    World getWorld();
 }
