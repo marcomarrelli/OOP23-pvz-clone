@@ -12,31 +12,30 @@ import model.api.EntitiesFactory;
  * 
  * @author Sofia Caberletti
  */
-public class SunsFactory implements EntitiesFactory {
-    private final int screenWidth;
-    private final int screenHeight;
-    private final static int SPEED_Y_AXIS = 5;
-    private Random random;
-
-
-    public SunsFactory(final int screenWidth, final int screenHeight) {
-        this.screenWidth = screenWidth;
-        this.screenHeight = screenHeight;
-        this.random= new Random();
-    }
+public final class SunsFactory implements EntitiesFactory {
+    private static final int SPEED_Y_AXIS = 5;
+    private static final int STARTING_X_GAME_FIELD = 220;
+    private static final int FINAL_X_GAME_FIELD = 750;
+    private static final int STARTING_Y_POSITIONIG = -15;
+    private Random random= new Random();
 
     @Override
     public Entities createEntity() {
-        return new SunImpl(new Pair<Integer, Integer>(random.nextInt(750-220)+220, -15), SPEED_Y_AXIS);
+        return new SunImpl(
+            new Pair<Integer, Integer>(
+            random.nextInt(FINAL_X_GAME_FIELD - STARTING_X_GAME_FIELD) + STARTING_X_GAME_FIELD, 
+            STARTING_Y_POSITIONIG), 
+            SPEED_Y_AXIS
+        );
     }
 
     @Override
-    public Set<Entities> createEntities(int n) {
+    public Set<Entities> createEntities(final int n) {
         Set<Entities> sunsSet = new HashSet<>();
-        for (int i=0; i<n; i++){
+        for (int i = 0; i < n; i++) {
             sunsSet.add(createEntity());
         }
         return sunsSet;
     }
-    
+
 }

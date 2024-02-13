@@ -58,7 +58,7 @@ public final class GameImpl implements Game {
     public GameImpl(final World world) {
         this.world = world;
         this.gameState = new GameStateImpl(this.world.getLevel().getZombieCount());
-        this.sunFactory = new SunsFactory(SwingViewImpl.APPLICATION_WIDTH, SwingViewImpl.APPLICATION_HEIGHT);
+        this.sunFactory = new SunsFactory();
         this.zombiesFactory = new ZombiesFactory();
     }
 
