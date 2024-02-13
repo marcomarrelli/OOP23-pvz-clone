@@ -39,10 +39,10 @@ public class GamePanel extends GenericPanel {
     public static final int X_MARGIN = 10; // 20/2
     public static final int Y_MARGIN = 15; // 30/2
 
-    private final String PLANT_IMAGE = "/images/plantEntity.png";
-    private final String ZOMBIE_IMAGE = "/images/zombieEntity.png";
-    private final String BULLET_IMAGE = "/images/bulletEntity.png";
-    private final String SUN_IMAGE = "/images/sunEntity.png";
+    private final String PLANT_IMAGE = "/images/sunCounter.jpg"; // "/images/plantEntity.png";
+    private final String ZOMBIE_IMAGE = "/images/sunCounter.jpg"; // "/images/zombieEntity.png";
+    private final String BULLET_IMAGE = "/images/sunCounter.jpg"; // "/images/bulletEntity.png";
+    private final String SUN_IMAGE = "/images/sunCounter.jpg"; // "/images/sunEntity.png";
 
     public static final int CELL_WIDTH = X_OFFSET-X_MARGIN;
     public static final int CELL_HEIGHT = Y_OFFSET-Y_MARGIN;
@@ -87,30 +87,15 @@ public class GamePanel extends GenericPanel {
         
         Graphics2D g2d = (Graphics2D) g;
         g2d.drawImage(this.background, 0, 0, null);
-
-        this.updateEntities();
-
-        this.entities.entrySet().forEach(e -> {
-            this.images.add(new Pair<Image, Pair<Integer, Integer>>(e.getValue(), e.getKey().getPosition()));
-        });
-
-        this.images.forEach(e -> {
-            g2d.drawImage(e.getX(), e.getY().getX(), e.getY().getY(), this);
-        });
+        
+        this.updateEntities(g2d);
     }
 
-    private void updateEntities() {
+    private void updateEntities(Graphics2D g) {
+        this.entities.clear();
+        this.entities.entrySet().forEach(e -> this.images.add(new Pair<Image, Pair<Integer, Integer>>(e.getValue(), e.getKey().getPosition())));
         this.entities.keySet().removeIf(e -> !this.parent.getController().getEntities().contains(e));
-        
-        this.parent.getController().getEntities().forEach(entity -> {
-            if(!this.entities.containsKey(entity)) {
-                this.createEntity(entity);
-            }
-
-            this.entities.get(entity);
-
-            //entity.translate(entity.getPosition().getX(), entity.getPosition().getY());
-        });
+        this.parent.getController().getEntities().forEach(entity -> this.createEntity(g, entity));
     }
 
     private Image getEntityImage(Entities entity) {
@@ -123,7 +108,8 @@ public class GamePanel extends GenericPanel {
         };
     }
 
-    private void createEntity(Entities entity) {
+    private void createEntity(Graphics2D g, Entities entity) {
         this.entities.put(entity, getEntityImage(entity));
+        g.drawImage(this.entities.get(entity), entity.getPosition().getX(), entity.getPosition().getY(), this);
     }
 }
