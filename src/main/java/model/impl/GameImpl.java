@@ -38,7 +38,7 @@ public class GameImpl implements Game{
     
     private long timeOfLastCreatedSun= 0;
     private long timeOfLastCreatedZombie= 0;
-    private long deltaTimeZombie = 15000;
+    private long deltaTimeZombie = 12000;
 
     //private long timeOfLastCreatedBullet= 0;
 

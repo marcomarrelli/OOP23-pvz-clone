@@ -17,7 +17,7 @@ import view.impl.SwingViewImpl;
 
 public class ControllerImpl implements Controller {
     
-    private static final long PERIOD = 1;
+    private static final long PERIOD = 100;
 
     private World world;
     private View view;
