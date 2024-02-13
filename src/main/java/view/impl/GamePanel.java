@@ -41,6 +41,7 @@ public class GamePanel extends GenericPanel {
     public static final int X_MARGIN = 10; // 20/2
     public static final int Y_MARGIN = 15; // 30/2
 
+    private final String PLANT_CARD = "/images/plantCard.png";
     private final String PLANT_IMAGE = "/images/sunCounter.jpg"; // "/images/plantEntity.png";
     private final String ZOMBIE_IMAGE = "/images/zombieEntity2.png"; // "/images/zombieEntity.png";
     private final String BULLET_IMAGE = "/images/sunCounter.png"; // "/images/bulletEntity.png";
@@ -81,6 +82,11 @@ public class GamePanel extends GenericPanel {
                 //this.add(this.fieldMatrix[i][j]);
             }
         }
+
+        JButton plantCardButton = new JButton("");
+        plantCardButton.setIcon(new ImageIcon(getClass().getResource(PLANT_CARD)));
+        plantCardButton.setBounds(40, 50, 120, 75);
+        this.add(plantCardButton);
 
         this.addMouseListener( new MouseListener() {
 
@@ -126,6 +132,7 @@ public class GamePanel extends GenericPanel {
         
         Graphics2D g2d = (Graphics2D) g;
         g2d.drawImage(this.background, 0, 0, null);
+        //g2d.drawImage(new ImageIcon(getClass().getResource(PLANT_CARD)).getImage(), 20, 40, getFocusCycleRootAncestor());
         
         this.updateEntities(g2d);
     }
