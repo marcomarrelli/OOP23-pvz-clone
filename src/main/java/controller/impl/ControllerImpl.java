@@ -13,6 +13,7 @@ import model.impl.Pair;
 import model.impl.WorldImpl;
 import view.api.View;
 import view.impl.SwingViewImpl;
+
 /**
  * Class that implements Controller.
  */
@@ -43,9 +44,9 @@ public final class ControllerImpl implements Controller {
         long startTime = System.currentTimeMillis();
         // System.out.println("tempo di inizio gioco: " + startTime);
         while (!this.game.isOver()) {
-            long currentStartTime = System.currentTimeMillis();
+            final long currentStartTime = System.currentTimeMillis();
             // System.out.println("tempo di inizio ciclo: " + currentStartTime);
-            long elapsed = currentStartTime - startTime;
+            final long elapsed = currentStartTime - startTime;
             // System.out.println("tempo delta: " + elapsed);
             this.game.update(elapsed);
             this.view.update();
@@ -55,7 +56,7 @@ public final class ControllerImpl implements Controller {
     }
 
     private void waitForNextFrame(final long currentStartTime) {
-        long dt = System.currentTimeMillis() - currentStartTime;
+        final long dt = System.currentTimeMillis() - currentStartTime;
         if (dt < PERIOD) {
             try {
                 Thread.sleep(PERIOD - dt);

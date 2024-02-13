@@ -14,11 +14,8 @@ public interface Controller extends ViewEventListener {
     /**
      * Initializes the game.
      * This method should be called once to start the game.
-     * It may throw an Exception if there is an error during initialization.
-     *
-     * @throws Exception if there is an error during game initialization.
      */
-    void initGame() throws Exception;
+    void initGame();
 
     /**
      * Calls the main loop of the game.
