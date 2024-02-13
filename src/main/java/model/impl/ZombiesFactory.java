@@ -14,7 +14,7 @@ public class ZombiesFactory implements EntitiesFactory {
     private static final int ZOMBIE_SPPED = 2; /*metri al secondo */
     private static final int COOLDOWN = 10;
     
-    private static final int POSSIBLE_Y = 6;
+    private static final int POSSIBLE_Y = 5;
     
     
     @Override
