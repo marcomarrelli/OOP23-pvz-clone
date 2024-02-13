@@ -131,7 +131,7 @@ public class GamePanel extends GenericPanel {
         super.paintComponent(g);
         
         Graphics2D g2d = (Graphics2D) g;
-        g2d.drawImage(this.background, 0, 0, null);
+        g2d.drawImage(this.getBackgroundImage(), 0, 0, null);
         //g2d.drawImage(new ImageIcon(getClass().getResource(PLANT_CARD)).getImage(), 20, 40, getFocusCycleRootAncestor());
         
         this.updateEntities(g2d);
@@ -140,8 +140,8 @@ public class GamePanel extends GenericPanel {
     private void updateEntities(Graphics2D g) {
         this.entities.clear();
         this.entities.entrySet().forEach(e -> this.images.add(new Pair<Image, Pair<Integer, Integer>>(e.getValue(), e.getKey().getPosition())));
-        this.entities.keySet().removeIf(e -> !this.parent.getController().getEntities().contains(e));
-        this.parent.getController().getEntities().forEach(entity -> this.createEntity(g, entity));
+        this.entities.keySet().removeIf(e -> !this.getView().getController().getEntities().contains(e));
+        this.getView().getController().getEntities().forEach(entity -> this.createEntity(g, entity));
         /*
         for (var ent : entities.entrySet()) {
             if(ent.getKey() instanceof Sun) {

@@ -14,20 +14,41 @@ import view.impl.SwingViewImpl;
  * @author Marco Marrelli
  */
 public abstract class GenericPanel extends JPanel {
-    protected final SwingViewImpl parent;
-    protected Image background;
-    
+    /** The View Implementation. */
+    private final SwingViewImpl parent;
+
+    /** The Image for the Panel's Background. */
+    private final Image background;
+
     /**
      * Panel Constructor.
      * 
      * @param parent The Application View.
      * @param backgroundSource The Panel Background.
      */
-    public GenericPanel(SwingViewImpl parent, String backgroundSource) {
+    public GenericPanel(final SwingViewImpl parent, final String backgroundSource) {
         this.parent = parent;
+        this.background = new ImageIcon(getClass().getResource(backgroundSource)).getImage();
         this.setLayout(null);
         this.setBackground(Color.BLACK);
         this.setSize(SwingViewImpl.APPLICATION_WIDTH, SwingViewImpl.APPLICATION_HEIGHT);
-        this.background = new ImageIcon(getClass().getResource(backgroundSource)).getImage();
+    }
+
+    /**
+     * View Getter. Returns the View (Parent).
+     * 
+     * @return the view.
+     */
+    public SwingViewImpl getView() {
+        return this.parent;
+    }
+
+    /**
+     * Background Getter. Returns the BackgroundImage.
+     * 
+     * @return the background image of the panel.
+     */
+    public Image getBackgroundImage() {
+        return this.background;
     }
 }

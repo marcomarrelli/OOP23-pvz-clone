@@ -66,6 +66,6 @@ public class MenuPanel extends GenericPanel {
         super.paintComponent(g);
 
         Graphics2D g2D = (Graphics2D) g;
-        g2D.drawImage(this.background, 0, 0, null);
+        g2D.drawImage(this.getBackgroundImage(), 0, 0, null);
     }
 }
