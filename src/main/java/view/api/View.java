@@ -14,16 +14,16 @@ public interface View {
      * @param scene The scene name to load.
      */
     void setScene(String scene);
-    
+
     /**
-     * Gets the current scene
+     * Gets the current scene.
      * 
      * @return The currently loaded scene.
      */
     JPanel getScene();
 
     /**
-     * Gets the current scene
+     * Gets the current scene.
      * 
      * @return The currently loaded scene constraint.
      */
@@ -36,7 +36,7 @@ public interface View {
 
     /**
      * 
-     * @return the controller associated with the view
+     * @return the controller associated with the view.
      */
     Controller getController();
 }

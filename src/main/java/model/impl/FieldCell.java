@@ -15,21 +15,23 @@ import view.impl.GamePanel;
  * @author Marco Marrelli
  */
 public class FieldCell extends JButton {
-    private final Pair<Integer, Integer> coord;
+    /** Cell Text Initializer, used for {@link JButton#JButton(String)}. */
     public static final String CELL_TEXT_INITIALIZER = "";
-    private final Color HOVER_COLOR = new Color(225, 215, 235);
 
+    private final Pair<Integer, Integer> coord;
+    private final Color hoverColor = new Color(225, 215, 235);
     private boolean hasPlant;
 
     /**
      * Field Cell Constructor.
      * 
-     * @param coord The central coordinate of the Cell.
+     * @param coord the central coordinate of the Cell.
+     * @param text the text of the button.
      */
-    public FieldCell(Pair<Integer, Integer> coord, String text) {
+    public FieldCell(final Pair<Integer, Integer> coord, final String text) {
         super(text);
         this.coord = coord;
-        
+
         this.setBounds(coord.getX(), coord.getY(), GamePanel.CELL_WIDTH, GamePanel.CELL_HEIGHT);
         this.setOpaque(false);
         this.setBorderPainted(false);
@@ -59,9 +61,11 @@ public class FieldCell extends JButton {
 
     /**
      * Set a plant to the cell.
+     * 
+     * @param isHovered if the content area should be filler or not.
      */
-    protected void cellHover(boolean isHovered) {
-        this.setBackground(HOVER_COLOR);
+    protected void cellHover(final boolean isHovered) {
+        this.setBackground(hoverColor);
         this.setContentAreaFilled(isHovered);
     }
 

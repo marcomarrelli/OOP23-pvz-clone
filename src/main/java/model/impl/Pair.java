@@ -10,11 +10,10 @@ import java.util.Objects;
  * @param <E2> second element type.
  */
 public final class Pair<E1, E2> {
+    private final E1 e1;
+    private final E2 e2;
 
-	private final E1 e1;
-	private final E2 e2;
-
-	/**
+    /**
 	 * Pair Constructor.
 	 * 
 	 * @param x first element.
