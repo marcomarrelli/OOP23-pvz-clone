@@ -55,18 +55,14 @@ public class ControllerImpl implements Controller {
 
     private void waitForNextFrame(long currentStartTime){
         long dt = System.currentTimeMillis() - currentStartTime;
-        //System.out.println(dt);
         if (dt < PERIOD){
-            //System.out.println(dt);
             try {
                 //System.out.println(dt);
                 Thread.sleep(PERIOD - dt);
             } catch (InterruptedException e) {
                 System.exit(1);
             }
-            
         }
-        //System.out.println(dt);
     }
 
     @Override

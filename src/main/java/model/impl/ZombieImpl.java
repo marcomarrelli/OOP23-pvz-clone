@@ -1,5 +1,6 @@
 package model.impl;
 
+import model.api.Entities;
 import model.api.Zombie;
 /**
  * Class that implements Zombie Interface.
@@ -13,7 +14,7 @@ public class ZombieImpl implements Zombie {
 
     private double remainingLife;
     private long lastTimeAttack;
-    private Pair<Integer, Integer> position;
+    private Pair<Integer,Integer> position;
     /**
      * Constructor of Zombies.
      * 
@@ -23,7 +24,8 @@ public class ZombieImpl implements Zombie {
      * @param maxLife Zombie's inital life.
      * @param position Zombie's position.
      */
-    public ZombieImpl(final double damage, final long cooldown, final int xShift, final double maxLife, final Pair<Integer, Integer> position){
+    public ZombieImpl(final double damage, final long cooldown, final int xShift,
+        final double maxLife, final Pair<Integer,Integer> position){
         this.damage = damage;
         this.cooldown = cooldown;
         this.xShift = xShift;
@@ -43,7 +45,7 @@ public class ZombieImpl implements Zombie {
     }
     
     @Override
-    public Pair<Integer, Integer> getPosition() {
+    public Pair<Integer,Integer> getPosition() {
         return this.position;
     }
     
@@ -84,6 +86,8 @@ public class ZombieImpl implements Zombie {
 
     @Override
     public void moveLeft() {
-        this.position = new Pair<Integer, Integer>(this.position.getX() - this.xShift, this.position.getY());
+        this.position = new Pair<Integer,Integer>(this.position.getX() - this.xShift, this.position.getY());
     }
+
+    
 }
