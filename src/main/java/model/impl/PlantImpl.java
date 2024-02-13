@@ -53,10 +53,7 @@ public final class PlantImpl implements Plant {
 
     @Override
     public boolean isAlive() {
-        if (remainingLife > 0) {
-            return true;
-        }
-        return false;
+        return this.remainingLife > 0;
     }
 
     @Override
