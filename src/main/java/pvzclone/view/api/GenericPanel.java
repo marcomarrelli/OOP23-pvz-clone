@@ -3,7 +3,6 @@ package pvzclone.view.api;
 import java.awt.Color;
 import java.awt.Image;
 
-import javax.annotation.Nonnull;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
