@@ -131,7 +131,7 @@ public class GameImpl implements Game{
 
     @Override
     public void createPlant(Pair<Integer, Integer> position) {
-        plants.add(new PlantImpl(20, 100, "base plant", 2, position, 5));
+        plants.add(new PlantImpl(20, 100, "Plant", position, 5));
     }
 
     public void mouseEvent(Pair<Integer, Integer> posClick){

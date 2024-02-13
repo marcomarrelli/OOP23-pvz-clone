@@ -3,28 +3,34 @@ package model.impl;
 import model.api.Plant;
 
 /**
- * class that implements Plant interface
+ * class that implements Plant interface.
  * 
  * @author Zanchini Margherita
  */
 
-public class PlantImpl implements Plant{
+public final class PlantImpl implements Plant {
 
     private final double damage;
     private final String entityName;
-    private final double timeBetweenAttacks;
     private final Pair<Integer, Integer> position;
     private final long cooldown;
 
     private double remainingLife;
     private long lastTimeAttack;
 
-    
-    public PlantImpl(final double damage, final double remainingLife, final String entityName, final double timeBetweenAttacks, final Pair<Integer, Integer> position, final long cooldown){
+    /**
+     * 
+     * @param damage        is the damage that the plant do
+     * @param remainingLife is the remaining life of the plant
+     * @param entityName    is the name of the entity, for the plant is "plant"
+     * @param position      is the position of the plant
+     * @param cooldown      is the time between two attack of the plant
+     */
+    public PlantImpl(final double damage, final double remainingLife, final String entityName,
+            final Pair<Integer, Integer> position, final long cooldown) {
         this.damage = damage;
         this.remainingLife = remainingLife;
         this.entityName = entityName;
-        this.timeBetweenAttacks = timeBetweenAttacks;
         this.position = position;
         this.cooldown = cooldown;
         this.lastTimeAttack = 0;
@@ -47,22 +53,19 @@ public class PlantImpl implements Plant{
 
     @Override
     public boolean isAlive() {
-        if(remainingLife > 0) return true;
+        if (remainingLife > 0) {
+            return true;
+        }
         return false;
     }
 
     @Override
     public String getEntityName() {
-       return "Plant"; //return this.entityName;
+        return this.entityName;
     }
 
     @Override
-    public double getTimeBetweenAttacks() {
-        return this.timeBetweenAttacks;
-    }
-
-    @Override
-    public void receiveDamage(double damageReceived) {
+    public void receiveDamage(final double damageReceived) {
         this.remainingLife = this.remainingLife - damageReceived;
     }
 
@@ -72,7 +75,7 @@ public class PlantImpl implements Plant{
     }
 
     @Override
-    public void setLastTimeAttack(long lastTimeAttack) {
+    public void setLastTimeAttack(final long lastTimeAttack) {
         this.lastTimeAttack = lastTimeAttack;
     }
 
