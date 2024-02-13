@@ -5,28 +5,31 @@ package model.api;
  * It contains methods to set the Level and Game that will
  * be used to start the game.
  * 
- * @author Sofia Caberletti
+ * @author Sofia Caberletti.
  */
 public interface World {
     /**
-     * Sets the level
+     * Sets the level.
      * 
-     * @param level 
+     * @param level level of the World.
      */
     void setLevel(Level level);
+
     /**
-     * Sets the game
+     * Sets the game.
      * 
-     * @param game
+     * @param game the game of the World.
      */
     void setGame(Game game);
-    /** 
-     * @return the level
+
+    /**
+     * @return the level.
      */
     Level getLevel();
+
     /**
-     * @return the game
+     * @return the game.
      */
     Game getGame();
-    
+
 }

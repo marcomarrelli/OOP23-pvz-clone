@@ -1,13 +1,13 @@
 package model.api;
 /**
  * This interface models methods for Zombies and Plants.
- * @authors Margherita Zanchini, Sofia Lotti.
+ * @author Margherita Zanchini, Sofia Lotti.
  */
 public interface ActiveEntities extends Entities {
     /**
      * Sets the respective field.
      * 
-     * @param LastTimeAttack time since the last attack.
+     * @param lastTimeAttack time since the last attack.
      */
     void setLastTimeAttack(long lastTimeAttack);
     /**
