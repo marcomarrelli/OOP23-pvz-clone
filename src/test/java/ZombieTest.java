@@ -2,31 +2,37 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.junit.jupiter.api.Test;
 
-import model.api.Entities;
 import model.api.Zombie;
 import model.impl.Pair;
 import model.impl.ZombieImpl;
 
+/**
+ * This class contains tests for testing Zombie.
+ * 
+ * @author Sofia Lotti.
+ */
 public final class ZombieTest {
-    
+
     private static final double ATK = 20.0;
     private static final double MAX_LIFE = 100.0;
-    private static final int X_SHIFT = 2; /* metri al secondo */
+    private static final int X_SHIFT = 2;
     private static final int COOLDOWN = 10;
-    private static final Pair<Integer,Integer> POSITION = new Pair<Integer,Integer>(50, 50);
-    
-    private Zombie ZombieEntity(){
+    private static final Pair<Integer, Integer> POSITION = new Pair<Integer, Integer>(50, 50);
+
+    private static final int DAMAGE_RECEIVED = 10;
+    private static final int INT_FIFTY = 50;
+    private static final int FIRST_X_COORD = 48;
+    private static final int SECOND_X_COORD = 28;
+
+    private Zombie zombieEntity() {
         return new ZombieImpl(ATK, COOLDOWN, X_SHIFT, MAX_LIFE, POSITION);
     }
 
     @Test
-    void isZombieAliveWithCorrectValues(){
-        Zombie zombie = ZombieEntity();
+    void isZombieAliveWithCorrectValues() {
+        Zombie zombie = zombieEntity();
         assertTrue(zombie.isAlive());
         assertEquals(MAX_LIFE, zombie.getRemainingLife());
         assertEquals(ATK, zombie.getDamage());
@@ -36,42 +42,44 @@ public final class ZombieTest {
     }
 
     @Test
-    void correctDecreaseLife(){
-        Zombie zombie = ZombieEntity();
+    void correctDecreaseLife() {
+        Zombie zombie = zombieEntity();
         assertTrue(zombie.isAlive());
         assertEquals(MAX_LIFE, zombie.getRemainingLife());
-        zombie.receiveDamage(10);
-        assertEquals(90.0, zombie.getRemainingLife());
-        zombie.receiveDamage(40);
-        assertEquals(50, zombie.getRemainingLife());
+        zombie.receiveDamage(DAMAGE_RECEIVED);
+        assertEquals(MAX_LIFE - DAMAGE_RECEIVED, zombie.getRemainingLife());
+        zombie.receiveDamage(DAMAGE_RECEIVED);
+        zombie.receiveDamage(DAMAGE_RECEIVED);
+        zombie.receiveDamage(DAMAGE_RECEIVED);
+        zombie.receiveDamage(DAMAGE_RECEIVED);
+        assertEquals(INT_FIFTY, zombie.getRemainingLife());
         assertTrue(zombie.isAlive());
-        zombie.receiveDamage(50);
+        zombie.receiveDamage(INT_FIFTY);
         assertFalse(zombie.isAlive());
     }
 
     @Test
-    void correctMovementZombie(){
-        Zombie zombie = ZombieEntity();
+    void correctMovementZombie() {
+        Zombie zombie = zombieEntity();
         assertEquals(POSITION, zombie.getPosition());
         zombie.moveLeft();
-        assertEquals(new Pair<>(48.0,50.0), zombie.getPosition());
-        for (int i=0; i<10; i++){
+        assertEquals(new Pair<>(FIRST_X_COORD, INT_FIFTY), zombie.getPosition());
+        for (int i = 0; i < DAMAGE_RECEIVED; i++) {
             zombie.moveLeft();
         }
-        assertEquals(new Pair<>(28.0,50.0), zombie.getPosition());
+        assertEquals(new Pair<>(SECOND_X_COORD, INT_FIFTY), zombie.getPosition());
     }
 
     @Test
-    void createALotOfZombies(){
-        Set<Zombie> zombies = new HashSet<>();
-        Zombie zombie1 = ZombieEntity();
-        Zombie zombie2 = ZombieEntity();
-        Zombie zombie3 = ZombieEntity();
+    void createALotOfZombies() {
+        // Set<Zombie> zombies = new HashSet<>();
+        Zombie zombie1 = zombieEntity();
+        Zombie zombie2 = zombieEntity();
+        Zombie zombie3 = zombieEntity();
 
         assertTrue(zombie1.isAlive());
         assertTrue(zombie2.isAlive());
         assertTrue(zombie3.isAlive());
-        
-        
+
     }
 }
