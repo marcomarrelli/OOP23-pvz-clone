@@ -4,6 +4,8 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.HashMap;
@@ -76,9 +78,46 @@ public class GamePanel extends GenericPanel {
                 int yCoord = i == 0 ? (STARTING_Y+(Y_OFFSET*i)) : (STARTING_Y+(Y_OFFSET*i)+(Y_MARGIN/4));
                 
                 this.fieldMatrix[i][j] = new FieldCell(new Pair(xCoord, yCoord), FieldCell.CELL_TEXT_INITIALIZER);
-                this.add(this.fieldMatrix[i][j]);
+                //this.add(this.fieldMatrix[i][j]);
             }
         }
+
+        this.addMouseListener( new MouseListener() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                //System.out.println(e.getX()+" "+e.getY());
+                Entities toRemove= null;
+                for(var el : entities.entrySet()) {    
+                    if(el.getKey() instanceof Sun) {
+                        //System.out.println("Sole"+el.getKey().getPosition().getX()+" "+el.getKey().getPosition().getY());
+                        if(e.getX()>=el.getKey().getPosition().getX() && e.getX()<=el.getKey().getPosition().getX()+140 &&
+                        e.getY()>=el.getKey().getPosition().getY() && e.getY()<=el.getKey().getPosition().getY()+106) {
+                            Sun sun= (Sun) el.getKey();
+                            sun.kill();
+                            toRemove= el.getKey();
+                        }   
+                    }
+                }
+                entities.remove(toRemove);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+        });
     }
 
     @Override
@@ -96,6 +135,13 @@ public class GamePanel extends GenericPanel {
         this.entities.entrySet().forEach(e -> this.images.add(new Pair<Image, Pair<Integer, Integer>>(e.getValue(), e.getKey().getPosition())));
         this.entities.keySet().removeIf(e -> !this.parent.getController().getEntities().contains(e));
         this.parent.getController().getEntities().forEach(entity -> this.createEntity(g, entity));
+        /*
+        for (var ent : entities.entrySet()) {
+            if(ent.getKey() instanceof Sun) {
+                System.out.println("Sun "+ent.getKey().getPosition().getX()+" "+ent.getKey().getPosition().getY());
+            }
+        }
+        */
     }
 
     private Image getEntityImage(Entities entity) {

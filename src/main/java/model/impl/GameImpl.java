@@ -20,7 +20,7 @@ public class GameImpl implements Game{
 
     private static final int DELTA_PLANT=35;
     private static final int DELTA_ZOMBIE=10;
-    private static final long DELTA_TIME_SUN= 10000;    
+    private static final long DELTA_TIME_SUN= 2000;    
     private static final int BULLET_SPEED = 2;
     //private static final long DELTA_TIME_ZOMBIE= 15000;
     //private static final long DELTA_TIME_BULLET= 2000;
