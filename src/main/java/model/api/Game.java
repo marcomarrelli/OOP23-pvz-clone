@@ -20,9 +20,9 @@ public interface Game {
     /**
      * create a new Plant
      */
-    void createPlant(Pair<Double, Double> position);
+    void createPlant(Pair<Integer, Integer> position);
 
-    void mouseEvent(Pair<Double, Double> posClick);
+    void mouseEvent(Pair<Integer, Integer> posClick);
 
     GameState getGameState();
 

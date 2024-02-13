@@ -10,12 +10,12 @@ public class ZombiesFactory implements EntitiesFactory {
 
     private static final double ATK = 20.0;
     private static final double MAX_LIFE = 100.0;
-    private static final long ZOMBIE_SPPED = 2; /*metri al secondo */
-    private static final long COOLDOWN = 10;
+    private static final int ZOMBIE_SPPED = 2; /*metri al secondo */
+    private static final int COOLDOWN = 10;
     
     @Override
     public Entities createEntity() {
-        return new ZombieImpl( ATK, COOLDOWN, ZOMBIE_SPPED, MAX_LIFE, null);
+        return new ZombieImpl(ATK, COOLDOWN, ZOMBIE_SPPED, MAX_LIFE, new Pair<Integer, Integer>(800, 250));
     }
 
     @Override

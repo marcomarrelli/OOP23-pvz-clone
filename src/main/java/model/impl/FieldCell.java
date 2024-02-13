@@ -1,13 +1,10 @@
 package model.impl;
 
 import java.awt.Color;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
-import javax.swing.JComponent;
 
-import view.impl.GamePanel; // Used for JavaDoc
+import view.impl.GamePanel;
 
 /**
  * Cell used in Game Panel for placing Plants Entities.
@@ -54,10 +51,10 @@ public class FieldCell extends JButton {
     /**
      * Set a plant to the cell.
      */
-    protected void setPlant() {
+    protected void setPlant(/* Entity plant */) {
         this.hasPlant = true;
         this.setContentAreaFilled(true);
-        this.setBackground(Color.BLACK);//new Color(0, 0, 0, 0));
+        // this . set Image (plant);
     }
 
     /**

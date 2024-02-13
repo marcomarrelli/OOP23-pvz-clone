@@ -11,7 +11,7 @@ public interface Entities {
     /**
      * @return position of the entity
      */
-    Pair<Double,Double> getPosition();
+    Pair<Integer, Integer> getPosition();
     /**
      * @return state alive of the entity.
      */
@@ -20,6 +20,4 @@ public interface Entities {
      * @return name of the entity.
      */
     String getEntityName();
-
-
 }

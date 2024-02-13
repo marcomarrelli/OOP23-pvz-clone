@@ -13,14 +13,14 @@ public class PlantImpl implements Plant{
     private final double damage;
     private final String entityName;
     private final double timeBetweenAttacks;
-    private final Pair<Double,Double> position;
+    private final Pair<Integer, Integer> position;
     private final long cooldown;
 
     private double remainingLife;
     private long lastTimeAttack;
 
     
-    public PlantImpl(final double damage, final double remainingLife, final String entityName, final double timeBetweenAttacks, final Pair<Double, Double> position, final long cooldown){
+    public PlantImpl(final double damage, final double remainingLife, final String entityName, final double timeBetweenAttacks, final Pair<Integer, Integer> position, final long cooldown){
         this.damage = damage;
         this.remainingLife = remainingLife;
         this.entityName = entityName;
@@ -41,7 +41,7 @@ public class PlantImpl implements Plant{
     }
 
     @Override
-    public Pair<Double,Double> getPosition() {
+    public Pair<Integer, Integer> getPosition() {
         return this.position;
     }
 
@@ -53,7 +53,7 @@ public class PlantImpl implements Plant{
 
     @Override
     public String getEntityName() {
-       return this.entityName;
+       return "Plant"; //return this.entityName;
     }
 
     @Override

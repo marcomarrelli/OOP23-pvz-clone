@@ -1,5 +1,6 @@
 package controller.impl;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import controller.api.Controller;
@@ -39,14 +40,14 @@ public class ControllerImpl implements Controller {
         this.game = new GameImpl(this.world);
         this.world.setGame(game);
         long startTime = System.currentTimeMillis();
-        System.out.println("tempo di inizio gioco: " + startTime);
+        //System.out.println("tempo di inizio gioco: " + startTime);
         while (!this.game.isOver()) {
             long currentStartTime = System.currentTimeMillis();
             //System.out.println("tempo di inizio ciclo: " + currentStartTime);
             long elapsed = currentStartTime - startTime;
-            System.out.println("tempo delta: " + elapsed);
+            //System.out.println("tempo delta: " + elapsed);
             this.game.update(elapsed);
-            //this.view.update(null);
+            this.view.update();
             waitForNextFrame(currentStartTime);
             startTime = currentStartTime - startTime;
         }
@@ -69,12 +70,16 @@ public class ControllerImpl implements Controller {
     }
 
     @Override
-    public void notifyMouseEvent(Pair<Double, Double> clickPos) {
+    public void notifyMouseEvent(Pair<Integer, Integer> clickPos) {
         this.game.mouseEvent(clickPos);
     }
 
     @Override
     public Set<Entities> getEntities() {
+        if(this.game == null) {
+            return new HashSet<Entities>();
+        }
+        
         return this.game.getEntities();
     }
 
