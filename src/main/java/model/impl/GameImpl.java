@@ -6,7 +6,6 @@ import model.api.Plant;
 import model.api.Sun;
 import model.api.World;
 import model.api.Zombie;
-import view.impl.SwingViewImpl;
 import model.api.Bullet;
 import model.api.Entities;
 
@@ -145,11 +144,7 @@ public final class GameImpl implements Game {
         plants.add(new PlantImpl(DAMAGE_BASE_PLANT, LIFE_BASE_PLANT, "Plant", position, COOLDOWN_BASE_PLANT));
     }
 
-    /**
-     * check the type of mouse event.
-     * 
-     * @param posClick is the position of the mouse click
-     */
+    @Override
     public void mouseEvent(final Pair<Integer, Integer> posClick) {
         // qua il model guarda dove è stato fatto il click e di conseguenza gestisce
         // l'evento
