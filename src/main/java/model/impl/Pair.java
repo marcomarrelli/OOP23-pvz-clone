@@ -3,19 +3,24 @@ package model.impl;
 import java.util.Objects;
 
 /**
- * A standard generic Pair<E1,E2>, with getters, hashCode, equals, and toString well implemented.
+ * A standard generic Pair<E1,E2>, with getters, hashCode, equals, and toString
+ * well implemented.
+ * 
+ * @param <E1> first element type.
+ * @param <E2> second element type.
  */
-public class Pair<E1,E2> {
+public final class Pair<E1, E2> {
+
 	private final E1 e1;
 	private final E2 e2;
-	
+
 	/**
 	 * Pair Constructor.
 	 * 
 	 * @param x first element.
 	 * @param y second element.
 	 */
-	public Pair(E1 x, E2 y) {
+	public Pair(final E1 x, final E2 y) {
 		super();
 		this.e1 = x;
 		this.e2 = y;
@@ -46,7 +51,7 @@ public class Pair<E1,E2> {
 
 	@SuppressWarnings("rawtypes")
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(final Object obj) {
 		if (this == obj) {
 			return true;
 		}
@@ -65,4 +70,3 @@ public class Pair<E1,E2> {
 		return "Pair [e1 = " + e1 + ", e2 = " + e2 + "]";
 	}
 }
-
