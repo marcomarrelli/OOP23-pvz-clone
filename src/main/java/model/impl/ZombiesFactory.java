@@ -6,30 +6,36 @@ import java.util.Random;
 
 import model.api.Entities;
 import model.api.EntitiesFactory;
-/* NOTA: creare un metodo che restituisce la posizione dello Zombie. X max larghezza, Y casuale (tra 5/6 pos possibili) */
-public class ZombiesFactory implements EntitiesFactory {
+
+/**
+ * Class that implements EntitiesFactory.
+ * 
+ * @author Sofia Lotti.
+ */
+public final class ZombiesFactory implements EntitiesFactory {
 
     private static final double ATK = 20.0;
     private static final double MAX_LIFE = 100.0;
-    private static final int ZOMBIE_SPPED = 2; /*metri al secondo */
+    private static final int ZOMBIE_SPPED = 2;
     private static final int COOLDOWN = 10;
-    
+    private static final int START_X_ZOMBIE = 800;
+    private static final int START_Y_ZOMBIE = 110;
     private static final int POSSIBLE_Y = 5;
-    
-    
+
     @Override
     public Entities createEntity() {
         var random = new Random();
-        return new ZombieImpl(ATK, COOLDOWN, ZOMBIE_SPPED, MAX_LIFE, new Pair<Integer, Integer>(800, 110*random.nextInt(1,POSSIBLE_Y)));
+        return new ZombieImpl(ATK, COOLDOWN, ZOMBIE_SPPED, MAX_LIFE,
+                new Pair<Integer, Integer>(START_X_ZOMBIE, START_Y_ZOMBIE * random.nextInt(1, POSSIBLE_Y)));
     }
 
     @Override
-    public Set<Entities> createEntities(int n) {
+    public Set<Entities> createEntities(final int n) {
         Set<Entities> zombieSet = new HashSet<>();
-        for (int i=0; i<n; i++){
+        for (int i = 0; i < n; i++) {
             zombieSet.add(createEntity());
         }
         return zombieSet;
     }
-    
+
 }
