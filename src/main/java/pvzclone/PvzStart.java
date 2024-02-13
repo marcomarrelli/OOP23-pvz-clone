@@ -14,7 +14,7 @@ public final class PvzStart {
      *             this case).
      */
     public static void main(final String[] args) {
-        ControllerImpl controller = new ControllerImpl();
+        final ControllerImpl controller = new ControllerImpl();
         controller.initGame();
     }
 

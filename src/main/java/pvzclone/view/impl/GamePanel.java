@@ -25,6 +25,8 @@ import pvzclone.view.api.GenericPanel;
  * @author Marco Marrelli
  */
 public class GamePanel extends GenericPanel {
+    private static final long serialVersionUID = 1234500002L;
+
     private static final int ROW_COUNT = 5;
     private static final int COLUMN_COUNT = 9;
 
@@ -58,8 +60,8 @@ public class GamePanel extends GenericPanel {
 
     private final FieldCell[][] fieldMatrix;
 
-    private final Map<Entities, Image> entities = new HashMap<Entities, Image>();
-    private final Set<Pair<Image, Pair<Integer, Integer>>> images = new HashSet<Pair<Image, Pair<Integer, Integer>>>();
+    private final Map<Entities, Image> entities = new HashMap<>();
+    private final Set<Pair<Image, Pair<Integer, Integer>>> images = new HashSet<>();
 
     /**
      * Game Panel Constructor.
@@ -75,15 +77,17 @@ public class GamePanel extends GenericPanel {
         this.fieldMatrix = new FieldCell[ROW_COUNT][COLUMN_COUNT];
         for (int i = 0; i < ROW_COUNT; i++) {
             for (int j = 0; j < COLUMN_COUNT; j++) {
-                int xCoord = FIELD_STARTING_X + (X_OFFSET * j);
-                int yCoord = i == 0 ? (FIELD_STARTING_Y + (Y_OFFSET * i)) : (FIELD_STARTING_Y + (Y_OFFSET * i) + (Y_MARGIN / 4));
+                final int xCoord = FIELD_STARTING_X + (X_OFFSET * j);
+                final int yCoord = i == 0
+                    ? FIELD_STARTING_Y + (Y_OFFSET * i)
+                    : FIELD_STARTING_Y + (Y_OFFSET * i) + (Y_MARGIN / 4);
 
                 this.fieldMatrix[i][j] = new FieldCell(new Pair(xCoord, yCoord), FieldCell.CELL_TEXT_INITIALIZER);
                 this.add(this.fieldMatrix[i][j]);
             }
         }
 
-        JButton plantCardButton = new JButton();
+        final JButton plantCardButton = new JButton();
         plantCardButton.setIcon(new ImageIcon(getClass().getResource(PLANT_CARD)));
         plantCardButton.setBounds(CARD_STARTING_X, CARD_STARTING_Y, CARD_WIDTH, CARD_HEIGHT);
         this.add(plantCardButton);
@@ -92,16 +96,15 @@ public class GamePanel extends GenericPanel {
             @Override
             public void mouseClicked(final MouseEvent e) {
                 Entities toRemove = null;
-                for (var el : entities.entrySet()) {
-                    if (el.getKey() instanceof Sun) {
-                        if (e.getX() >= el.getKey().getPosition().getX()
-                        && e.getX() <= el.getKey().getPosition().getX() + SUN_ENTITY_WIDTH
-                        && e.getY() >= el.getKey().getPosition().getY()
-                        && e.getY() <= el.getKey().getPosition().getY() + SUN_ENTITY_HEIGHT) {
-                            Sun sun = (Sun) el.getKey();
-                            sun.kill();
-                            toRemove = el.getKey();
-                        }
+                for (final var el : entities.entrySet()) {
+                    if (el.getKey() instanceof Sun
+                    && e.getX() >= el.getKey().getPosition().getX()
+                    && e.getX() <= el.getKey().getPosition().getX() + SUN_ENTITY_WIDTH
+                    && e.getY() >= el.getKey().getPosition().getY()
+                    && e.getY() <= el.getKey().getPosition().getY() + SUN_ENTITY_HEIGHT) {
+                        final Sun sun = (Sun) el.getKey();
+                        sun.kill();
+                        toRemove = el.getKey();
                     }
                 }
                 entities.remove(toRemove);
@@ -128,7 +131,7 @@ public class GamePanel extends GenericPanel {
     public void paintComponent(final Graphics g) {
         super.paintComponent(g);
 
-        Graphics2D g2d = (Graphics2D) g;
+        final Graphics2D g2d = (Graphics2D) g;
         g2d.drawImage(this.getBackgroundImage(), 0, 0, null);
 
         this.updateEntities(g2d);

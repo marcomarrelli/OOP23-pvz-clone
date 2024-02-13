@@ -14,7 +14,6 @@ import java.util.Random;
  * @author Sofia Lotti.
  */
 public final class ZombiesFactory implements EntitiesFactory {
-
     private static final double ATK = 20.0;
     private static final double MAX_LIFE = 100.0;
     private static final int ZOMBIE_SPPED = 2;
@@ -25,14 +24,14 @@ public final class ZombiesFactory implements EntitiesFactory {
 
     @Override
     public Entities createEntity() {
-        var random = new Random();
+        final Random random = new Random();
         return new ZombieImpl(ATK, COOLDOWN, ZOMBIE_SPPED, MAX_LIFE,
                 new Pair<Integer, Integer>(START_X_ZOMBIE, START_Y_ZOMBIE * random.nextInt(1, POSSIBLE_Y)));
     }
 
     @Override
     public Set<Entities> createEntities(final int n) {
-        Set<Entities> zombieSet = new HashSet<>();
+        final Set<Entities> zombieSet = new HashSet<>();
         for (int i = 0; i < n; i++) {
             zombieSet.add(createEntity());
         }

@@ -3,15 +3,15 @@ package pvzclone.model.impl;
 import java.util.Objects;
 
 /**
- * A standard generic Pair<E1,E2>, with getters, hashCode, equals, and toString
+ * A standard generic Pair<X,Y>, with getters, hashCode, equals, and toString
  * well implemented.
  * 
- * @param <E1> first element type.
- * @param <E2> second element type.
+ * @param <X> first element type.
+ * @param <Y> second element type.
  */
-public final class Pair<E1, E2> {
-    private final E1 e1;
-    private final E2 e2;
+public final class Pair<X, Y> {
+    private final X x;
+    private final Y y;
 
     /**
      * Pair Constructor.
@@ -19,10 +19,10 @@ public final class Pair<E1, E2> {
      * @param x first element.
      * @param y second element.
      */
-    public Pair(final E1 x, final E2 y) {
+    public Pair(final X x, final Y y) {
         super();
-        this.e1 = x;
-        this.e2 = y;
+        this.x = x;
+        this.y = y;
     }
 
     /**
@@ -30,8 +30,8 @@ public final class Pair<E1, E2> {
      * 
      * @return first element of pair.
      */
-    public E1 getX() {
-        return e1;
+    public X getX() {
+        return this.x;
     }
 
     /**
@@ -39,13 +39,13 @@ public final class Pair<E1, E2> {
      * 
      * @return second element of pair.
      */
-    public E2 getY() {
-        return e2;
+    public Y getY() {
+        return this.y;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(e1, e2);
+        return Objects.hash(this.x, this.y);
     }
 
     @SuppressWarnings("rawtypes")
@@ -60,12 +60,12 @@ public final class Pair<E1, E2> {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        Pair other = (Pair) obj;
-        return Objects.equals(e1, other.e1) && Objects.equals(e2, other.e2);
+        final Pair other = (Pair) obj;
+        return Objects.equals(this.x, other.x) && Objects.equals(this.y, other.y);
     }
 
     @Override
     public String toString() {
-        return "Pair [e1 = " + e1 + ", e2 = " + e2 + "]";
+        return "Pair [X = " + this.x + ", Y = " + this.y + "]";
     }
 }

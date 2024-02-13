@@ -50,6 +50,6 @@ public final class BulletImpl implements Bullet {
 
     @Override
     public void move() {
-        this.position = new Pair<Integer, Integer>(position.getX() + speed, position.getY());
+        this.position = new Pair<>(position.getX() + speed, position.getY());
     }
 }

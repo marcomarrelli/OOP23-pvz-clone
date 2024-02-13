@@ -14,7 +14,7 @@ import pvzclone.view.api.View;
  * 
  * @author Sofia Caberletti, Marco Marrelli
  */
-public class SwingViewImpl implements View {
+public final class SwingViewImpl implements View {
     /** Application Width. */
     public static final int APPLICATION_WIDTH = 1000;
 
@@ -31,18 +31,17 @@ public class SwingViewImpl implements View {
     public static final String GAME_PANEL_CONSTRAINT = "GAME";
 
     /** Menu Panel's Background Image Source. */
-    protected static final String MENU_BACKGROUND = "/images/menuBackground.jpeg";
+    private static final String MENU_BACKGROUND = "/images/menuBackground.jpeg";
 
     /** Game Panel's Background Image Source. */
-    protected static final String GAME_BACKGROUND = "/images/gameBackground.png";
+    private static final String GAME_BACKGROUND = "/images/gameBackground.png";
 
     /** Application Resizable Capability. */
     private static final boolean IS_APPLICATION_RESIZABLE = false;
 
     private final Controller controller;
-    private final JFrame frame;
     private final CardLayout sceneManager = new CardLayout();
-    private JPanel panel;
+    private final JPanel panel;
     private String currentConstraint = "";
 
     /**
@@ -52,21 +51,21 @@ public class SwingViewImpl implements View {
      */
     public SwingViewImpl(final Controller controller) {
         this.controller = controller;
-        this.frame = new JFrame(APPLICATION_TITLE);
-        this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.frame.setSize(APPLICATION_WIDTH, APPLICATION_HEIGHT);
-        this.frame.setLocationRelativeTo(null);
-        this.frame.setMinimumSize(new Dimension(APPLICATION_WIDTH, APPLICATION_HEIGHT));
-        this.frame.setResizable(IS_APPLICATION_RESIZABLE);
+        final JFrame frame = new JFrame(APPLICATION_TITLE);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(APPLICATION_WIDTH, APPLICATION_HEIGHT);
+        frame.setLocationRelativeTo(null);
+        frame.setMinimumSize(new Dimension(APPLICATION_WIDTH, APPLICATION_HEIGHT));
+        frame.setResizable(IS_APPLICATION_RESIZABLE);
 
         this.panel = new JPanel(sceneManager);
         this.panel.setSize(APPLICATION_WIDTH, APPLICATION_HEIGHT);
         this.panel.add(new MenuPanel(this, MENU_BACKGROUND), MENU_PANEL_CONSTRAINT);
         this.panel.add(new GamePanel(this, GAME_BACKGROUND), GAME_PANEL_CONSTRAINT);
 
-        this.frame.getContentPane().add(panel);
+        frame.getContentPane().add(panel);
 
-        this.frame.setVisible(true);
+        frame.setVisible(true);
     }
 
     /**
@@ -74,6 +73,7 @@ public class SwingViewImpl implements View {
      * 
      * @return the Application's {@link Controller}.
      */
+    @Override
     public Controller getController() {
         return this.controller;
     }

@@ -49,7 +49,7 @@ public final class SunImpl implements Sun {
 
     @Override
     public int getPoints() {
-        if (!this.isAlive && !(this.position.getY() == SCREEN_BOTTOM)) {
+        if (!this.isAlive && this.position.getY() != SCREEN_BOTTOM) {
             return POINTS;
         }
         return 0;
@@ -62,7 +62,7 @@ public final class SunImpl implements Sun {
 
     @Override
     public void moveDown() {
-        this.position = new Pair<Integer, Integer>(this.position.getX(), this.position.getY() + this.speedYAxis);
+        this.position = new Pair<>(this.position.getX(), this.position.getY() + this.speedYAxis);
         if (this.position.getY() + IMAGE_HEIGHT >= SCREEN_BOTTOM) {
             this.kill();
         }

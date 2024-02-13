@@ -18,13 +18,14 @@ import pvzclone.view.api.GenericPanel;
  * @author Sofia Caberletti
  */
 public class MenuPanel extends GenericPanel {
+    private static final long serialVersionUID = 1234500001L;
+
     private static final int LAYOUT_HGAP = 20;
     private static final int LAYOUT_VGAP = 50;
     private static final String BUTTON_TEXTURE = "/images/tombstoneTexture.jpg";
     private static final Dimension MENU_BUTTON_DIMENSION = new Dimension(
         SwingViewImpl.APPLICATION_WIDTH / 6, SwingViewImpl.APPLICATION_HEIGHT / 8
     );
-    private ImageIcon texture;
 
     /**
      * Menu Panel Constructor.
@@ -35,12 +36,12 @@ public class MenuPanel extends GenericPanel {
      */
     public MenuPanel(final SwingViewImpl parent, final String backgroundSource) {
         super(parent, backgroundSource);
-        this.setLayout(new FlowLayout(FlowLayout.CENTER, LAYOUT_HGAP, (SwingViewImpl.APPLICATION_HEIGHT / 2) - LAYOUT_VGAP));
-        this.texture = new ImageIcon(getClass().getResource(BUTTON_TEXTURE));
+        this.setLayout(new FlowLayout(FlowLayout.CENTER, LAYOUT_HGAP, SwingViewImpl.APPLICATION_HEIGHT / 2 - LAYOUT_VGAP));
+        final ImageIcon texture = new ImageIcon(getClass().getResource(BUTTON_TEXTURE));
 
-        JButton startButton = new JButton("Start Adventure", this.texture);
-        JButton fullButton = new JButton("Full Screen", this.texture);
-        JButton exitButton = new JButton("Exit Game", this.texture);
+        final JButton startButton = new JButton("Start Adventure", texture);
+        final JButton fullButton = new JButton("Full Screen", texture);
+        final JButton exitButton = new JButton("Exit Game", texture);
 
         this.setButton(startButton);
         this.setButton(fullButton);
@@ -81,7 +82,7 @@ public class MenuPanel extends GenericPanel {
     public void paintComponent(final Graphics g) {
         super.paintComponent(g);
 
-        Graphics2D g2D = (Graphics2D) g;
+        final Graphics2D g2D = (Graphics2D) g;
         g2D.drawImage(this.getBackgroundImage(), 0, 0, null);
     }
 }

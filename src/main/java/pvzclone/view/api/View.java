@@ -35,6 +35,7 @@ public interface View {
     void update();
 
     /**
+     * Returns the controller associated with the view.
      * 
      * @return the controller associated with the view.
      */

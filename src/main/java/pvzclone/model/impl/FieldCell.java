@@ -15,6 +15,8 @@ import pvzclone.view.impl.GamePanel;
  * @author Marco Marrelli
  */
 public class FieldCell extends JButton {
+    private static final long serialVersionUID = 1234500005L;
+
     /** Cell Text Initializer, used for {@link JButton#JButton(String)}. */
     public static final String CELL_TEXT_INITIALIZER = "";
 
@@ -45,7 +47,7 @@ public class FieldCell extends JButton {
     /**
      * Frees the cell from a Plant.
      */
-    protected void freeCell() {
+    private void freeCell() {
         this.hasPlant = false;
         this.setContentAreaFilled(false);
     }

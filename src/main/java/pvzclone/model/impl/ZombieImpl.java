@@ -8,7 +8,6 @@ import pvzclone.model.api.Zombie;
  * @author Sofia Lotti.
  */
 public final class ZombieImpl implements Zombie {
-
     private final double damage;
     private final int xShift;
     private final long cooldown;
@@ -88,7 +87,6 @@ public final class ZombieImpl implements Zombie {
 
     @Override
     public void moveLeft() {
-        this.position = new Pair<Integer, Integer>(this.position.getX() - this.xShift, this.position.getY());
+        this.position = new Pair<>(this.position.getX() - this.xShift, this.position.getY());
     }
-
 }

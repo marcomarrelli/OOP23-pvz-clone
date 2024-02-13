@@ -3,6 +3,7 @@ package pvzclone.view.api;
 import java.awt.Color;
 import java.awt.Image;
 
+import javax.annotation.Nonnull;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
@@ -14,6 +15,8 @@ import pvzclone.view.impl.SwingViewImpl;
  * @author Marco Marrelli
  */
 public abstract class GenericPanel extends JPanel {
+    private static final long serialVersionUID = 1234500000L;
+
     /** The View Implementation. */
     private final SwingViewImpl parent;
 
@@ -49,6 +52,6 @@ public abstract class GenericPanel extends JPanel {
      * @return the background image of the panel.
      */
     public Image getBackgroundImage() {
-        return this.background;
+        return new ImageIcon(this.background).getImage();
     }
 }
