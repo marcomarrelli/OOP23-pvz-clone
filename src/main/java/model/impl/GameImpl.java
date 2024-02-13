@@ -23,7 +23,7 @@ public final class GameImpl implements Game {
 
     // zombie
     private static final int DELTA_ZOMBIE = 10;
-    private static final long DELTA_TIME_ZOMBIE_START = 12000;
+    private static final long DELTA_TIME_ZOMBIE_START = 12_000;
     private static final int DEC_ZOMBIE_TIME_GENERATE = 500;
 
     // base plant
@@ -41,13 +41,13 @@ public final class GameImpl implements Game {
     private final SunsFactory sunFactory;
     private final ZombiesFactory zombiesFactory;
 
-    private Set<Plant> plants = new HashSet<>();
-    private Set<Zombie> zombies = new HashSet<>();
+    private final Set<Plant> plants = new HashSet<>();
+    private final Set<Zombie> zombies = new HashSet<>();
+    private final Set<Bullet> bullets = new HashSet<>();
     private Set<Sun> suns = new HashSet<>();
-    private Set<Bullet> bullets = new HashSet<>();
 
-    private long timeOfLastCreatedSun = 0;
-    private long timeOfLastCreatedZombie = 0;
+    private long timeOfLastCreatedSun;
+    private long timeOfLastCreatedZombie;
     private long deltaTimeZombie = DELTA_TIME_ZOMBIE_START;
 
     /**
@@ -66,7 +66,7 @@ public final class GameImpl implements Game {
         if (this.gameState.areZombieAllKilled()) {
             return true;
         }
-        for (var zombie : zombies) {
+        for (final var zombie : zombies) {
             if (zombie.getPosition().getX() <= HOUSE_X_POSITION) {
                 return true;
             }
@@ -81,20 +81,20 @@ public final class GameImpl implements Game {
      * @author Sofia Caberletti
      */
     private void moveEntities() {
-        for (var zombie : this.zombies) {
+        for (final var zombie : this.zombies) {
             zombie.moveLeft();
         }
-        for (var sun : this.suns) {
+        for (final var sun : this.suns) {
             sun.moveDown();
         }
-        for (var bullet : this.bullets) {
+        for (final var bullet : this.bullets) {
             bullet.move();
         }
     }
 
     private void removeKilledSuns() {
-        Set<Sun> remainingSuns = new HashSet<>();
-        for (var sun : this.suns) {
+        final Set<Sun> remainingSuns = new HashSet<>();
+        for (final var sun : this.suns) {
             if (sun.isAlive()) {
                 remainingSuns.add(sun);
             }
@@ -132,9 +132,9 @@ public final class GameImpl implements Game {
 
     @Override
     public void createWave() {
-        int percentage = this.world.getLevel().getZombieCount();
-        Set<Entities> newWave = this.zombiesFactory.createEntities(percentage);
-        for (Entities singleZombieInWave : newWave) {
+        final int percentage = this.world.getLevel().getZombieCount();
+        final Set<Entities> newWave = this.zombiesFactory.createEntities(percentage);
+        for (final Entities singleZombieInWave : newWave) {
             this.zombies.add((Zombie) singleZombieInWave);
         }
     }
@@ -159,9 +159,9 @@ public final class GameImpl implements Game {
      * @author Zanchini Margherita
      */
     private void checkCollision() {
-        for (Zombie zombie : zombies) {
-            for (Plant plant : plants) {
-                if (zombie.getPosition().getY() == plant.getPosition().getY()) {
+        for (final Zombie zombie : zombies) {
+            for (final Plant plant : plants) {
+                if (zombie.getPosition().getY().equals(plant.getPosition().getY())) {
                     if (zombie.getPosition().getX() <= plant.getPosition().getX() + DELTA_PLANT) {
                         zombieEatPlant(zombie, plant);
                         if (!plant.isAlive()) {
@@ -171,9 +171,9 @@ public final class GameImpl implements Game {
                 }
             }
         }
-        for (Bullet bullet : bullets) {
-            for (Zombie zombie : zombies) {
-                if (zombie.getPosition().getY() == bullet.getPosition().getY()) {
+        for (final Bullet bullet : bullets) {
+            for (final Zombie zombie : zombies) {
+                if (zombie.getPosition().getY().equals(bullet.getPosition().getY())) {
                     if (bullet.getPosition().getX() >= zombie.getPosition().getX() - DELTA_ZOMBIE) {
                         zombie.receiveDamage(bullet.getDamage());
                         bullets.remove(bullet);
@@ -198,8 +198,8 @@ public final class GameImpl implements Game {
      * @param plant  the plant that is eaten by the zombie
      */
     private void zombieEatPlant(final Zombie zombie, final Plant plant) {
-        long zombieLastAttack = zombie.getLastTimeAttack();
-        long currentTime = System.currentTimeMillis();
+        final long zombieLastAttack = zombie.getLastTimeAttack();
+        final long currentTime = System.currentTimeMillis();
         if (currentTime - zombieLastAttack > zombie.getCooldown()) {
             plant.receiveDamage(zombie.getDamage());
             zombie.setLastTimeAttack(currentTime);
@@ -213,9 +213,9 @@ public final class GameImpl implements Game {
      * @authore Zanchini Margherita
      */
     private void plantsShoot() {
-        for (Plant plant : plants) {
-            long plantLastAttack = plant.getLastTimeAttack();
-            long currentTime = System.currentTimeMillis();
+        for (final Plant plant : plants) {
+            final long plantLastAttack = plant.getLastTimeAttack();
+            final long currentTime = System.currentTimeMillis();
             if (currentTime - plantLastAttack > plant.getCooldown()) {
                 // da riguardare la posizione da passare al bullet, non sarà esattamente quella
                 // della pianta ma un pelo più avanti
@@ -232,7 +232,7 @@ public final class GameImpl implements Game {
 
     @Override
     public Set<Entities> getEntities() {
-        Set<Entities> entities = new HashSet<>();
+        final Set<Entities> entities = new HashSet<>();
         entities.addAll(plants);
         entities.addAll(zombies);
         entities.addAll(suns);
