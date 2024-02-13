@@ -17,7 +17,7 @@ public final class SunsFactory implements EntitiesFactory {
     private static final int STARTING_X_GAME_FIELD = 220;
     private static final int FINAL_X_GAME_FIELD = 750;
     private static final int STARTING_Y_POSITIONIG = -15;
-    private Random random= new Random();
+    private Random random = new Random();
 
     @Override
     public Entities createEntity() {

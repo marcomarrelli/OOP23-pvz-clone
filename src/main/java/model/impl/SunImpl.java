@@ -7,18 +7,24 @@ import model.api.Sun;
  * 
  * @author Sofia Caberletti
  */
-public class SunImpl implements Sun {
-    private final static String NAME= "Sun";
-    private final static int POINTS= 25;
+public final class SunImpl implements Sun {
+    private static final String NAME = "Sun";
+    private static final int POINTS = 25;
+    private static final int SCREEN_BOTTOM = 700;
+    private static final int IMAGE_HEIGHT = 150;
     private final Integer speedYAxis;
-    private final static int SCREEN_BOTTOM= 700;
     private boolean isAlive;
     private Pair<Integer, Integer> position;
 
+    /**
+     * 
+     * @param position starting position of the sun.
+     * @param speedYAxis speed of movement.
+     */
     public SunImpl(final Pair<Integer, Integer> position, final Integer speedYAxis) {
-        this.isAlive= true;
-        this.position= position;
-        this.speedYAxis= speedYAxis;
+        this.isAlive = true;
+        this.position = position;
+        this.speedYAxis = speedYAxis;
     }
 
     @Override
@@ -38,12 +44,12 @@ public class SunImpl implements Sun {
 
     @Override
     public void kill() {
-        this.isAlive= false;
+        this.isAlive = false;
     }
 
     @Override
     public int getPoints() {
-        if(!this.isAlive && !(this.position.getY()==SCREEN_BOTTOM)){
+        if (!this.isAlive && !(this.position.getY() == SCREEN_BOTTOM)) {
             return POINTS;
         }
         return 0;
@@ -56,8 +62,8 @@ public class SunImpl implements Sun {
 
     @Override
     public void moveDown() {
-        this.position= new Pair<Integer, Integer>(this.position.getX(), this.position.getY()+this.speedYAxis);
-        if(this.position.getY()+150>=SCREEN_BOTTOM) {
+        this.position = new Pair<Integer, Integer>(this.position.getX(), this.position.getY() + this.speedYAxis);
+        if (this.position.getY() + IMAGE_HEIGHT >= SCREEN_BOTTOM) {
             this.kill();
         }
     }
