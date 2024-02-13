@@ -2,6 +2,7 @@ package model.impl;
 
 import java.util.Set;
 import java.util.HashSet;
+import java.util.Random;
 
 import model.api.Entities;
 import model.api.EntitiesFactory;
@@ -13,9 +14,13 @@ public class ZombiesFactory implements EntitiesFactory {
     private static final int ZOMBIE_SPPED = 2; /*metri al secondo */
     private static final int COOLDOWN = 10;
     
+    private static final int POSSIBLE_Y = 6;
+    
+    
     @Override
     public Entities createEntity() {
-        return new ZombieImpl(ATK, COOLDOWN, ZOMBIE_SPPED, MAX_LIFE, new Pair<Integer, Integer>(800, 250));
+        var random = new Random();
+        return new ZombieImpl(ATK, COOLDOWN, ZOMBIE_SPPED, MAX_LIFE, new Pair<Integer, Integer>(800, 110*random.nextInt(1,POSSIBLE_Y)));
     }
 
     @Override
