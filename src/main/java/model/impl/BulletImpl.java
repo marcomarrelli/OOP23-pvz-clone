@@ -2,13 +2,22 @@ package model.impl;
 
 import model.api.Bullet;
 
-public class BulletImpl implements Bullet{
+/**
+ * class that implements the interface Bullet.
+ */
+public final class BulletImpl implements Bullet {
 
     private Pair<Integer, Integer> position;
     private final Integer speed;
     private final double damage;
 
-    public BulletImpl(final Integer speed, final double damage, final Pair<Integer, Integer> pos){
+    /**
+     * 
+     * @param speed  the speed of the bullet
+     * @param damage the damage of the bullet
+     * @param pos    the position of the bullet
+     */
+    public BulletImpl(final Integer speed, final double damage, final Pair<Integer, Integer> pos) {
         this.speed = speed;
         this.damage = damage;
         this.position = pos;
@@ -42,5 +51,5 @@ public class BulletImpl implements Bullet{
     @Override
     public void move() {
         this.position = new Pair<Integer, Integer>(position.getX() + speed, position.getY());
-    }    
+    }
 }
