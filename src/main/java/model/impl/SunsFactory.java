@@ -15,7 +15,7 @@ import model.api.EntitiesFactory;
 public class SunsFactory implements EntitiesFactory {
     private final int screenWidth;
     private final int screenHeight;
-    private final static int SPEED_Y_AXIS = 1;
+    private final static int SPEED_Y_AXIS = 5;
     private Random random;
 
 
@@ -27,7 +27,7 @@ public class SunsFactory implements EntitiesFactory {
 
     @Override
     public Entities createEntity() {
-        return new SunImpl(new Pair<Integer, Integer>(random.nextInt(this.screenWidth), -10), SPEED_Y_AXIS);
+        return new SunImpl(new Pair<Integer, Integer>(random.nextInt(750-220)+220, -15), SPEED_Y_AXIS);
     }
 
     @Override

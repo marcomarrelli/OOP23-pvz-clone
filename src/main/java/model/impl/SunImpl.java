@@ -11,7 +11,7 @@ public class SunImpl implements Sun {
     private final static String NAME= "Sun";
     private final static int POINTS= 25;
     private final Integer speedYAxis;
-    private final static double SCREEN_BOTTOM= 700.0;
+    private final static int SCREEN_BOTTOM= 700;
     private boolean isAlive;
     private Pair<Integer, Integer> position;
 
@@ -57,7 +57,7 @@ public class SunImpl implements Sun {
     @Override
     public void moveDown() {
         this.position= new Pair<Integer, Integer>(this.position.getX(), this.position.getY()+this.speedYAxis);
-        if(this.position.getY()==SCREEN_BOTTOM) {
+        if(this.position.getY()+150>=SCREEN_BOTTOM) {
             this.kill();
         }
     }

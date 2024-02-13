@@ -41,8 +41,8 @@ public class GamePanel extends GenericPanel {
 
     private final String PLANT_IMAGE = "/images/sunCounter.jpg"; // "/images/plantEntity.png";
     private final String ZOMBIE_IMAGE = "/images/zombieEntity2.png"; // "/images/zombieEntity.png";
-    private final String BULLET_IMAGE = "/images/sunCounter.jpg"; // "/images/bulletEntity.png";
-    private final String SUN_IMAGE = "/images/sunCounter.jpg"; // "/images/sunEntity.png";
+    private final String BULLET_IMAGE = "/images/sunCounter.png"; // "/images/bulletEntity.png";
+    private final String SUN_IMAGE = "/images/sunEntity3.png"; // "/images/sunEntity.png";
 
     public static final int CELL_WIDTH = X_OFFSET-X_MARGIN;
     public static final int CELL_HEIGHT = Y_OFFSET-Y_MARGIN;
