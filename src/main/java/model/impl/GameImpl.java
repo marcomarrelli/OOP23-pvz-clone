@@ -18,6 +18,7 @@ import javax.swing.ImageIcon;
 
 public class GameImpl implements Game{
 
+    private static final int HOUSE_X_POSITION = 150;
     private static final int DELTA_PLANT=35;
     private static final int DELTA_ZOMBIE=10;
     private static final long DELTA_TIME_SUN= 2000;    
@@ -56,7 +57,7 @@ public class GameImpl implements Game{
             return true;
         }
         for (var zombie : zombies) {
-            if(zombie.getPosition().getX()<=200) {
+            if (zombie.getPosition().getX() <= HOUSE_X_POSITION) {
                 return true;
             }
         }
