@@ -32,6 +32,7 @@ public class FieldCell extends JButton {
      */
     public FieldCell(final Pair<Integer, Integer> coord, final String text) {
         super(text);
+        this.setEnabled(false);
         this.coord = coord;
 
         this.setBounds(coord.getX(), coord.getY(), GamePanel.CELL_WIDTH, GamePanel.CELL_HEIGHT);
@@ -57,7 +58,7 @@ public class FieldCell extends JButton {
      */
     protected void setPlant(/* Entity plant */) {
         this.hasPlant = true;
-        this.setContentAreaFilled(true);
+        //this.setContentAreaFilled(true);
         // this . set Image (plant);
     }
 

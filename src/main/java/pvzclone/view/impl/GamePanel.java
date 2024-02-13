@@ -3,6 +3,8 @@ package pvzclone.view.impl;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.HashMap;
@@ -63,6 +65,8 @@ public class GamePanel extends GenericPanel {
     private final Map<Entities, Image> entities = new HashMap<>();
     private final Set<Pair<Image, Pair<Integer, Integer>>> images = new HashSet<>();
 
+    private boolean userIsPlanting = false;
+
     /**
      * Game Panel Constructor.
      * 
@@ -90,6 +94,12 @@ public class GamePanel extends GenericPanel {
         final JButton plantCardButton = new JButton();
         plantCardButton.setIcon(new ImageIcon(getClass().getResource(PLANT_CARD)));
         plantCardButton.setBounds(CARD_STARTING_X, CARD_STARTING_Y, CARD_WIDTH, CARD_HEIGHT);
+        plantCardButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+            }
+        });
         this.add(plantCardButton);
 
         this.addMouseListener(new MouseListener() {
@@ -137,6 +147,11 @@ public class GamePanel extends GenericPanel {
         this.updateEntities(g2d);
     }
 
+    /**
+     * Funzione dedicata all'update delle entità fornite dal Controller.
+     * 
+     * @param g Graphics Component
+     */
     private void updateEntities(final Graphics2D g) {
         this.entities.clear();
         this.entities.entrySet().forEach(
@@ -146,6 +161,12 @@ public class GamePanel extends GenericPanel {
         this.getView().getController().getEntities().forEach(entity -> this.createEntity(g, entity));
     }
 
+    /**
+     * Restituisce l'immagine affiliata all'entità.
+     * 
+     * @param entity Entità da cui prelevare l'immagine
+     * @return l'immagine dell'entità.
+     */
     private Image getEntityImage(final Entities entity) {
         return switch (entity.getEntityName()) {
             case "Plant" -> new ImageIcon(getClass().getResource(PLANT_IMAGE)).getImage();
@@ -156,6 +177,12 @@ public class GamePanel extends GenericPanel {
         };
     }
 
+    /**
+     * Crea un'entità graficamente.
+     * 
+     * @param g Graphics Component.
+     * @param entity entità da "disegnare".
+     */
     private void createEntity(final Graphics2D g, final Entities entity) {
         this.entities.put(entity, getEntityImage(entity));
         g.drawImage(this.entities.get(entity), entity.getPosition().getX(), entity.getPosition().getY(), this);
