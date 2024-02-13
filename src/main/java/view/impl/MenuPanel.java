@@ -9,11 +9,8 @@ import java.awt.Graphics2D;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 
-import javafx.stage.Screen;
 import view.api.GenericPanel;
-
 
 /**
  * Panel used in the starting Menu Section.
@@ -21,14 +18,24 @@ import view.api.GenericPanel;
  * @author Sofia Caberletti
  */
 public class MenuPanel extends GenericPanel {
-    
+    private static final int LAYOUT_HGAP = 20;
+    private static final int LAYOUT_VGAP = 50;
     private static final String BUTTON_TEXTURE = "/images/tombstoneTexture.jpg";
+    private static final Dimension MENU_BUTTON_DIMENSION = new Dimension(
+        SwingViewImpl.APPLICATION_WIDTH / 6, SwingViewImpl.APPLICATION_HEIGHT / 8
+    );
     private ImageIcon texture;
 
-    public MenuPanel(SwingViewImpl parent, String backgroundSource) {
+    /**
+     * Menu Panel Constructor.
+     * 
+     * @param parent the application's view.
+     * @param backgroundSource the background image source.
+     */
+    public MenuPanel(final SwingViewImpl parent, final String backgroundSource) {
         super(parent, backgroundSource);
-        this.setLayout(new FlowLayout(FlowLayout.CENTER, 20, (SwingViewImpl.APPLICATION_HEIGHT/2)-50));
-        this.texture= new ImageIcon(getClass().getResource(BUTTON_TEXTURE));
+        this.setLayout(new FlowLayout(FlowLayout.CENTER, LAYOUT_HGAP, (SwingViewImpl.APPLICATION_HEIGHT / 2) - LAYOUT_VGAP));
+        this.texture = new ImageIcon(getClass().getResource(BUTTON_TEXTURE));
 
         JButton startButton = new JButton("Start Adventure", this.texture);
         JButton fullButton = new JButton("Full Screen", this.texture);
@@ -38,31 +45,39 @@ public class MenuPanel extends GenericPanel {
         this.setButton(fullButton);
         this.setButton(exitButton);
 
-        startButton.addActionListener( e -> {
+        startButton.addActionListener(e -> {
             parent.setScene(SwingViewImpl.GAME_PANEL_CONSTRAINT);
             parent.getController().callMainloop(); 
         });
-        fullButton.addActionListener( e -> {
+        //fullButton.addActionListener(e -> {
             // parent.getApplication().setExtendedState(JFrame.MAXIMIZED_BOTH);
             // parent.getApplication().setUndecorated(true);
-        });
-        exitButton.addActionListener( e -> System.exit(0));
+        //});
+        exitButton.addActionListener(e -> System.exit(0));
 
         this.add(startButton);
         this.add(fullButton);
         this.add(exitButton);
     }
 
+    /**
+     * Sets a Button's settings.
+     * 
+     * @param button the chosen button.
+     */
     private void setButton(final JButton button) {
         button.setHorizontalTextPosition(JButton.CENTER);
         button.setVerticalTextPosition(JButton.CENTER);
-        button.setPreferredSize(new Dimension(SwingViewImpl.APPLICATION_WIDTH/6, SwingViewImpl.APPLICATION_HEIGHT/8));
+        button.setPreferredSize(MENU_BUTTON_DIMENSION);
         button.setFont(new Font(null, Font.BOLD, 16));
         button.setForeground(Color.BLACK);
     }
 
+    /**
+     * Used for {@link view.api.GenericPanel#update(Graphics)}.
+     */
     @Override
-    public void paintComponent(Graphics g) {
+    public void paintComponent(final Graphics g) {
         super.paintComponent(g);
 
         Graphics2D g2D = (Graphics2D) g;
