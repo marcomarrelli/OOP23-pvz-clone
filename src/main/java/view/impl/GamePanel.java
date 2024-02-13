@@ -40,7 +40,7 @@ public class GamePanel extends GenericPanel {
     public static final int Y_MARGIN = 15; // 30/2
 
     private final String PLANT_IMAGE = "/images/sunCounter.jpg"; // "/images/plantEntity.png";
-    private final String ZOMBIE_IMAGE = "/images/sunCounter.jpg"; // "/images/zombieEntity.png";
+    private final String ZOMBIE_IMAGE = "/images/zombieEntity2.png"; // "/images/zombieEntity.png";
     private final String BULLET_IMAGE = "/images/sunCounter.jpg"; // "/images/bulletEntity.png";
     private final String SUN_IMAGE = "/images/sunCounter.jpg"; // "/images/sunEntity.png";
 
