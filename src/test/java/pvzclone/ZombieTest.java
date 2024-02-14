@@ -1,4 +1,5 @@
 package pvzclone;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -14,13 +15,13 @@ import pvzclone.model.impl.ZombieImpl;
  * 
  * @author Sofia Lotti.
  */
-public final class ZombieTest {
+final class ZombieTest {
 
     private static final double ATK = 20.0;
     private static final double MAX_LIFE = 100.0;
     private static final int X_SHIFT = 2;
     private static final int COOLDOWN = 10;
-    private static final Pair<Integer, Integer> POSITION = new Pair<Integer, Integer>(50, 50);
+    private static final Pair<Integer, Integer> POSITION = new Pair<>(50, 50);
 
     private static final int DAMAGE_RECEIVED = 10;
     private static final int INT_FIFTY = 50;
@@ -33,7 +34,7 @@ public final class ZombieTest {
 
     @Test
     void isZombieAliveWithCorrectValues() {
-        Zombie zombie = zombieEntity();
+        final Zombie zombie = zombieEntity();
         assertTrue(zombie.isAlive());
         assertEquals(MAX_LIFE, zombie.getRemainingLife());
         assertEquals(ATK, zombie.getDamage());
@@ -44,7 +45,7 @@ public final class ZombieTest {
 
     @Test
     void correctDecreaseLife() {
-        Zombie zombie = zombieEntity();
+        final Zombie zombie = zombieEntity();
         assertTrue(zombie.isAlive());
         assertEquals(MAX_LIFE, zombie.getRemainingLife());
         zombie.receiveDamage(DAMAGE_RECEIVED);
@@ -61,7 +62,7 @@ public final class ZombieTest {
 
     @Test
     void correctMovementZombie() {
-        Zombie zombie = zombieEntity();
+        final Zombie zombie = zombieEntity();
         assertEquals(POSITION, zombie.getPosition());
         zombie.moveLeft();
         assertEquals(new Pair<>(FIRST_X_COORD, INT_FIFTY), zombie.getPosition());
@@ -74,9 +75,9 @@ public final class ZombieTest {
     @Test
     void createALotOfZombies() {
         // Set<Zombie> zombies = new HashSet<>();
-        Zombie zombie1 = zombieEntity();
-        Zombie zombie2 = zombieEntity();
-        Zombie zombie3 = zombieEntity();
+        final Zombie zombie1 = zombieEntity();
+        final Zombie zombie2 = zombieEntity();
+        final Zombie zombie3 = zombieEntity();
 
         assertTrue(zombie1.isAlive());
         assertTrue(zombie2.isAlive());

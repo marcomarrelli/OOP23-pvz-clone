@@ -20,7 +20,7 @@ import pvzclone.model.impl.ZombiesFactory;
  * 
  * @author Sofia Lotti.
  */
-public final class ZombieFactoryTest {
+final class ZombieFactoryTest {
 
     private static final double ATK = 20.0;
     private static final double MAX_LIFE = 100.0;
@@ -46,7 +46,7 @@ public final class ZombieFactoryTest {
     @Test
     void canCreateSingleZombie() {
         // ZombiesFactory zombieCreate = createZombies();
-        Zombie zombie1 = (Zombie) factory.createEntity();
+        final Zombie zombie1 = (Zombie) factory.createEntity();
         assertNotNull(zombie1);
         assertTrue(zombie1 instanceof ZombieImpl);
         assertTrue(zombie1.isAlive());
@@ -56,7 +56,7 @@ public final class ZombieFactoryTest {
         assertEquals(DOUBLE_FIFTY, zombie1.getRemainingLife());
         for (int x = 0; x < COUNTER; x++) {
             assertTrue(createZombies().createEntity().isAlive());
-            Zombie cycleZombie = (Zombie) createZombies().createEntity();
+            final Zombie cycleZombie = (Zombie) createZombies().createEntity();
             cycleZombie.receiveDamage(HUNDRED);
             assertFalse(cycleZombie.isAlive());
         }
@@ -64,17 +64,17 @@ public final class ZombieFactoryTest {
 
     @Test
     void canCreateMoreZombies() {
-        Set<Entities> setZombie = factory.createEntities(NUMBER_ENTITIES);
+        final Set<Entities> setZombie = factory.createEntities(NUMBER_ENTITIES);
         assertEquals(NUMBER_ENTITIES, setZombie.size());
         setZombie.add(factory.createEntity());
         assertEquals(NUMBER_ENTITIES + 1, setZombie.size());
 
-        for (Entities zombie : setZombie) {
+        for (final Entities zombie : setZombie) {
             assertTrue(zombie instanceof Entities);
             assertTrue(zombie instanceof Zombie);
-            var position = zombie.getPosition();
+            final var position = zombie.getPosition();
             ((Zombie) zombie).moveLeft();
-            assertTrue(zombie.getPosition().getX().equals(position.getX() - ZOMBIE_SPPED));
+            assertEquals(zombie.getPosition().getX(), position.getX() - ZOMBIE_SPPED);
         }
 
     }

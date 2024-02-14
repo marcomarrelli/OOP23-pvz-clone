@@ -5,7 +5,11 @@ package pvzclone.model.api;
  */
 public interface Level {
     /**
-     * @return the numbers of zombie in one level
+     * @return the World to which the level is associated.
+     */
+    World getWorld();
+    /**
+     * @return the numbers of zombie in one level.
      */
     int getZombieCount();
 

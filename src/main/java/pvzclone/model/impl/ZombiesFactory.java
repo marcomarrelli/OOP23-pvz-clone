@@ -27,7 +27,8 @@ public final class ZombiesFactory implements EntitiesFactory {
     public Entities createEntity() {
         final Random random = new Random();
         return new ZombieImpl(ATK, COOLDOWN, ZOMBIE_SPPED, MAX_LIFE,
-                new Pair<Integer, Integer>(START_X_ZOMBIE, START_Y_ZOMBIE + DELTA_Y_ZOMBIE * random.nextInt(0, POSSIBLE_Y)));
+                new Pair<Integer, Integer>(START_X_ZOMBIE,
+                        START_Y_ZOMBIE + DELTA_Y_ZOMBIE * random.nextInt(0, POSSIBLE_Y)));
     }
 
     @Override
