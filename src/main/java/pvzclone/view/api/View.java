@@ -1,5 +1,6 @@
 package pvzclone.view.api;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import pvzclone.controller.api.Controller;
@@ -40,4 +41,12 @@ public interface View {
      * @return the controller associated with the view.
      */
     Controller getController();
+
+
+    /**
+     * Returns the frame used in the view.
+     * 
+     * @return the frame of the view.
+     */
+    JFrame getFrame();
 }

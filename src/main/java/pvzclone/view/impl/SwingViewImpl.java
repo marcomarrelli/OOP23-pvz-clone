@@ -1,6 +1,7 @@
 package pvzclone.view.impl;
 
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.CardLayout;
 
 import javax.swing.JFrame;
@@ -43,6 +44,7 @@ public final class SwingViewImpl implements View {
     private final CardLayout sceneManager = new CardLayout();
     private final JPanel panel;
     private String currentConstraint = "";
+    private final JFrame frame;
 
     /**
      * View Implementation Constructor.
@@ -51,12 +53,12 @@ public final class SwingViewImpl implements View {
      */
     public SwingViewImpl(final Controller controller) {
         this.controller = controller;
-        final JFrame frame = new JFrame(APPLICATION_TITLE);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(APPLICATION_WIDTH, APPLICATION_HEIGHT);
-        frame.setLocationRelativeTo(null);
-        frame.setMinimumSize(new Dimension(APPLICATION_WIDTH, APPLICATION_HEIGHT));
-        frame.setResizable(IS_APPLICATION_RESIZABLE);
+        this.frame = new JFrame(APPLICATION_TITLE);
+        this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.frame.setSize(APPLICATION_WIDTH, APPLICATION_HEIGHT);
+        this.frame.setLocationRelativeTo(null);
+        this.frame.setMinimumSize(new Dimension(APPLICATION_WIDTH, APPLICATION_HEIGHT));
+        this.frame.setResizable(IS_APPLICATION_RESIZABLE);
 
         this.panel = new JPanel(sceneManager);
         this.panel.setSize(APPLICATION_WIDTH, APPLICATION_HEIGHT);
@@ -117,5 +119,10 @@ public final class SwingViewImpl implements View {
     @Override
     public void update() {
         this.panel.repaint();
+    }
+
+    @Override
+    public JFrame getFrame() {
+        return this.frame;
     }
 }
