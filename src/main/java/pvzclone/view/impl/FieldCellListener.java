@@ -69,7 +69,7 @@ public class FieldCellListener implements MouseListener {
      */
     private void hoverHandler(final boolean hover) {
         if (this.parent.hasPlant()) {
-            return;
+            this.parent.cellHover(false);
         }
         this.parent.cellHover(hover);
     }

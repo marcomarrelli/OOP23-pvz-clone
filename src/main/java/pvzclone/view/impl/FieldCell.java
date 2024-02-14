@@ -3,6 +3,8 @@ package pvzclone.view.impl;
 import java.awt.Color;
 
 import javax.swing.JButton;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 
 import pvzclone.controller.api.Controller;
 import pvzclone.model.impl.Pair;
@@ -24,6 +26,7 @@ public class FieldCell extends JButton {
     private final GamePanel parent;
     private final Pair<Integer, Integer> coord;
     private final Color hoverColor = new Color(225, 215, 235);
+    private final Border hoverBorder = new LineBorder(hoverColor, 3);
     private boolean hasPlant;
     private final Controller controller;
 
@@ -43,6 +46,7 @@ public class FieldCell extends JButton {
 
         this.setBounds(coord.getX(), coord.getY(), GamePanel.CELL_WIDTH, GamePanel.CELL_HEIGHT);
         this.setOpaque(false);
+        this.setBorder(hoverBorder);
         this.setBorderPainted(false);
         this.setFocusPainted(false);
 
@@ -58,7 +62,6 @@ public class FieldCell extends JButton {
      */
     private void freeCell() {
         this.hasPlant = false;
-        this.setContentAreaFilled(false);
     }
 
     /**
@@ -66,11 +69,10 @@ public class FieldCell extends JButton {
      */
     protected void setPlant(/* Entity plant */) {
         this.hasPlant = true;
+        this.setBorderPainted(false);
         this.parent.userIsPlanting = false;
         this.parent.hideGrid();
-        this.setContentAreaFilled(true);
         controller.newPlant(coord);
-        // this . set Image (plant);
     }
 
     /**
@@ -79,8 +81,8 @@ public class FieldCell extends JButton {
      * @param isHovered if the content area should be filler or not.
      */
     protected void cellHover(final boolean isHovered) {
-        this.setBackground(hoverColor);
-        this.setContentAreaFilled(isHovered);
+        if(this.hasPlant()) this.setBorderPainted(false);
+        else this.setBorderPainted(isHovered);
     }
 
     /**
