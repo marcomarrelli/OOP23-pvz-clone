@@ -148,6 +148,7 @@ public final class GameImpl implements Game {
     @Override
     public void createPlant(final Pair<Integer, Integer> position) {
         plants.add(new PlantImpl(DAMAGE_BASE_PLANT, LIFE_BASE_PLANT, "Plant", position, COOLDOWN_BASE_PLANT));
+
     }
 
     @Override
