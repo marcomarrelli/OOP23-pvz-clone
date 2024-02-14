@@ -22,7 +22,6 @@ import javax.swing.SwingConstants;
 import pvzclone.model.api.Entities;
 import pvzclone.model.api.Sun;
 import pvzclone.model.impl.Pair;
-import pvzclone.view.api.GenericPanel;
 
 /**
  * Panel used in the Gameplay Section.
@@ -193,7 +192,7 @@ public class GamePanel extends GenericPanel {
                 this.remove(this.fieldMatrix[i][j]);
     }
     /**
-     * Used for {@link pvzclone.view.api.GenericPanel#update(Graphics)}.
+     * Used for {@link pvzclone.view.impl.GenericPanel#update(Graphics)}.
      */
     @Override
     public void paintComponent(final Graphics g) {

@@ -11,8 +11,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
-import pvzclone.view.api.GenericPanel;
-
 /**
  * Panel used in the starting Menu Section.
  * 
@@ -77,7 +75,7 @@ public class MenuPanel extends GenericPanel {
     }
 
     /**
-     * Used for {@link pvzclone.view.api.GenericPanel#update(Graphics)}.
+     * Used for {@link pvzclone.view.impl.GenericPanel#update(Graphics)}.
      */
     @Override
     public void paintComponent(final Graphics g) {

@@ -114,7 +114,7 @@ public final class SwingViewImpl implements View {
     /**
      * Updates the View.
      * 
-     * @see {@link pvzclone.view.api.GenericPanel#paintComponents(java.awt.Graphics)}
+     * @see {@link pvzclone.view.impl.GenericPanel#paintComponents(java.awt.Graphics)}
      */
     @Override
     public void update() {

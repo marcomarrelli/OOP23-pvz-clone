@@ -1,12 +1,10 @@
-package pvzclone.view.api;
+package pvzclone.view.impl;
 
 import java.awt.Color;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
-
-import pvzclone.view.impl.SwingViewImpl;
 
 /**
  * Abstract class for Panels, with a pre-setted Constructor.
