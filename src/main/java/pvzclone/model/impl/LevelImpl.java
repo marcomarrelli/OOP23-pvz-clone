@@ -23,9 +23,13 @@ public final class LevelImpl implements Level {
     }
 
     @Override
+    public World getWorld() {
+        return this.world;
+    }
+
+    @Override
     public int getZombieCount() {
-        return TOTAL_ZOMBIES; // momentaneo, andrà cambiato in base al livello magari come abbiamo detto l'11
-                              // sera
+        return TOTAL_ZOMBIES;
     }
 
 }
