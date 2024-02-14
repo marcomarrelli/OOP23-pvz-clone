@@ -49,18 +49,18 @@ public class GamePanel extends GenericPanel {
     private static final int FIELD_STARTING_X = 220;
     private static final int FIELD_STARTING_Y = 110;
 
-    private static final int CARD_STARTING_X = 40;
-    private static final int CARD_STARTING_Y = 50;
-    private static final int CARD_WIDTH = 120;
-    private static final int CARD_HEIGHT = 75;
+    private static final int CARD_STARTING_X = 50;
+    private static final int CARD_STARTING_Y = 190;
+    private static final int CARD_WIDTH = 112;
+    private static final int CARD_HEIGHT = 70;
 
     private static final int SUN_COUNTER_STARTING_X = 50;
-    private static final int SUN_COUNTER_STARTING_Y = 135;
+    private static final int SUN_COUNTER_STARTING_Y = 50;
     private static final int SUN_COUNTER_WIDTH = 104;
     private static final int SUN_COUNTER_HEIGHT = 119;
 
     private static final int POINTS_STARTING_X = 72;
-    private static final int POINTS_STARTING_Y = 217;
+    private static final int POINTS_STARTING_Y = 130;
     private static final int POINTS_WIDTH = 60;
     private static final int POINTS_HEIGHT = 40;
 
