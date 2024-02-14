@@ -21,7 +21,7 @@ public final class GameImpl implements Game {
 
     // sun
     private static final int HOUSE_X_POSITION = 150;
-    private static final long DELTA_TIME_SUN = 1000;
+    private static final long DELTA_TIME_SUN = 3300;
     private static final int BULLET_SPEED = 10;
 
     // zombie

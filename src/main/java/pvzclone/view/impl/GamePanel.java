@@ -126,7 +126,7 @@ public class GamePanel extends GenericPanel {
         });
         this.add(plantCardButton);
 
-        this.points = new JLabel("0", SwingConstants.CENTER);
+        this.points = new JLabel("100", SwingConstants.CENTER);
         this.points.setBounds(POINTS_STARTING_X, POINTS_STARTING_Y, POINTS_WIDTH, POINTS_HEIGHT);
         this.points.setFont(new Font("Arial", Font.BOLD, 16));
         this.points.setForeground(Color.BLACK);
