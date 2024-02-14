@@ -33,10 +33,13 @@ public class FieldCell extends JButton {
     /**
      * Field Cell Constructor.
      * 
-     * @param coord the central coordinate of the Cell.
-     * @param text the text of the button.
+     * @param coord     the central coordinate of the Cell.
+     * @param text      the text of the button.
+     * @param parent    the parente panel.
+     * @param controller is the controller of the game.
      */
-    public FieldCell(final GamePanel parent, final Pair<Integer, Integer> coord, final String text, final Controller controller) {
+    public FieldCell(final GamePanel parent, final Pair<Integer, Integer> coord, final String text,
+            final Controller controller) {
         super(text);
 
         this.parent = parent;
@@ -81,8 +84,11 @@ public class FieldCell extends JButton {
      * @param isHovered if the content area should be filler or not.
      */
     protected void cellHover(final boolean isHovered) {
-        if(this.hasPlant()) this.setBorderPainted(false);
-        else this.setBorderPainted(isHovered);
+        if (this.hasPlant()) {
+            this.setBorderPainted(false);
+        } else {
+            this.setBorderPainted(isHovered);
+        }
     }
 
     /**

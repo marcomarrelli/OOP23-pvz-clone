@@ -17,7 +17,6 @@ import java.util.Set;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import pvzclone.model.api.Entities;
@@ -87,7 +86,7 @@ public class GamePanel extends GenericPanel {
     /**
      * Game Panel Constructor.
      * 
-     * @param parent the application's view.
+     * @param parent           the application's view.
      * @param backgroundSource the background image source.
      * @see {@link GenericPanel}
      */
@@ -100,9 +99,10 @@ public class GamePanel extends GenericPanel {
             for (int j = 0; j < COLUMN_COUNT; j++) {
                 final int xCoord = FIELD_STARTING_X + (X_OFFSET * j);
                 final int yCoord = i == 0
-                    ? FIELD_STARTING_Y + (Y_OFFSET * i)
-                    : FIELD_STARTING_Y + (Y_OFFSET * i) + (Y_MARGIN / 4);
-                this.fieldMatrix[i][j] = new FieldCell(this, new Pair(xCoord, yCoord), FieldCell.CELL_TEXT_INITIALIZER, parent.getController());
+                        ? FIELD_STARTING_Y + (Y_OFFSET * i)
+                        : FIELD_STARTING_Y + (Y_OFFSET * i) + (Y_MARGIN / 4);
+                this.fieldMatrix[i][j] = new FieldCell(this, new Pair(xCoord, yCoord), FieldCell.CELL_TEXT_INITIALIZER,
+                        parent.getController());
             }
         }
 
@@ -114,8 +114,10 @@ public class GamePanel extends GenericPanel {
             public void actionPerformed(ActionEvent e) {
                 userIsPlanting = !userIsPlanting;
 
-                if(userIsPlanting) showGrid();
-                else hideGrid();
+                if (userIsPlanting)
+                    showGrid();
+                else
+                    hideGrid();
             }
         });
         this.add(plantCardButton);
@@ -128,43 +130,50 @@ public class GamePanel extends GenericPanel {
 
         final JLabel sunCounterImage = new JLabel();
         sunCounterImage.setIcon(new ImageIcon(getClass().getResource(SUN_COUNTER_IMAGE)));
-        sunCounterImage.setBounds(SUN_COUNTER_STARTING_X, SUN_COUNTER_STARTING_Y, SUN_COUNTER_WIDTH, SUN_COUNTER_HEIGHT);
+        sunCounterImage.setBounds(SUN_COUNTER_STARTING_X, SUN_COUNTER_STARTING_Y, SUN_COUNTER_WIDTH,
+                SUN_COUNTER_HEIGHT);
         this.add(sunCounterImage);
-        
+
         this.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(final MouseEvent e) {
                 Entities toRemove = null;
-                
-                if(userIsPlanting) return;
+
+                if (userIsPlanting)
+                    return;
 
                 for (final var el : entities.entrySet()) {
                     if (el.getKey() instanceof Sun
-                    && e.getX() >= el.getKey().getPosition().getX()
-                    && e.getX() <= el.getKey().getPosition().getX() + SUN_ENTITY_WIDTH
-                    && e.getY() >= el.getKey().getPosition().getY()
-                    && e.getY() <= el.getKey().getPosition().getY() + SUN_ENTITY_HEIGHT) {
+                            && e.getX() >= el.getKey().getPosition().getX()
+                            && e.getX() <= el.getKey().getPosition().getX() + SUN_ENTITY_WIDTH
+                            && e.getY() >= el.getKey().getPosition().getY()
+                            && e.getY() <= el.getKey().getPosition().getY() + SUN_ENTITY_HEIGHT) {
                         final Sun sun = (Sun) el.getKey();
                         sun.kill();
                         toRemove = el.getKey();
                         parent.getController().getWorld().getGame().getGameState().incSunScore();
-                        points.setText(String.valueOf(parent.getController().getWorld().getGame().getGameState().getSunScore())); 
+                        points.setText(String
+                                .valueOf(parent.getController().getWorld().getGame().getGameState().getSunScore()));
                     }
                 }
                 entities.remove(toRemove);
             }
 
             @Override
-            public void mousePressed(final MouseEvent e) { }
+            public void mousePressed(final MouseEvent e) {
+            }
 
             @Override
-            public void mouseReleased(final MouseEvent e) { }
+            public void mouseReleased(final MouseEvent e) {
+            }
 
             @Override
-            public void mouseEntered(final MouseEvent e) { }
+            public void mouseEntered(final MouseEvent e) {
+            }
 
             @Override
-            public void mouseExited(final MouseEvent e) { }
+            public void mouseExited(final MouseEvent e) {
+            }
         });
     }
 
@@ -201,8 +210,7 @@ public class GamePanel extends GenericPanel {
     private void updateEntities(final Graphics2D g) {
         this.entities.clear();
         this.entities.entrySet().forEach(
-            e -> this.images.add(new Pair<>(e.getValue(), e.getKey().getPosition()))
-        );
+                e -> this.images.add(new Pair<>(e.getValue(), e.getKey().getPosition())));
         this.entities.keySet().removeIf(e -> !this.getView().getController().getEntities().contains(e));
         this.getView().getController().getEntities().forEach(entity -> this.createEntity(g, entity));
     }
@@ -226,7 +234,7 @@ public class GamePanel extends GenericPanel {
     /**
      * Crea un'entità graficamente.
      * 
-     * @param g Graphics Component.
+     * @param g      Graphics Component.
      * @param entity entità da "disegnare".
      */
     private void createEntity(final Graphics2D g, final Entities entity) {

@@ -29,11 +29,13 @@ public final class GameImpl implements Game {
     private static final int DEC_ZOMBIE_TIME_GENERATE = 500;
 
     // base plant
-    private static final int DAMAGE_BASE_PLANT = 50;
+    private static final int DAMAGE_BASE_PLANT = 20;
     private static final int LIFE_BASE_PLANT = 100;
     private static final int COOLDOWN_BASE_PLANT = 3000;
     private static final int DELTA_PLANT = 35;
     private static final int DELTA_Y_PLANT = 63;
+
+    private static final int DELTA_X_BULLET = 30;
 
     // private static final long DELTA_TIME_ZOMBIE= 15000;
     // private static final long DELTA_TIME_BULLET= 2000;
@@ -197,7 +199,7 @@ public final class GameImpl implements Game {
                     }
                 }
             }
-            if(bullet.getPosition().getX() > SwingViewImpl.APPLICATION_WIDTH){
+            if (bullet.getPosition().getX() > SwingViewImpl.APPLICATION_WIDTH) {
                 bulletTemp.remove(bullet);
             }
         }
@@ -239,10 +241,8 @@ public final class GameImpl implements Game {
                     final long plantLastAttack = plant.getLastTimeAttack();
                     final long currentTime = System.currentTimeMillis();
                     if (currentTime - plantLastAttack > plant.getCooldown()) {
-                        // da riguardare la posizione da passare al bullet, non sarà esattamente quella
-                        // della pianta ma un pelo più avanti
                         bullets.add(new BulletImpl(BULLET_SPEED, plant.getDamage(),
-                                new Pair<>(plant.getPosition().getX() + 30, plant.getPosition().getY())));
+                                new Pair<>(plant.getPosition().getX() + DELTA_X_BULLET, plant.getPosition().getY())));
                         plant.setLastTimeAttack(currentTime);
                     }
                 }
