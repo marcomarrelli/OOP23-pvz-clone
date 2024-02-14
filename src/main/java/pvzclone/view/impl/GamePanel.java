@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -24,6 +25,7 @@ import pvzclone.model.api.Entities;
 import pvzclone.model.api.Sun;
 import pvzclone.model.impl.FieldCell;
 import pvzclone.model.impl.Pair;
+import pvzclone.view.api.GenericEntity;
 import pvzclone.view.api.GenericPanel;
 
 /**
@@ -80,8 +82,7 @@ public class GamePanel extends GenericPanel {
 
     private final JLabel points;
 
-    private final Map<Entities, Image> entities = new HashMap<>();
-    private final Set<Pair<Image, Pair<Integer, Integer>>> images = new HashSet<>();
+    private final Set<GenericEntity> entities = new HashSet<>();
 
     public boolean userIsPlanting = false;
 
@@ -96,8 +97,6 @@ public class GamePanel extends GenericPanel {
     public GamePanel(final SwingViewImpl parent, final String backgroundSource) {
         super(parent, backgroundSource);
 
-        System.out.println("");
-        
         this.fieldMatrix = new FieldCell[ROW_COUNT][COLUMN_COUNT];
         for (int i = 0; i < ROW_COUNT; i++) {
             for (int j = 0; j < COLUMN_COUNT; j++) {
@@ -107,6 +106,7 @@ public class GamePanel extends GenericPanel {
                     : FIELD_STARTING_Y + (Y_OFFSET * i) + (Y_MARGIN / 4);
 
                 this.fieldMatrix[i][j] = new FieldCell(this, new Pair(xCoord, yCoord), FieldCell.CELL_TEXT_INITIALIZER);
+                this.add(this.fieldMatrix[i][j]);
             }
         }
 
@@ -117,9 +117,6 @@ public class GamePanel extends GenericPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 userIsPlanting = !userIsPlanting;
-
-                if(userIsPlanting) showGrid();
-                else hideGrid();
             }
         });
         this.add(plantCardButton);
@@ -135,53 +132,41 @@ public class GamePanel extends GenericPanel {
         sunCounterImage.setBounds(SUN_COUNTER_STARTING_X, SUN_COUNTER_STARTING_Y, SUN_COUNTER_WIDTH, SUN_COUNTER_HEIGHT);
         this.add(sunCounterImage);
         
-        this.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(final MouseEvent e) {
-                Entities toRemove = null;
-                
-                if(userIsPlanting) return;
-
-                for (final var el : entities.entrySet()) {
-                    if (el.getKey() instanceof Sun
-                    && e.getX() >= el.getKey().getPosition().getX()
-                    && e.getX() <= el.getKey().getPosition().getX() + SUN_ENTITY_WIDTH
-                    && e.getY() >= el.getKey().getPosition().getY()
-                    && e.getY() <= el.getKey().getPosition().getY() + SUN_ENTITY_HEIGHT) {
-                        final Sun sun = (Sun) el.getKey();
-                        sun.kill();
-                        toRemove = el.getKey();
-                        parent.getController().getWorld().getGame().getGameState().incSunScore();
-                        points.setText(String.valueOf(parent.getController().getWorld().getGame().getGameState().getSunScore())); 
-                    }
-                }
-                entities.remove(toRemove);
-            }
-
-            @Override
-            public void mousePressed(final MouseEvent e) { }
-
-            @Override
-            public void mouseReleased(final MouseEvent e) { }
-
-            @Override
-            public void mouseEntered(final MouseEvent e) { }
-
-            @Override
-            public void mouseExited(final MouseEvent e) { }
-        });
-    }
-
-    public void showGrid() {
-        for (int i = 0; i < ROW_COUNT; i++)
-            for (int j = 0; j < COLUMN_COUNT; j++)
-                this.add(this.fieldMatrix[i][j]);
-    }
-
-    public void hideGrid() {
-        for (int i = 0; i < ROW_COUNT; i++)
-            for (int j = 0; j < COLUMN_COUNT; j++)
-                this.remove(this.fieldMatrix[i][j]);
+        //this.addMouseListener(new MouseListener() {
+        //    @Override
+        //    public void mouseClicked(final MouseEvent e) {
+        //        Entities toRemove = null;
+        //        
+        //        if(userIsPlanting) return;
+//
+        //        for (final var el : entities.entrySet()) {
+        //            if (el.getKey() instanceof Sun
+        //            && e.getX() >= el.getKey().getPosition().getX()
+        //            && e.getX() <= el.getKey().getPosition().getX() + SUN_ENTITY_WIDTH
+        //            && e.getY() >= el.getKey().getPosition().getY()
+        //            && e.getY() <= el.getKey().getPosition().getY() + SUN_ENTITY_HEIGHT) {
+        //                final Sun sun = (Sun) el.getKey();
+        //                sun.kill();
+        //                toRemove = el.getKey();
+        //                parent.getController().getWorld().getGame().getGameState().incSunScore();
+        //                points.setText(String.valueOf(parent.getController().getWorld().getGame().getGameState().getSunScore())); 
+        //            }
+        //        }
+        //        entities.remove(toRemove);
+        //    }
+//
+        //    @Override
+        //    public void mousePressed(final MouseEvent e) { }
+//
+        //    @Override
+        //    public void mouseReleased(final MouseEvent e) { }
+//
+        //    @Override
+        //    public void mouseEntered(final MouseEvent e) { }
+//
+        //    @Override
+        //    public void mouseExited(final MouseEvent e) { }
+        //});
     }
 
     /**
@@ -203,11 +188,8 @@ public class GamePanel extends GenericPanel {
      * @param g Graphics Component
      */
     private void updateEntities(final Graphics2D g) {
-        this.entities.clear();
-        this.entities.entrySet().forEach(
-            e -> this.images.add(new Pair<>(e.getValue(), e.getKey().getPosition()))
-        );
-        this.entities.keySet().removeIf(e -> !this.getView().getController().getEntities().contains(e));
+        this.entities.forEach(e -> this.remove(e));
+        this.entities.removeIf(e -> !this.getView().getController().getEntities().contains(e.getEntity()));
         this.getView().getController().getEntities().forEach(entity -> this.createEntity(g, entity));
     }
 
@@ -234,7 +216,17 @@ public class GamePanel extends GenericPanel {
      * @param entity entità da "disegnare".
      */
     private void createEntity(final Graphics2D g, final Entities entity) {
-        this.entities.put(entity, getEntityImage(entity));
-        g.drawImage(this.entities.get(entity), entity.getPosition().getX(), entity.getPosition().getY(), this);
+        final GenericEntity temp;
+
+        switch (entity.getEntityName()) {
+            case "Plant" ->temp = new SunEntity(this, entity, new Rectangle(50, 50), getEntityImage(entity));
+            case "Zombie" -> temp = new SunEntity(this, entity, new Rectangle(50, 50), getEntityImage(entity));
+            case "Bullet" -> temp = new SunEntity(this, entity, new Rectangle(50, 50), getEntityImage(entity));
+            case "Sun" -> temp = new SunEntity(this, entity, new Rectangle(100, 100), getEntityImage(entity));
+            default -> throw new IllegalArgumentException("Unexpected value: " + entity.getClass().getName());
+        }
+
+        this.entities.add(temp);
+        this.add(temp);
     }
 }

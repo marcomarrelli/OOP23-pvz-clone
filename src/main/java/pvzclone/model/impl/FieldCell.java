@@ -63,7 +63,6 @@ public class FieldCell extends JButton {
     protected void setPlant(/* Entity plant */) {
         this.hasPlant = true;
         this.parent.userIsPlanting = false;
-        this.parent.hideGrid();
         //this.setContentAreaFilled(true);
         // this . set Image (plant);
     }

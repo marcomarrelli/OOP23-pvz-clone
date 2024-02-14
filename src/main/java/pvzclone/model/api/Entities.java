@@ -1,6 +1,7 @@
 package pvzclone.model.api;
 
 import pvzclone.model.impl.Pair;
+
 /**
  * This interface models a generic entity.
  * Contains methods common to all entities.

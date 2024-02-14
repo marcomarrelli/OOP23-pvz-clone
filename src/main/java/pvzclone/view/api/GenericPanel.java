@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
-import javax.swing.JPanel;
+import javax.swing.JLayeredPane;
 
 import pvzclone.view.impl.SwingViewImpl;
 
@@ -13,7 +13,7 @@ import pvzclone.view.impl.SwingViewImpl;
  * 
  * @author Marco Marrelli
  */
-public abstract class GenericPanel extends JPanel {
+public abstract class GenericPanel extends JLayeredPane {
     private static final long serialVersionUID = 1234500000L;
 
     /** The View Implementation. */
