@@ -48,12 +48,9 @@ public final class ControllerImpl implements Controller {
         this.game = new GameImpl(this.world);
         this.world.setGame(game);
         long startTime = System.currentTimeMillis();
-        // System.out.println("tempo di inizio gioco: " + startTime);
         while (!this.game.isOver()) {
             final long currentStartTime = System.currentTimeMillis();
-            // System.out.println("tempo di inizio ciclo: " + currentStartTime);
             final long elapsed = currentStartTime - startTime;
-            // System.out.println("tempo delta: " + elapsed);
             this.game.update(elapsed);
             this.view.update();
             waitForNextFrame(currentStartTime);
@@ -67,7 +64,8 @@ public final class ControllerImpl implements Controller {
             try {
                 Thread.sleep(PERIOD - dt);
             } catch (InterruptedException e) {
-                System.exit(1);
+                System.err.println("Thread interrupted while waiting for next frame: " + e.getMessage());
+                Thread.currentThread().interrupt();
             }
         }
     }

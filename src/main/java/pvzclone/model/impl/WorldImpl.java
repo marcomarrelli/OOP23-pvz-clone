@@ -18,7 +18,7 @@ public final class WorldImpl implements World {
 
     }
 
-    public WorldImpl(World world) {
+    public WorldImpl(final World world) {
         this.level = world.getLevel();
         this.game = world.getGame();
     }

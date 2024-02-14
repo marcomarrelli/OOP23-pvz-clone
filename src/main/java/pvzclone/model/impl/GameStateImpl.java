@@ -24,7 +24,7 @@ public final class GameStateImpl implements GameState {
     public GameStateImpl(final int totZombies) {
         this.totZombies = totZombies;
         this.killedZombies = 0;
-        this.sunScore = 0;
+        this.sunScore = 75;
     }
 
     @Override
