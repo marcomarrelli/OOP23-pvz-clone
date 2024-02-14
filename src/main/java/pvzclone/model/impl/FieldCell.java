@@ -20,6 +20,7 @@ public class FieldCell extends JButton {
     /** Cell Text Initializer, used for {@link JButton#JButton(String)}. */
     public static final String CELL_TEXT_INITIALIZER = "";
 
+    private final GamePanel parent;
     private final Pair<Integer, Integer> coord;
     private final Color hoverColor = new Color(225, 215, 235);
     private boolean hasPlant;
@@ -30,8 +31,11 @@ public class FieldCell extends JButton {
      * @param coord the central coordinate of the Cell.
      * @param text the text of the button.
      */
-    public FieldCell(final Pair<Integer, Integer> coord, final String text) {
+    public FieldCell(final GamePanel parent, final Pair<Integer, Integer> coord, final String text) {
         super(text);
+
+        this.parent = parent;
+
         this.setEnabled(false);
         this.coord = coord;
 
@@ -58,6 +62,8 @@ public class FieldCell extends JButton {
      */
     protected void setPlant(/* Entity plant */) {
         this.hasPlant = true;
+        this.parent.userIsPlanting = false;
+        this.parent.hideGrid();
         //this.setContentAreaFilled(true);
         // this . set Image (plant);
     }

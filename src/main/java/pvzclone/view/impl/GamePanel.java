@@ -17,6 +17,7 @@ import java.util.Set;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import pvzclone.model.api.Entities;
@@ -82,7 +83,7 @@ public class GamePanel extends GenericPanel {
     private final Map<Entities, Image> entities = new HashMap<>();
     private final Set<Pair<Image, Pair<Integer, Integer>>> images = new HashSet<>();
 
-    private boolean userIsPlanting = false;
+    public boolean userIsPlanting = false;
 
     /**
      * Game Panel Constructor.
@@ -103,8 +104,7 @@ public class GamePanel extends GenericPanel {
                     ? FIELD_STARTING_Y + (Y_OFFSET * i)
                     : FIELD_STARTING_Y + (Y_OFFSET * i) + (Y_MARGIN / 4);
 
-                this.fieldMatrix[i][j] = new FieldCell(new Pair(xCoord, yCoord), FieldCell.CELL_TEXT_INITIALIZER);
-                this.add(this.fieldMatrix[i][j]);
+                this.fieldMatrix[i][j] = new FieldCell(this, new Pair(xCoord, yCoord), FieldCell.CELL_TEXT_INITIALIZER);
             }
         }
 
@@ -114,7 +114,10 @@ public class GamePanel extends GenericPanel {
         plantCardButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                userIsPlanting = !userIsPlanting;
+
+                if(userIsPlanting) showGrid();
+                else hideGrid();
             }
         });
         this.add(plantCardButton);
@@ -134,6 +137,9 @@ public class GamePanel extends GenericPanel {
             @Override
             public void mouseClicked(final MouseEvent e) {
                 Entities toRemove = null;
+                
+                if(userIsPlanting) return;
+
                 for (final var el : entities.entrySet()) {
                     if (el.getKey() instanceof Sun
                     && e.getX() >= el.getKey().getPosition().getX()
@@ -162,6 +168,18 @@ public class GamePanel extends GenericPanel {
             @Override
             public void mouseExited(final MouseEvent e) { }
         });
+    }
+
+    public void showGrid() {
+        for (int i = 0; i < ROW_COUNT; i++)
+            for (int j = 0; j < COLUMN_COUNT; j++)
+                this.add(this.fieldMatrix[i][j]);
+    }
+
+    public void hideGrid() {
+        for (int i = 0; i < ROW_COUNT; i++)
+            for (int j = 0; j < COLUMN_COUNT; j++)
+                this.remove(this.fieldMatrix[i][j]);
     }
 
     /**
