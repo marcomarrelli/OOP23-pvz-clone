@@ -15,5 +15,5 @@ public class SunTest {
     private void initTest() {
         this.sun = new SunImpl(POSITION, SPEED);
     }
-    
+
 }

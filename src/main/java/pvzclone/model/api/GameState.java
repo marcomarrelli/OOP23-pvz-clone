@@ -8,6 +8,11 @@ package pvzclone.model.api;
  */
 public interface GameState {
     /**
+     * Increases the number of Zombies generated.
+     */
+    void incZombiesGenerated();
+
+    /**
      * Increases the number of Zombies killed.
      */
     void incKilledZombies();
@@ -33,6 +38,11 @@ public interface GameState {
      * @return Suns counter.
      */
     int getSunScore();
+
+    /**
+     * @return number of Zombies generated.
+     */
+    int getZombiesGenerated();
 
     /**
      * @return {@true} number of zombies killed is equals

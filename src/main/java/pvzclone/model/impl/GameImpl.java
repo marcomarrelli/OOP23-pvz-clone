@@ -19,7 +19,7 @@ import java.util.HashSet;
  */
 public final class GameImpl implements Game {
 
-    //sun
+    // sun
     private static final int HOUSE_X_POSITION = 150;
     private static final long DELTA_TIME_SUN = 1000;
     private static final int BULLET_SPEED = 10;
@@ -38,10 +38,6 @@ public final class GameImpl implements Game {
     private static final int DELTA_Y_PLANT = 63;
 
     private static final int DELTA_X_BULLET = 30;
-
-    // private static final long DELTA_TIME_ZOMBIE= 15000;
-    // private static final long DELTA_TIME_BULLET= 2000;
-    // private static final int timeRechargeAttackZombie = 2000;
 
     private final World world;
     private final GameState gameState;
@@ -89,7 +85,9 @@ public final class GameImpl implements Game {
      */
     private void moveEntities() {
         for (final var zombie : this.zombies) {
-            zombie.moveLeft();
+            if (zombie.getCanGo()) {
+                zombie.moveLeft();
+            }
         }
         for (final var sun : this.suns) {
             sun.moveDown();
@@ -121,10 +119,12 @@ public final class GameImpl implements Game {
     }
 
     private void newZombieGenerate(final long elapsed) {
-        if (hasDeltaTimePassed(this.timeOfLastCreatedZombie, elapsed, deltaTimeZombie)) {
+        if (hasDeltaTimePassed(this.timeOfLastCreatedZombie, elapsed, deltaTimeZombie)
+                && this.gameState.getZombiesGenerated() < this.world.getLevel().getZombieCount()) {
             this.timeOfLastCreatedZombie = elapsed;
             this.zombies.add((Zombie) this.zombiesFactory.createEntity());
             this.deltaTimeZombie = this.deltaTimeZombie - DEC_ZOMBIE_TIME_GENERATE;
+            this.gameState.incZombiesGenerated();
         }
     }
 
@@ -149,9 +149,9 @@ public final class GameImpl implements Game {
 
     @Override
     public void createPlant(final Pair<Integer, Integer> position) {
-        if(this.gameState.getSunScore()>=100) {
-            final PlantImpl newPlant = new PlantImpl(DAMAGE_BASE_PLANT, LIFE_BASE_PLANT, "Plant", position, 
-                COOLDOWN_BASE_PLANT, PLANT_COST);
+        if (this.gameState.getSunScore() >= 100) {
+            final PlantImpl newPlant = new PlantImpl(DAMAGE_BASE_PLANT, LIFE_BASE_PLANT, "Plant", position,
+                    COOLDOWN_BASE_PLANT, PLANT_COST);
             plants.add(newPlant);
             this.gameState.decSunScore(newPlant.getPlantCost());
         }
@@ -184,8 +184,10 @@ public final class GameImpl implements Game {
                         || plant.getPosition().getY() == zombie.getPosition().getY() + DELTA_Y_PLANT - 3) {
                     if (zombie.getPosition().getX() <= plant.getPosition().getX() + DELTA_PLANT) {
                         zombieEatPlant(zombie, plant);
-                        if (plant.isAlive()) {
+                        zombie.setCanGo(false);
+                        if (!plant.isAlive()) {
                             plantTemp.remove(plant);
+                            zombie.setCanGo(true);
                         }
                     }
                 }
@@ -202,6 +204,7 @@ public final class GameImpl implements Game {
                         if (!zombie.isAlive()) {
                             // zombieTemp.add(zombie);
                             zombieTemp.remove(zombie);
+                            this.gameState.incKilledZombies();
                         }
                     }
                 }

@@ -14,4 +14,8 @@ public interface Zombie extends ActiveEntities {
      */
     double getXShift();
 
+    public void setCanGo(boolean cango);
+
+    public boolean getCanGo();
+
 }

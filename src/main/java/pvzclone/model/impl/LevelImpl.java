@@ -10,7 +10,7 @@ import pvzclone.model.api.World;
  */
 public final class LevelImpl implements Level {
 
-    private static final int TOTAL_ZOMBIES = 20;
+    private static final int TOTAL_ZOMBIES = 5;
     private final World world;
 
     /**

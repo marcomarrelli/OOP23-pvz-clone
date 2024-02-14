@@ -57,5 +57,5 @@ tasks.withType<Test> {
 
 application {
     // Define the main class for the application
-    mainClass.set("PvzStart")
+    mainClass.set("pvzclone.PvzStart")
 }

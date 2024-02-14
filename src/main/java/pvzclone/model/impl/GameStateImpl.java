@@ -14,6 +14,7 @@ public final class GameStateImpl implements GameState {
     private static final int INC_SUN = 25;
     private final int totZombies;
     private int killedZombies;
+    private int zombiesGenerated;
     private int sunScore;
 
     /**
@@ -25,6 +26,11 @@ public final class GameStateImpl implements GameState {
         this.totZombies = totZombies;
         this.killedZombies = 0;
         this.sunScore = 0;
+    }
+
+    @Override
+    public void incZombiesGenerated() {
+        this.zombiesGenerated = this.zombiesGenerated + 1;
     }
 
     @Override
@@ -50,6 +56,11 @@ public final class GameStateImpl implements GameState {
     @Override
     public int getSunScore() {
         return this.sunScore;
+    }
+
+    @Override
+    public int getZombiesGenerated() {
+        return this.zombiesGenerated;
     }
 
     @Override

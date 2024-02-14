@@ -14,10 +14,10 @@ import java.util.Random;
  * @author Sofia Lotti.
  */
 public final class ZombiesFactory implements EntitiesFactory {
-    private static final double ATK = 20.0;
-    private static final double MAX_LIFE = 100.0;
+    private static final double ATK = 50;
+    private static final int MAX_LIFE = 100;
     private static final int ZOMBIE_SPPED = 2;
-    private static final int COOLDOWN = 10;
+    private static final long COOLDOWN = 3000;
     private static final int START_X_ZOMBIE = 800;
     private static final int START_Y_ZOMBIE = 50;
     private static final int DELTA_Y_ZOMBIE = 110;

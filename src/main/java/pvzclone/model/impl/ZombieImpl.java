@@ -12,6 +12,7 @@ public final class ZombieImpl implements Zombie {
     private final int xShift;
     private final long cooldown;
 
+    private boolean canGo=true;
     private double remainingLife;
     private long lastTimeAttack;
     private Pair<Integer, Integer> position;
@@ -88,5 +89,13 @@ public final class ZombieImpl implements Zombie {
     @Override
     public void moveLeft() {
         this.position = new Pair<>(this.position.getX() - this.xShift, this.position.getY());
+    }
+
+    public void setCanGo(boolean cango){
+        this.canGo = cango;
+    }
+
+    public boolean getCanGo(){
+        return this.canGo;
     }
 }
