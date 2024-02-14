@@ -1,10 +1,11 @@
-package pvzclone.model.impl;
+package pvzclone.view.impl;
 
 import java.awt.Color;
 
 import javax.swing.JButton;
 
-import pvzclone.view.impl.GamePanel;
+import pvzclone.controller.api.Controller;
+import pvzclone.model.impl.Pair;
 
 /**
  * Cell used in Game Panel for placing Plants Entities.
@@ -24,6 +25,7 @@ public class FieldCell extends JButton {
     private final Pair<Integer, Integer> coord;
     private final Color hoverColor = new Color(225, 215, 235);
     private boolean hasPlant;
+    private final Controller controller;
 
     /**
      * Field Cell Constructor.
@@ -31,7 +33,7 @@ public class FieldCell extends JButton {
      * @param coord the central coordinate of the Cell.
      * @param text the text of the button.
      */
-    public FieldCell(final GamePanel parent, final Pair<Integer, Integer> coord, final String text) {
+    public FieldCell(final GamePanel parent, final Pair<Integer, Integer> coord, final String text, final Controller controller) {
         super(text);
 
         this.parent = parent;
@@ -47,6 +49,8 @@ public class FieldCell extends JButton {
         this.freeCell();
 
         this.addMouseListener(new FieldCellListener(this));
+
+        this.controller = controller;
     }
 
     /**
@@ -64,7 +68,8 @@ public class FieldCell extends JButton {
         this.hasPlant = true;
         this.parent.userIsPlanting = false;
         this.parent.hideGrid();
-        //this.setContentAreaFilled(true);
+        this.setContentAreaFilled(true);
+        controller.newPlant(coord);
         // this . set Image (plant);
     }
 

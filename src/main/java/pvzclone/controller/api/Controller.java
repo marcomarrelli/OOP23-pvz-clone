@@ -5,6 +5,7 @@ import java.util.Set;
 import pvzclone.input.api.ViewEventListener;
 import pvzclone.model.api.Entities;
 import pvzclone.model.api.World;
+import pvzclone.model.impl.Pair;
 
 /**
  * This interface models a Controller for the game.
@@ -39,4 +40,12 @@ public interface Controller extends ViewEventListener {
      * @return world of the game.
      */
     World getWorld();
+
+    /**
+     * this method communicate with the model
+     * telling him the position of the new plant
+     * 
+     * @param pos is the position of the new plant
+     */
+    void newPlant(Pair<Integer, Integer> pos);
 }

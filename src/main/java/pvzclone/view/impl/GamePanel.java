@@ -22,7 +22,6 @@ import javax.swing.SwingConstants;
 
 import pvzclone.model.api.Entities;
 import pvzclone.model.api.Sun;
-import pvzclone.model.impl.FieldCell;
 import pvzclone.model.impl.Pair;
 import pvzclone.view.api.GenericPanel;
 
@@ -44,9 +43,9 @@ public class GamePanel extends GenericPanel {
 
     private static final String PLANT_CARD = "/images/plantCard.png";
     private static final String SUN_COUNTER_IMAGE = "/images/sunCounter2.jpg";
-    private static final String PLANT_IMAGE = "/images/sunCounter.jpg"; // "/images/plantEntity.png";
+    private static final String PLANT_IMAGE = "/images/plantPeaShooter.png"; // "/images/plantEntity.png";
     private static final String ZOMBIE_IMAGE = "/images/zombieEntity2.png"; // "/images/zombieEntity.png";
-    private static final String BULLET_IMAGE = "/images/sunCounter.png"; // "/images/bulletEntity.png";
+    private static final String BULLET_IMAGE = "/images/ProjectilePea.png"; // "/images/bulletEntity.png";
     private static final String SUN_IMAGE = "/images/sunEntity3.png"; // "/images/sunEntity.png";
 
     private static final int FIELD_STARTING_X = 220;
@@ -103,8 +102,8 @@ public class GamePanel extends GenericPanel {
                 final int yCoord = i == 0
                     ? FIELD_STARTING_Y + (Y_OFFSET * i)
                     : FIELD_STARTING_Y + (Y_OFFSET * i) + (Y_MARGIN / 4);
-
-                this.fieldMatrix[i][j] = new FieldCell(this, new Pair(xCoord, yCoord), FieldCell.CELL_TEXT_INITIALIZER);
+                System.out.println(xCoord + " "+ yCoord);
+                this.fieldMatrix[i][j] = new FieldCell(this, new Pair(xCoord, yCoord), FieldCell.CELL_TEXT_INITIALIZER, parent.getController());
             }
         }
 

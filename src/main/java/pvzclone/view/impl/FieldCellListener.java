@@ -1,4 +1,4 @@
-package pvzclone.model.impl;
+package pvzclone.view.impl;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;

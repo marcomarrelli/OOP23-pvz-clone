@@ -3,6 +3,7 @@ package pvzclone.controller.impl;
 import java.util.HashSet;
 import java.util.Set;
 
+
 import pvzclone.controller.api.Controller;
 import pvzclone.model.api.Entities;
 import pvzclone.model.api.Game;
@@ -83,6 +84,11 @@ public final class ControllerImpl implements Controller {
     @Override
     public World getWorld() {
         return this.world;
+    }
+
+    @Override
+    public void newPlant(Pair<Integer, Integer> pos){
+        game.createPlant(pos);
     }
 
     /*
