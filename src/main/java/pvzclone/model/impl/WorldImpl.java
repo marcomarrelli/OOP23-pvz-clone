@@ -14,11 +14,19 @@ public final class WorldImpl implements World {
     private Level level;
     private Game game;
 
+    /**
+     * WorldImpl first constructor.
+     */
     public WorldImpl() {
 
     }
 
-    public WorldImpl(World world) {
+    /**
+     * WorldImpl second constructor.
+     * 
+     * @param world the world
+     */
+    public WorldImpl(final World world) {
         this.level = world.getLevel();
         this.game = world.getGame();
     }
