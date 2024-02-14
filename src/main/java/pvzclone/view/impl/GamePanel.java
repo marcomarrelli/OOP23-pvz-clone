@@ -96,6 +96,8 @@ public class GamePanel extends GenericPanel {
     public GamePanel(final SwingViewImpl parent, final String backgroundSource) {
         super(parent, backgroundSource);
 
+        System.out.println("");
+        
         this.fieldMatrix = new FieldCell[ROW_COUNT][COLUMN_COUNT];
         for (int i = 0; i < ROW_COUNT; i++) {
             for (int j = 0; j < COLUMN_COUNT; j++) {
