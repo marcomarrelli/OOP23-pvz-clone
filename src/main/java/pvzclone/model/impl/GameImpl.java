@@ -32,6 +32,7 @@ public final class GameImpl implements Game {
     private static final int LIFE_BASE_PLANT = 100;
     private static final int COOLDOWN_BASE_PLANT = 20;
     private static final int DELTA_PLANT = 35;
+    private static final int DELTA_Y_PLANT = 63;
 
     // private static final long DELTA_TIME_ZOMBIE= 15000;
     // private static final long DELTA_TIME_BULLET= 2000;
@@ -162,11 +163,13 @@ public final class GameImpl implements Game {
     private void checkCollision() {
         for (final Zombie zombie : zombies) {
             for (final Plant plant : plants) {
-                if (zombie.getPosition().getY().equals(plant.getPosition().getY())
-                && zombie.getPosition().getX() <= plant.getPosition().getX() + DELTA_PLANT) {
-                    zombieEatPlant(zombie, plant);
-                    if (!plant.isAlive()) {
-                        plants.remove(plant); // togliere un oggetto da un set in foeach potrebbe dare problemi
+                if(plant.getPosition().getY() == zombie.getPosition().getY() + DELTA_Y_PLANT
+                    || plant.getPosition().getY() == zombie.getPosition().getY() + DELTA_Y_PLANT -3){
+                    if(zombie.getPosition().getX() <= plant.getPosition().getX() + DELTA_PLANT) {
+                        zombieEatPlant(zombie, plant);
+                        if (!plant.isAlive()) {
+                            plants.remove(plant); // togliere un oggetto da un set in foeach potrebbe dare problemi
+                        }
                     }
                 }
             }
@@ -213,13 +216,18 @@ public final class GameImpl implements Game {
      */
     private void plantsShoot() {
         for (final Plant plant : plants) {
-            final long plantLastAttack = plant.getLastTimeAttack();
-            final long currentTime = System.currentTimeMillis();
-            if (currentTime - plantLastAttack > plant.getCooldown()) {
-                // da riguardare la posizione da passare al bullet, non sarà esattamente quella
-                // della pianta ma un pelo più avanti
-                bullets.add(new BulletImpl(BULLET_SPEED, plant.getDamage(), plant.getPosition()));
-                plant.setLastTimeAttack(currentTime);
+            for(final Zombie zombie : zombies){
+                if(plant.getPosition().getY() == zombie.getPosition().getY() + DELTA_Y_PLANT
+                    || plant.getPosition().getY() == zombie.getPosition().getY() + DELTA_Y_PLANT -3){
+                    final long plantLastAttack = plant.getLastTimeAttack();
+                    final long currentTime = System.currentTimeMillis();
+                    if (currentTime - plantLastAttack > plant.getCooldown()) {
+                        // da riguardare la posizione da passare al bullet, non sarà esattamente quella
+                        // della pianta ma un pelo più avanti
+                        bullets.add(new BulletImpl(BULLET_SPEED, plant.getDamage(), plant.getPosition()));
+                        plant.setLastTimeAttack(currentTime);
+                    }
+                }
             }
         }
     }

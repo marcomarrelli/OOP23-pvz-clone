@@ -102,7 +102,6 @@ public class GamePanel extends GenericPanel {
                 final int yCoord = i == 0
                     ? FIELD_STARTING_Y + (Y_OFFSET * i)
                     : FIELD_STARTING_Y + (Y_OFFSET * i) + (Y_MARGIN / 4);
-                System.out.println(xCoord + " "+ yCoord);
                 this.fieldMatrix[i][j] = new FieldCell(this, new Pair(xCoord, yCoord), FieldCell.CELL_TEXT_INITIALIZER, parent.getController());
             }
         }
