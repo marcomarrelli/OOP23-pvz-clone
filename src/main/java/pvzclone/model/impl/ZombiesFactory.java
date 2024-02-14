@@ -19,14 +19,15 @@ public final class ZombiesFactory implements EntitiesFactory {
     private static final int ZOMBIE_SPPED = 2;
     private static final int COOLDOWN = 10;
     private static final int START_X_ZOMBIE = 800;
-    private static final int START_Y_ZOMBIE = 110;
+    private static final int START_Y_ZOMBIE = 50;
+    private static final int DELTA_Y_ZOMBIE = 110;
     private static final int POSSIBLE_Y = 5;
 
     @Override
     public Entities createEntity() {
         final Random random = new Random();
         return new ZombieImpl(ATK, COOLDOWN, ZOMBIE_SPPED, MAX_LIFE,
-                new Pair<Integer, Integer>(START_X_ZOMBIE, START_Y_ZOMBIE * random.nextInt(1, POSSIBLE_Y)));
+                new Pair<Integer, Integer>(START_X_ZOMBIE, START_Y_ZOMBIE + DELTA_Y_ZOMBIE * random.nextInt(0, POSSIBLE_Y)));
     }
 
     @Override
