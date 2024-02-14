@@ -48,4 +48,17 @@ public interface Controller extends ViewEventListener {
      * @param pos is the position of the new plant
      */
     void newPlant(Pair<Integer, Integer> pos);
+
+    /**
+     * Increases the points obtained by the suns in GameState.
+     */
+    void increaseSunPoints();
+
+
+    /**
+     * Retrieves the points from the GameState.
+     * 
+     * @return points obtained at the moment.
+     */
+    int getSunScore();
 }

@@ -83,6 +83,8 @@ public class GamePanel extends GenericPanel {
 
     public boolean userIsPlanting = false;
 
+    private final SwingViewImpl parent;
+
     /**
      * Game Panel Constructor.
      * 
@@ -93,6 +95,7 @@ public class GamePanel extends GenericPanel {
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public GamePanel(final SwingViewImpl parent, final String backgroundSource) {
         super(parent, backgroundSource);
+        this.parent= parent;
 
         this.fieldMatrix = new FieldCell[ROW_COUNT][COLUMN_COUNT];
         for (int i = 0; i < ROW_COUNT; i++) {
@@ -112,12 +115,15 @@ public class GamePanel extends GenericPanel {
         plantCardButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                userIsPlanting = !userIsPlanting;
-
-                if (userIsPlanting)
-                    showGrid();
-                else
-                    hideGrid();
+                if (parent.getController().getSunScore()>=100) {
+                    userIsPlanting = !userIsPlanting;
+                    if(userIsPlanting) {
+                        showGrid();
+                    }
+                    else {
+                        hideGrid();
+                    }
+                }    
             }
         });
         this.add(plantCardButton);
@@ -151,9 +157,8 @@ public class GamePanel extends GenericPanel {
                         final Sun sun = (Sun) el.getKey();
                         sun.kill();
                         toRemove = el.getKey();
-                        parent.getController().getWorld().getGame().getGameState().incSunScore();
-                        points.setText(String
-                                .valueOf(parent.getController().getWorld().getGame().getGameState().getSunScore()));
+                        parent.getController().increaseSunPoints();
+                        points.setText(String.valueOf(parent.getController().getSunScore()));
                     }
                 }
                 entities.remove(toRemove);
@@ -188,7 +193,6 @@ public class GamePanel extends GenericPanel {
             for (int j = 0; j < COLUMN_COUNT; j++)
                 this.remove(this.fieldMatrix[i][j]);
     }
-
     /**
      * Used for {@link pvzclone.view.api.GenericPanel#update(Graphics)}.
      */
@@ -199,6 +203,7 @@ public class GamePanel extends GenericPanel {
         final Graphics2D g2d = (Graphics2D) g;
         g2d.drawImage(this.getBackgroundImage(), 0, 0, null);
 
+        this.points.setText(String.valueOf(this.parent.getController().getSunScore()));
         this.updateEntities(g2d);
     }
 

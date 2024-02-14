@@ -95,6 +95,16 @@ public final class ControllerImpl implements Controller {
         game.createPlant(pos);
     }
 
+    @Override
+    public void increaseSunPoints() {
+        game.getGameState().incSunScore();
+    }
+
+    @Override
+    public int getSunScore() {
+        return game == null ? 0 : game.getGameState().getSunScore();
+    }
+
     /*
      * @Override
      * public void notifyWorldEvent(WorldEvent ev) {

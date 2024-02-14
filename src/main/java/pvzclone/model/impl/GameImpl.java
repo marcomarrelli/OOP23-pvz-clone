@@ -19,8 +19,9 @@ import java.util.HashSet;
  */
 public final class GameImpl implements Game {
 
+    //sun
     private static final int HOUSE_X_POSITION = 150;
-    private static final long DELTA_TIME_SUN = 8000;
+    private static final long DELTA_TIME_SUN = 1000;
     private static final int BULLET_SPEED = 10;
 
     // zombie
@@ -29,6 +30,7 @@ public final class GameImpl implements Game {
     private static final int DEC_ZOMBIE_TIME_GENERATE = 500;
 
     // base plant
+    private static final int PLANT_COST = 100;
     private static final int DAMAGE_BASE_PLANT = 20;
     private static final int LIFE_BASE_PLANT = 100;
     private static final int COOLDOWN_BASE_PLANT = 3000;
@@ -147,8 +149,12 @@ public final class GameImpl implements Game {
 
     @Override
     public void createPlant(final Pair<Integer, Integer> position) {
-        plants.add(new PlantImpl(DAMAGE_BASE_PLANT, LIFE_BASE_PLANT, "Plant", position, COOLDOWN_BASE_PLANT));
-
+        if(this.gameState.getSunScore()>=100) {
+            final PlantImpl newPlant = new PlantImpl(DAMAGE_BASE_PLANT, LIFE_BASE_PLANT, "Plant", position, 
+                COOLDOWN_BASE_PLANT, PLANT_COST);
+            plants.add(newPlant);
+            this.gameState.decSunScore(newPlant.getPlantCost());
+        }
     }
 
     @Override

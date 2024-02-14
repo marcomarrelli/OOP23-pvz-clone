@@ -10,6 +10,7 @@ import pvzclone.model.api.Plant;
 
 public final class PlantImpl implements Plant {
 
+    private final int cost;
     private final double damage;
     private final String entityName;
     private final Pair<Integer, Integer> position;
@@ -27,7 +28,8 @@ public final class PlantImpl implements Plant {
      * @param cooldown      is the time between two attack of the plant
      */
     public PlantImpl(final double damage, final double remainingLife, final String entityName,
-            final Pair<Integer, Integer> position, final long cooldown) {
+            final Pair<Integer, Integer> position, final long cooldown, final int cost) {
+        this.cost = cost;
         this.damage = damage;
         this.remainingLife = remainingLife;
         this.entityName = entityName;
@@ -79,6 +81,11 @@ public final class PlantImpl implements Plant {
     @Override
     public long getLastTimeAttack() {
         return this.lastTimeAttack;
+    }
+
+    @Override
+    public int getPlantCost() {
+        return this.cost;
     }
 
 }

@@ -7,4 +7,10 @@ package pvzclone.model.api;
  */
 public interface Plant extends ActiveEntities {
 
+    /**
+     * Returns the cost of the plant.
+     * 
+     * @return cost to buy the plant.
+     */
+    int getPlantCost();
 }
