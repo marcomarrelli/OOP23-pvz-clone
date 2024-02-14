@@ -92,7 +92,6 @@ public class GamePanel extends GenericPanel {
      * @param backgroundSource the background image source.
      * @see {@link GenericPanel}
      */
-    @SuppressWarnings({ "unchecked", "rawtypes" })
     public GamePanel(final SwingViewImpl parent, final String backgroundSource) {
         super(parent, backgroundSource);
         this.parent= parent;
@@ -104,7 +103,7 @@ public class GamePanel extends GenericPanel {
                 final int yCoord = i == 0
                         ? FIELD_STARTING_Y + (Y_OFFSET * i)
                         : FIELD_STARTING_Y + (Y_OFFSET * i) + (Y_MARGIN / 4);
-                this.fieldMatrix[i][j] = new FieldCell(this, new Pair(xCoord, yCoord), FieldCell.CELL_TEXT_INITIALIZER,
+                this.fieldMatrix[i][j] = new FieldCell(this, new Pair<>(xCoord, yCoord), FieldCell.CELL_TEXT_INITIALIZER,
                         parent.getController());
             }
         }
