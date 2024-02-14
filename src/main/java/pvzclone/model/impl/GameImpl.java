@@ -10,6 +10,7 @@ import pvzclone.model.api.Plant;
 import pvzclone.model.api.Sun;
 import pvzclone.model.api.World;
 import pvzclone.model.api.Zombie;
+import pvzclone.view.impl.SwingViewImpl;
 
 import java.util.HashSet;
 
@@ -19,8 +20,8 @@ import java.util.HashSet;
 public final class GameImpl implements Game {
 
     private static final int HOUSE_X_POSITION = 150;
-    private static final long DELTA_TIME_SUN = 2000;
-    private static final int BULLET_SPEED = 2;
+    private static final long DELTA_TIME_SUN = 8000;
+    private static final int BULLET_SPEED = 10;
 
     // zombie
     private static final int DELTA_ZOMBIE = 10;
@@ -28,9 +29,9 @@ public final class GameImpl implements Game {
     private static final int DEC_ZOMBIE_TIME_GENERATE = 500;
 
     // base plant
-    private static final int DAMAGE_BASE_PLANT = 10;
+    private static final int DAMAGE_BASE_PLANT = 50;
     private static final int LIFE_BASE_PLANT = 100;
-    private static final int COOLDOWN_BASE_PLANT = 20;
+    private static final int COOLDOWN_BASE_PLANT = 3000;
     private static final int DELTA_PLANT = 35;
     private static final int DELTA_Y_PLANT = 63;
 
@@ -43,9 +44,9 @@ public final class GameImpl implements Game {
     private final SunsFactory sunFactory;
     private final ZombiesFactory zombiesFactory;
 
-    private final Set<Plant> plants = new HashSet<>();
-    private final Set<Zombie> zombies = new HashSet<>();
-    private final Set<Bullet> bullets = new HashSet<>();
+    private Set<Plant> plants = new HashSet<>();
+    private Set<Zombie> zombies = new HashSet<>();
+    private Set<Bullet> bullets = new HashSet<>();
     private Set<Sun> suns = new HashSet<>();
 
     private long timeOfLastCreatedSun;
@@ -126,6 +127,7 @@ public final class GameImpl implements Game {
     @Override
     public void update(final long elapsed) {
         this.checkCollision();
+        this.plantsShoot();
         this.removeKilledSuns();
         this.moveEntities();
         this.newSunGenerate(elapsed);
@@ -161,14 +163,20 @@ public final class GameImpl implements Game {
      * @author Zanchini Margherita
      */
     private void checkCollision() {
+        final Set<Zombie> zombieTemp = new HashSet<>();
+        final Set<Plant> plantTemp = new HashSet<>();
+        final Set<Bullet> bulletTemp = new HashSet<>();
+        bulletTemp.addAll(bullets);
+        zombieTemp.addAll(zombies);
+        plantTemp.addAll(plants);
         for (final Zombie zombie : zombies) {
             for (final Plant plant : plants) {
-                if(plant.getPosition().getY() == zombie.getPosition().getY() + DELTA_Y_PLANT
-                    || plant.getPosition().getY() == zombie.getPosition().getY() + DELTA_Y_PLANT -3){
-                    if(zombie.getPosition().getX() <= plant.getPosition().getX() + DELTA_PLANT) {
+                if (plant.getPosition().getY() == zombie.getPosition().getY() + DELTA_Y_PLANT
+                        || plant.getPosition().getY() == zombie.getPosition().getY() + DELTA_Y_PLANT - 3) {
+                    if (zombie.getPosition().getX() <= plant.getPosition().getX() + DELTA_PLANT) {
                         zombieEatPlant(zombie, plant);
-                        if (!plant.isAlive()) {
-                            plants.remove(plant); // togliere un oggetto da un set in foeach potrebbe dare problemi
+                        if (plant.isAlive()) {
+                            plantTemp.remove(plant);
                         }
                     }
                 }
@@ -176,17 +184,26 @@ public final class GameImpl implements Game {
         }
         for (final Bullet bullet : bullets) {
             for (final Zombie zombie : zombies) {
-                if (zombie.getPosition().getY().equals(bullet.getPosition().getY())
-                && bullet.getPosition().getX() >= zombie.getPosition().getX() - DELTA_ZOMBIE) {
-                    zombie.receiveDamage(bullet.getDamage());
-                    bullets.remove(bullet);
-                    if (!zombie.isAlive()) {
-                        zombies.remove(zombie);
+                if (bullet.getPosition().getY() == zombie.getPosition().getY() + DELTA_Y_PLANT
+                        || bullet.getPosition().getY() == zombie.getPosition().getY() + DELTA_Y_PLANT - 3) {
+                    if (bullet.getPosition().getX() >= zombie.getPosition().getX() - DELTA_ZOMBIE) {
+                        zombie.receiveDamage(bullet.getDamage());
+                        // bullets.remove(bullet);
+                        bulletTemp.remove(bullet);
+                        if (!zombie.isAlive()) {
+                            // zombieTemp.add(zombie);
+                            zombieTemp.remove(zombie);
+                        }
                     }
                 }
             }
+            if(bullet.getPosition().getX() > SwingViewImpl.APPLICATION_WIDTH){
+                bulletTemp.remove(bullet);
+            }
         }
-
+        this.bullets = bulletTemp;
+        this.plants = plantTemp;
+        this.zombies = zombieTemp;
     }
 
     /**
@@ -216,15 +233,16 @@ public final class GameImpl implements Game {
      */
     private void plantsShoot() {
         for (final Plant plant : plants) {
-            for(final Zombie zombie : zombies){
-                if(plant.getPosition().getY() == zombie.getPosition().getY() + DELTA_Y_PLANT
-                    || plant.getPosition().getY() == zombie.getPosition().getY() + DELTA_Y_PLANT -3){
+            for (final Zombie zombie : zombies) {
+                if (plant.getPosition().getY() == zombie.getPosition().getY() + DELTA_Y_PLANT
+                        || plant.getPosition().getY() == zombie.getPosition().getY() + DELTA_Y_PLANT - 3) {
                     final long plantLastAttack = plant.getLastTimeAttack();
                     final long currentTime = System.currentTimeMillis();
                     if (currentTime - plantLastAttack > plant.getCooldown()) {
                         // da riguardare la posizione da passare al bullet, non sarà esattamente quella
                         // della pianta ma un pelo più avanti
-                        bullets.add(new BulletImpl(BULLET_SPEED, plant.getDamage(), plant.getPosition()));
+                        bullets.add(new BulletImpl(BULLET_SPEED, plant.getDamage(),
+                                new Pair<>(plant.getPosition().getX() + 30, plant.getPosition().getY())));
                         plant.setLastTimeAttack(currentTime);
                     }
                 }
