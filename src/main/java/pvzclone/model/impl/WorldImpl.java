@@ -14,6 +14,15 @@ public final class WorldImpl implements World {
     private Level level;
     private Game game;
 
+    public WorldImpl() {
+
+    }
+
+    public WorldImpl(World world) {
+        this.level = world.getLevel();
+        this.game = world.getGame();
+    }
+
     @Override
     public void setLevel(final Level level) {
         this.level = level;

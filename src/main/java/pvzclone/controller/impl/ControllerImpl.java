@@ -3,7 +3,6 @@ package pvzclone.controller.impl;
 import java.util.HashSet;
 import java.util.Set;
 
-
 import pvzclone.controller.api.Controller;
 import pvzclone.model.api.Entities;
 import pvzclone.model.api.Game;
@@ -34,11 +33,17 @@ public final class ControllerImpl implements Controller {
 
     @Override
     public void callMainloop() {
+        if (this.world == null || this.view == null) {
+            initGame();
+        }
         new Thread(this::mainLoop).start();
     }
 
     private void mainLoop() {
-        // this.view.setScene(SwingViewImpl.GAME_PANEL_CONSTRAINT);
+        if (this.world == null || this.view == null) {
+            System.err.println("World was not initialized correctly");
+            return;
+        }
         this.world.setLevel(new LevelImpl(world));
         this.game = new GameImpl(this.world);
         this.world.setGame(game);
@@ -83,11 +88,12 @@ public final class ControllerImpl implements Controller {
 
     @Override
     public World getWorld() {
-        return this.world;
+        return new WorldImpl(this.world);
+        // return this.world;
     }
 
     @Override
-    public void newPlant(Pair<Integer, Integer> pos){
+    public void newPlant(Pair<Integer, Integer> pos) {
         game.createPlant(pos);
     }
 
