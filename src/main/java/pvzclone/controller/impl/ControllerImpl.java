@@ -79,11 +79,6 @@ public final class ControllerImpl implements Controller {
     }
 
     @Override
-    public void notifyMouseEvent(final Pair<Integer, Integer> clickPos) {
-        this.game.mouseEvent(clickPos);
-    }
-
-    @Override
     public Set<Entities> getEntities() {
         if (this.game == null) {
             return new HashSet<Entities>();

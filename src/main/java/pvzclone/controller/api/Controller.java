@@ -3,7 +3,6 @@ package pvzclone.controller.api;
 import java.util.Optional;
 import java.util.Set;
 
-import pvzclone.input.api.ViewEventListener;
 import pvzclone.model.api.Entities;
 import pvzclone.model.impl.Pair;
 
@@ -11,7 +10,7 @@ import pvzclone.model.impl.Pair;
  * This interface models a Controller for the game.
  * It extends the ViewEventListener interface.
  */
-public interface Controller extends ViewEventListener {
+public interface Controller {
 
     /**
      * Initializes the game.
