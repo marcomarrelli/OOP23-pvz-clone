@@ -10,17 +10,20 @@ public final class BulletImpl implements Bullet {
     private Pair<Integer, Integer> position;
     private final Integer speed;
     private final double damage;
+    private final String name;
 
     /**
      * 
      * @param speed  the speed of the bullet
      * @param damage the damage of the bullet
      * @param pos    the position of the bullet
+     * @param name   the name of the bullet
      */
-    public BulletImpl(final Integer speed, final double damage, final Pair<Integer, Integer> pos) {
+    public BulletImpl(final Integer speed, final double damage, final Pair<Integer, Integer> pos, final String name) {
         this.speed = speed;
         this.damage = damage;
         this.position = pos;
+        this.name = name;
     }
 
     @Override
@@ -35,7 +38,7 @@ public final class BulletImpl implements Bullet {
 
     @Override
     public String getEntityName() {
-        return "Bullet";
+        return this.name;
     }
 
     @Override

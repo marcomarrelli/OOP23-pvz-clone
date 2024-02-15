@@ -28,7 +28,6 @@ public final class GameImpl implements Game {
     private static final int DELTA_ZOMBIE = 10;
     private static final long DEC_ZOMBIE_TIME_GENERATE = 250;
 
-
     // base plant
     private static final int PLANT_COST = 100;
     private static final int DAMAGE_BASE_PLANT = 20;
@@ -126,7 +125,8 @@ public final class GameImpl implements Game {
         if (this.hasDeltaTimePassed(this.timeOfLastCreatedSun, currentTime, this.deltaTimeSun)) {
             this.timeOfLastCreatedSun = currentTime;
             this.suns.add((SunImpl) this.sunFactory.createEntity());
-            final long deltaDecrement = new Random().nextLong((2 * this.deltaTimeSunDecrement)) - this.deltaTimeSunDecrement;
+            final long deltaDecrement = new Random().nextLong((2 * this.deltaTimeSunDecrement))
+                    - this.deltaTimeSunDecrement;
             this.deltaTimeSun = this.deltaTimeSun - deltaDecrement;
         }
     }
@@ -136,7 +136,8 @@ public final class GameImpl implements Game {
                 && this.gameState.getZombiesGenerated() < this.world.getLevel().getZombieCount()) {
             this.timeOfLastCreatedZombie = elapsed;
             this.zombies.add((Zombie) this.zombiesFactory.createEntity());
-            final long deltaDecrement = new Random().nextLong((2 * this.deltaTimeZombieDecrement)) - this.deltaTimeZombieDecrement;
+            final long deltaDecrement = new Random().nextLong((2 * this.deltaTimeZombieDecrement))
+                    - this.deltaTimeZombieDecrement;
             this.deltaTimeZombie = this.deltaTimeZombie - deltaDecrement;
             this.gameState.incZombiesGenerated();
         }
@@ -219,12 +220,12 @@ public final class GameImpl implements Game {
 
                 if ((bulletY == zombieY + DELTA_Y_PLANT || bulletY == zombieY + DELTA_Y_PLANT - 3)
                         && bulletX >= zombieX - DELTA_ZOMBIE) {
-                        zombie.receiveDamage(bullet.getDamage());
-                        bulletTemp.remove(bullet);
-                        if (!zombie.isAlive()) {
-                            zombieTemp.remove(zombie);
-                            this.gameState.incKilledZombies();
-                        }
+                    zombie.receiveDamage(bullet.getDamage());
+                    bulletTemp.remove(bullet);
+                    if (!zombie.isAlive()) {
+                        zombieTemp.remove(zombie);
+                        this.gameState.incKilledZombies();
+                    }
                 }
             }
             if (bullet.getPosition().getX() > SwingViewImpl.APPLICATION_WIDTH) {
@@ -270,7 +271,8 @@ public final class GameImpl implements Game {
                     final long currentTime = System.currentTimeMillis();
                     if (currentTime - plantLastAttack > plant.getCooldown()) {
                         bullets.add(new BulletImpl(BULLET_SPEED, plant.getDamage(),
-                                new Pair<>(plant.getPosition().getX() + DELTA_X_BULLET, plant.getPosition().getY())));
+                                new Pair<>(plant.getPosition().getX() + DELTA_X_BULLET, plant.getPosition().getY()),
+                                "Bullet"));
                         plant.setLastTimeAttack(currentTime);
                     }
                 }
