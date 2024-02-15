@@ -12,8 +12,8 @@ public class LevelsManager {
 
     private static final int ZOMBIE_COUNT = 5;
     private static final int ZOMBIE_COUNT_STEP = 4;
-    private static final long SUN_SPAWN_RATE = 3000;
-    private static final long SUN_SPAWN_RATE_STEP = 120;
+    private static final long SUN_SPAWN_RATE = 4000;
+    private static final long SUN_SPAWN_RATE_STEP = 125;
     private static final long ZOMBIE_SPAWN_RATE = 13_000;
     private static final long ZOMBIE_SPAWN_RATE_STEP = -300;
     private static final long SUN_SPAWN_RATE_DECREMENT_RANGE = 25;

@@ -13,6 +13,11 @@ import org.junit.jupiter.api.Test;
 import pvzclone.model.impl.LevelImpl;
 import pvzclone.model.impl.LevelsManager;
 
+/**
+ * Level, LevelImpl and LevelsManager Tests.
+ * 
+ * @author Marco Marrelli
+ */
 public class LevelTest {
     private final static int BELOW_MIN_LEVEL = -1;
     private final static int ABOVE_MAX_LEVEL = 999;

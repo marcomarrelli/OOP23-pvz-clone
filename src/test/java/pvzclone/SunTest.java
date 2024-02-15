@@ -27,6 +27,9 @@ final class SunTest {
     private static final int SPEED = 5;
     private Sun sun;
 
+    /**
+     * Inizializza sun prima di ogni test.
+     */
     @BeforeEach
     private void createSunEntity() {
         this.sun = new SunImpl(POSITION, SPEED);
