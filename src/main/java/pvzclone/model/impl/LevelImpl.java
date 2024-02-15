@@ -16,15 +16,6 @@ public class LevelImpl implements Level {
     private final long sunSpawnRateDecrementRange;
     private final long zombieSpawnRateDecrementRange;
 
-    public LevelImpl() {
-        this.zombieCount = LevelsManager.ZOMBIE_COUNT;
-        this.zombieWaveCount = 1;
-        this.sunSpawnRate = LevelsManager.SUN_SPAWN_RATE;
-        this.sunSpawnRateDecrementRange = LevelsManager.SUN_SPAWN_RATE_DECREMENT_RANGE;
-        this.zombieSpawnRate = LevelsManager.ZOMBIE_SPAWN_RATE;
-        this.zombieSpawnRateDecrementRange = LevelsManager.ZOMBIE_SPAWN_RATE_DECREMENT_RANGE;
-    }
-
     public LevelImpl(final int zombieCount, final int zombieWaveCount,
                     final long sunSpawnRate, final long zombieSpawnRate,
                     final long sunSpawnRateDecrementRange,

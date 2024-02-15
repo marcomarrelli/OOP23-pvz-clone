@@ -83,7 +83,7 @@ public final class GamePanel extends GenericPanel {
     private final Map<Entities, Image> entities = new HashMap<>();
     private final Set<Pair<Image, Pair<Integer, Integer>>> images = new HashSet<>();
 
-    public boolean userIsPlanting = false;
+    private boolean userIsPlanting = false;
 
     private final SwingViewImpl parent;
 
@@ -306,5 +306,13 @@ public final class GamePanel extends GenericPanel {
 
         this.add(label);
         this.repaint();
+    }
+
+    public void userPlantingStatus(boolean isUserPlanting) {
+        this.userIsPlanting = isUserPlanting;
+    } 
+
+    public boolean isUserPlanting() {
+        return this.userIsPlanting;
     }
 }

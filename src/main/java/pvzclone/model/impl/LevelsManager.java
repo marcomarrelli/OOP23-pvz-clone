@@ -10,14 +10,14 @@ public class LevelsManager {
 
     private final List<LevelImpl> levelList;
 
-    public static final int ZOMBIE_COUNT = 5;
+    private static final int ZOMBIE_COUNT = 5;
     private static final int ZOMBIE_COUNT_STEP = 4;
-    public static final long SUN_SPAWN_RATE = 3000;
+    private static final long SUN_SPAWN_RATE = 3000;
     private static final long SUN_SPAWN_RATE_STEP = 120;
-    public static final long ZOMBIE_SPAWN_RATE = 12_000;
+    private static final long ZOMBIE_SPAWN_RATE = 12_000;
     private static final long ZOMBIE_SPAWN_RATE_STEP = -300;
-    public static final long SUN_SPAWN_RATE_DECREMENT_RANGE = 25;
-    public static final long ZOMBIE_SPAWN_RATE_DECREMENT_RANGE = 75;
+    private static final long SUN_SPAWN_RATE_DECREMENT_RANGE = 25;
+    private static final long ZOMBIE_SPAWN_RATE_DECREMENT_RANGE = 75;
 
     public LevelsManager(int levelNumber) {
         this.levelList = new ArrayList<>();
@@ -39,10 +39,6 @@ public class LevelsManager {
     }
 
     public LevelImpl createLevel(int delta) {
-        if (delta == 0) {
-            return new LevelImpl();
-        } 
-
         return new LevelImpl(
             LevelsManager.ZOMBIE_COUNT +
             (LevelsManager.ZOMBIE_COUNT_STEP * delta),
