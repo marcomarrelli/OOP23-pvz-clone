@@ -35,11 +35,17 @@ public final class SwingViewImpl implements View {
     /** Menu Panel's Textual Constraint. */
     public static final String MENU_PANEL_CONSTRAINT = "MENU";
 
+    /** Level Panel's Textual Constraint. */
+    public static final String LEVEL_PANEL_CONSTRAINT = "LEVEL";
+
     /** Game Panel's Textual Constraint. */
     public static final String GAME_PANEL_CONSTRAINT = "GAME";
 
     /** Menu Panel's Background Image Source. */
     private static final String MENU_BACKGROUND = "/images/menuBackground.jpeg";
+
+    /** Level Panel's Background Image Source. */
+    private static final String LEVEL_BACKGROUND = "/images/menuBackground.jpeg";
 
     /** Game Panel's Background Image Source. */
     private static final String GAME_BACKGROUND = "/images/gameBackground.png";
@@ -55,6 +61,7 @@ public final class SwingViewImpl implements View {
 
     private final MenuPanel menuPanel;
     private final GamePanel gamePanel;
+    private final LevelPanel levelPanel;
 
     private Pair<Double, Double> scale;
 
@@ -83,11 +90,13 @@ public final class SwingViewImpl implements View {
         this.frame.setResizable(IS_APPLICATION_RESIZABLE);
 
         this.menuPanel = new MenuPanel(this, MENU_BACKGROUND);
+        this.levelPanel = new LevelPanel(this, LEVEL_BACKGROUND);
         this.gamePanel = new GamePanel(this, GAME_BACKGROUND);
 
         this.panel = new JPanel(sceneManager);
         this.panel.setSize(APPLICATION_WIDTH, APPLICATION_HEIGHT);
         this.panel.add(menuPanel, MENU_PANEL_CONSTRAINT);
+        this.panel.add(levelPanel, LEVEL_PANEL_CONSTRAINT);
         this.panel.add(gamePanel, GAME_PANEL_CONSTRAINT);
         this.panel.addComponentListener(new ComponentListener() {
 

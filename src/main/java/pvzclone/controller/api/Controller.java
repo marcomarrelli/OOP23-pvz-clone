@@ -1,5 +1,6 @@
 package pvzclone.controller.api;
 
+import java.util.Optional;
 import java.util.Set;
 
 import pvzclone.input.api.ViewEventListener;
@@ -52,4 +53,20 @@ public interface Controller extends ViewEventListener {
      * @return points obtained at the moment.
      */
     int getSunScore();
+
+
+    /**
+     * Sets the number of the Level to the number of the argument passed.
+     * 
+     * @param numberOfTheLevel
+     */
+    void chooseLevel(int numberOfTheLevel);
+
+    /**
+     * Retrieves the number of the chosen level if the level was chosen,
+     * if not returns an empty Optional.
+     * 
+     * @return number of the level the we chose;
+     */
+    Optional<Integer> getChosenLevel();
 }

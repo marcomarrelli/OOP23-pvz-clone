@@ -1,6 +1,7 @@
 package pvzclone.controller.impl;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import pvzclone.controller.api.Controller;
@@ -24,11 +25,13 @@ public final class ControllerImpl implements Controller {
     private World world;
     private View view;
     private Game game;
+    private Optional<Integer> chosenLevel;
 
     @Override
     public void initGame() {
         this.world = new WorldImpl();
         this.view = new SwingViewImpl(this);
+        this.chosenLevel = Optional.empty();
     }
 
     @Override
@@ -97,6 +100,16 @@ public final class ControllerImpl implements Controller {
     @Override
     public int getSunScore() {
         return game == null ? 0 : game.getGameState().getSunScore();
+    }
+
+    @Override
+    public void chooseLevel(final int numberOfTheLevel) {
+        this.chosenLevel = Optional.of(numberOfTheLevel);
+    }
+
+    @Override
+    public Optional<Integer> getChosenLevel() {
+        return this.chosenLevel;
     }
 
     /*
