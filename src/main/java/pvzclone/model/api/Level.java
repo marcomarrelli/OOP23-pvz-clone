@@ -22,10 +22,10 @@ public interface Level {
     int getZombieWaveCount();
 
     /**
-     * Returns the numbers of zombie waves in one level.
+     * Returns the numbers of zombie in a wave in the level.
      * The value is based on the zombie count.
      * 
-     * @return the numbers of zombie waves in one level.
+     * @return the numbers of zombie in a wave in the level.
      */
     int getZombieCountInWave();
 
