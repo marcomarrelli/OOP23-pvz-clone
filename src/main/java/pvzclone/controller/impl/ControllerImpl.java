@@ -23,7 +23,7 @@ public final class ControllerImpl implements Controller {
 
     private static final long PERIOD = 60;
     private static final int LEVEL_COUNT = 5;
-    
+
     private World world;
     private View view;
     private Game game;
@@ -35,7 +35,7 @@ public final class ControllerImpl implements Controller {
 
         this.world = new WorldImpl();
         this.world.setLevelsManager(new LevelsManager(LEVEL_COUNT));
-        
+
         this.view = new SwingViewImpl(this);
         this.chosenLevel = Optional.empty();
     }
@@ -55,7 +55,7 @@ public final class ControllerImpl implements Controller {
         this.world.setLevel(this.world.getLevelsManager().getLevel(chosenLevel));
         this.world.setGame(new GameImpl(this.world));
         this.game = this.world.getGame();
-        long startTime = System.currentTimeMillis();
+        final long startTime = System.currentTimeMillis();
         while (!this.game.isOver()) {
             final long currentStartTime = System.currentTimeMillis();
             final long elapsed = currentStartTime - startTime;
@@ -76,11 +76,6 @@ public final class ControllerImpl implements Controller {
                 Thread.currentThread().interrupt();
             }
         }
-    }
-
-    @Override
-    public void notifyMouseEvent(final Pair<Integer, Integer> clickPos) {
-        this.game.mouseEvent(clickPos);
     }
 
     @Override

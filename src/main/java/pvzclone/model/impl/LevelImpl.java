@@ -17,6 +17,16 @@ public class LevelImpl implements Level {
 
     private static final int WAVE_PERCENTAGE = 40;
 
+    /**
+     * Constructor of the Level Implementation.
+     * 
+     * @param zombieCount the number of zombies
+     * @param zombieWaveCount the number of zombie waves
+     * @param sunSpawnRate the spawn rate of the sun
+     * @param zombieSpawnRate the spawn rate of the zombie
+     * @param sunSpawnRateDecrementRange the inc/dec range for suns' s.r.
+     * @param zombieSpawnRateDecrementRange the inc/dec range for zombies' s.r.
+     */
     public LevelImpl(final int zombieCount, final int zombieWaveCount,
                     final long sunSpawnRate, final long zombieSpawnRate,
                     final long sunSpawnRateDecrementRange,
@@ -29,36 +39,57 @@ public class LevelImpl implements Level {
         this.zombieSpawnRateDecrementRange = zombieSpawnRateDecrementRange;
     }
 
+    /**
+     * @see {@link Level#getZombieCount()}
+     */
     @Override
     public int getZombieCount() {
         return this.zombieCount;
     }
 
+    /**
+     * @see {@link Level#getZombieWaveCount()}
+     */
     @Override
     public int getZombieWaveCount() {
         return this.zombieWaveCount;
     }
 
+    /**
+     * @see {@link Level#getZombieCountInWave()}
+     */
     @Override
     public int getZombieCountInWave() {
         return (int) (this.getZombieCount() * WAVE_PERCENTAGE) / 100;
     }
 
+    /**
+     * @see {@link Level#getSunSpawnRate()}
+     */
     @Override
     public long getSunSpawnRate() {
         return this.sunSpawnRate;
     }
 
+    /**
+     * @see {@link Level#getZombieSpawnRate()}
+     */
     @Override
     public long getZombieSpawnRate() {
         return this.zombieSpawnRate;
     }
 
+    /**
+     * @see {@link Level#getSunSpawnRateDecrementRange()}
+     */
     @Override
     public long getSunSpawnRateDecrementRange() {
         return this.sunSpawnRateDecrementRange;
     }
 
+    /**
+     * @see {@link Level#getZombieSpawnRateDecrementRange()}
+     */
     @Override
     public long getZombieSpawnRateDecrementRange() {
         return this.zombieSpawnRateDecrementRange;

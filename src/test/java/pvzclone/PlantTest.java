@@ -16,7 +16,7 @@ import pvzclone.model.impl.PlantImpl;
  * 
  * @author Zanchini Margherita
  */
-public class PlantTest {
+final class PlantTest {
 
     private static final double DAMAGE = 20;
     private static final double LIFE = 100;

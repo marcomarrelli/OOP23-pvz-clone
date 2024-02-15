@@ -39,14 +39,6 @@ public interface Game {
     boolean createPlant(Pair<Integer, Integer> position);
 
     /**
-     * Handles mouse events in the game.
-     * This method is called when a mouse event occurs in the game window.
-     *
-     * @param posClick the position where the mouse click event occurred.
-     */
-    void mouseEvent(Pair<Integer, Integer> posClick);
-
-    /**
      * Retrieves the current state of the game.
      *
      * @return the current state of the game.

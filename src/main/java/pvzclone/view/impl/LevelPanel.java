@@ -10,13 +10,18 @@ import java.awt.Graphics2D;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
+/**
+ * Panel used to choose the level at the start of the application.
+ * 
+ * @author Sofia Caberletti.
+ */
 public class LevelPanel extends GenericPanel {
+    private static final int FONT_SIZE = 24;
     private static final int LAYOUT_HGAP = 20;
     private static final int LAYOUT_VGAP = 50;
     private static final String BUTTON_TEXTURE = "/images/tombstoneTexture.jpg";
     private static final Dimension MENU_BUTTON_DIMENSION = new Dimension(
-            SwingViewImpl.APPLICATION_WIDTH / 6, SwingViewImpl.APPLICATION_HEIGHT / 8
-    );
+            SwingViewImpl.APPLICATION_WIDTH / 6, SwingViewImpl.APPLICATION_HEIGHT / 8);
     private final SwingViewImpl parent;
     private final int levelCount;
 
@@ -27,7 +32,7 @@ public class LevelPanel extends GenericPanel {
      * @param backgroundSource the background image source.
      * @see {@link GenericPanel}
      */
-    public LevelPanel(SwingViewImpl parent, String backgroundSource) {
+    public LevelPanel(final SwingViewImpl parent, final String backgroundSource) {
         super(parent, backgroundSource);
         this.parent = parent;
         this.setLayout(
@@ -40,7 +45,7 @@ public class LevelPanel extends GenericPanel {
             throw new IllegalStateException("There are no valid levels to load!");
         }
 
-        for(int i=0; i<this.levelCount; i++) {
+        for (int i = 0; i < this.levelCount; i++) {
             final int numberOfTheLevel = i;
             final JButton button = new JButton(String.valueOf(numberOfTheLevel + 1), texture);
             this.setButton(button);
@@ -61,7 +66,7 @@ public class LevelPanel extends GenericPanel {
         button.setHorizontalTextPosition(JButton.CENTER);
         button.setVerticalTextPosition(JButton.CENTER);
         button.setPreferredSize(MENU_BUTTON_DIMENSION);
-        button.setFont(new Font(this.getFont().getName(), Font.BOLD, 24));
+        button.setFont(new Font(this.getFont().getName(), Font.BOLD, FONT_SIZE));
         button.setForeground(Color.BLACK);
     }
 

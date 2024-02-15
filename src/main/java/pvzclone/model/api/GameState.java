@@ -54,13 +54,16 @@ public interface GameState {
 
     /**
      * Sets the win state of the current game.
+     * 
+     * @param winState the state of the current game.
      */
     void setWinState(boolean winState);
 
     /**
      * Returns the win state at the end of the Game.
      * 
-     * @return true if player won, false if player lose, Optional.empty if game is not over.
+     * @return true if player won, false if player lose, Optional.empty if game is
+     *         not over.
      */
     Optional<Boolean> getWinState();
 }

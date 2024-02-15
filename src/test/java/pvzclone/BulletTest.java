@@ -11,11 +11,11 @@ import pvzclone.model.impl.BulletImpl;
 import pvzclone.model.impl.Pair;
 
 /**
- * this class contains the test for the bullet
+ * this class contains the test for the bullet.
  * 
  * @author Zanchini Margherita
  */
-public class BulletTest {
+final class BulletTest {
 
     private static final int SPEED = 15;
     private static final double DAMAGE = 20;

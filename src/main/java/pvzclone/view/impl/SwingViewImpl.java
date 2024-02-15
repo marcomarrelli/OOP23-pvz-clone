@@ -8,6 +8,7 @@ import java.awt.event.WindowEvent;
 import java.util.Optional;
 import java.awt.CardLayout;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -50,6 +51,8 @@ public final class SwingViewImpl implements View {
     /** Game Panel's Background Image Source. */
     private static final String GAME_BACKGROUND = "/images/gameBackground.png";
 
+    private static final String GAME_ICON = "/images/pvzIcon.png";
+
     /** Application Resizable Capability. */
     private static final boolean IS_APPLICATION_RESIZABLE = true;
 
@@ -59,9 +62,7 @@ public final class SwingViewImpl implements View {
     private String currentConstraint = "";
     private final JFrame frame;
 
-    private final MenuPanel menuPanel;
     private final GamePanel gamePanel;
-    private final LevelPanel levelPanel;
 
     private Pair<Double, Double> scale;
 
@@ -76,7 +77,8 @@ public final class SwingViewImpl implements View {
         this.frame = new JFrame(APPLICATION_TITLE);
         this.frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         this.frame.addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
+            @Override
+            public void windowClosing(final WindowEvent e) {
                 final int n = JOptionPane.showConfirmDialog(frame, "Do you really want to quit?",
                         "Quitting", JOptionPane.YES_NO_OPTION);
                 if (n == JOptionPane.YES_OPTION) {
@@ -88,9 +90,10 @@ public final class SwingViewImpl implements View {
         this.frame.setLocationRelativeTo(null);
         this.frame.setMinimumSize(new Dimension(APPLICATION_WIDTH, APPLICATION_HEIGHT));
         this.frame.setResizable(IS_APPLICATION_RESIZABLE);
+        this.frame.setIconImage(new ImageIcon(getClass().getResource(GAME_ICON)).getImage());
 
-        this.menuPanel = new MenuPanel(this, MENU_BACKGROUND);
-        this.levelPanel = new LevelPanel(this, LEVEL_BACKGROUND);
+        final MenuPanel menuPanel = new MenuPanel(this, MENU_BACKGROUND);
+        final LevelPanel levelPanel = new LevelPanel(this, LEVEL_BACKGROUND);
         this.gamePanel = new GamePanel(this, GAME_BACKGROUND);
 
         this.panel = new JPanel(sceneManager);
@@ -101,21 +104,21 @@ public final class SwingViewImpl implements View {
         this.panel.addComponentListener(new ComponentListener() {
 
             @Override
-            public void componentResized(ComponentEvent e) {
+            public void componentResized(final ComponentEvent e) {
                 scale = new Pair<>(e.getComponent().getWidth() / (double) APPLICATION_WIDTH,
                         e.getComponent().getHeight() / (double) APPLICATION_HEIGHT);
             }
 
             @Override
-            public void componentMoved(ComponentEvent e) {
+            public void componentMoved(final ComponentEvent e) {
             }
 
             @Override
-            public void componentShown(ComponentEvent e) {
+            public void componentShown(final ComponentEvent e) {
             }
 
             @Override
-            public void componentHidden(ComponentEvent e) {
+            public void componentHidden(final ComponentEvent e) {
             }
 
         });
@@ -181,7 +184,7 @@ public final class SwingViewImpl implements View {
     }
 
     @Override
-    public void endGame(Optional<Boolean> win) {
+    public void endGame(final Optional<Boolean> win) {
         if (win.isEmpty()) {
             throw new IllegalAccessError("Function not Accessible!");
         } else {
@@ -190,7 +193,7 @@ public final class SwingViewImpl implements View {
     }
 
     @Override
-    public final Pair<Double, Double> getScale() {
+    public Pair<Double, Double> getScale() {
         return this.scale;
     }
 }

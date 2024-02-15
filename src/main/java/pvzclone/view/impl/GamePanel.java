@@ -244,7 +244,8 @@ public final class GamePanel extends GenericPanel {
      * @return l'immagine dell'entità.
      */
     private Image getEntityImage(final Entities entity) {
-        return new ImageIcon(getClass().getResource(switch (entity.getEntityName()) {
+        return new ImageIcon(getClass().getResource(
+            switch (entity.getEntityName()) {
             case "Plant" -> PLANT_IMAGE;
             case "Zombie" -> ZOMBIE_IMAGE;
             case "Bullet" -> BULLET_IMAGE;
@@ -275,6 +276,9 @@ public final class GamePanel extends GenericPanel {
         g.drawImage(scaledImage, (int) scaledX, (int) scaledY, this);
     }
 
+    /**
+     * Updates the matrix during the resize.
+     */
     private void updateMatrix() {
         for (int i = 0; i < ROW_COUNT; i++) {
             for (int j = 0; j < COLUMN_COUNT; j++) {
@@ -290,12 +294,16 @@ public final class GamePanel extends GenericPanel {
         }
     }
 
-    public void endGame(boolean win) {
+    /**
+     * Shows the End Game Scene.
+     * 
+     * @param win if player won or lost.
+     */
+    public void endGame(final boolean win) {
         this.removeAll();
 
         final URL url = win ? this.getClass().getResource("/images/winner.gif")
                 : this.getClass().getResource("/images/loser.gif");
-        ;
         final int scaledX = (int) (SwingViewImpl.APPLICATION_WIDTH * this.parent.getScale().getX());
         final int scaledY = (int) (SwingViewImpl.APPLICATION_HEIGHT * this.parent.getScale().getY());
         final Icon icon = new ImageIcon(
@@ -308,10 +316,20 @@ public final class GamePanel extends GenericPanel {
         this.repaint();
     }
 
-    public void userPlantingStatus(boolean isUserPlanting) {
+    /**
+     * {@link GamePanel#userIsPlanting} setter.
+     * 
+     * @param isUserPlanting if the user is planting or not.
+     */
+    public void userPlantingStatus(final boolean isUserPlanting) {
         this.userIsPlanting = isUserPlanting;
     } 
 
+    /**
+     * {@link GamePanel#userIsPlanting} getter.
+     * 
+     * @return {@link GamePanel#userIsPlanting} status
+     */
     public boolean isUserPlanting() {
         return this.userIsPlanting;
     }

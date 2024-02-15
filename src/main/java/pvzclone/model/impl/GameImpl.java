@@ -138,9 +138,7 @@ public final class GameImpl implements Game {
 
     private void newZombieGenerate(final long elapsed) {
         if (hasDeltaTimePassed(this.timeOfLastCreatedZombie, elapsed, deltaTimeZombie)
-                && this.canSingleZombieGenerate
-        // this.gameState.getZombiesGenerated() < this.world.getLevel().getZombieCount()
-        ) {
+                && this.canSingleZombieGenerate) {
             this.timeOfLastCreatedZombie = elapsed;
             this.zombies.add((Zombie) this.zombiesFactory.createEntity());
             
@@ -198,13 +196,6 @@ public final class GameImpl implements Game {
             return true;
         }
         return false;
-    }
-
-    @Override
-    public void mouseEvent(final Pair<Integer, Integer> posClick) {
-        // qua il model guarda dove è stato fatto il click e di conseguenza gestisce
-        // l'evento
-        // se è stato fatto su un sole o sulla pianta o il secondo click della pianta
     }
 
     /**
