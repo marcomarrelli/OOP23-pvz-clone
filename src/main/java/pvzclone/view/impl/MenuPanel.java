@@ -57,11 +57,8 @@ public class MenuPanel extends GenericPanel {
             }
         });
         levelButton.addActionListener(e -> {
-            //if(this.parent.getController().getChosenLevel().isEmpty()) {
-                this.parent.setScene(SwingViewImpl.LEVEL_PANEL_CONSTRAINT);
-                startButton.setEnabled(true);
-                //levelButton.setEnabled(false);
-            //}
+            this.parent.setScene(SwingViewImpl.LEVEL_PANEL_CONSTRAINT);
+            startButton.setEnabled(true);
         });
         exitButton.addActionListener(e -> {
             final int n = JOptionPane.showConfirmDialog(parent.getFrame(), "Do you really want to quit?",
