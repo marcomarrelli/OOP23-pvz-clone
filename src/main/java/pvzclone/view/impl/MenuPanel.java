@@ -41,12 +41,10 @@ public class MenuPanel extends GenericPanel {
 
         final JButton levelButton = new JButton("Choose Level", texture);
         final JButton startButton = new JButton("Start Adventure", texture);
-        final JButton fullButton = new JButton("Full Screen", texture);
         final JButton exitButton = new JButton("Exit Game", texture);
 
         this.setButton(levelButton);
         this.setButton(startButton);
-        this.setButton(fullButton);
         this.setButton(exitButton);
 
         levelButton.addActionListener(e -> {
@@ -55,10 +53,6 @@ public class MenuPanel extends GenericPanel {
         startButton.addActionListener(e -> {
             parent.setScene(SwingViewImpl.GAME_PANEL_CONSTRAINT);
             parent.getController().callMainloop();
-        });
-        fullButton.addActionListener(e -> {
-            parent.getFrame().setExtendedState(JFrame.MAXIMIZED_BOTH);
-            parent.getFrame().setUndecorated(true);
         });
         exitButton.addActionListener(e -> {
             final int n = JOptionPane.showConfirmDialog(parent.getFrame(), "Do you really want to quit?",
@@ -70,7 +64,6 @@ public class MenuPanel extends GenericPanel {
 
         this.add(levelButton);
         this.add(startButton);
-        this.add(fullButton);
         this.add(exitButton);
     }
 
