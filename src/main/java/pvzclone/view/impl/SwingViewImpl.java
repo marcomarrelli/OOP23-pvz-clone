@@ -76,7 +76,7 @@ public final class SwingViewImpl implements View {
         this.frame = new JFrame(APPLICATION_TITLE);
         this.frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         this.frame.addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
+            public void windowClosing(final WindowEvent e) {
                 final int n = JOptionPane.showConfirmDialog(frame, "Do you really want to quit?",
                         "Quitting", JOptionPane.YES_NO_OPTION);
                 if (n == JOptionPane.YES_OPTION) {
@@ -101,21 +101,21 @@ public final class SwingViewImpl implements View {
         this.panel.addComponentListener(new ComponentListener() {
 
             @Override
-            public void componentResized(ComponentEvent e) {
+            public void componentResized(final ComponentEvent e) {
                 scale = new Pair<>(e.getComponent().getWidth() / (double) APPLICATION_WIDTH,
                         e.getComponent().getHeight() / (double) APPLICATION_HEIGHT);
             }
 
             @Override
-            public void componentMoved(ComponentEvent e) {
+            public void componentMoved(final ComponentEvent e) {
             }
 
             @Override
-            public void componentShown(ComponentEvent e) {
+            public void componentShown(final ComponentEvent e) {
             }
 
             @Override
-            public void componentHidden(ComponentEvent e) {
+            public void componentHidden(final ComponentEvent e) {
             }
 
         });
@@ -181,7 +181,7 @@ public final class SwingViewImpl implements View {
     }
 
     @Override
-    public void endGame(Optional<Boolean> win) {
+    public void endGame(final Optional<Boolean> win) {
         if (win.isEmpty()) {
             throw new IllegalAccessError("Function not Accessible!");
         } else {
@@ -190,7 +190,7 @@ public final class SwingViewImpl implements View {
     }
 
     @Override
-    public final Pair<Double, Double> getScale() {
+    public Pair<Double, Double> getScale() {
         return this.scale;
     }
 }

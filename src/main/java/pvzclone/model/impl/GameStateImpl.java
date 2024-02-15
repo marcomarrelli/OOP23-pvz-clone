@@ -14,7 +14,7 @@ import pvzclone.model.api.GameState;
 public final class GameStateImpl implements GameState {
 
     private static final int INC_SUN = 25;
-    private final int INITIAL_SUNS = 100;
+    private static final int INITIAL_SUNS = 100;
     private final int totZombies;
     private int killedZombies;
     private int zombiesGenerated;
@@ -75,16 +75,15 @@ public final class GameStateImpl implements GameState {
     }
 
     @Override
-    public void setWinState(boolean winState) {
+    public void setWinState(final boolean winState) {
         this.winState = Optional.of(winState);
     }
 
     @Override
     public Optional<Boolean> getWinState() {
-        if(this.winState.isPresent()) {
+        if (this.winState.isPresent()) {
             return this.winState;
-        }
-        else {
+        } else {
             return Optional.empty();
         }
     }
