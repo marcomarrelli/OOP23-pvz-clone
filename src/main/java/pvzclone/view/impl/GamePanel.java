@@ -43,11 +43,11 @@ public final class GamePanel extends GenericPanel {
     private static final int Y_MARGIN = 15; // 30/2
 
     private static final String PLANT_CARD = "/images/plantCard.png";
-    private static final String SUN_COUNTER_IMAGE = "/images/sunCounter2.jpg";
+    private static final String SUN_COUNTER_IMAGE = "/images/sunCounter.jpg";
     private static final String PLANT_IMAGE = "/images/plantPeaShooter.png"; // "/images/plantEntity.png";
-    private static final String ZOMBIE_IMAGE = "/images/zombieEntity2.png"; // "/images/zombieEntity.png";
+    private static final String ZOMBIE_IMAGE = "/images/zombieEntity.png"; // "/images/zombieEntity.png";
     private static final String BULLET_IMAGE = "/images/ProjectilePea.png"; // "/images/bulletEntity.png";
-    private static final String SUN_IMAGE = "/images/sunEntity3.png"; // "/images/sunEntity.png";
+    private static final String SUN_IMAGE = "/images/sunEntity.png"; // "/images/sunEntity.png";
 
     private static final int FIELD_STARTING_X = 220;
     private static final int FIELD_STARTING_Y = 110;
