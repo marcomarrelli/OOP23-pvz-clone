@@ -1,5 +1,7 @@
 package pvzclone.model.api;
 
+import java.util.Optional;
+
 /**
  * This interface models a GameState.
  * Works on the main information related to the game.
@@ -50,4 +52,15 @@ public interface GameState {
      */
     boolean areZombieAllKilled();
 
+    /**
+     * Sets the win state of the current game.
+     */
+    void setWinState(boolean winState);
+
+    /**
+     * Returns the win state at the end of the Game.
+     * 
+     * @return true if player won, false if player lose, Optional.empty if game is not over.
+     */
+    Optional<Boolean> getWinState();
 }

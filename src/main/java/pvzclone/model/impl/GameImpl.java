@@ -21,7 +21,7 @@ public final class GameImpl implements Game {
 
     // sun
     private static final int HOUSE_X_POSITION = 150;
-    private static final long DELTA_TIME_SUN = 3300;
+    private static final long DELTA_TIME_SUN = 500;
     private static final int BULLET_SPEED = 10;
 
     // zombie
@@ -67,10 +67,12 @@ public final class GameImpl implements Game {
     @Override
     public boolean isOver() {
         if (this.gameState.areZombieAllKilled()) {
+            this.gameState.setWinState(true);
             return true;
         }
         for (final var zombie : zombies) {
             if (zombie.getPosition().getX() <= HOUSE_X_POSITION) {
+                this.gameState.setWinState(false);
                 return true;
             }
         }

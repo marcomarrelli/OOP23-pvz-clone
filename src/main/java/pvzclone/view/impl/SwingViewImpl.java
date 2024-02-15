@@ -1,6 +1,7 @@
 package pvzclone.view.impl;
 
 import java.awt.Dimension;
+import java.util.Optional;
 import java.awt.CardLayout;
 
 import javax.swing.JFrame;
@@ -45,6 +46,9 @@ public final class SwingViewImpl implements View {
     private String currentConstraint = "";
     private final JFrame frame;
 
+    private final MenuPanel menuPanel;
+    private final GamePanel gamePanel;
+
     /**
      * View Implementation Constructor.
      * 
@@ -59,10 +63,13 @@ public final class SwingViewImpl implements View {
         this.frame.setMinimumSize(new Dimension(APPLICATION_WIDTH, APPLICATION_HEIGHT));
         this.frame.setResizable(IS_APPLICATION_RESIZABLE);
 
+        this.menuPanel = new MenuPanel(this, MENU_BACKGROUND);
+        this.gamePanel = new GamePanel(this, GAME_BACKGROUND);
+
         this.panel = new JPanel(sceneManager);
         this.panel.setSize(APPLICATION_WIDTH, APPLICATION_HEIGHT);
-        this.panel.add(new MenuPanel(this, MENU_BACKGROUND), MENU_PANEL_CONSTRAINT);
-        this.panel.add(new GamePanel(this, GAME_BACKGROUND), GAME_PANEL_CONSTRAINT);
+        this.panel.add(menuPanel, MENU_PANEL_CONSTRAINT);
+        this.panel.add(gamePanel, GAME_PANEL_CONSTRAINT);
 
         frame.getContentPane().add(panel);
 
@@ -123,5 +130,15 @@ public final class SwingViewImpl implements View {
     @Override
     public JFrame getFrame() {
         return this.frame;
+    }
+
+    @Override
+    public void endGame(Optional<Boolean> win) {
+        if(win.isEmpty()) {
+            throw new IllegalAccessError("Function not Accessible!");
+        }
+        else {
+            this.gamePanel.endGame(win.get());
+        }
     }
 }

@@ -9,11 +9,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -257,5 +259,18 @@ public final class GamePanel extends GenericPanel {
     private void createEntity(final Graphics2D g, final Entities entity) {
         this.entities.put(entity, getEntityImage(entity));
         g.drawImage(this.entities.get(entity), entity.getPosition().getX(), entity.getPosition().getY(), this);
+    }
+
+    public void endGame(boolean win) {
+        this.removeAll();
+        
+        final URL url = win ? this.getClass().getResource("/images/winner.gif") : this.getClass().getResource("/images/loser.gif");;
+        final Icon icon = new ImageIcon(new ImageIcon(url).getImage().getScaledInstance(SwingViewImpl.APPLICATION_WIDTH, SwingViewImpl.APPLICATION_HEIGHT, Image.SCALE_DEFAULT));
+        final JLabel label = new JLabel();
+        label.setBounds(0, 0, SwingViewImpl.APPLICATION_WIDTH, SwingViewImpl.APPLICATION_HEIGHT);
+        label.setIcon(icon);
+
+        this.add(label);
+        this.repaint();
     }
 }

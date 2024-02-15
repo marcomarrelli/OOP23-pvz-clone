@@ -1,5 +1,7 @@
 package pvzclone.model.impl;
 
+import java.util.Optional;
+
 import pvzclone.model.api.GameState;
 
 /**
@@ -17,6 +19,8 @@ public final class GameStateImpl implements GameState {
     private int zombiesGenerated;
     private int sunScore;
 
+    private Optional<Boolean> winState;
+
     /**
      * Constructor of GameStateImpl.
      * 
@@ -26,6 +30,7 @@ public final class GameStateImpl implements GameState {
         this.totZombies = totZombies;
         this.killedZombies = 0;
         this.sunScore = 100;
+        this.winState = Optional.empty();
     }
 
     @Override
@@ -66,5 +71,20 @@ public final class GameStateImpl implements GameState {
     @Override
     public boolean areZombieAllKilled() {
         return this.totZombies == this.killedZombies;
+    }
+
+    @Override
+    public void setWinState(boolean winState) {
+        this.winState = Optional.of(winState);
+    }
+
+    @Override
+    public Optional<Boolean> getWinState() {
+        if(this.winState.isPresent()) {
+            return this.winState;
+        }
+        else {
+            return Optional.empty();
+        }
     }
 }

@@ -1,5 +1,7 @@
 package pvzclone.view.api;
 
+import java.util.Optional;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -49,4 +51,11 @@ public interface View {
      * @return the frame of the view.
      */
     JFrame getFrame();
+
+    /**
+     * The End Game handler.
+     * 
+     * @param win if the player won or lose.
+     */
+    void endGame(Optional<Boolean> win);
 }

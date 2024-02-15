@@ -55,6 +55,8 @@ public final class ControllerImpl implements Controller {
             waitForNextFrame(currentStartTime);
             startTime = currentStartTime - startTime;
         }
+
+        this.view.endGame(this.game.getGameState().getWinState());
     }
 
     private void waitForNextFrame(final long currentStartTime) {
