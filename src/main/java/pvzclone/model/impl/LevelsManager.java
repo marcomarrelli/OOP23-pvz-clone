@@ -13,8 +13,6 @@ public final class LevelsManager {
     private static final int MIN_LEVELS = 1;
     private static final int MAX_LEVELS = 5;
 
-    private final List<LevelImpl> levelList;
-
     private static final int ZOMBIE_COUNT = 5;
     private static final int ZOMBIE_COUNT_STEP = 4;
     private static final long SUN_SPAWN_RATE = 4000;
@@ -24,6 +22,8 @@ public final class LevelsManager {
     private static final long SUN_SPAWN_RATE_DECREMENT_RANGE = 25;
     private static final long ZOMBIE_SPAWN_RATE_DECREMENT_RANGE = 75;
 
+    private final List<LevelImpl> levelList;
+    
     /**
      * Constructor for LevelsManager.
      * 
@@ -61,6 +61,10 @@ public final class LevelsManager {
      * @return the number of levels.
      */
     public LevelImpl createLevel(final int delta) {
+        if (delta < 0 || delta >= MAX_LEVELS) {
+            throw new IllegalArgumentException("Invalid delta: '" + delta + "'!");
+        }
+
         return new LevelImpl(
                 LevelsManager.ZOMBIE_COUNT
                 + (LevelsManager.ZOMBIE_COUNT_STEP * delta),
