@@ -20,15 +20,14 @@ import java.util.Random;
  */
 public final class GameImpl implements Game {
 
-    // sun
+    // Sun
     private static final int HOUSE_X_POSITION = 150;
     private static final int BULLET_SPEED = 15;
 
-    // zombie
+    // Zombie
     private static final int DELTA_ZOMBIE = 10;
-    private static final long DEC_ZOMBIE_TIME_GENERATE = 250;
 
-    // base plant
+    // Base Plant
     private static final int PLANT_COST = 100;
     private static final int DAMAGE_BASE_PLANT = 20;
     private static final int LIFE_BASE_PLANT = 100;

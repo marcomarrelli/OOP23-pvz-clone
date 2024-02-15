@@ -8,13 +8,14 @@ import pvzclone.model.api.Level;
  * @author Marco Marrelli
  */
 public class LevelImpl implements Level {
-
     private final int zombieCount;
     private final int zombieWaveCount;
     private final long sunSpawnRate;
     private final long zombieSpawnRate;
     private final long sunSpawnRateDecrementRange;
     private final long zombieSpawnRateDecrementRange;
+
+    private static final int WAVE_PERCENTAGE = 40;
 
     public LevelImpl(final int zombieCount, final int zombieWaveCount,
                     final long sunSpawnRate, final long zombieSpawnRate,
@@ -36,6 +37,11 @@ public class LevelImpl implements Level {
     @Override
     public int getZombieWaveCount() {
         return this.zombieWaveCount;
+    }
+
+    @Override
+    public int getZombieCountInWave() {
+        return (int) (this.getZombieCount() * WAVE_PERCENTAGE) / 100;
     }
 
     @Override
