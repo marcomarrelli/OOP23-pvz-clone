@@ -28,7 +28,7 @@ import pvzclone.model.impl.Pair;
  * 
  * @author Marco Marrelli
  */
-public class GamePanel extends GenericPanel {
+public final class GamePanel extends GenericPanel {
     private static final long serialVersionUID = 1234500002L;
 
     private static final int ROW_COUNT = 5;
@@ -93,7 +93,7 @@ public class GamePanel extends GenericPanel {
      */
     public GamePanel(final SwingViewImpl parent, final String backgroundSource) {
         super(parent, backgroundSource);
-        this.parent= parent;
+        this.parent = parent;
 
         this.fieldMatrix = new FieldCell[ROW_COUNT][COLUMN_COUNT];
         for (int i = 0; i < ROW_COUNT; i++) {
@@ -102,7 +102,8 @@ public class GamePanel extends GenericPanel {
                 final int yCoord = i == 0
                         ? FIELD_STARTING_Y + (Y_OFFSET * i)
                         : FIELD_STARTING_Y + (Y_OFFSET * i) + (Y_MARGIN / 4);
-                this.fieldMatrix[i][j] = new FieldCell(this, new Pair<>(xCoord, yCoord), FieldCell.CELL_TEXT_INITIALIZER,
+                this.fieldMatrix[i][j] = new FieldCell(this, new Pair<>(xCoord, yCoord),
+                        FieldCell.CELL_TEXT_INITIALIZER,
                         parent.getController());
             }
         }
@@ -112,16 +113,15 @@ public class GamePanel extends GenericPanel {
         plantCardButton.setBounds(CARD_STARTING_X, CARD_STARTING_Y, CARD_WIDTH, CARD_HEIGHT);
         plantCardButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                if (parent.getController().getSunScore()>=100) {
+            public void actionPerformed(final ActionEvent e) {
+                if (parent.getController().getSunScore() >= 100) {
                     userIsPlanting = !userIsPlanting;
-                    if(userIsPlanting) {
+                    if (userIsPlanting) {
                         showGrid();
-                    }
-                    else {
+                    } else {
                         hideGrid();
                     }
-                }    
+                }
             }
         });
         this.add(plantCardButton);
@@ -143,8 +143,9 @@ public class GamePanel extends GenericPanel {
             public void mouseClicked(final MouseEvent e) {
                 Entities toRemove = null;
 
-                if (userIsPlanting)
+                if (userIsPlanting) {
                     return;
+                }
 
                 for (final var el : entities.entrySet()) {
                     if (el.getKey() instanceof Sun
@@ -180,17 +181,30 @@ public class GamePanel extends GenericPanel {
         });
     }
 
+    /**
+     * Displays all grid elements by adding them to the container.
+     * This method makes all grid elements visible on the container.
+     */
     public void showGrid() {
-        for (int i = 0; i < ROW_COUNT; i++)
-            for (int j = 0; j < COLUMN_COUNT; j++)
+        for (int i = 0; i < ROW_COUNT; i++) {
+            for (int j = 0; j < COLUMN_COUNT; j++) {
                 this.add(this.fieldMatrix[i][j]);
+            }
+        }
     }
 
+    /**
+     * Hides all grid elements by removing them from the container.
+     * This method hides all grid elements by removing them from the container.
+     */
     public void hideGrid() {
-        for (int i = 0; i < ROW_COUNT; i++)
-            for (int j = 0; j < COLUMN_COUNT; j++)
+        for (int i = 0; i < ROW_COUNT; i++) {
+            for (int j = 0; j < COLUMN_COUNT; j++) {
                 this.remove(this.fieldMatrix[i][j]);
+            }
+        }
     }
+
     /**
      * Used for {@link pvzclone.view.impl.GenericPanel#update(Graphics)}.
      */

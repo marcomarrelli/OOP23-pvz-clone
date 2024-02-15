@@ -23,12 +23,20 @@ public final class ZombiesFactory implements EntitiesFactory {
     private static final int DELTA_Y_ZOMBIE = 110;
     private static final int POSSIBLE_Y = 5;
 
+    private final Random random;
+
+    /**
+     * Constructor of ZombiesFactory.
+     */
+    public ZombiesFactory() {
+        this.random = new Random();
+    }
+
     @Override
     public Entities createEntity() {
-        final Random random = new Random();
         return new ZombieImpl(ATK, COOLDOWN, ZOMBIE_SPPED, MAX_LIFE,
                 new Pair<Integer, Integer>(START_X_ZOMBIE,
-                        START_Y_ZOMBIE + DELTA_Y_ZOMBIE * random.nextInt(0, POSSIBLE_Y)));
+                        START_Y_ZOMBIE + DELTA_Y_ZOMBIE * this.random.nextInt(0, POSSIBLE_Y)));
     }
 
     @Override

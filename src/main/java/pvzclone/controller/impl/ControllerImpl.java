@@ -19,7 +19,7 @@ import pvzclone.view.impl.SwingViewImpl;
  */
 public final class ControllerImpl implements Controller {
 
-    private static final long PERIOD = 100;
+    private static final long PERIOD = 80;
 
     private World world;
     private View view;
@@ -41,10 +41,9 @@ public final class ControllerImpl implements Controller {
 
     private void mainLoop() {
         if (this.world == null || this.view == null) {
-            System.err.println("World was not initialized correctly");
             return;
         }
-        this.world.setLevel(new LevelImpl(world));
+        this.world.setLevel(new LevelImpl());
         this.game = new GameImpl(this.world);
         this.world.setGame(game);
         long startTime = System.currentTimeMillis();
@@ -64,7 +63,6 @@ public final class ControllerImpl implements Controller {
             try {
                 Thread.sleep(PERIOD - dt);
             } catch (InterruptedException e) {
-                System.err.println("Thread interrupted while waiting for next frame: " + e.getMessage());
                 Thread.currentThread().interrupt();
             }
         }
@@ -85,13 +83,7 @@ public final class ControllerImpl implements Controller {
     }
 
     @Override
-    public World getWorld() {
-        return new WorldImpl(this.world);
-        // return this.world;
-    }
-
-    @Override
-    public void newPlant(Pair<Integer, Integer> pos) {
+    public void newPlant(final Pair<Integer, Integer> pos) {
         game.createPlant(pos);
     }
 

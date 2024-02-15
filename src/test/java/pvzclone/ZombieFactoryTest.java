@@ -22,8 +22,8 @@ import pvzclone.model.impl.ZombiesFactory;
  */
 final class ZombieFactoryTest {
 
-    private static final double ATK = 20.0;
-    private static final double MAX_LIFE = 100.0;
+    private static final double ATK = 50;
+    private static final int MAX_LIFE = 100;
     private static final int ZOMBIE_SPPED = 2;
     private static final int NUMBER_ENTITIES = 5;
 
@@ -32,20 +32,14 @@ final class ZombieFactoryTest {
     private static final int HUNDRED = 100;
     private static final int COUNTER = 5;
 
-    private ZombiesFactory factory;
 
-    private ZombiesFactory createZombies() {
-        return new ZombiesFactory();
-    }
-
-    @BeforeEach
-    void initFactory() {
-        this.factory = createZombies();
+    private ZombiesFactory newZombiesFactory() {
+        return newZombiesFactory();
     }
 
     @Test
     void canCreateSingleZombie() {
-        // ZombiesFactory zombieCreate = createZombies();
+        final ZombiesFactory factory = newZombiesFactory();
         final Zombie zombie1 = (Zombie) factory.createEntity();
         assertNotNull(zombie1);
         assertTrue(zombie1 instanceof ZombieImpl);
@@ -55,8 +49,8 @@ final class ZombieFactoryTest {
         zombie1.receiveDamage(INT_FIFTY);
         assertEquals(DOUBLE_FIFTY, zombie1.getRemainingLife());
         for (int x = 0; x < COUNTER; x++) {
-            assertTrue(createZombies().createEntity().isAlive());
-            final Zombie cycleZombie = (Zombie) createZombies().createEntity();
+            assertTrue(factory.createEntity().isAlive());
+            final Zombie cycleZombie = (Zombie) factory.createEntity();
             cycleZombie.receiveDamage(HUNDRED);
             assertFalse(cycleZombie.isAlive());
         }
@@ -64,14 +58,14 @@ final class ZombieFactoryTest {
 
     @Test
     void canCreateMoreZombies() {
+        final ZombiesFactory factory = newZombiesFactory();
+        assertNotNull(factory);
         final Set<Entities> setZombie = factory.createEntities(NUMBER_ENTITIES);
         assertEquals(NUMBER_ENTITIES, setZombie.size());
         setZombie.add(factory.createEntity());
         assertEquals(NUMBER_ENTITIES + 1, setZombie.size());
 
         for (final Entities zombie : setZombie) {
-            assertTrue(zombie instanceof Entities);
-            assertTrue(zombie instanceof Zombie);
             final var position = zombie.getPosition();
             ((Zombie) zombie).moveLeft();
             assertEquals(zombie.getPosition().getX(), position.getX() - ZOMBIE_SPPED);

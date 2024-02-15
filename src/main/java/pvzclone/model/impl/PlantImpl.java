@@ -26,6 +26,7 @@ public final class PlantImpl implements Plant {
      * @param entityName    is the name of the entity, for the plant is "plant"
      * @param position      is the position of the plant
      * @param cooldown      is the time between two attack of the plant
+     * @param cost          is the Sun cost of the plant
      */
     public PlantImpl(final double damage, final double remainingLife, final String entityName,
             final Pair<Integer, Integer> position, final long cooldown, final int cost) {

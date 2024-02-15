@@ -85,7 +85,7 @@ public final class GameImpl implements Game {
      */
     private void moveEntities() {
         for (final var zombie : this.zombies) {
-            if (zombie.getCanGo()) {
+            if (zombie.isCanGo()) {
                 zombie.moveLeft();
             }
         }
@@ -180,33 +180,37 @@ public final class GameImpl implements Game {
         plantTemp.addAll(plants);
         for (final Zombie zombie : zombies) {
             for (final Plant plant : plants) {
-                if (plant.getPosition().getY() == zombie.getPosition().getY() + DELTA_Y_PLANT
-                        || plant.getPosition().getY() == zombie.getPosition().getY() + DELTA_Y_PLANT - 3) {
-                    if (zombie.getPosition().getX() <= plant.getPosition().getX() + DELTA_PLANT) {
-                        zombieEatPlant(zombie, plant);
-                        zombie.setCanGo(false);
-                        if (!plant.isAlive()) {
-                            plantTemp.remove(plant);
-                            zombie.setCanGo(true);
-                        }
+                final int plantX = plant.getPosition().getX();
+                final int plantY = plant.getPosition().getY();
+                final int zombieX = zombie.getPosition().getX();
+                final int zombieY = zombie.getPosition().getY();
+
+                if ((plantY == zombieY + DELTA_Y_PLANT || plantY == zombieY + DELTA_Y_PLANT - 3)
+                        && zombieX <= plantX + DELTA_PLANT) {
+                    zombieEatPlant(zombie, plant);
+                    zombie.setCanGo(false);
+                    if (!plant.isAlive()) {
+                        plantTemp.remove(plant);
+                        zombie.setCanGo(true);
                     }
                 }
             }
         }
         for (final Bullet bullet : bullets) {
             for (final Zombie zombie : zombies) {
-                if (bullet.getPosition().getY() == zombie.getPosition().getY() + DELTA_Y_PLANT
-                        || bullet.getPosition().getY() == zombie.getPosition().getY() + DELTA_Y_PLANT - 3) {
-                    if (bullet.getPosition().getX() >= zombie.getPosition().getX() - DELTA_ZOMBIE) {
+                final int bulletX = bullet.getPosition().getX();
+                final int bulletY = bullet.getPosition().getY();
+                final int zombieX = zombie.getPosition().getX();
+                final int zombieY = zombie.getPosition().getY();
+
+                if ((bulletY == zombieY + DELTA_Y_PLANT || bulletY == zombieY + DELTA_Y_PLANT - 3)
+                        && bulletX >= zombieX - DELTA_ZOMBIE) {
                         zombie.receiveDamage(bullet.getDamage());
-                        // bullets.remove(bullet);
                         bulletTemp.remove(bullet);
                         if (!zombie.isAlive()) {
-                            // zombieTemp.add(zombie);
                             zombieTemp.remove(zombie);
                             this.gameState.incKilledZombies();
                         }
-                    }
                 }
             }
             if (bullet.getPosition().getX() > SwingViewImpl.APPLICATION_WIDTH) {

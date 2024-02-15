@@ -4,7 +4,6 @@ import java.util.Set;
 
 import pvzclone.input.api.ViewEventListener;
 import pvzclone.model.api.Entities;
-import pvzclone.model.api.World;
 import pvzclone.model.impl.Pair;
 
 /**
@@ -35,17 +34,10 @@ public interface Controller extends ViewEventListener {
     Set<Entities> getEntities();
 
     /**
-     * Retrieves the pricipal class of the game model.
-     * 
-     * @return world of the game.
-     */
-    World getWorld();
-
-    /**
      * this method communicate with the model
-     * telling him the position of the new plant
+     * telling him the position of the new plant.
      * 
-     * @param pos is the position of the new plant
+     * @param pos is the position of the new plant.
      */
     void newPlant(Pair<Integer, Integer> pos);
 
@@ -53,7 +45,6 @@ public interface Controller extends ViewEventListener {
      * Increases the points obtained by the suns in GameState.
      */
     void increaseSunPoints();
-
 
     /**
      * Retrieves the points from the GameState.

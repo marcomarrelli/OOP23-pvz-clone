@@ -1,4 +1,5 @@
 package pvzclone;
+
 import pvzclone.controller.impl.ControllerImpl;
 
 /**
@@ -7,6 +8,10 @@ import pvzclone.controller.impl.ControllerImpl;
  * @author Sofia Caberletti, Margherita Zanchini, Sofia Lotti, Marco Marrelli.
  */
 public final class PvzStart {
+
+    private PvzStart() {
+    }
+
     /**
      * Main method to start the Plants Vs Zombies application.
      * 
@@ -16,9 +21,5 @@ public final class PvzStart {
     public static void main(final String[] args) {
         final ControllerImpl controller = new ControllerImpl();
         controller.initGame();
-    }
-
-    private PvzStart() {
-        PvzStart.main(null);
     }
 }

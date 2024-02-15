@@ -1,7 +1,6 @@
 package pvzclone.view.impl;
 
 import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.CardLayout;
 
 import javax.swing.JFrame;

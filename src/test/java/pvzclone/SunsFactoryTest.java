@@ -15,12 +15,20 @@ import pvzclone.model.api.EntitiesFactory;
 import pvzclone.model.api.Sun;
 import pvzclone.model.impl.SunsFactory;
 
-public class SunsFactoryTest {
+/**
+ * This class contains unit tests for the SunFactory.
+ * 
+ * @author Sofia Caberletti.
+ */
+final class SunsFactoryTest {
     private EntitiesFactory sunsFactory;
     private static final int ENTITIES_NUMBER = 5;
 
+    /**
+     * Inizializza sunsFactory prima di ogni test.
+     */
     @BeforeEach
-    private void initTest() {
+    void setup() {
         this.sunsFactory = new SunsFactory();
     }
 
@@ -28,7 +36,6 @@ public class SunsFactoryTest {
     void createSingleSun() {
         final Sun sun = (Sun) this.sunsFactory.createEntity();
         assertNotNull(sun);
-        assertTrue(sun instanceof Sun);
         assertTrue(sun.isAlive());
         sun.kill();
         assertFalse(sun.isAlive());
@@ -40,9 +47,7 @@ public class SunsFactoryTest {
         assertEquals(ENTITIES_NUMBER, suns.size());
         suns.forEach(s -> {
             assertNotNull(s);
-            assertTrue(s instanceof Entities);
-            assertTrue(s instanceof Sun);
-            Sun sun = (Sun) s;
+            final Sun sun = (Sun) s;
             assertTrue(sun.isAlive());
             sun.kill();
             assertFalse(sun.isAlive());
