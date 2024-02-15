@@ -83,7 +83,7 @@ public final class GamePanel extends GenericPanel {
     private final Map<Entities, Image> entities = new HashMap<>();
     private final Set<Pair<Image, Pair<Integer, Integer>>> images = new HashSet<>();
 
-    private boolean userIsPlanting = false;
+    private boolean userIsPlanting;
 
     private final SwingViewImpl parent;
 
@@ -146,11 +146,11 @@ public final class GamePanel extends GenericPanel {
         this.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(final MouseEvent e) {
-                Entities toRemove = null;
-
                 if (userIsPlanting) {
                     return;
                 }
+
+                Entities toRemove = null;
 
                 for (final var el : entities.entrySet()) {
                     if (el.getKey() instanceof Sun
@@ -245,13 +245,13 @@ public final class GamePanel extends GenericPanel {
      */
     private Image getEntityImage(final Entities entity) {
         return new ImageIcon(getClass().getResource(
-            switch (entity.getEntityName()) {
-            case "Plant" -> PLANT_IMAGE;
-            case "Zombie" -> ZOMBIE_IMAGE;
-            case "Bullet" -> BULLET_IMAGE;
-            case "Sun" -> SUN_IMAGE;
-            default -> throw new IllegalArgumentException("Unexpected value: " + entity.getClass().getName());
-        })).getImage();
+                switch (entity.getEntityName()) {
+                    case "Plant" -> PLANT_IMAGE;
+                    case "Zombie" -> ZOMBIE_IMAGE;
+                    case "Bullet" -> BULLET_IMAGE;
+                    case "Sun" -> SUN_IMAGE;
+                    default -> throw new IllegalArgumentException("Unexpected value: " + entity.getClass().getName());
+                })).getImage();
     }
 
     /**
@@ -323,7 +323,7 @@ public final class GamePanel extends GenericPanel {
      */
     public void userPlantingStatus(final boolean isUserPlanting) {
         this.userIsPlanting = isUserPlanting;
-    } 
+    }
 
     /**
      * {@link GamePanel#userIsPlanting} getter.
