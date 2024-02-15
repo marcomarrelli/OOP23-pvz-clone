@@ -23,7 +23,7 @@ public final class LevelsManager {
     private static final long ZOMBIE_SPAWN_RATE_DECREMENT_RANGE = 75;
 
     private final List<LevelImpl> levelList;
-    
+
     /**
      * Constructor for LevelsManager.
      * 

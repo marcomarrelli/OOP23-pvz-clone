@@ -8,6 +8,7 @@ import java.awt.event.WindowEvent;
 import java.util.Optional;
 import java.awt.CardLayout;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -50,6 +51,8 @@ public final class SwingViewImpl implements View {
     /** Game Panel's Background Image Source. */
     private static final String GAME_BACKGROUND = "/images/gameBackground.png";
 
+    private static final String GAME_ICON = "/images/pvzIcon.png";
+
     /** Application Resizable Capability. */
     private static final boolean IS_APPLICATION_RESIZABLE = true;
 
@@ -87,6 +90,7 @@ public final class SwingViewImpl implements View {
         this.frame.setLocationRelativeTo(null);
         this.frame.setMinimumSize(new Dimension(APPLICATION_WIDTH, APPLICATION_HEIGHT));
         this.frame.setResizable(IS_APPLICATION_RESIZABLE);
+        this.frame.setIconImage(new ImageIcon(getClass().getResource(GAME_ICON)).getImage());
 
         final MenuPanel menuPanel = new MenuPanel(this, MENU_BACKGROUND);
         final LevelPanel levelPanel = new LevelPanel(this, LEVEL_BACKGROUND);
