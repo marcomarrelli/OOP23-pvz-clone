@@ -16,6 +16,8 @@ import javax.swing.JButton;
  * @author Sofia Caberletti.
  */
 public class LevelPanel extends GenericPanel {
+    private static final long serialVersionUID = 1234500003L;
+
     private static final int FONT_SIZE = 24;
     private static final int LAYOUT_HGAP = 20;
     private static final int LAYOUT_VGAP = 50;
@@ -23,7 +25,6 @@ public class LevelPanel extends GenericPanel {
     private static final Dimension MENU_BUTTON_DIMENSION = new Dimension(
             SwingViewImpl.APPLICATION_WIDTH / 6, SwingViewImpl.APPLICATION_HEIGHT / 8);
     private final SwingViewImpl parent;
-    private final int levelCount;
 
     /**
      * Level Panel Constructor.
@@ -35,17 +36,17 @@ public class LevelPanel extends GenericPanel {
     public LevelPanel(final SwingViewImpl parent, final String backgroundSource) {
         super(parent, backgroundSource);
         this.parent = parent;
-        this.setLayout(
-                new FlowLayout(FlowLayout.CENTER, LAYOUT_HGAP, SwingViewImpl.APPLICATION_HEIGHT / 2 - LAYOUT_VGAP));
-        final ImageIcon texture = new ImageIcon(getClass().getResource(BUTTON_TEXTURE));
+        final int levelCount = this.parent.getController().getLevelCount();
 
-        this.levelCount = this.parent.getController().getLevelCount();
-
-        if (this.levelCount <= 0) {
+        if (levelCount <= 0) {
             throw new IllegalStateException("There are no valid levels to load!");
         }
 
-        for (int i = 0; i < this.levelCount; i++) {
+        this.setLayout(new FlowLayout(FlowLayout.CENTER, LAYOUT_HGAP,
+                SwingViewImpl.APPLICATION_HEIGHT / 2 - LAYOUT_VGAP));
+        final ImageIcon texture = new ImageIcon(getClass().getResource(BUTTON_TEXTURE));
+
+        for (int i = 0; i < levelCount; i++) {
             final int numberOfTheLevel = i;
             final JButton button = new JButton(String.valueOf(numberOfTheLevel + 1), texture);
             this.setButton(button);
