@@ -127,6 +127,7 @@ public final class GameImpl implements Game {
 
     private void newSunGenerate(final long currentTime) {
         if (this.hasDeltaTimePassed(this.timeOfLastCreatedSun, currentTime, this.deltaTimeSun)) {
+            System.out.println(this.timeOfLastCreatedSun +" "+ currentTime+" "+ this.deltaTimeSun);
             this.timeOfLastCreatedSun = currentTime;
             this.suns.add((SunImpl) this.sunFactory.createEntity());
             final long deltaDecrement = new Random().nextLong((2 * this.deltaTimeSunDecrement))
@@ -188,13 +189,15 @@ public final class GameImpl implements Game {
     }
 
     @Override
-    public void createPlant(final Pair<Integer, Integer> position) {
+    public boolean createPlant(final Pair<Integer, Integer> position) {
         if (this.gameState.getSunScore() >= 100) {
             final PlantImpl newPlant = new PlantImpl(DAMAGE_BASE_PLANT, LIFE_BASE_PLANT, "Plant", position,
                     COOLDOWN_BASE_PLANT, PLANT_COST);
             plants.add(newPlant);
             this.gameState.decSunScore(newPlant.getPlantCost());
+            return true;
         }
+        return false;
     }
 
     @Override

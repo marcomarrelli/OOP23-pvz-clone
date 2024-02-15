@@ -34,8 +34,9 @@ public interface Game {
      * create a new plant.
      * 
      * @param position is the position of the new plant
+     * @return true if the plant is created, else false
      */
-    void createPlant(Pair<Integer, Integer> position);
+    boolean createPlant(Pair<Integer, Integer> position);
 
     /**
      * Handles mouse events in the game.
