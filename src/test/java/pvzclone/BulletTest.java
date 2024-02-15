@@ -3,6 +3,7 @@ package pvzclone;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import pvzclone.model.api.Bullet;
@@ -21,13 +22,15 @@ public class BulletTest {
     private static final Pair<Integer, Integer> POS = new Pair<>(0, 0);
     private static final String NAME = "Bullet";
 
-    private Bullet newBullet() {
-        return new BulletImpl(SPEED, DAMAGE, POS, NAME);
+    private Bullet bullet;
+
+    @BeforeEach
+    void setUp() {
+        bullet = new BulletImpl(SPEED, DAMAGE, POS, NAME);
     }
 
     @Test
     void isBulletAliveWithCorrectValues() {
-        Bullet bullet = newBullet();
         assertTrue(bullet.isAlive());
         assertEquals(SPEED, bullet.getSpeed());
         assertEquals(DAMAGE, bullet.getDamage());
@@ -37,7 +40,6 @@ public class BulletTest {
 
     @Test
     void correctMovement() {
-        Bullet bullet = newBullet();
         bullet.move();
         assertEquals(new Pair<>(POS.getX() + SPEED, POS.getY()), bullet.getPosition());
     }
