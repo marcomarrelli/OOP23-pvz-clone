@@ -19,7 +19,7 @@ import pvzclone.model.impl.WorldImpl;
  * 
  * @author Sofia Caberletti.
  */
-public class WorldTest {
+final class WorldTest {
     private static final int INT_COSTANT_FOR_TESTING = 5;
     private static final int LONG_COSTANT_FOR_TESTING = 5;
     private World world;
@@ -28,7 +28,7 @@ public class WorldTest {
      * Inizializza world prima di ogni test.
      */
     @BeforeEach
-    private void createWorld() {
+    void createWorld() {
         this.world = new WorldImpl();
     }
 

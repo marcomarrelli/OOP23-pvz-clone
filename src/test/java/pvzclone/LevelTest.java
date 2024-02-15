@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -18,7 +18,7 @@ import pvzclone.model.impl.LevelsManager;
  * 
  * @author Marco Marrelli
  */
-public class LevelTest {
+class LevelTest {
     private static final int BELOW_MIN_LEVEL = -1;
     private static final int ABOVE_MAX_LEVEL = 999;
     private static final int CORRECT_LEVEL = 3;
@@ -59,6 +59,6 @@ public class LevelTest {
         assertFalse(this.correctLevelManager.getLevelList().isEmpty());
 
         assertEquals(this.correctLevelManager.getLevelList().size(), this.correctLevelManager.getLevelCount());
-        assertEquals(this.correctLevelManager.getLevelList().getClass(), ArrayList.class);
+        assertEquals(this.correctLevelManager.getLevelList().getClass(), List.class);
     }
 }
