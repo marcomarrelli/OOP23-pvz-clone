@@ -51,7 +51,7 @@ public class MenuPanel extends GenericPanel {
         startButton.setEnabled(false);
 
         startButton.addActionListener(e -> {
-            if(this.parent.getController().getChosenLevel().isPresent()) {
+            if (this.parent.getController().getChosenLevel().isPresent()) {
                 this.parent.setScene(SwingViewImpl.GAME_PANEL_CONSTRAINT);
                 this.parent.getController().callMainloop();
             }
@@ -63,7 +63,7 @@ public class MenuPanel extends GenericPanel {
         exitButton.addActionListener(e -> {
             final int n = JOptionPane.showConfirmDialog(parent.getFrame(), "Do you really want to quit?",
                     "Quitting", JOptionPane.YES_NO_OPTION);
-            if(n == JOptionPane.YES_OPTION) {
+            if (n == JOptionPane.YES_OPTION) {
                 System.exit(0);
             }
         });
