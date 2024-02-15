@@ -26,7 +26,7 @@ public final class GameImpl implements Game {
 
     // Zombie
     private static final int DELTA_ZOMBIE = 10;
-    private static final double PERCENTAGE = 0.4;
+    private static final double PERCENTAGE = 0.3;
 
     // Base plant
     private static final int PLANT_COST = 100;
@@ -145,6 +145,14 @@ public final class GameImpl implements Game {
                     - this.deltaTimeZombieDecrement;
             this.deltaTimeZombie = this.deltaTimeZombie - deltaDecrement;
 
+            this.gameState.incZombiesGenerated();
+        } else if (hasDeltaTimePassed(this.timeOfLastCreatedZombie, elapsed, 4000)
+                && this.gameState.getZombiesGenerated() == 0) {
+            this.timeOfLastCreatedZombie = elapsed;
+            this.zombies.add((Zombie) this.zombiesFactory.createEntity());
+            final long deltaDecrement = new Random().nextLong((2 * this.deltaTimeZombieDecrement))
+                    - this.deltaTimeZombieDecrement;
+            this.deltaTimeZombie = this.deltaTimeZombie - deltaDecrement;
             this.gameState.incZombiesGenerated();
         }
     }
