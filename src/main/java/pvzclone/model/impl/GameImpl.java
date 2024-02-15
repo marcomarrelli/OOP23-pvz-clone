@@ -142,9 +142,11 @@ public final class GameImpl implements Game {
         ) {
             this.timeOfLastCreatedZombie = elapsed;
             this.zombies.add((Zombie) this.zombiesFactory.createEntity());
+            
             final long deltaDecrement = new Random().nextLong((2 * this.deltaTimeZombieDecrement))
                     - this.deltaTimeZombieDecrement;
             this.deltaTimeZombie = this.deltaTimeZombie - deltaDecrement;
+
             this.gameState.incZombiesGenerated();
         }
     }
