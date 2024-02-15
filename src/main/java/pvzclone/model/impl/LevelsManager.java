@@ -24,7 +24,6 @@ public final class LevelsManager {
     public static final long SUN_SPAWN_RATE_DECREMENT_RANGE = 25;
     public static final long ZOMBIE_SPAWN_RATE_DECREMENT_RANGE = 75;
 
-    private final List<LevelImpl> levelList;
 
     /**
      * Constructor for LevelsManager.
@@ -63,10 +62,6 @@ public final class LevelsManager {
      * @return the number of levels.
      */
     public LevelImpl createLevel(final int delta) {
-        if (delta < 0 || delta >= MAX_LEVELS) {
-            throw new IllegalArgumentException("Invalid delta: '" + delta + "'!");
-        }
-
         return new LevelImpl(
                 LevelsManager.ZOMBIE_COUNT
                 + (LevelsManager.ZOMBIE_COUNT_STEP * delta),

@@ -35,6 +35,7 @@ public final class GameImpl implements Game {
     private static final int COOLDOWN_BASE_PLANT = 3000;
     private static final int DELTA_PLANT = 35;
     private static final int DELTA_Y_PLANT = 63;
+    private static final int DELTA_TIME_FIRST_ZOMBIE = 4000;
 
     private static final int DELTA_X_BULLET = 30;
 
@@ -48,13 +49,14 @@ public final class GameImpl implements Game {
     private Set<Bullet> bullets = new HashSet<>();
     private Set<Sun> suns = new HashSet<>();
 
+    private final long deltaTimeSunDecrement;
+    private final long deltaTimeZombieDecrement;
+
     private long timeOfLastCreatedSun;
     private long timeOfLastCreatedZombie;
-
     private long deltaTimeSun;
     private long deltaTimeZombie;
-    private long deltaTimeSunDecrement;
-    private long deltaTimeZombieDecrement;
+
     private boolean canSingleZombieGenerate;
     private int wavePassed;
 
@@ -127,10 +129,9 @@ public final class GameImpl implements Game {
 
     private void newSunGenerate(final long currentTime) {
         if (this.hasDeltaTimePassed(this.timeOfLastCreatedSun, currentTime, this.deltaTimeSun)) {
-            System.out.println(this.timeOfLastCreatedSun +" "+ currentTime+" "+ this.deltaTimeSun);
             this.timeOfLastCreatedSun = currentTime;
             this.suns.add((SunImpl) this.sunFactory.createEntity());
-            final long deltaDecrement = new Random().nextLong((2 * this.deltaTimeSunDecrement))
+            final long deltaDecrement = new Random().nextLong(2 * this.deltaTimeSunDecrement)
                     - this.deltaTimeSunDecrement;
             this.deltaTimeSun = this.deltaTimeSun - deltaDecrement;
         }
@@ -141,17 +142,17 @@ public final class GameImpl implements Game {
                 && this.canSingleZombieGenerate) {
             this.timeOfLastCreatedZombie = elapsed;
             this.zombies.add((Zombie) this.zombiesFactory.createEntity());
-            
-            final long deltaDecrement = new Random().nextLong((2 * this.deltaTimeZombieDecrement))
+
+            final long deltaDecrement = new Random().nextLong(2 * this.deltaTimeZombieDecrement)
                     - this.deltaTimeZombieDecrement;
             this.deltaTimeZombie = this.deltaTimeZombie - deltaDecrement;
 
             this.gameState.incZombiesGenerated();
-        } else if (hasDeltaTimePassed(this.timeOfLastCreatedZombie, elapsed, 4000)
+        } else if (hasDeltaTimePassed(this.timeOfLastCreatedZombie, elapsed, DELTA_TIME_FIRST_ZOMBIE)
                 && this.gameState.getZombiesGenerated() == 0) {
             this.timeOfLastCreatedZombie = elapsed;
             this.zombies.add((Zombie) this.zombiesFactory.createEntity());
-            final long deltaDecrement = new Random().nextLong((2 * this.deltaTimeZombieDecrement))
+            final long deltaDecrement = new Random().nextLong(2 * this.deltaTimeZombieDecrement)
                     - this.deltaTimeZombieDecrement;
             this.deltaTimeZombie = this.deltaTimeZombie - deltaDecrement;
             this.gameState.incZombiesGenerated();

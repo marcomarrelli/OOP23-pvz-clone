@@ -63,7 +63,7 @@ class GameTest {
     @Test
     void correctIsOver() {
         assertFalse(game.isOver());
-        for(int i = 0; i<ZOMBIE_COUNT; i++){
+        for (int i = 0; i < ZOMBIE_COUNT; i++) {
             this.game.getGameState().incKilledZombies();
         }
         assertTrue(game.isOver());
