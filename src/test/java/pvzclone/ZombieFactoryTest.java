@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Set;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import pvzclone.model.api.Entities;
@@ -34,7 +33,7 @@ final class ZombieFactoryTest {
 
 
     private ZombiesFactory newZombiesFactory() {
-        return newZombiesFactory();
+        return new ZombiesFactory();
     }
 
     @Test

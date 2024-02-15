@@ -61,7 +61,7 @@ public class LevelPanel extends GenericPanel {
         button.setHorizontalTextPosition(JButton.CENTER);
         button.setVerticalTextPosition(JButton.CENTER);
         button.setPreferredSize(MENU_BUTTON_DIMENSION);
-        button.setFont(new Font(null, Font.BOLD, 16));
+        button.setFont(new Font(this.getFont().getName(), Font.BOLD, 24));
         button.setForeground(Color.BLACK);
     }
 

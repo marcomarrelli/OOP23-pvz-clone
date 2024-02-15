@@ -22,6 +22,14 @@ public interface Level {
     int getZombieWaveCount();
 
     /**
+     * Returns the numbers of zombie in a wave in the level.
+     * The value is based on the zombie count.
+     * 
+     * @return the numbers of zombie in a wave in the level.
+     */
+    int getZombieCountInWave();
+
+    /**
      * Returns the sun spawn rate.
      * 
      * @return the sun spawn rate.
