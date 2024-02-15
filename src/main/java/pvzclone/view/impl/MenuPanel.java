@@ -10,6 +10,7 @@ import java.awt.Graphics2D;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  * Panel used in the starting Menu Section.
@@ -23,39 +24,51 @@ public class MenuPanel extends GenericPanel {
     private static final int LAYOUT_VGAP = 50;
     private static final String BUTTON_TEXTURE = "/images/tombstoneTexture.jpg";
     private static final Dimension MENU_BUTTON_DIMENSION = new Dimension(
-        SwingViewImpl.APPLICATION_WIDTH / 6, SwingViewImpl.APPLICATION_HEIGHT / 8
-    );
+            SwingViewImpl.APPLICATION_WIDTH / 6, SwingViewImpl.APPLICATION_HEIGHT / 8);
 
     /**
      * Menu Panel Constructor.
      * 
-     * @param parent the application's view.
+     * @param parent           the application's view.
      * @param backgroundSource the background image source.
      * @see {@link GenericPanel}
      */
     public MenuPanel(final SwingViewImpl parent, final String backgroundSource) {
         super(parent, backgroundSource);
-        this.setLayout(new FlowLayout(FlowLayout.CENTER, LAYOUT_HGAP, SwingViewImpl.APPLICATION_HEIGHT / 2 - LAYOUT_VGAP));
+        this.setLayout(
+                new FlowLayout(FlowLayout.CENTER, LAYOUT_HGAP, SwingViewImpl.APPLICATION_HEIGHT / 2 - LAYOUT_VGAP));
         final ImageIcon texture = new ImageIcon(getClass().getResource(BUTTON_TEXTURE));
 
+        final JButton levelButton = new JButton("Choose Level", texture);
         final JButton startButton = new JButton("Start Adventure", texture);
         final JButton fullButton = new JButton("Full Screen", texture);
         final JButton exitButton = new JButton("Exit Game", texture);
 
+        this.setButton(levelButton);
         this.setButton(startButton);
         this.setButton(fullButton);
         this.setButton(exitButton);
 
+        levelButton.addActionListener(e -> {
+            // parent.setScene(SwingViewImpl.LEVEL_PANEL_CONSTRAINT);
+        });
         startButton.addActionListener(e -> {
             parent.setScene(SwingViewImpl.GAME_PANEL_CONSTRAINT);
-            parent.getController().callMainloop(); 
+            parent.getController().callMainloop();
         });
         fullButton.addActionListener(e -> {
             parent.getFrame().setExtendedState(JFrame.MAXIMIZED_BOTH);
             parent.getFrame().setUndecorated(true);
         });
-        exitButton.addActionListener(e -> System.exit(0));
+        exitButton.addActionListener(e -> {
+            final int n = JOptionPane.showConfirmDialog(parent.getFrame(), "Do you really want to quit?",
+                    "Quitting", JOptionPane.YES_NO_OPTION);
+            if(n == JOptionPane.YES_OPTION) {
+                System.exit(0);
+            }
+        });
 
+        this.add(levelButton);
         this.add(startButton);
         this.add(fullButton);
         this.add(exitButton);

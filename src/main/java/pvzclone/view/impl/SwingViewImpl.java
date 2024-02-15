@@ -1,11 +1,15 @@
 package pvzclone.view.impl;
 
 import java.awt.Dimension;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Optional;
 import java.awt.CardLayout;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 
 import pvzclone.controller.api.Controller;
 import pvzclone.view.api.View;
@@ -57,7 +61,16 @@ public final class SwingViewImpl implements View {
     public SwingViewImpl(final Controller controller) {
         this.controller = controller;
         this.frame = new JFrame(APPLICATION_TITLE);
-        this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+        this.frame.addWindowListener(new WindowAdapter() {
+            public void windowClosing (WindowEvent e) {
+                final int n = JOptionPane.showConfirmDialog(frame, "Do you really want to quit?",
+                        "Quitting", JOptionPane.YES_NO_OPTION);
+                if (n == JOptionPane.YES_OPTION) {
+                    System.exit(0);
+                }
+            }
+        });
         this.frame.setSize(APPLICATION_WIDTH, APPLICATION_HEIGHT);
         this.frame.setLocationRelativeTo(null);
         this.frame.setMinimumSize(new Dimension(APPLICATION_WIDTH, APPLICATION_HEIGHT));
