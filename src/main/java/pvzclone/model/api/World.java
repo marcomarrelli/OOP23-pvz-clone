@@ -29,7 +29,7 @@ public interface World {
      * 
      * @param levelsManager the level manager of the World.
      */
-    void setLevelManager(LevelsManager levelsManager);
+    void setLevelsManager(LevelsManager levelsManager);
 
     /**
      * @return the level.
@@ -44,5 +44,5 @@ public interface World {
     /**
      * @return the level manager.
      */
-    LevelsManager getLevelManager();
+    LevelsManager getLevelsManager();
 }

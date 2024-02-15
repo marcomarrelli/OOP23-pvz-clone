@@ -26,7 +26,7 @@ public final class WorldImpl implements World {
     }
 
     @Override
-    public void setLevelManager(final LevelsManager levelManager) {
+    public void setLevelsManager(final LevelsManager levelManager) {
         this.levelManager = levelManager;
     }
 
@@ -41,7 +41,7 @@ public final class WorldImpl implements World {
     }
 
     @Override
-    public LevelsManager getLevelManager() {
+    public LevelsManager getLevelsManager() {
         return this.levelManager;
     }
 }
