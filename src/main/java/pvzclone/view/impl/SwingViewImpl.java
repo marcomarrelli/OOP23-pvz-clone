@@ -59,9 +59,7 @@ public final class SwingViewImpl implements View {
     private String currentConstraint = "";
     private final JFrame frame;
 
-    private final MenuPanel menuPanel;
     private final GamePanel gamePanel;
-    private final LevelPanel levelPanel;
 
     private Pair<Double, Double> scale;
 
@@ -76,6 +74,7 @@ public final class SwingViewImpl implements View {
         this.frame = new JFrame(APPLICATION_TITLE);
         this.frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         this.frame.addWindowListener(new WindowAdapter() {
+            @Override
             public void windowClosing(final WindowEvent e) {
                 final int n = JOptionPane.showConfirmDialog(frame, "Do you really want to quit?",
                         "Quitting", JOptionPane.YES_NO_OPTION);
@@ -89,8 +88,8 @@ public final class SwingViewImpl implements View {
         this.frame.setMinimumSize(new Dimension(APPLICATION_WIDTH, APPLICATION_HEIGHT));
         this.frame.setResizable(IS_APPLICATION_RESIZABLE);
 
-        this.menuPanel = new MenuPanel(this, MENU_BACKGROUND);
-        this.levelPanel = new LevelPanel(this, LEVEL_BACKGROUND);
+        final MenuPanel menuPanel = new MenuPanel(this, MENU_BACKGROUND);
+        final LevelPanel levelPanel = new LevelPanel(this, LEVEL_BACKGROUND);
         this.gamePanel = new GamePanel(this, GAME_BACKGROUND);
 
         this.panel = new JPanel(sceneManager);
