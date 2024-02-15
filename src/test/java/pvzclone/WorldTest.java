@@ -14,11 +14,19 @@ import pvzclone.model.impl.LevelImpl;
 import pvzclone.model.impl.LevelsManager;
 import pvzclone.model.impl.WorldImpl;
 
+/**
+ * This class contains tests for the class WorldImpl.
+ * 
+ * @author Sofia Caberletti.
+ */
 public class WorldTest {
     private static final int INT_COSTANT_FOR_TESTING = 5;
     private static final int LONG_COSTANT_FOR_TESTING = 5;
     private World world;
 
+    /**
+     * Inizializza world prima di ogni test.
+     */
     @BeforeEach
     private void createWorld() {
         this.world = new WorldImpl();
