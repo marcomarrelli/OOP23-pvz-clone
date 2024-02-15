@@ -14,6 +14,7 @@ import pvzclone.model.api.GameState;
 public final class GameStateImpl implements GameState {
 
     private static final int INC_SUN = 25;
+    private final int INITIAL_SUNS = 100;
     private final int totZombies;
     private int killedZombies;
     private int zombiesGenerated;
@@ -29,7 +30,7 @@ public final class GameStateImpl implements GameState {
     public GameStateImpl(final int totZombies) {
         this.totZombies = totZombies;
         this.killedZombies = 0;
-        this.sunScore = 100;
+        this.sunScore = INITIAL_SUNS;
         this.winState = Optional.empty();
     }
 

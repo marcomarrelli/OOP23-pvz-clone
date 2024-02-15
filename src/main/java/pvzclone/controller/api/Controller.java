@@ -66,7 +66,14 @@ public interface Controller extends ViewEventListener {
      * Retrieves the number of the chosen level if the level was chosen,
      * if not returns an empty Optional.
      * 
-     * @return number of the level the we chose;
+     * @return number of the level the we chose.
      */
     Optional<Integer> getChosenLevel();
+
+    /**
+     * Returns the number of levels available in the application.
+     * 
+     * @return number of levels available in the application.
+     */
+    int getLevelCount();
 }

@@ -9,7 +9,7 @@ import pvzclone.model.api.Entities;
 import pvzclone.model.api.Game;
 import pvzclone.model.api.World;
 import pvzclone.model.impl.GameImpl;
-import pvzclone.model.impl.LevelImpl;
+import pvzclone.model.impl.LevelsManager;
 import pvzclone.model.impl.Pair;
 import pvzclone.model.impl.WorldImpl;
 import pvzclone.view.api.View;
@@ -20,8 +20,9 @@ import pvzclone.view.impl.SwingViewImpl;
  */
 public final class ControllerImpl implements Controller {
 
-    private static final long PERIOD = 80;
-
+    private static final long PERIOD = 60;
+    private static final int LEVEL_COUNT = 10;
+    
     private World world;
     private View view;
     private Game game;
@@ -30,6 +31,8 @@ public final class ControllerImpl implements Controller {
     @Override
     public void initGame() {
         this.world = new WorldImpl();
+        this.world.setLevelManager(new LevelsManager(LEVEL_COUNT));
+        
         this.view = new SwingViewImpl(this);
         this.chosenLevel = Optional.empty();
     }
@@ -46,7 +49,7 @@ public final class ControllerImpl implements Controller {
         if (this.world == null || this.view == null) {
             return;
         }
-        this.world.setLevel(new LevelImpl());
+        this.world.setLevel(this.world.getLevelManager().getLevel(chosenLevel));
         this.game = new GameImpl(this.world);
         this.world.setGame(game);
         long startTime = System.currentTimeMillis();
@@ -112,12 +115,12 @@ public final class ControllerImpl implements Controller {
         return this.chosenLevel;
     }
 
-    /*
-     * @Override
-     * public void notifyWorldEvent(WorldEvent ev) {
-     * //qua ho un dubbio, se è gia il model che gestisce le collisioni interne
-     * //già lui controlla che ci siano state cose
-     * //il controller lo comunica alla view?
-     * }
-     */
+    @Override
+    public int getLevelCount() {
+        if (this.world.getLevelManager() == null) {
+            throw new IllegalStateException("There are no valid levels to load!");
+        }
+
+        return this.world.getLevelManager().getLevelCount();
+    }
 }

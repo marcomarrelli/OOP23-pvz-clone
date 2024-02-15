@@ -13,6 +13,7 @@ public final class WorldImpl implements World {
 
     private Level level;
     private Game game;
+    private LevelsManager levelManager;
 
     @Override
     public void setLevel(final Level level) {
@@ -25,6 +26,11 @@ public final class WorldImpl implements World {
     }
 
     @Override
+    public void setLevelManager(final LevelsManager levelManager) {
+        this.levelManager = levelManager;
+    }
+
+    @Override
     public Level getLevel() {
         return this.level;
     }
@@ -34,4 +40,8 @@ public final class WorldImpl implements World {
         return this.game;
     }
 
+    @Override
+    public LevelsManager getLevelManager() {
+        return this.levelManager;
+    }
 }

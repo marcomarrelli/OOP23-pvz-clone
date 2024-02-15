@@ -1,5 +1,7 @@
 package pvzclone.model.api;
 
+import pvzclone.model.impl.LevelsManager;
+
 /**
  * Interface of the Model of the game.
  * It contains methods to set the Level and Game that will
@@ -23,6 +25,13 @@ public interface World {
     void setGame(Game game);
 
     /**
+     * Sets the level manager.
+     * 
+     * @param levelsManager the level manager of the World.
+     */
+    void setLevelManager(LevelsManager levelsManager);
+
+    /**
      * @return the level.
      */
     Level getLevel();
@@ -32,4 +41,8 @@ public interface World {
      */
     Game getGame();
 
+    /**
+     * @return the level manager.
+     */
+    LevelsManager getLevelManager();
 }

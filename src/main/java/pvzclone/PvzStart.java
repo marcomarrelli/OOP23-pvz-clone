@@ -5,7 +5,10 @@ import pvzclone.controller.impl.ControllerImpl;
 /**
  * Plants Vs Zombies Application's Entry Point.
  * 
- * @author Sofia Caberletti, Margherita Zanchini, Sofia Lotti, Marco Marrelli.
+ * @author Sofia Caberletti
+ * @author Margherita Zanchini
+ * @author Sofia Lotti
+ * @author Marco Marrelli
  */
 public final class PvzStart {
 

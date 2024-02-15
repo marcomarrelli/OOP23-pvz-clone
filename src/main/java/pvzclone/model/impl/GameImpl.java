@@ -13,6 +13,7 @@ import pvzclone.model.api.Zombie;
 import pvzclone.view.impl.SwingViewImpl;
 
 import java.util.HashSet;
+import java.util.Random;
 
 /**
  * class that implements the interface Game.
@@ -21,13 +22,12 @@ public final class GameImpl implements Game {
 
     // sun
     private static final int HOUSE_X_POSITION = 150;
-    private static final long DELTA_TIME_SUN = 3000;
-    private static final int BULLET_SPEED = 10;
+    private static final int BULLET_SPEED = 15;
 
     // zombie
     private static final int DELTA_ZOMBIE = 10;
-    private static final long DELTA_TIME_ZOMBIE_START = 12_000;
-    private static final int DEC_ZOMBIE_TIME_GENERATE = 500;
+    private static final long DEC_ZOMBIE_TIME_GENERATE = 250;
+
 
     // base plant
     private static final int PLANT_COST = 100;
@@ -51,7 +51,11 @@ public final class GameImpl implements Game {
 
     private long timeOfLastCreatedSun;
     private long timeOfLastCreatedZombie;
-    private long deltaTimeZombie = DELTA_TIME_ZOMBIE_START;
+
+    private long deltaTimeSun;
+    private long deltaTimeZombie;
+    private long deltaTimeSunDecrement;
+    private long deltaTimeZombieDecrement;
 
     /**
      * 
@@ -62,6 +66,11 @@ public final class GameImpl implements Game {
         this.gameState = new GameStateImpl(this.world.getLevel().getZombieCount());
         this.sunFactory = new SunsFactory();
         this.zombiesFactory = new ZombiesFactory();
+
+        this.deltaTimeSun = this.world.getLevel().getSunSpawnRate();
+        this.deltaTimeZombie = this.world.getLevel().getZombieSpawnRate();
+        this.deltaTimeSunDecrement = this.world.getLevel().getSunSpawnRateDecrementRange();
+        this.deltaTimeZombieDecrement = this.world.getLevel().getZombieSpawnRateDecrementRange();
     }
 
     @Override
@@ -114,9 +123,11 @@ public final class GameImpl implements Game {
     }
 
     private void newSunGenerate(final long currentTime) {
-        if (this.hasDeltaTimePassed(this.timeOfLastCreatedSun, currentTime, DELTA_TIME_SUN)) {
-            this.suns.add((SunImpl) this.sunFactory.createEntity());
+        if (this.hasDeltaTimePassed(this.timeOfLastCreatedSun, currentTime, this.deltaTimeSun)) {
             this.timeOfLastCreatedSun = currentTime;
+            this.suns.add((SunImpl) this.sunFactory.createEntity());
+            final long deltaDecrement = new Random().nextLong((2 * this.deltaTimeSunDecrement)) - this.deltaTimeSunDecrement;
+            this.deltaTimeSun = this.deltaTimeSun - deltaDecrement;
         }
     }
 
@@ -125,7 +136,8 @@ public final class GameImpl implements Game {
                 && this.gameState.getZombiesGenerated() < this.world.getLevel().getZombieCount()) {
             this.timeOfLastCreatedZombie = elapsed;
             this.zombies.add((Zombie) this.zombiesFactory.createEntity());
-            this.deltaTimeZombie = this.deltaTimeZombie - DEC_ZOMBIE_TIME_GENERATE;
+            final long deltaDecrement = new Random().nextLong((2 * this.deltaTimeZombieDecrement)) - this.deltaTimeZombieDecrement;
+            this.deltaTimeZombie = this.deltaTimeZombie - deltaDecrement;
             this.gameState.incZombiesGenerated();
         }
     }

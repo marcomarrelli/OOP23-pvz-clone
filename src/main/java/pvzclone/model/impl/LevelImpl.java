@@ -5,15 +5,65 @@ import pvzclone.model.api.Level;
 /**
  * Class that implements a Level.
  * 
- * @author Sofia Lotti.
+ * @author Marco Marrelli
  */
-public final class LevelImpl implements Level {
+public class LevelImpl implements Level {
 
-    private static final int TOTAL_ZOMBIES = 5;
+    private final int zombieCount;
+    private final int zombieWaveCount;
+    private final long sunSpawnRate;
+    private final long zombieSpawnRate;
+    private final long sunSpawnRateDecrementRange;
+    private final long zombieSpawnRateDecrementRange;
+
+    public LevelImpl() {
+        this.zombieCount = LevelsManager.ZOMBIE_COUNT;
+        this.zombieWaveCount = 1;
+        this.sunSpawnRate = LevelsManager.SUN_SPAWN_RATE;
+        this.sunSpawnRateDecrementRange = LevelsManager.SUN_SPAWN_RATE_DECREMENT_RANGE;
+        this.zombieSpawnRate = LevelsManager.ZOMBIE_SPAWN_RATE;
+        this.zombieSpawnRateDecrementRange = LevelsManager.ZOMBIE_SPAWN_RATE_DECREMENT_RANGE;
+    }
+
+    public LevelImpl(final int zombieCount, final int zombieWaveCount,
+                    final long sunSpawnRate, final long zombieSpawnRate,
+                    final long sunSpawnRateDecrementRange,
+                    final long zombieSpawnRateDecrementRange) {
+        this.zombieCount = zombieCount;
+        this.zombieWaveCount = zombieWaveCount;
+        this.sunSpawnRate = sunSpawnRate;
+        this.sunSpawnRateDecrementRange = sunSpawnRateDecrementRange;
+        this.zombieSpawnRate = zombieSpawnRate;
+        this.zombieSpawnRateDecrementRange = zombieSpawnRateDecrementRange;
+    }
 
     @Override
     public int getZombieCount() {
-        return TOTAL_ZOMBIES;
+        return this.zombieCount;
     }
 
+    @Override
+    public int getZombieWaveCount() {
+        return this.zombieWaveCount;
+    }
+
+    @Override
+    public long getSunSpawnRate() {
+        return this.sunSpawnRate;
+    }
+
+    @Override
+    public long getZombieSpawnRate() {
+        return this.zombieSpawnRate;
+    }
+
+    @Override
+    public long getSunSpawnRateDecrementRange() {
+        return this.sunSpawnRateDecrementRange;
+    }
+
+    @Override
+    public long getZombieSpawnRateDecrementRange() {
+        return this.zombieSpawnRateDecrementRange;
+    }
 }
