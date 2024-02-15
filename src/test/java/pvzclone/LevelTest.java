@@ -18,17 +18,13 @@ public class LevelTest {
     private final static int ABOVE_MAX_LEVEL = 999;
     private final static int CORRECT_LEVEL = 3;
 
-    private LevelsManager newLevelsManager(final int level) {
-        return new LevelsManager(level);
-    }
+    private final LevelsManager correctLevelManager = new LevelsManager(CORRECT_LEVEL);
+    private final LevelsManager belowLimitLevelManager = new LevelsManager(BELOW_MIN_LEVEL);
+    private final LevelsManager aboveLimitLevelManager = new LevelsManager(ABOVE_MAX_LEVEL);
 
     @Test
     void checkLevelGenerationLimits() {
-        final LevelsManager correctLevelManager = newLevelsManager(CORRECT_LEVEL);
-        final LevelsManager belowLimitLevelManager = newLevelsManager(BELOW_MIN_LEVEL);
-        final LevelsManager aboveLimitLevelManager = newLevelsManager(ABOVE_MAX_LEVEL);
-
-        assertEquals(correctLevelManager.getLevelCount(), CORRECT_LEVEL);
+        assertEquals(this.correctLevelManager.getLevelCount(), CORRECT_LEVEL);
 
         assertNotEquals(belowLimitLevelManager.getLevelCount(), BELOW_MIN_LEVEL);
         assertNotEquals(aboveLimitLevelManager.getLevelCount(), ABOVE_MAX_LEVEL);
@@ -36,32 +32,26 @@ public class LevelTest {
 
     @Test
     void checkCreatedLevel() {
-        final LevelsManager correctLevelManager = newLevelsManager(CORRECT_LEVEL);
+        assertEquals(this.correctLevelManager.createLevel(0).getClass(), LevelImpl.class);
 
-        assertEquals(correctLevelManager.createLevel(0).getClass(), LevelImpl.class);
-
-        assertThrowsExactly(IllegalArgumentException.class, () -> correctLevelManager.createLevel(-1));
+        assertThrowsExactly(IllegalArgumentException.class, () -> this.correctLevelManager.createLevel(-1));
     }
 
     @Test
     void checkLevelGetter() {
-        final LevelsManager correctLevelManager = newLevelsManager(CORRECT_LEVEL);
+        assertEquals(this.correctLevelManager.getLevel(Optional.of(BELOW_MIN_LEVEL)), this.correctLevelManager.getLevelList().get(0));
+        assertEquals(this.correctLevelManager.getLevel(Optional.of(ABOVE_MAX_LEVEL)), this.correctLevelManager.getLevelList().get(CORRECT_LEVEL-1));
 
-        assertEquals(correctLevelManager.getLevel(Optional.of(BELOW_MIN_LEVEL)), correctLevelManager.getLevelList().get(0));
-        assertEquals(correctLevelManager.getLevel(Optional.of(ABOVE_MAX_LEVEL)), correctLevelManager.getLevelList().get(CORRECT_LEVEL-1));
+        assertEquals(this.correctLevelManager.getLevel(Optional.of(1)), this.correctLevelManager.getLevelList().get(1));
 
-        assertEquals(correctLevelManager.getLevel(Optional.of(1)), correctLevelManager.getLevelList().get(1));
-
-        assertThrowsExactly(IllegalStateException.class, () -> correctLevelManager.getLevel(Optional.empty()));
+        assertThrowsExactly(IllegalStateException.class, () -> this.correctLevelManager.getLevel(Optional.empty()));
     }
 
     @Test
     void checkLevelListGetter() {
-        final LevelsManager correctLevelManager = newLevelsManager(CORRECT_LEVEL);
+        assertFalse(this.correctLevelManager.getLevelList().isEmpty());
 
-        assertFalse(correctLevelManager.getLevelList().isEmpty());
-
-        assertEquals(correctLevelManager.getLevelList().size(), correctLevelManager.getLevelCount());
-        assertEquals(correctLevelManager.getLevelList().getClass(), ArrayList.class);
+        assertEquals(this.correctLevelManager.getLevelList().size(), this.correctLevelManager.getLevelCount());
+        assertEquals(this.correctLevelManager.getLevelList().getClass(), ArrayList.class);
     }
 }
