@@ -3,6 +3,7 @@ package pvzclone.controller.impl;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
+import java.util.Locale;
 
 import pvzclone.controller.api.Controller;
 import pvzclone.model.api.Entities;
@@ -30,6 +31,8 @@ public final class ControllerImpl implements Controller {
 
     @Override
     public void initGame() {
+        Locale.setDefault(Locale.ENGLISH);
+
         this.world = new WorldImpl();
         this.world.setLevelManager(new LevelsManager(LEVEL_COUNT));
         
