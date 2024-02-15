@@ -35,7 +35,7 @@ public interface Level {
      * @return the sun spawn rate.
      */
     long getSunSpawnRate();
-    
+
     /**
      * Returns the zombie spawn rate.
      * 
@@ -43,13 +43,13 @@ public interface Level {
      */
     long getZombieSpawnRate();
 
-        /**
+    /**
      * Returns the sun spawn rate.
      * 
      * @return the sun decrement spawn rate.
      */
     long getSunSpawnRateDecrementRange();
-    
+
     /**
      * Returns the zombie spawn rate.
      * 
