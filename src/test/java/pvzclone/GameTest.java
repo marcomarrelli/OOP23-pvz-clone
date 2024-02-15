@@ -20,19 +20,29 @@ import pvzclone.model.impl.WorldImpl;
  */
 public class GameTest {
 
+    private static final int ZOMBIE_COUNT = 5;
+    private static final long SUN_SPAWN_RATE = 3000;
+    private static final long ZOMBIE_SPAWN_RATE = 13_000;
+    private static final long SUN_SPAWN_RATE_DECREMENT_RANGE = 25;
+    private static final long ZOMBIE_SPAWN_RATE_DECREMENT_RANGE = 75;
+
     private World world;
     private Game game;
+    private Level level;
 
     @BeforeEach
     void setUp() {
         world = new WorldImpl();
-        world.setLevel(new LevelImpl());
+        level = new LevelImpl(ZOMBIE_COUNT, 1, SUN_SPAWN_RATE, ZOMBIE_SPAWN_RATE, SUN_SPAWN_RATE_DECREMENT_RANGE,
+                ZOMBIE_SPAWN_RATE_DECREMENT_RANGE);
+        world.setLevel(level);
         game = new GameImpl(world);
-        
+
     }
 
     @Test
     void correctCreateEntity() {
+        game.update(1000);
         game.createPlant(new Pair<Integer,Integer>(0, 0));
         assertEquals(1, game.getEntities().size());
     }

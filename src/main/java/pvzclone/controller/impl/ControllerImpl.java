@@ -62,7 +62,6 @@ public final class ControllerImpl implements Controller {
             this.game.update(elapsed);
             this.view.update();
             waitForNextFrame(currentStartTime);
-            startTime = currentStartTime - startTime;
         }
 
         this.view.endGame(this.game.getGameState().getWinState());
