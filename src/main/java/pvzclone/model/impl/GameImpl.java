@@ -26,8 +26,9 @@ public final class GameImpl implements Game {
 
     // Zombie
     private static final int DELTA_ZOMBIE = 10;
+    private static final double PERCENTAGE = 0.4;
 
-    // Base Plant
+    // Base plant
     private static final int PLANT_COST = 100;
     private static final int DAMAGE_BASE_PLANT = 20;
     private static final int LIFE_BASE_PLANT = 100;
@@ -54,6 +55,8 @@ public final class GameImpl implements Game {
     private long deltaTimeZombie;
     private long deltaTimeSunDecrement;
     private long deltaTimeZombieDecrement;
+    private boolean canSingleZombieGenerate;
+    private int wavePassed;
 
     /**
      * 
@@ -69,6 +72,8 @@ public final class GameImpl implements Game {
         this.deltaTimeZombie = this.world.getLevel().getZombieSpawnRate();
         this.deltaTimeSunDecrement = this.world.getLevel().getSunSpawnRateDecrementRange();
         this.deltaTimeZombieDecrement = this.world.getLevel().getZombieSpawnRateDecrementRange();
+
+        this.canSingleZombieGenerate = true;
     }
 
     @Override
@@ -132,7 +137,9 @@ public final class GameImpl implements Game {
 
     private void newZombieGenerate(final long elapsed) {
         if (hasDeltaTimePassed(this.timeOfLastCreatedZombie, elapsed, deltaTimeZombie)
-                && this.gameState.getZombiesGenerated() < this.world.getLevel().getZombieCount()) {
+                && this.canSingleZombieGenerate
+        // this.gameState.getZombiesGenerated() < this.world.getLevel().getZombieCount()
+        ) {
             this.timeOfLastCreatedZombie = elapsed;
             this.zombies.add((Zombie) this.zombiesFactory.createEntity());
             final long deltaDecrement = new Random().nextLong((2 * this.deltaTimeZombieDecrement))
@@ -149,15 +156,24 @@ public final class GameImpl implements Game {
         this.removeKilledSuns();
         this.moveEntities();
         this.newSunGenerate(elapsed);
+        this.createWave();
         this.newZombieGenerate(elapsed);
     }
 
     @Override
     public void createWave() {
-        final int percentage = this.world.getLevel().getZombieCount();
-        final Set<Entities> newWave = this.zombiesFactory.createEntities(percentage);
-        for (final Entities singleZombieInWave : newWave) {
-            this.zombies.add((Zombie) singleZombieInWave);
+        final int totZombies = this.world.getLevel().getZombieCount(); // se è 21
+        final int totzombieWave = (int) Math.floor(totZombies * PERCENTAGE); // questo sarà 8 (8.4)
+
+        if (this.gameState.getZombiesGenerated() >= totZombies - totzombieWave
+                && this.wavePassed < this.world.getLevel().getZombieWaveCount()) {
+            this.canSingleZombieGenerate = false;
+            this.wavePassed = this.wavePassed + 1;
+
+            final Set<Entities> newWave = this.zombiesFactory.createEntities(totzombieWave);
+            for (final Entities singleZombieInWave : newWave) {
+                this.zombies.add((Zombie) singleZombieInWave);
+            }
         }
     }
 
