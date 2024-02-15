@@ -138,8 +138,11 @@ public final class GameImpl implements Game {
     }
 
     private void newZombieGenerate(final long elapsed) {
-        if (hasDeltaTimePassed(this.timeOfLastCreatedZombie, elapsed, deltaTimeZombie)
-                && this.canSingleZombieGenerate) {
+        if ((hasDeltaTimePassed(this.timeOfLastCreatedZombie, elapsed, deltaTimeZombie)
+                && this.canSingleZombieGenerate)
+                || (hasDeltaTimePassed(this.timeOfLastCreatedZombie, elapsed,
+                        DELTA_TIME_FIRST_ZOMBIE)
+                        && this.gameState.getZombiesGenerated() == 0)) {
             this.timeOfLastCreatedZombie = elapsed;
             this.zombies.add((Zombie) this.zombiesFactory.createEntity());
 
@@ -147,14 +150,6 @@ public final class GameImpl implements Game {
                     - this.deltaTimeZombieDecrement;
             this.deltaTimeZombie = this.deltaTimeZombie - deltaDecrement;
 
-            this.gameState.incZombiesGenerated();
-        } else if (hasDeltaTimePassed(this.timeOfLastCreatedZombie, elapsed, DELTA_TIME_FIRST_ZOMBIE)
-                && this.gameState.getZombiesGenerated() == 0) {
-            this.timeOfLastCreatedZombie = elapsed;
-            this.zombies.add((Zombie) this.zombiesFactory.createEntity());
-            final long deltaDecrement = new Random().nextLong(2 * this.deltaTimeZombieDecrement)
-                    - this.deltaTimeZombieDecrement;
-            this.deltaTimeZombie = this.deltaTimeZombie - deltaDecrement;
             this.gameState.incZombiesGenerated();
         }
     }
