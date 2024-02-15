@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import pvzclone.model.api.Sun;
@@ -24,15 +25,15 @@ final class SunTest {
     private static final int Y_POSITION = 540;
     private static final Pair<Integer, Integer> POSITION = new Pair<>(X_POSITION, Y_POSITION);
     private static final int SPEED = 5;
-    // private Sun sun;
+    private Sun sun;
 
-    private Sun sunEntity() {
-        return new SunImpl(POSITION, SPEED);
+    @BeforeEach
+    private void createSunEntity() {
+        this.sun = new SunImpl(POSITION, SPEED);
     }
 
     @Test
     void isSunAliveWithCorrectValues() {
-        final Sun sun = sunEntity();
         assertTrue(sun.isAlive());
         assertEquals(NAME, sun.getEntityName());
         assertEquals(POSITION, sun.getPosition());
@@ -41,7 +42,6 @@ final class SunTest {
 
     @Test
     void correctMovement() {
-        final Sun sun = sunEntity();
         assertEquals(POSITION, sun.getPosition());
         sun.moveDown();
         assertEquals(X_POSITION, sun.getPosition().getX());
@@ -55,7 +55,6 @@ final class SunTest {
 
     @Test
     void correctRetrievalOfPoints() {
-        final Sun sun = sunEntity();
         assertTrue(sun.isAlive());
         assertEquals(0, sun.getPoints());
         sun.kill();

@@ -22,7 +22,7 @@ import pvzclone.view.impl.SwingViewImpl;
 public final class ControllerImpl implements Controller {
 
     private static final long PERIOD = 60;
-    private static final int LEVEL_COUNT = 10;
+    private static final int LEVEL_COUNT = 5;
     
     private World world;
     private View view;
@@ -34,7 +34,7 @@ public final class ControllerImpl implements Controller {
         Locale.setDefault(Locale.ENGLISH);
 
         this.world = new WorldImpl();
-        this.world.setLevelManager(new LevelsManager(LEVEL_COUNT));
+        this.world.setLevelsManager(new LevelsManager(LEVEL_COUNT));
         
         this.view = new SwingViewImpl(this);
         this.chosenLevel = Optional.empty();
@@ -52,9 +52,9 @@ public final class ControllerImpl implements Controller {
         if (this.world == null || this.view == null) {
             return;
         }
-        this.world.setLevel(this.world.getLevelManager().getLevel(chosenLevel));
-        this.game = new GameImpl(this.world);
-        this.world.setGame(game);
+        this.world.setLevel(this.world.getLevelsManager().getLevel(chosenLevel));
+        this.world.setGame(new GameImpl(this.world));
+        this.game = this.world.getGame();
         long startTime = System.currentTimeMillis();
         while (!this.game.isOver()) {
             final long currentStartTime = System.currentTimeMillis();
@@ -95,17 +95,17 @@ public final class ControllerImpl implements Controller {
 
     @Override
     public void newPlant(final Pair<Integer, Integer> pos) {
-        game.createPlant(pos);
+        this.game.createPlant(pos);
     }
 
     @Override
     public void increaseSunPoints() {
-        game.getGameState().incSunScore();
+        this.game.getGameState().incSunScore();
     }
 
     @Override
     public int getSunScore() {
-        return game == null ? 0 : game.getGameState().getSunScore();
+        return this.game == null ? 0 : this.game.getGameState().getSunScore();
     }
 
     @Override
@@ -120,10 +120,10 @@ public final class ControllerImpl implements Controller {
 
     @Override
     public int getLevelCount() {
-        if (this.world.getLevelManager() == null) {
+        if (this.world.getLevelsManager() == null) {
             throw new IllegalStateException("There are no valid levels to load!");
         }
 
-        return this.world.getLevelManager().getLevelCount();
+        return this.world.getLevelsManager().getLevelCount();
     }
 }
