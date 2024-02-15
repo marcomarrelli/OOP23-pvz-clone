@@ -1,6 +1,7 @@
 package pvzclone.view.impl;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -86,6 +87,8 @@ public final class GamePanel extends GenericPanel {
 
     private final SwingViewImpl parent;
 
+    private Pair<Double, Double> scale;
+
     /**
      * Game Panel Constructor.
      * 
@@ -96,7 +99,7 @@ public final class GamePanel extends GenericPanel {
     public GamePanel(final SwingViewImpl parent, final String backgroundSource) {
         super(parent, backgroundSource);
         this.parent = parent;
-
+        this.scale = this.parent.getScale();
         this.fieldMatrix = new FieldCell[ROW_COUNT][COLUMN_COUNT];
         for (int i = 0; i < ROW_COUNT; i++) {
             for (int j = 0; j < COLUMN_COUNT; j++) {
@@ -151,10 +154,10 @@ public final class GamePanel extends GenericPanel {
 
                 for (final var el : entities.entrySet()) {
                     if (el.getKey() instanceof Sun
-                            && e.getX() >= el.getKey().getPosition().getX()
-                            && e.getX() <= el.getKey().getPosition().getX() + SUN_ENTITY_WIDTH
-                            && e.getY() >= el.getKey().getPosition().getY()
-                            && e.getY() <= el.getKey().getPosition().getY() + SUN_ENTITY_HEIGHT) {
+                            && e.getX() >= el.getKey().getPosition().getX() * scale.getX()
+                            && e.getX() <= (el.getKey().getPosition().getX() + SUN_ENTITY_WIDTH) * scale.getX()
+                            && e.getY() >= el.getKey().getPosition().getY() * scale.getY()
+                            && e.getY() <= (el.getKey().getPosition().getY() + SUN_ENTITY_HEIGHT) * scale.getY()) {
                         final Sun sun = (Sun) el.getKey();
                         sun.kill();
                         toRemove = el.getKey();
@@ -241,13 +244,13 @@ public final class GamePanel extends GenericPanel {
      * @return l'immagine dell'entità.
      */
     private Image getEntityImage(final Entities entity) {
-        return switch (entity.getEntityName()) {
-            case "Plant" -> new ImageIcon(getClass().getResource(PLANT_IMAGE)).getImage();
-            case "Zombie" -> new ImageIcon(getClass().getResource(ZOMBIE_IMAGE)).getImage();
-            case "Bullet" -> new ImageIcon(getClass().getResource(BULLET_IMAGE)).getImage();
-            case "Sun" -> new ImageIcon(getClass().getResource(SUN_IMAGE)).getImage();
+        return new ImageIcon(getClass().getResource(switch (entity.getEntityName()) {
+            case "Plant" -> PLANT_IMAGE;
+            case "Zombie" -> ZOMBIE_IMAGE;
+            case "Bullet" -> BULLET_IMAGE;
+            case "Sun" -> SUN_IMAGE;
             default -> throw new IllegalArgumentException("Unexpected value: " + entity.getClass().getName());
-        };
+        })).getImage();
     }
 
     /**
@@ -257,17 +260,48 @@ public final class GamePanel extends GenericPanel {
      * @param entity entità da "disegnare".
      */
     private void createEntity(final Graphics2D g, final Entities entity) {
+        if (!this.scale.equals(this.parent.getScale())) {
+            this.scale = this.parent.getScale();
+            updateMatrix();
+        }
         this.entities.put(entity, getEntityImage(entity));
-        g.drawImage(this.entities.get(entity), entity.getPosition().getX(), entity.getPosition().getY(), this);
+        final Image original = this.entities.get(entity);
+        final Image scaledImage = new ImageIcon(
+                original.getScaledInstance((int) (original.getWidth(this) * this.scale.getX()),
+                        (int) (original.getHeight(this) * this.scale.getY()), Image.SCALE_SMOOTH))
+                .getImage();
+        final double scaledX = entity.getPosition().getX() * this.scale.getX();
+        final double scaledY = entity.getPosition().getY() * this.scale.getY();
+        g.drawImage(scaledImage, (int) scaledX, (int) scaledY, this);
+    }
+
+    private void updateMatrix() {
+        for (int i = 0; i < ROW_COUNT; i++) {
+            for (int j = 0; j < COLUMN_COUNT; j++) {
+                final int xCoord = FIELD_STARTING_X + (X_OFFSET * j);
+                final int yCoord = i == 0
+                        ? FIELD_STARTING_Y + (Y_OFFSET * i)
+                        : FIELD_STARTING_Y + (Y_OFFSET * i) + (Y_MARGIN / 4);
+                this.fieldMatrix[i][j].setLocation((int) (xCoord * this.scale.getX()),
+                        (int) (yCoord * this.scale.getY()));
+                this.fieldMatrix[i][j].setSize(new Dimension((int) (GamePanel.CELL_WIDTH * this.scale.getX()),
+                        (int) (GamePanel.CELL_HEIGHT * this.scale.getY())));
+            }
+        }
     }
 
     public void endGame(boolean win) {
         this.removeAll();
-        
-        final URL url = win ? this.getClass().getResource("/images/winner.gif") : this.getClass().getResource("/images/loser.gif");;
-        final Icon icon = new ImageIcon(new ImageIcon(url).getImage().getScaledInstance(SwingViewImpl.APPLICATION_WIDTH, SwingViewImpl.APPLICATION_HEIGHT, Image.SCALE_DEFAULT));
+
+        final URL url = win ? this.getClass().getResource("/images/winner.gif")
+                : this.getClass().getResource("/images/loser.gif");
+        ;
+        final int scaledX = (int) (SwingViewImpl.APPLICATION_WIDTH * this.parent.getScale().getX());
+        final int scaledY = (int) (SwingViewImpl.APPLICATION_HEIGHT * this.parent.getScale().getY());
+        final Icon icon = new ImageIcon(
+                new ImageIcon(url).getImage().getScaledInstance(scaledX, scaledY, Image.SCALE_DEFAULT));
         final JLabel label = new JLabel();
-        label.setBounds(0, 0, SwingViewImpl.APPLICATION_WIDTH, SwingViewImpl.APPLICATION_HEIGHT);
+        label.setBounds(0, 0, scaledX, scaledY);
         label.setIcon(icon);
 
         this.add(label);

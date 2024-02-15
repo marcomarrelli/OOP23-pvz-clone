@@ -23,7 +23,7 @@ public abstract class GenericPanel extends JPanel {
     /**
      * Panel Constructor.
      * 
-     * @param parent The Application View.
+     * @param parent           The Application View.
      * @param backgroundSource The Panel Background.
      */
     public GenericPanel(final SwingViewImpl parent, final String backgroundSource) {
@@ -49,6 +49,7 @@ public abstract class GenericPanel extends JPanel {
      * @return the background image of the panel.
      */
     public Image getBackgroundImage() {
-        return new ImageIcon(this.background).getImage();
+        return new ImageIcon(this.background.getScaledInstance(this.getWidth(), this.getHeight(), Image.SCALE_DEFAULT))
+                .getImage();
     }
 }

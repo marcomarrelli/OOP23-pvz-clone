@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import pvzclone.controller.api.Controller;
+import pvzclone.model.impl.Pair;
 
 /**
  * View Interface, gets/sets the current Scene and updates it.
@@ -44,7 +45,6 @@ public interface View {
      */
     Controller getController();
 
-
     /**
      * Returns the frame used in the view.
      * 
@@ -58,4 +58,13 @@ public interface View {
      * @param win if the player won or lose.
      */
     void endGame(Optional<Boolean> win);
+
+    /**
+     * Returns the scaled X and Y relative to their
+     * original dimensions. If the window dimension was
+     * not modified, their value should be both 1.
+     * 
+     * @return a pair of the scaled dimensions
+     */
+    Pair<Double, Double> getScale();
 }

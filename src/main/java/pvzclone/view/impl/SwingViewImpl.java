@@ -1,6 +1,8 @@
 package pvzclone.view.impl;
 
 import java.awt.Dimension;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Optional;
@@ -12,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import pvzclone.controller.api.Controller;
+import pvzclone.model.impl.Pair;
 import pvzclone.view.api.View;
 
 /**
@@ -42,7 +45,7 @@ public final class SwingViewImpl implements View {
     private static final String GAME_BACKGROUND = "/images/gameBackground.png";
 
     /** Application Resizable Capability. */
-    private static final boolean IS_APPLICATION_RESIZABLE = false;
+    private static final boolean IS_APPLICATION_RESIZABLE = true;
 
     private final Controller controller;
     private final CardLayout sceneManager = new CardLayout();
@@ -53,17 +56,20 @@ public final class SwingViewImpl implements View {
     private final MenuPanel menuPanel;
     private final GamePanel gamePanel;
 
+    private Pair<Double, Double> scale;
+
     /**
      * View Implementation Constructor.
      * 
      * @param controller the Application's Controller.
      */
     public SwingViewImpl(final Controller controller) {
+        this.scale = new Pair<>(1.0, 1.0);
         this.controller = controller;
         this.frame = new JFrame(APPLICATION_TITLE);
         this.frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
         this.frame.addWindowListener(new WindowAdapter() {
-            public void windowClosing (WindowEvent e) {
+            public void windowClosing(WindowEvent e) {
                 final int n = JOptionPane.showConfirmDialog(frame, "Do you really want to quit?",
                         "Quitting", JOptionPane.YES_NO_OPTION);
                 if (n == JOptionPane.YES_OPTION) {
@@ -83,7 +89,27 @@ public final class SwingViewImpl implements View {
         this.panel.setSize(APPLICATION_WIDTH, APPLICATION_HEIGHT);
         this.panel.add(menuPanel, MENU_PANEL_CONSTRAINT);
         this.panel.add(gamePanel, GAME_PANEL_CONSTRAINT);
+        this.panel.addComponentListener(new ComponentListener() {
 
+            @Override
+            public void componentResized(ComponentEvent e) {
+                scale = new Pair<>(e.getComponent().getWidth() / (double) APPLICATION_WIDTH,
+                        e.getComponent().getHeight() / (double) APPLICATION_HEIGHT);
+            }
+
+            @Override
+            public void componentMoved(ComponentEvent e) {
+            }
+
+            @Override
+            public void componentShown(ComponentEvent e) {
+            }
+
+            @Override
+            public void componentHidden(ComponentEvent e) {
+            }
+
+        });
         frame.getContentPane().add(panel);
 
         frame.setVisible(true);
@@ -147,11 +173,15 @@ public final class SwingViewImpl implements View {
 
     @Override
     public void endGame(Optional<Boolean> win) {
-        if(win.isEmpty()) {
+        if (win.isEmpty()) {
             throw new IllegalAccessError("Function not Accessible!");
-        }
-        else {
+        } else {
             this.gamePanel.endGame(win.get());
         }
+    }
+
+    @Override
+    public final Pair<Double, Double> getScale() {
+        return this.scale;
     }
 }
