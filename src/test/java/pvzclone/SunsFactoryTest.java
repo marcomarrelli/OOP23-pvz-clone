@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Set;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import pvzclone.model.api.Entities;
@@ -22,15 +21,7 @@ import pvzclone.model.impl.SunsFactory;
  */
 final class SunsFactoryTest {
     private static final int ENTITIES_NUMBER = 5;
-    private EntitiesFactory sunsFactory;
-
-    /**
-     * Inizializza sunsFactory prima di ogni test.
-     */
-    @BeforeEach
-    void createSunsFactory() {
-        this.sunsFactory = new SunsFactory();
-    }
+    private final EntitiesFactory sunsFactory = new SunsFactory();
 
     @Test
     void createSingleSun() {

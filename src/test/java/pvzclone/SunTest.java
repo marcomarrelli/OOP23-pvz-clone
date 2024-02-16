@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import pvzclone.model.api.Sun;
@@ -25,15 +24,7 @@ final class SunTest {
     private static final int Y_POSITION = 540;
     private static final Pair<Integer, Integer> POSITION = new Pair<>(X_POSITION, Y_POSITION);
     private static final int SPEED = 5;
-    private Sun sun;
-
-    /**
-     * Inizializza sun prima di ogni test.
-     */
-    @BeforeEach
-    void createSunEntity() {
-        this.sun = new SunImpl(POSITION, SPEED);
-    }
+    private final Sun sun = new SunImpl(POSITION, SPEED);
 
     @Test
     void isSunAliveWithCorrectValues() {

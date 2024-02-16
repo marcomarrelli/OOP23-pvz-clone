@@ -3,7 +3,6 @@ package pvzclone;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import pvzclone.model.api.Game;
@@ -22,15 +21,7 @@ import pvzclone.model.impl.WorldImpl;
 final class WorldTest {
     private static final int INT_COSTANT_FOR_TESTING = 5;
     private static final int LONG_COSTANT_FOR_TESTING = 5;
-    private World world;
-
-    /**
-     * Inizializza world prima di ogni test.
-     */
-    @BeforeEach
-    void createWorld() {
-        this.world = new WorldImpl();
-    }
+    private final World world = new WorldImpl();
 
     @Test
     void testSettingAndRetriavalOfClasses() {

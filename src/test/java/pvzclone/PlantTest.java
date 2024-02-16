@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import pvzclone.model.api.Plant;
@@ -25,12 +24,7 @@ final class PlantTest {
     private static final long COOLDOWN = 3000;
     private static final int COST = 100;
 
-    private Plant plant;
-
-    @BeforeEach
-    void setUp() {
-        plant = new PlantImpl(DAMAGE, LIFE, NAME, POS, COOLDOWN, COST);
-    }
+    private final Plant plant = new PlantImpl(DAMAGE, LIFE, NAME, POS, COOLDOWN, COST);
 
     @Test
     void isPlantAliveWithCorrectValues() {

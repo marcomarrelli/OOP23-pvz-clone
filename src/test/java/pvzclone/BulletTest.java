@@ -3,7 +3,6 @@ package pvzclone;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import pvzclone.model.api.Bullet;
@@ -22,12 +21,7 @@ final class BulletTest {
     private static final Pair<Integer, Integer> POS = new Pair<>(0, 0);
     private static final String NAME = "Bullet";
 
-    private Bullet bullet;
-
-    @BeforeEach
-    void setUp() {
-        bullet = new BulletImpl(SPEED, DAMAGE, POS, NAME);
-    }
+    private final Bullet bullet = new BulletImpl(SPEED, DAMAGE, POS, NAME);
 
     @Test
     void isBulletAliveWithCorrectValues() {
