@@ -47,7 +47,7 @@ public interface GameState {
     int getZombiesGenerated();
 
     /**
-     * @return {@true} number of zombies killed is equals
+     * @return if number of zombies killed is equals
      *         to the effective number to be killed.
      */
     boolean areZombieAllKilled();

@@ -3,8 +3,8 @@ package pvzclone.model.impl;
 import java.util.Objects;
 
 /**
- * A standard generic Pair<X,Y>, with getters, hashCode, equals, and toString
- * well implemented.
+ * A standard generic Pair&lt;X,Y&gt;.
+ * It comprehends getters, hashCode, equals, and toString.
  * 
  * @param <X> first element type.
  * @param <Y> second element type.

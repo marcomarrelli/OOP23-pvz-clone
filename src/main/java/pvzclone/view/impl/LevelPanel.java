@@ -37,7 +37,7 @@ public class LevelPanel extends GenericPanel {
      * 
      * @param parent           the application's view.
      * @param backgroundSource the background image source.
-     * @see {@link GenericPanel}
+     * @see GenericPanel
      */
     public LevelPanel(final SwingViewImpl parent, final String backgroundSource) {
         super(parent, backgroundSource);

@@ -40,7 +40,7 @@ public class LevelImpl implements Level {
     }
 
     /**
-     * @see {@link Level#getZombieCount()}
+     * @see Level#getZombieCount()
      */
     @Override
     public int getZombieCount() {
@@ -48,7 +48,7 @@ public class LevelImpl implements Level {
     }
 
     /**
-     * @see {@link Level#getZombieWaveCount()}
+     * @see Level#getZombieWaveCount()
      */
     @Override
     public int getZombieWaveCount() {
@@ -56,7 +56,7 @@ public class LevelImpl implements Level {
     }
 
     /**
-     * @see {@link Level#getZombieCountInWave()}
+     * @see Level#getZombieCountInWave()
      */
     @Override
     public int getZombieCountInWave() {
@@ -64,7 +64,7 @@ public class LevelImpl implements Level {
     }
 
     /**
-     * @see {@link Level#getSunSpawnRate()}
+     * @see Level#getSunSpawnRate()
      */
     @Override
     public long getSunSpawnRate() {
@@ -72,7 +72,7 @@ public class LevelImpl implements Level {
     }
 
     /**
-     * @see {@link Level#getZombieSpawnRate()}
+     * @see Level#getZombieSpawnRate()
      */
     @Override
     public long getZombieSpawnRate() {
@@ -80,7 +80,7 @@ public class LevelImpl implements Level {
     }
 
     /**
-     * @see {@link Level#getSunSpawnRateDecrementRange()}
+     * @see Level#getSunSpawnRateDecrementRange()
      */
     @Override
     public long getSunSpawnRateDecrementRange() {
@@ -88,7 +88,7 @@ public class LevelImpl implements Level {
     }
 
     /**
-     * @see {@link Level#getZombieSpawnRateDecrementRange()}
+     * @see Level#getZombieSpawnRateDecrementRange()
      */
     @Override
     public long getZombieSpawnRateDecrementRange() {

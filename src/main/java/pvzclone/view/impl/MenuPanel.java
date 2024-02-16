@@ -38,7 +38,7 @@ public class MenuPanel extends GenericPanel {
      * 
      * @param parent           the application's view.
      * @param backgroundSource the background image source.
-     * @see {@link GenericPanel}
+     * @see GenericPanel
      */
     public MenuPanel(final SwingViewImpl parent, final String backgroundSource) {
         super(parent, backgroundSource);

@@ -59,6 +59,10 @@ public final class LevelsManager {
      * @return the number of levels.
      */
     public LevelImpl createLevel(final int delta) {
+        if (delta < 0 || delta >= MAX_LEVELS) {
+            throw new IllegalArgumentException("Invalid delta: '" + delta + "'!");
+        }
+
         return new LevelImpl(
                 LevelsManager.ZOMBIE_COUNT
                         + (LevelsManager.ZOMBIE_COUNT_STEP * delta),

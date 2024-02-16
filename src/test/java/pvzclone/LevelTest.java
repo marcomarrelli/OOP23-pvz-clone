@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-//import java.util.List;
-//import java.util.ArrayList;
+import java.util.ArrayList;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -40,7 +40,7 @@ class LevelTest {
     void checkCreatedLevel() {
         assertEquals(this.correctLevelManager.createLevel(0).getClass(), LevelImpl.class);
 
-        //assertThrowsExactly(IllegalArgumentException.class, () -> this.correctLevelManager.createLevel(-1));
+        assertThrowsExactly(IllegalArgumentException.class, () -> this.correctLevelManager.createLevel(-1));
     }
 
     @Test
@@ -60,6 +60,6 @@ class LevelTest {
         assertFalse(this.correctLevelManager.getLevelList().isEmpty());
 
         assertEquals(this.correctLevelManager.getLevelList().size(), this.correctLevelManager.getLevelCount());
-        //assertEquals(this.correctLevelManager.getLevelList().getClass(), ArrayList.class);
+        assertTrue(this.correctLevelManager.getLevelList() instanceof ArrayList);
     }
 }

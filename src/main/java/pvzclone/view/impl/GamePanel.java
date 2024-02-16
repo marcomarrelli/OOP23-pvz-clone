@@ -76,31 +76,35 @@ public final class GamePanel extends GenericPanel {
     private static final int SUN_ENTITY_WIDTH = 140;
     private static final int SUN_ENTITY_HEIGHT = 106;
 
+    private final transient Map<Entities, ImageIcon> entities = new HashMap<>();
+
+    private final transient Set<Pair<ImageIcon, Pair<Integer, Integer>>> images = new HashSet<>();
+
+    private final transient SwingViewImpl parent;
+
+    private transient Pair<Double, Double> scale;
+
     /** Field Cell Width. */
     public static final int CELL_WIDTH = X_OFFSET - X_MARGIN;
 
     /** Field Cell Height. */
     public static final int CELL_HEIGHT = Y_OFFSET - Y_MARGIN;
 
+    /** Cell Matrix on the Game Field. */
     private final FieldCell[][] fieldMatrix;
 
+    /** Show how many suns the player has. */
     private final JLabel points;
 
-    private final transient Map<Entities, ImageIcon> entities = new HashMap<>();
-    private final transient Set<Pair<ImageIcon, Pair<Integer, Integer>>> images = new HashSet<>();
-
+    /** Flag checking if the user is planting or not. */
     private boolean userIsPlanting;
-
-    private final transient SwingViewImpl parent;
-
-    private transient Pair<Double, Double> scale;
 
     /**
      * Game Panel Constructor.
      * 
      * @param parent           the application's view.
      * @param backgroundSource the background image source.
-     * @see {@link GenericPanel}
+     * @see GenericPanel
      */
     public GamePanel(final SwingViewImpl parent, final String backgroundSource) {
         super(parent, backgroundSource);

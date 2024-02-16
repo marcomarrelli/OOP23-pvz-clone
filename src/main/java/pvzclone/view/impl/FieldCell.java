@@ -15,24 +15,32 @@ import pvzclone.model.impl.Pair;
  * The center of the cell is saved and its bounds will be calculated
  * using the constants declared inside {@link GamePanel}
  * 
- * @see {@link GamePanel}
+ * @see GamePanel
  * @author Marco Marrelli
  */
 @SuppressFBWarnings(value = {
         "EI_EXPOSE_REP2"
-}, justification = "parent is intended to be modified")
+}, justification = "Parent is Intended to be Modified.")
 public class FieldCell extends JButton {
     private static final long serialVersionUID = 1234500005L;
 
     /** Cell Text Initializer, used for {@link JButton#JButton(String)}. */
     public static final String CELL_TEXT_INITIALIZER = "";
 
-    private final GamePanel parent;
     private final transient Pair<Integer, Integer> coord;
-    private final Color hoverColor = new Color(225, 215, 235);
-    private final Border hoverBorder = new LineBorder(hoverColor, 3);
-    private boolean hasPlant;
     private final transient Controller controller;
+
+    /** The Game Panel (the parent). */
+    private final GamePanel parent;
+
+    /** The Color for the Hover on the Cell. */
+    private final Color hoverColor = new Color(225, 215, 235);
+
+    /** The Border Settings for the Hover on the Cell. */
+    private final Border hoverBorder = new LineBorder(hoverColor, 3);
+
+    /** If the Cell has a Plant or Not. */
+    private boolean hasPlant;
 
     /**
      * Field Cell Constructor.

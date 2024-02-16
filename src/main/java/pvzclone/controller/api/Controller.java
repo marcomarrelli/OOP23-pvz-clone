@@ -51,7 +51,7 @@ public interface Controller {
     /**
      * Sets the number of the Level to the number of the argument passed.
      * 
-     * @param numberOfTheLevel
+     * @param numberOfTheLevel level index.
      */
     void chooseLevel(int numberOfTheLevel);
 
