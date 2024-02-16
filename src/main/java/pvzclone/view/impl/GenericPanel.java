@@ -15,8 +15,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
  */
 @SuppressFBWarnings(value = {
         "EI_EXPOSE_REP"
-}, justification = "parent is intended to be modificated")
-
+}, justification = "parent is intended to be modified")
 public abstract class GenericPanel extends JPanel {
     private static final long serialVersionUID = 1234500000L;
 
@@ -34,7 +33,7 @@ public abstract class GenericPanel extends JPanel {
      */
     public GenericPanel(final SwingViewImpl parent, final String backgroundSource) {
         this.parent = parent;
-        this.background = new ImageIcon(getClass().getClassLoader().getResource(backgroundSource)).getImage();
+        this.background = new ImageIcon(backgroundSource).getImage();
         this.setLayout(null);
         this.setBackground(Color.BLACK);
         this.setSize(SwingViewImpl.APPLICATION_WIDTH, SwingViewImpl.APPLICATION_HEIGHT);

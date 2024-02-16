@@ -43,15 +43,15 @@ public final class SwingViewImpl implements View {
     public static final String GAME_PANEL_CONSTRAINT = "GAME";
 
     /** Menu Panel's Background Image Source. */
-    private static final String MENU_BACKGROUND = "/images/menuBackground.jpeg";
+    private static final String MENU_BACKGROUND = "src/main/resources/images/menuBackground.jpeg";
 
     /** Level Panel's Background Image Source. */
-    private static final String LEVEL_BACKGROUND = "/images/menuBackground.jpeg";
+    private static final String LEVEL_BACKGROUND = "src/main/resources/images/menuBackground.jpeg";
 
     /** Game Panel's Background Image Source. */
-    private static final String GAME_BACKGROUND = "/images/gameBackground.png";
+    private static final String GAME_BACKGROUND = "src/main/resources/images/gameBackground.png";
 
-    private static final String GAME_ICON = "/images/pvzIcon.png";
+    private static final String GAME_ICON = "src/main/resources/images/pvzIcon.png";
 
     /** Application Resizable Capability. */
     private static final boolean IS_APPLICATION_RESIZABLE = true;
@@ -90,7 +90,7 @@ public final class SwingViewImpl implements View {
         this.frame.setLocationRelativeTo(null);
         this.frame.setMinimumSize(new Dimension(APPLICATION_WIDTH, APPLICATION_HEIGHT));
         this.frame.setResizable(IS_APPLICATION_RESIZABLE);
-        this.frame.setIconImage(new ImageIcon(getClass().getResource(GAME_ICON)).getImage());
+        this.frame.setIconImage(new ImageIcon(GAME_ICON).getImage());
 
         final MenuPanel menuPanel = new MenuPanel(this, MENU_BACKGROUND);
         final LevelPanel levelPanel = new LevelPanel(this, LEVEL_BACKGROUND);
@@ -149,16 +149,6 @@ public final class SwingViewImpl implements View {
     }
 
     /**
-     * Returns the actual scene.
-     * 
-     * @return the current scene.
-     */
-    @Override
-    public JPanel getScene() {
-        return this.panel;
-    }
-
-    /**
      * Returns the actual scene constraint.
      * 
      * @return the current scene constraint.
@@ -176,11 +166,6 @@ public final class SwingViewImpl implements View {
     @Override
     public void update() {
         this.panel.repaint();
-    }
-
-    @Override
-    public JFrame getFrame() {
-        return this.frame;
     }
 
     @Override

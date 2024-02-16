@@ -21,7 +21,7 @@ public class MenuPanel extends GenericPanel {
 
     private static final int LAYOUT_HGAP = 20;
     private static final int LAYOUT_VGAP = 50;
-    private static final String BUTTON_TEXTURE = "/images/tombstoneTexture.jpg";
+    private static final String BUTTON_TEXTURE = "src/main/resources/images/tombstoneTexture.jpg";
     private static final Dimension MENU_BUTTON_DIMENSION = new Dimension(
             SwingViewImpl.APPLICATION_WIDTH / 6, SwingViewImpl.APPLICATION_HEIGHT / 8);
     private final SwingViewImpl parent;
@@ -38,7 +38,7 @@ public class MenuPanel extends GenericPanel {
         this.parent = parent;
         this.setLayout(
                 new FlowLayout(FlowLayout.CENTER, LAYOUT_HGAP, SwingViewImpl.APPLICATION_HEIGHT / 2 - LAYOUT_VGAP));
-        final ImageIcon texture = new ImageIcon(getClass().getResource(BUTTON_TEXTURE));
+        final ImageIcon texture = new ImageIcon(BUTTON_TEXTURE);
 
         final JButton levelButton = new JButton("Choose Level", texture);
         final JButton startButton = new JButton("Start Adventure", texture);
@@ -61,7 +61,7 @@ public class MenuPanel extends GenericPanel {
             startButton.setEnabled(true);
         });
         exitButton.addActionListener(e -> {
-            final int n = JOptionPane.showConfirmDialog(parent.getFrame(), "Do you really want to quit?",
+            final int n = JOptionPane.showConfirmDialog(this, "Do you really want to quit?",
                     "Quitting", JOptionPane.YES_NO_OPTION);
             if (n == JOptionPane.YES_OPTION) {
                 System.exit(0);

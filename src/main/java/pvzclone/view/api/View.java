@@ -2,9 +2,6 @@ package pvzclone.view.api;
 
 import java.util.Optional;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
 import pvzclone.controller.api.Controller;
 import pvzclone.model.impl.Pair;
 
@@ -18,13 +15,6 @@ public interface View {
      * @param scene The scene name to load.
      */
     void setScene(String scene);
-
-    /**
-     * Gets the current scene.
-     * 
-     * @return The currently loaded scene.
-     */
-    JPanel getScene();
 
     /**
      * Gets the current scene.
@@ -44,13 +34,6 @@ public interface View {
      * @return the controller associated with the view.
      */
     Controller getController();
-
-    /**
-     * Returns the frame used in the view.
-     * 
-     * @return the frame of the view.
-     */
-    JFrame getFrame();
 
     /**
      * The End Game handler.

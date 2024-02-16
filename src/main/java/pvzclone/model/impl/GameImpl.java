@@ -2,6 +2,7 @@ package pvzclone.model.impl;
 
 import java.util.Set;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import pvzclone.model.api.Bullet;
 import pvzclone.model.api.Entities;
 import pvzclone.model.api.Game;
@@ -18,6 +19,12 @@ import java.util.Random;
 /**
  * class that implements the interface Game.
  */
+
+@SuppressFBWarnings(value = {
+        "EI_EXPOSE_REP2",
+        "EI_EXPOSE_REP"
+}, justification = "world is intended to be updated outside"
+        + "GameState is intended to be modified")
 public final class GameImpl implements Game {
 
     // Sun
@@ -59,6 +66,8 @@ public final class GameImpl implements Game {
 
     private boolean canSingleZombieGenerate;
     private int wavePassed;
+
+    private final Random random = new Random();
 
     /**
      * 
@@ -131,7 +140,7 @@ public final class GameImpl implements Game {
         if (this.hasDeltaTimePassed(this.timeOfLastCreatedSun, currentTime, this.deltaTimeSun)) {
             this.timeOfLastCreatedSun = currentTime;
             this.suns.add((SunImpl) this.sunFactory.createEntity());
-            final long deltaDecrement = new Random().nextLong(2 * this.deltaTimeSunDecrement)
+            final long deltaDecrement = this.random.nextLong(2 * this.deltaTimeSunDecrement)
                     - this.deltaTimeSunDecrement;
             this.deltaTimeSun = this.deltaTimeSun - deltaDecrement;
         }
@@ -146,7 +155,7 @@ public final class GameImpl implements Game {
             this.timeOfLastCreatedZombie = elapsed;
             this.zombies.add((Zombie) this.zombiesFactory.createEntity());
 
-            final long deltaDecrement = new Random().nextLong(2 * this.deltaTimeZombieDecrement)
+            final long deltaDecrement = this.random.nextLong(2 * this.deltaTimeZombieDecrement)
                     - this.deltaTimeZombieDecrement;
             this.deltaTimeZombie = this.deltaTimeZombie - deltaDecrement;
 
@@ -167,8 +176,8 @@ public final class GameImpl implements Game {
 
     @Override
     public void createWave() {
-        final int totZombies = this.world.getLevel().getZombieCount(); // se è 21
-        final int totzombieWave = (int) Math.floor(totZombies * PERCENTAGE); // questo sarà 8 (8.4)
+        final int totZombies = this.world.getLevel().getZombieCount();
+        final int totzombieWave = (int) Math.floor(totZombies * PERCENTAGE);
 
         if (this.gameState.getZombiesGenerated() >= totZombies - totzombieWave
                 && this.wavePassed < this.world.getLevel().getZombieWaveCount()) {

@@ -12,12 +12,10 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
  * @author Marco Marrelli
  */
 
-@SuppressFBWarnings(
-    value = {
+@SuppressFBWarnings(value = {
         "EI_EXPOSE_REP2"
-    },
-    justification = "parent is intended to be modificated"
-)
+}, justification = "parent is intended to be modified")
+
 public class FieldCellListener implements MouseListener {
     private final FieldCell parent;
 
@@ -34,13 +32,15 @@ public class FieldCellListener implements MouseListener {
      * @see {@link FieldCellListener#muouseReleased()}
      */
     @Override
-    public void mouseClicked(final MouseEvent e) { }
+    public void mouseClicked(final MouseEvent e) {
+    }
 
     /**
      * @see {@link FieldCellListener#muouseReleased()}
      */
     @Override
-    public void mousePressed(final MouseEvent e) { }
+    public void mousePressed(final MouseEvent e) {
+    }
 
     /**
      * Click and Press Event.

@@ -42,12 +42,12 @@ public final class GamePanel extends GenericPanel {
     private static final int X_MARGIN = 10; // 20/2
     private static final int Y_MARGIN = 15; // 30/2
 
-    private static final String PLANT_CARD = "/images/plantCard.png";
-    private static final String SUN_COUNTER_IMAGE = "/images/sunCounter.jpg";
-    private static final String PLANT_IMAGE = "/images/plantPeaShooter.png"; // "/images/plantEntity.png";
-    private static final String ZOMBIE_IMAGE = "/images/zombieEntity.png"; // "/images/zombieEntity.png";
-    private static final String BULLET_IMAGE = "/images/ProjectilePea.png"; // "/images/bulletEntity.png";
-    private static final String SUN_IMAGE = "/images/sunEntity.png"; // "/images/sunEntity.png";
+    private static final String PLANT_CARD = "src/main/resources/images/plantCard.png";
+    private static final String SUN_COUNTER_IMAGE = "src/main/resources/images/sunCounter.jpg";
+    private static final String PLANT_IMAGE = "src/main/resources/images/plantPeaShooter.png";
+    private static final String ZOMBIE_IMAGE = "src/main/resources/images/zombieEntity.png";
+    private static final String BULLET_IMAGE = "src/main/resources/images/ProjectilePea.png";
+    private static final String SUN_IMAGE = "src/main/resources/images/sunEntity.png";
 
     private static final int FIELD_STARTING_X = 220;
     private static final int FIELD_STARTING_Y = 110;
@@ -114,7 +114,7 @@ public final class GamePanel extends GenericPanel {
         }
 
         final JButton plantCardButton = new JButton();
-        plantCardButton.setIcon(new ImageIcon(getClass().getResource(PLANT_CARD)));
+        plantCardButton.setIcon(new ImageIcon(PLANT_CARD));
         plantCardButton.setBounds(CARD_STARTING_X, CARD_STARTING_Y, CARD_WIDTH, CARD_HEIGHT);
         plantCardButton.addActionListener(new ActionListener() {
             @Override
@@ -138,7 +138,7 @@ public final class GamePanel extends GenericPanel {
         this.add(this.points);
 
         final JLabel sunCounterImage = new JLabel();
-        sunCounterImage.setIcon(new ImageIcon(getClass().getResource(SUN_COUNTER_IMAGE)));
+        sunCounterImage.setIcon(new ImageIcon(SUN_COUNTER_IMAGE));
         sunCounterImage.setBounds(SUN_COUNTER_STARTING_X, SUN_COUNTER_STARTING_Y, SUN_COUNTER_WIDTH,
                 SUN_COUNTER_HEIGHT);
         this.add(sunCounterImage);
@@ -245,14 +245,14 @@ public final class GamePanel extends GenericPanel {
      * @return l'immagine dell'entità.
      */
     private Image getEntityImage(final Entities entity) {
-        return new ImageIcon(getClass().getResource(
+        return new ImageIcon(
                 switch (entity.getEntityName()) {
                     case "Plant" -> PLANT_IMAGE;
                     case "Zombie" -> ZOMBIE_IMAGE;
                     case "Bullet" -> BULLET_IMAGE;
                     case "Sun" -> SUN_IMAGE;
                     default -> throw new IllegalArgumentException("Unexpected value: " + entity.getClass().getName());
-                })).getImage();
+                }).getImage();
     }
 
     /**
