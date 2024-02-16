@@ -21,14 +21,14 @@ import pvzclone.model.impl.SunsFactory;
  * @author Sofia Caberletti.
  */
 final class SunsFactoryTest {
-    private EntitiesFactory sunsFactory;
     private static final int ENTITIES_NUMBER = 5;
+    private EntitiesFactory sunsFactory;
 
     /**
      * Inizializza sunsFactory prima di ogni test.
      */
     @BeforeEach
-    void setup() {
+    void createSunsFactory() {
         this.sunsFactory = new SunsFactory();
     }
 
