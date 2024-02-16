@@ -25,12 +25,6 @@ public interface Game {
     void update(long elapsed);
 
     /**
-     * Creates a wave of zombies in the game.
-     * This method is responsible for spawning a new wave of zombies.
-     */
-    void createWave();
-
-    /**
      * Create a new plant.
      * 
      * @param position is the position of the new plant

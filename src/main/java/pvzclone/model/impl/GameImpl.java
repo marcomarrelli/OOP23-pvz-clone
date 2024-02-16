@@ -172,8 +172,11 @@ public final class GameImpl implements Game {
         this.newZombieGenerate(elapsed);
     }
 
-    @Override
-    public void createWave() {
+    /**
+     * Creates a wave of zombies in the game.
+     * This method is responsible for spawning a new wave of zombies.
+     */
+    private void createWave() {
         final int totZombies = this.world.getLevel().getZombieCount();
         final int totzombieWave = this.world.getLevel().getZombieCountInWave();
 
