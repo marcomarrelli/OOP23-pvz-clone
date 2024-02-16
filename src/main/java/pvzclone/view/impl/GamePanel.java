@@ -249,7 +249,6 @@ public final class GamePanel extends GenericPanel {
                 e -> this.images.add(new Pair<>(e.getValue(), e.getKey().getPosition())));
         this.entities.keySet().removeIf(e -> !this.getView().getController().getEntities().contains(e));
         this.getView().getController().getEntities().forEach(entity -> this.createEntity(g, entity));
-        // TODO fare stream
     }
 
     /**
