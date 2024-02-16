@@ -16,7 +16,7 @@ import java.util.Random;
 public final class ZombiesFactory implements EntitiesFactory {
     private static final double ATK = 50;
     private static final int MAX_LIFE = 100;
-    private static final int ZOMBIE_SPPED = 2;
+    private static final int ZOMBIE_SPEED = 2;
     private static final long COOLDOWN = 3000;
     private static final int START_X_ZOMBIE = 800;
     private static final int START_Y_ZOMBIE = 50;
@@ -34,7 +34,7 @@ public final class ZombiesFactory implements EntitiesFactory {
 
     @Override
     public Entities createEntity() {
-        return new ZombieImpl(ATK, COOLDOWN, ZOMBIE_SPPED, MAX_LIFE,
+        return new ZombieImpl(ATK, COOLDOWN, ZOMBIE_SPEED, MAX_LIFE,
                 new Pair<Integer, Integer>(START_X_ZOMBIE,
                         START_Y_ZOMBIE + DELTA_Y_ZOMBIE * this.random.nextInt(0, POSSIBLE_Y)));
     }

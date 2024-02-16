@@ -13,7 +13,7 @@ import pvzclone.model.api.EntitiesFactory;
  * @author Sofia Caberletti
  */
 public final class SunsFactory implements EntitiesFactory {
-    private static final int SPEED_Y_AXIS = 5;
+    private static final int SPEED_Y_AXIS = 4;
     private static final int STARTING_X_GAME_FIELD = 220;
     private static final int FINAL_X_GAME_FIELD = 750;
     private static final int STARTING_Y_POSITIONIG = -15;

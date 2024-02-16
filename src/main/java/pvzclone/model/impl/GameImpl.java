@@ -27,13 +27,10 @@ import java.util.Random;
         + "GameState is intended to be modified")
 public final class GameImpl implements Game {
 
-    // Sun
     private static final int HOUSE_X_POSITION = 150;
-    private static final int BULLET_SPEED = 15;
 
     // Zombie
     private static final int DELTA_ZOMBIE = 10;
-    private static final double PERCENTAGE = 0.3;
 
     // Base plant
     private static final int PLANT_COST = 100;
@@ -44,7 +41,9 @@ public final class GameImpl implements Game {
     private static final int DELTA_Y_PLANT = 63;
     private static final int DELTA_TIME_FIRST_ZOMBIE = 4000;
 
+    // Bullet
     private static final int DELTA_X_BULLET = 30;
+    private static final int BULLET_SPEED = 15;
 
     private final World world;
     private final GameState gameState;
@@ -177,16 +176,16 @@ public final class GameImpl implements Game {
     @Override
     public void createWave() {
         final int totZombies = this.world.getLevel().getZombieCount();
-        final int totzombieWave = (int) Math.floor(totZombies * PERCENTAGE);
+        final int totzombieWave = this.world.getLevel().getZombieCountInWave();
 
         if (this.gameState.getZombiesGenerated() >= totZombies - totzombieWave
                 && this.wavePassed < this.world.getLevel().getZombieWaveCount()) {
             this.canSingleZombieGenerate = false;
             this.wavePassed = this.wavePassed + 1;
-
             final Set<Entities> newWave = this.zombiesFactory.createEntities(totzombieWave);
             for (final Entities singleZombieInWave : newWave) {
                 this.zombies.add((Zombie) singleZombieInWave);
+                this.gameState.incZombiesGenerated();
             }
         }
     }

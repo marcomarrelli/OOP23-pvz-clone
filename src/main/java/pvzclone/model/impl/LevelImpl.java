@@ -15,7 +15,7 @@ public class LevelImpl implements Level {
     private final long sunSpawnRateDecrementRange;
     private final long zombieSpawnRateDecrementRange;
 
-    private static final int WAVE_PERCENTAGE = 40;
+    private static final double WAVE_PERCENTAGE = 0.3;
 
     /**
      * Constructor of the Level Implementation.
@@ -60,7 +60,7 @@ public class LevelImpl implements Level {
      */
     @Override
     public int getZombieCountInWave() {
-        return (int) (this.getZombieCount() * WAVE_PERCENTAGE) / 100;
+        return (int) Math.floor(this.getZombieCount() * WAVE_PERCENTAGE);
     }
 
     /**

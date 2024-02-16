@@ -21,7 +21,7 @@ import pvzclone.view.impl.SwingViewImpl;
  */
 public final class ControllerImpl implements Controller {
 
-    private static final long PERIOD = 60;
+    private static final long PERIOD = 70;
     private static final int LEVEL_COUNT = 5;
 
     private final World world;

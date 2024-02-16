@@ -14,6 +14,7 @@ public final class LevelsManager {
     private static final int MAX_LEVELS = 5;
     private static final int ZOMBIE_COUNT = 5;
     private static final int ZOMBIE_COUNT_STEP = 4;
+    private static final int ZOMBIE_WAVE_COUNT = 1;
     private static final long SUN_SPAWN_RATE = 4000;
     private static final long SUN_SPAWN_RATE_STEP = 120;
     private static final long ZOMBIE_SPAWN_RATE = 12_000;
@@ -67,9 +68,7 @@ public final class LevelsManager {
                 LevelsManager.ZOMBIE_COUNT
                         + (LevelsManager.ZOMBIE_COUNT_STEP * delta),
 
-                (LevelsManager.ZOMBIE_COUNT
-                        + (LevelsManager.ZOMBIE_COUNT_STEP * delta))
-                        / LevelsManager.ZOMBIE_COUNT,
+                LevelsManager.ZOMBIE_WAVE_COUNT,
 
                 LevelsManager.SUN_SPAWN_RATE
                         + (LevelsManager.SUN_SPAWN_RATE_STEP * delta),
