@@ -17,7 +17,7 @@ import pvzclone.view.api.View;
 import pvzclone.view.impl.SwingViewImpl;
 
 /**
- * Class that implements Controller.
+ * Class that implements the Controller.
  */
 public final class ControllerImpl implements Controller {
 

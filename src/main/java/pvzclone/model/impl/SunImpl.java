@@ -18,7 +18,7 @@ public final class SunImpl implements Sun {
 
     /**
      * 
-     * @param position starting position of the sun.
+     * @param position   starting position of the sun.
      * @param speedYAxis speed of movement.
      */
     public SunImpl(final Pair<Integer, Integer> position, final Integer speedYAxis) {
@@ -49,10 +49,7 @@ public final class SunImpl implements Sun {
 
     @Override
     public int getPoints() {
-        if (!this.isAlive && this.position.getY() != SCREEN_BOTTOM) {
-            return POINTS;
-        }
-        return 0;
+        return !this.isAlive && this.position.getY() != SCREEN_BOTTOM ? POINTS : 0;
     }
 
     @Override

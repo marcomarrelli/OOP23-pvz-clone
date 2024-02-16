@@ -19,7 +19,6 @@ import java.util.Random;
 /**
  * class that implements the interface Game.
  */
-
 @SuppressFBWarnings(value = {
         "EI_EXPOSE_REP2",
         "EI_EXPOSE_REP"
@@ -31,6 +30,7 @@ public final class GameImpl implements Game {
 
     // Zombie
     private static final int DELTA_ZOMBIE = 10;
+    private static final int DELTA_TIME_FIRST_ZOMBIE = 4000;
 
     // Base plant
     private static final int PLANT_COST = 100;
@@ -39,7 +39,6 @@ public final class GameImpl implements Game {
     private static final int COOLDOWN_BASE_PLANT = 3000;
     private static final int DELTA_PLANT = 35;
     private static final int DELTA_Y_PLANT = 63;
-    private static final int DELTA_TIME_FIRST_ZOMBIE = 4000;
 
     // Bullet
     private static final int DELTA_X_BULLET = 30;
@@ -203,9 +202,9 @@ public final class GameImpl implements Game {
     }
 
     /**
-     * this method checks all of the collisions.
-     * if a zombie is in the same position of the plant then it should eat it.
-     * if a bullet collides with a zombie.
+     * This method checks all of the collisions.
+     * If a zombie is in the same position of the plant then it should eat it.
+     * If a bullet collides with a zombie.
      * 
      * @author Zanchini Margherita
      */
@@ -261,10 +260,10 @@ public final class GameImpl implements Game {
     }
 
     /**
-     * this method handles the case of collision of a zombie and a plant.
-     * the plant takes damage.
-     * and then we check if the plant is still alive after the damage received.
-     * if not we remove it from the list of all the plants.
+     * This method handles the case of collision of a zombie and a plant.
+     * The plant takes damage.
+     * And then we check if the plant is still alive after the damage received.
+     * If not we remove it from the list of all the plants.
      * 
      * @author Zanchini Margherita
      * @param zombie the zombie that eats the plant
@@ -280,7 +279,7 @@ public final class GameImpl implements Game {
     }
 
     /**
-     * method that check all the plants that need to shoot.
+     * Method that checks all the plants that need to shoot
      * and if they have to shoot creates a new bullet.
      * 
      * @authore Zanchini Margherita

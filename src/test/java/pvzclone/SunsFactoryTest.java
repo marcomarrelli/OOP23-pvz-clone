@@ -15,7 +15,7 @@ import pvzclone.model.api.Sun;
 import pvzclone.model.impl.SunsFactory;
 
 /**
- * This class contains tests for the SunFactory.
+ * This class contains tests for the SunsFactory.
  * 
  * @author Sofia Caberletti.
  */

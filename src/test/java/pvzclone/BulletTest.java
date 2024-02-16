@@ -10,7 +10,7 @@ import pvzclone.model.impl.BulletImpl;
 import pvzclone.model.impl.Pair;
 
 /**
- * this class contains the test for the bullet.
+ * This class contains the test for the bullet.
  * 
  * @author Zanchini Margherita
  */

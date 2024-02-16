@@ -7,25 +7,24 @@ package pvzclone.model.api;
  */
 public interface Level {
     /**
-     * Returns the numbers of zombie in one level.
+     * Returns the number of zombies in one level.
      * 
-     * @return the numbers of zombie in one level.
+     * @return the number of zombies in one level.
      */
     int getZombieCount();
 
     /**
-     * Returns the numbers of zombie waves in one level.
-     * The value is based on the zombie count.
+     * Returns the number of zombie waves in one level.
      * 
      * @return the numbers of zombie waves in one level.
      */
     int getZombieWaveCount();
 
     /**
-     * Returns the numbers of zombie in a wave in the level.
+     * Returns the number of zombies in a wave in the level.
      * The value is based on the zombie count.
      * 
-     * @return the numbers of zombie in a wave in the level.
+     * @return the number of zombies in a wave in the level.
      */
     int getZombieCountInWave();
 
@@ -44,14 +43,14 @@ public interface Level {
     long getZombieSpawnRate();
 
     /**
-     * Returns the sun spawn rate.
+     * Returns the sun decrement spawn rate.
      * 
      * @return the sun decrement spawn rate.
      */
     long getSunSpawnRateDecrementRange();
 
     /**
-     * Returns the zombie spawn rate.
+     * Returns the zombie decrement spawn rate.
      * 
      * @return the zombie decrement spawn rate.
      */

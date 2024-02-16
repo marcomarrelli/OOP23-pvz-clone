@@ -10,7 +10,7 @@ import pvzclone.model.impl.Pair;
  */
 public interface View {
     /**
-     * Sets the current scene to the stage.
+     * Sets the current scene.
      * 
      * @param scene The scene name to load.
      */

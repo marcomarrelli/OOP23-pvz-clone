@@ -8,14 +8,12 @@ import pvzclone.model.impl.Pair;
 
 /**
  * This interface models a Controller for the game.
- * It extends the ViewEventListener interface.
  */
 public interface Controller {
 
     /**
      * Calls the main loop of the game.
      * This method should be called after the game is initialized.
-     * It is responsible for managing the game loop.
      */
     void callMainloop();
 
@@ -28,7 +26,7 @@ public interface Controller {
     Set<Entities> getEntities();
 
     /**
-     * this method communicate with the model
+     * this method communicates with the model
      * telling him the position of the new plant.
      * 
      * @param pos is the position of the new plant.
@@ -57,9 +55,9 @@ public interface Controller {
 
     /**
      * Retrieves the number of the chosen level if the level was chosen,
-     * if not returns an empty Optional.
+     * if not it returns an empty Optional.
      * 
-     * @return number of the level the we chose.
+     * @return number of the level that we chose.
      */
     Optional<Integer> getChosenLevel();
 

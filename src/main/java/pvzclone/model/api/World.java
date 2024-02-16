@@ -7,7 +7,6 @@ import pvzclone.model.impl.LevelsManager;
  * It contains methods to set the Level and Game that will
  * be used to start the game.
  * 
- * @author Sofia Caberletti.
  */
 public interface World {
     /**
@@ -25,9 +24,9 @@ public interface World {
     void setGame(Game game);
 
     /**
-     * Sets the level manager.
+     * Sets the levels manager.
      * 
-     * @param levelsManager the level manager of the World.
+     * @param levelsManager the levels manager of the World.
      */
     void setLevelsManager(LevelsManager levelsManager);
 
@@ -42,7 +41,7 @@ public interface World {
     Game getGame();
 
     /**
-     * @return the level manager.
+     * @return the levels manager.
      */
     LevelsManager getLevelsManager();
 }

@@ -31,7 +31,7 @@ public interface Game {
     void createWave();
 
     /**
-     * create a new plant.
+     * Create a new plant.
      * 
      * @param position is the position of the new plant
      * @return true if the plant is created, else false

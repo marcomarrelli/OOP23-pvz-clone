@@ -239,7 +239,7 @@ public final class GamePanel extends GenericPanel {
     }
 
     /**
-     * Funzione dedicata all'update delle entità fornite dal Controller.
+     * Method dedicated to the update of the entities given by the Controller.
      * 
      * @param g Graphics Component
      */
@@ -252,10 +252,10 @@ public final class GamePanel extends GenericPanel {
     }
 
     /**
-     * Restituisce l'immagine affiliata all'entità.
+     * Return the image associated to the entity.
      * 
-     * @param entity Entità da cui prelevare l'immagine
-     * @return l'immagine dell'entità.
+     * @param entity entity to prelevate the image from.
+     * @return image of the entity.
      */
     private ImageIcon getEntityImage(final Entities entity) {
         return new ImageIcon(
@@ -269,10 +269,10 @@ public final class GamePanel extends GenericPanel {
     }
 
     /**
-     * Crea un'entità graficamente.
+     * It creates the entity graphically.
      * 
      * @param g      Graphics Component.
-     * @param entity entità da "disegnare".
+     * @param entity entity to be "drawn".
      */
     private void createEntity(final Graphics2D g, final Entities entity) {
         if (!this.scale.equals(this.parent.getScale())) {

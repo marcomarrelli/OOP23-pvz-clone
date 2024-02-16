@@ -15,7 +15,7 @@ import pvzclone.model.impl.Pair;
 import pvzclone.model.impl.WorldImpl;
 
 /**
- * this class contains the test for the GameImpl.
+ * This class contains the test for the GameImpl.
  * 
  * @author Zanchini Margherita
  */

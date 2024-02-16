@@ -12,8 +12,7 @@ import pvzclone.model.impl.Pair;
 
 /**
  * Cell used in Game Panel for placing Plants Entities.
- * The center of the cell is saved and its bounds will be calculated
- * using the constants declared inside {@link GamePanel}
+ * Its bounds are declared inside {@link GamePanel}
  * 
  * @see GamePanel
  * @author Marco Marrelli
@@ -47,7 +46,7 @@ public class FieldCell extends JButton {
      * 
      * @param coord      the central coordinate of the Cell.
      * @param text       the text of the button.
-     * @param parent     the parente panel.
+     * @param parent     the parent panel.
      * @param controller is the controller of the game.
      */
     public FieldCell(final GamePanel parent, final Pair<Integer, Integer> coord, final String text,
@@ -93,7 +92,7 @@ public class FieldCell extends JButton {
     /**
      * Set a plant to the cell.
      * 
-     * @param isHovered if the content area should be filler or not.
+     * @param isHovered if the content area should be filled or not.
      */
     protected void cellHover(final boolean isHovered) {
         if (this.hasPlant()) {

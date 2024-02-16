@@ -3,7 +3,7 @@ package pvzclone.model.impl;
 import pvzclone.model.api.Bullet;
 
 /**
- * class that implements the interface Bullet.
+ * Class that implements the interface Bullet.
  */
 public final class BulletImpl implements Bullet {
 

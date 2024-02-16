@@ -5,8 +5,6 @@ import java.util.Optional;
 /**
  * This interface models a GameState.
  * Works on the main information related to the game.
- * 
- * @author Sofia Lotti.
  */
 public interface GameState {
     /**
@@ -20,12 +18,12 @@ public interface GameState {
     void incKilledZombies();
 
     /**
-     * Increases the available Suns counter.
+     * Increases the sun points obtained.
      */
     void incSunScore();
 
     /**
-     * Decrements the available Suns counter.
+     * Decrements the sun points.
      * 
      * @param costPlant cost of the chosen plant.
      */
@@ -37,7 +35,7 @@ public interface GameState {
     int getKilledZombies();
 
     /**
-     * @return Suns counter.
+     * @return sun points obtained.
      */
     int getSunScore();
 
@@ -48,7 +46,7 @@ public interface GameState {
 
     /**
      * @return if number of zombies killed is equals
-     *         to the effective number to be killed.
+     *         to the effective zombie number to be killed.
      */
     boolean areZombieAllKilled();
 
@@ -62,7 +60,7 @@ public interface GameState {
     /**
      * Returns the win state at the end of the Game.
      * 
-     * @return true if player won, false if player lose, Optional.empty if game is
+     * @return true if player won, false if player lost, Optional.empty if game is
      *         not over.
      */
     Optional<Boolean> getWinState();

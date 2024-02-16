@@ -21,7 +21,8 @@ import pvzclone.view.api.View;
 /**
  * Implementation of the View.
  * 
- * @author Sofia Caberletti, Marco Marrelli
+ * @author Sofia Caberletti
+ * @author Marco Marrelli
  */
 public final class SwingViewImpl implements View {
     /** Application Width. */
@@ -51,6 +52,7 @@ public final class SwingViewImpl implements View {
     /** Game Panel's Background Image Source. */
     private static final String GAME_BACKGROUND = "src/main/resources/images/gameBackground.png";
 
+    /** Application icon. */
     private static final String GAME_ICON = "src/main/resources/images/pvzIcon.png";
 
     /** Application Resizable Capability. */

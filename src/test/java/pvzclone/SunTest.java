@@ -11,7 +11,7 @@ import pvzclone.model.impl.Pair;
 import pvzclone.model.impl.SunImpl;
 
 /**
- * This class contains unit tests for the Sun entity.
+ * This class contains tests for the Sun entity.
  * 
  * @author Sofia Caberletti.
  */

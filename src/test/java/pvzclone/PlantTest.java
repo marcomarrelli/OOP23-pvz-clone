@@ -11,7 +11,7 @@ import pvzclone.model.impl.Pair;
 import pvzclone.model.impl.PlantImpl;
 
 /**
- * this class contains the test for the plant.
+ * This class contains the test for the plant.
  * 
  * @author Zanchini Margherita
  */
