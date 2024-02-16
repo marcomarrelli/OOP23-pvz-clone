@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import pvzclone.model.api.Game;
@@ -32,8 +31,7 @@ class GameTest {
 
     private Game game;
 
-    @BeforeEach
-    void setUp() {
+    private void init() {
         final World world = new WorldImpl();
         final Level level = new LevelImpl(ZOMBIE_COUNT, 1, SUN_SPAWN_RATE, ZOMBIE_SPAWN_RATE,
                 SUN_SPAWN_RATE_DECREMENT_RANGE,
@@ -44,6 +42,13 @@ class GameTest {
 
     @Test
     void correctCreateEntity() {
+        init();
+        final World world = new WorldImpl();
+        final Level level = new LevelImpl(ZOMBIE_COUNT, 1, SUN_SPAWN_RATE, ZOMBIE_SPAWN_RATE,
+                SUN_SPAWN_RATE_DECREMENT_RANGE,
+                ZOMBIE_SPAWN_RATE_DECREMENT_RANGE);
+        world.setLevel(level);
+        game = new GameImpl(world);
         // the first zombie and the first sun are generated after 4 seconds
         this.game.update(FIRST_ELAPSED);
         assertEquals(0, game.getEntities().size());
@@ -64,6 +69,7 @@ class GameTest {
 
     @Test
     void correctIsOver() {
+        init();
         assertFalse(this.game.isOver());
         for (int i = 0; i < ZOMBIE_COUNT; i++) {
             this.game.getGameState().incKilledZombies();
