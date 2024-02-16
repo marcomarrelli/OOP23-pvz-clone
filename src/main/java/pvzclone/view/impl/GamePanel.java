@@ -22,6 +22,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import pvzclone.model.api.Entities;
 import pvzclone.model.api.Sun;
 import pvzclone.model.impl.Pair;
@@ -31,6 +32,11 @@ import pvzclone.model.impl.Pair;
  * 
  * @author Marco Marrelli
  */
+@SuppressFBWarnings(value = {
+        "SE_TRANSIENT_FIELD_NOT_RESTORED",
+        "EI_EXPOSE_REP2"
+}, justification = "images and entites shouldn't be serialized"
+        + "parent is intended to be modified")
 public final class GamePanel extends GenericPanel {
     private static final long serialVersionUID = 1234500002L;
 
@@ -80,14 +86,14 @@ public final class GamePanel extends GenericPanel {
 
     private final JLabel points;
 
-    private final Map<Entities, Image> entities = new HashMap<>();
-    private final Set<Pair<Image, Pair<Integer, Integer>>> images = new HashSet<>();
+    private final transient Map<Entities, ImageIcon> entities = new HashMap<>();
+    private final transient Set<Pair<ImageIcon, Pair<Integer, Integer>>> images = new HashSet<>();
 
     private boolean userIsPlanting;
 
-    private final SwingViewImpl parent;
+    private final transient SwingViewImpl parent;
 
-    private Pair<Double, Double> scale;
+    private transient Pair<Double, Double> scale;
 
     /**
      * Game Panel Constructor.
@@ -217,11 +223,15 @@ public final class GamePanel extends GenericPanel {
     public void paintComponent(final Graphics g) {
         super.paintComponent(g);
 
-        final Graphics2D g2d = (Graphics2D) g;
-        g2d.drawImage(this.getBackgroundImage(), 0, 0, null);
+        if (g instanceof Graphics2D) {
+            final Graphics2D g2d = (Graphics2D) g;
+            g2d.drawImage(this.getBackgroundImage(), 0, 0, null);
+            this.points.setText(String.valueOf(this.parent.getController().getSunScore()));
+            this.updateEntities(g2d);
+        } else {
+            throw new IllegalArgumentException();
+        }
 
-        this.points.setText(String.valueOf(this.parent.getController().getSunScore()));
-        this.updateEntities(g2d);
     }
 
     /**
@@ -244,7 +254,7 @@ public final class GamePanel extends GenericPanel {
      * @param entity Entità da cui prelevare l'immagine
      * @return l'immagine dell'entità.
      */
-    private Image getEntityImage(final Entities entity) {
+    private ImageIcon getEntityImage(final Entities entity) {
         return new ImageIcon(
                 switch (entity.getEntityName()) {
                     case "Plant" -> PLANT_IMAGE;
@@ -252,7 +262,7 @@ public final class GamePanel extends GenericPanel {
                     case "Bullet" -> BULLET_IMAGE;
                     case "Sun" -> SUN_IMAGE;
                     default -> throw new IllegalArgumentException("Unexpected value: " + entity.getClass().getName());
-                }).getImage();
+                });
     }
 
     /**
@@ -267,10 +277,10 @@ public final class GamePanel extends GenericPanel {
             updateMatrix();
         }
         this.entities.put(entity, getEntityImage(entity));
-        final Image original = this.entities.get(entity);
+        final ImageIcon original = this.entities.get(entity);
         final Image scaledImage = new ImageIcon(
-                original.getScaledInstance((int) (original.getWidth(this) * this.scale.getX()),
-                        (int) (original.getHeight(this) * this.scale.getY()), Image.SCALE_SMOOTH))
+                original.getImage().getScaledInstance((int) (original.getImage().getWidth(this) * this.scale.getX()),
+                        (int) (original.getImage().getHeight(this) * this.scale.getY()), Image.SCALE_SMOOTH))
                 .getImage();
         final double scaledX = entity.getPosition().getX() * this.scale.getX();
         final double scaledY = entity.getPosition().getY() * this.scale.getY();

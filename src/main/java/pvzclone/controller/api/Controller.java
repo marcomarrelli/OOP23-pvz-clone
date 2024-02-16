@@ -13,12 +13,6 @@ import pvzclone.model.impl.Pair;
 public interface Controller {
 
     /**
-     * Initializes the game.
-     * This method should be called once to start the game.
-     */
-    void initGame();
-
-    /**
      * Calls the main loop of the game.
      * This method should be called after the game is initialized.
      * It is responsible for managing the game loop.

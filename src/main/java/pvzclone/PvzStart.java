@@ -22,7 +22,6 @@ public final class PvzStart {
      *             this case).
      */
     public static void main(final String[] args) {
-        final ControllerImpl controller = new ControllerImpl();
-        controller.initGame();
+        new ControllerImpl();
     }
 }

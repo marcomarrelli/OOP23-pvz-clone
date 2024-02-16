@@ -24,13 +24,15 @@ public final class ControllerImpl implements Controller {
     private static final long PERIOD = 60;
     private static final int LEVEL_COUNT = 5;
 
-    private World world;
-    private View view;
+    private final World world;
+    private final View view;
     private Game game;
     private Optional<Integer> chosenLevel;
 
-    @Override
-    public void initGame() {
+    /**
+     * Initializes the game.
+     */
+    public ControllerImpl() {
         Locale.setDefault(Locale.ENGLISH);
 
         this.world = new WorldImpl();
@@ -42,9 +44,6 @@ public final class ControllerImpl implements Controller {
 
     @Override
     public void callMainloop() {
-        if (this.world == null || this.view == null) {
-            initGame();
-        }
         new Thread(this::mainLoop).start();
     }
 

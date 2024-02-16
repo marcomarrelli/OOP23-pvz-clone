@@ -11,11 +11,18 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * Panel used in the starting Menu Section.
  * 
  * @author Sofia Caberletti
  */
+@SuppressFBWarnings(value = {
+        "DM_EXIT",
+        "EI_EXPOSE_REP2"
+}, justification = "when button exit is clicked it needs to shut down"
+        + "parent is intended to be modified")
 public class MenuPanel extends GenericPanel {
     private static final long serialVersionUID = 1234500001L;
 
@@ -24,7 +31,7 @@ public class MenuPanel extends GenericPanel {
     private static final String BUTTON_TEXTURE = "src/main/resources/images/tombstoneTexture.jpg";
     private static final Dimension MENU_BUTTON_DIMENSION = new Dimension(
             SwingViewImpl.APPLICATION_WIDTH / 6, SwingViewImpl.APPLICATION_HEIGHT / 8);
-    private final SwingViewImpl parent;
+    private final transient SwingViewImpl parent;
 
     /**
      * Menu Panel Constructor.
@@ -93,7 +100,11 @@ public class MenuPanel extends GenericPanel {
     public void paintComponent(final Graphics g) {
         super.paintComponent(g);
 
-        final Graphics2D g2D = (Graphics2D) g;
-        g2D.drawImage(this.getBackgroundImage(), 0, 0, null);
+        if (g instanceof Graphics2D) {
+            final Graphics2D g2D = (Graphics2D) g;
+            g2D.drawImage(this.getBackgroundImage(), 0, 0, null);
+        } else {
+            throw new IllegalArgumentException();
+        }
     }
 }

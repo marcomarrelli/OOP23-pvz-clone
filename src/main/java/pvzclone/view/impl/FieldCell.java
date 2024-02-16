@@ -6,6 +6,7 @@ import javax.swing.JButton;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import pvzclone.controller.api.Controller;
 import pvzclone.model.impl.Pair;
 
@@ -17,6 +18,9 @@ import pvzclone.model.impl.Pair;
  * @see {@link GamePanel}
  * @author Marco Marrelli
  */
+@SuppressFBWarnings(value = {
+        "EI_EXPOSE_REP2"
+}, justification = "parent is intended to be modified")
 public class FieldCell extends JButton {
     private static final long serialVersionUID = 1234500005L;
 
@@ -24,18 +28,18 @@ public class FieldCell extends JButton {
     public static final String CELL_TEXT_INITIALIZER = "";
 
     private final GamePanel parent;
-    private final Pair<Integer, Integer> coord;
+    private final transient Pair<Integer, Integer> coord;
     private final Color hoverColor = new Color(225, 215, 235);
     private final Border hoverBorder = new LineBorder(hoverColor, 3);
     private boolean hasPlant;
-    private final Controller controller;
+    private final transient Controller controller;
 
     /**
      * Field Cell Constructor.
      * 
-     * @param coord     the central coordinate of the Cell.
-     * @param text      the text of the button.
-     * @param parent    the parente panel.
+     * @param coord      the central coordinate of the Cell.
+     * @param text       the text of the button.
+     * @param parent     the parente panel.
      * @param controller is the controller of the game.
      */
     public FieldCell(final GamePanel parent, final Pair<Integer, Integer> coord, final String text,
