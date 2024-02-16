@@ -138,11 +138,11 @@ public final class GameImpl implements Game {
     }
 
     private void newZombieGenerate(final long elapsed) {
-        if ((hasDeltaTimePassed(this.timeOfLastCreatedZombie, elapsed, deltaTimeZombie)
-                && this.canSingleZombieGenerate)
-                || (hasDeltaTimePassed(this.timeOfLastCreatedZombie, elapsed,
+        if (hasDeltaTimePassed(this.timeOfLastCreatedZombie, elapsed, deltaTimeZombie)
+                && this.canSingleZombieGenerate
+                || hasDeltaTimePassed(this.timeOfLastCreatedZombie, elapsed,
                         DELTA_TIME_FIRST_ZOMBIE)
-                        && this.gameState.getZombiesGenerated() == 0)) {
+                        && this.gameState.getZombiesGenerated() == 0) {
             this.timeOfLastCreatedZombie = elapsed;
             this.zombies.add((Zombie) this.zombiesFactory.createEntity());
 
