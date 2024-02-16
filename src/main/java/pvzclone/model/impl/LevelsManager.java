@@ -109,6 +109,6 @@ public final class LevelsManager {
             throw new IllegalStateException("There are no valid levels to load!");
         }
 
-        return this.levelList;
+        return new ArrayList<>(this.levelList);
     }
 }

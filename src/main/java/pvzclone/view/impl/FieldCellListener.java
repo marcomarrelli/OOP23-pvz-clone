@@ -3,12 +3,21 @@ package pvzclone.view.impl;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * Mouse Event Listener for the {@link FieldCell} Component.
  * 
  * @see {@link FieldCell}
  * @author Marco Marrelli
  */
+
+@SuppressFBWarnings(
+    value = {
+        "EI_EXPOSE_REP2"
+    },
+    justification = "parent is intended to be modificated"
+)
 public class FieldCellListener implements MouseListener {
     private final FieldCell parent;
 
