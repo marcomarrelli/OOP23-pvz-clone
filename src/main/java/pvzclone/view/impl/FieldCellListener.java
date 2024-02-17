@@ -9,7 +9,6 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
  * Mouse Event Listener for the {@link FieldCell} Component.
  * 
  * @see FieldCell
- * @author Marco Marrelli
  */
 
 @SuppressFBWarnings(value = {
@@ -44,8 +43,6 @@ public class FieldCellListener implements MouseListener {
 
     /**
      * Click and Press Event.
-     * 
-     * @author Marco Marrelli
      */
     @Override
     public void mouseReleased(final MouseEvent e) {

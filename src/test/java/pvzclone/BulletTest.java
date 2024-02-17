@@ -11,8 +11,6 @@ import pvzclone.model.impl.Pair;
 
 /**
  * This class contains the test for the bullet.
- * 
- * @author Zanchini Margherita
  */
 final class BulletTest {
 

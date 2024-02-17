@@ -1,8 +1,6 @@
 package pvzclone.model.api;
 /**
  * This interface models the methods for Zombies and Plants.
- * 
- * @author Margherita Zanchini, Sofia Lotti.
  */
 public interface ActiveEntities extends Entities {
     /**

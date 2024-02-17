@@ -12,8 +12,6 @@ import pvzclone.model.impl.ZombieImpl;
 
 /**
  * This class contains tests for testing Zombie.
- * 
- * @author Sofia Lotti.
  */
 final class ZombieTest {
 

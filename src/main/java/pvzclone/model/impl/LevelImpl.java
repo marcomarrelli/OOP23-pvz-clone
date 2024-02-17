@@ -4,8 +4,6 @@ import pvzclone.model.api.Level;
 
 /**
  * Class that implements a Level.
- * 
- * @author Marco Marrelli
  */
 public class LevelImpl implements Level {
     private final int zombieCount;

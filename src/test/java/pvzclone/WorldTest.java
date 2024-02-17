@@ -15,8 +15,6 @@ import pvzclone.model.impl.WorldImpl;
 
 /**
  * This class contains tests for the class WorldImpl.
- * 
- * @author Sofia Caberletti.
  */
 final class WorldTest {
     private static final int INT_COSTANT_FOR_TESTING = 5;

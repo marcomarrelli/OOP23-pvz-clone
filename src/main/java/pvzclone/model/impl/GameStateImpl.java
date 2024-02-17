@@ -8,8 +8,6 @@ import pvzclone.model.api.GameState;
  * Class that implements GameState.
  * 
  * This class supports reading and writing operations on fields.
- * 
- * @author Sofia Lotti.
  */
 public final class GameStateImpl implements GameState {
 

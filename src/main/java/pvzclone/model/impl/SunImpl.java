@@ -4,8 +4,6 @@ import pvzclone.model.api.Sun;
 
 /**
  * Implementation of the Sun interface.
- * 
- * @author Sofia Caberletti
  */
 public final class SunImpl implements Sun {
     private static final String NAME = "Sun";

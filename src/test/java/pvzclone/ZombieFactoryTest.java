@@ -16,8 +16,6 @@ import pvzclone.model.impl.ZombiesFactory;
 
 /**
  * This class contains tests for testing ZombieFactory.
- * 
- * @author Sofia Lotti.
  */
 final class ZombieFactoryTest {
 

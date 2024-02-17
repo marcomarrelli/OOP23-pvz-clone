@@ -16,8 +16,6 @@ import pvzclone.model.impl.WorldImpl;
 
 /**
  * This class contains the test for the GameImpl.
- * 
- * @author Zanchini Margherita
  */
 class GameTest {
 

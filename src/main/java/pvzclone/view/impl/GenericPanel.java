@@ -10,8 +10,6 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 /**
  * Abstract class for Panels, with a pre-setted Constructor.
- * 
- * @author Marco Marrelli
  */
 @SuppressFBWarnings(value = {
         "EI_EXPOSE_REP"

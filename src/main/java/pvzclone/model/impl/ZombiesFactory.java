@@ -10,8 +10,6 @@ import java.util.Random;
 
 /**
  * Class that implements EntitiesFactory.
- * 
- * @author Sofia Lotti.
  */
 public final class ZombiesFactory implements EntitiesFactory {
     private static final double ATK = 50;

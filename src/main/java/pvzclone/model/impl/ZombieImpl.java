@@ -4,8 +4,6 @@ import pvzclone.model.api.Zombie;
 
 /**
  * Class that implements Zombie Interface.
- * 
- * @author Sofia Lotti.
  */
 public final class ZombieImpl implements Zombie {
     private final double damage;

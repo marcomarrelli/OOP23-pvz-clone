@@ -3,8 +3,6 @@ package pvzclone.model.api;
 /**
  * Interface that models a Sun Entity and provides
  * methods to interact with the entity.
- * 
- * @author Sofia Caberletti
  */
 public interface Sun extends Entities {
     /**

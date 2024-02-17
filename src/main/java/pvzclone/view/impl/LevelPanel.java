@@ -14,8 +14,6 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 /**
  * Panel used to choose the level at the start of the application.
- * 
- * @author Sofia Caberletti.
  */
 
 @SuppressFBWarnings(value = {

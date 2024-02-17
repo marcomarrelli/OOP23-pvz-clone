@@ -16,8 +16,6 @@ import pvzclone.model.impl.SunsFactory;
 
 /**
  * This class contains tests for the SunsFactory.
- * 
- * @author Sofia Caberletti.
  */
 final class SunsFactoryTest {
     private static final int ENTITIES_NUMBER = 5;

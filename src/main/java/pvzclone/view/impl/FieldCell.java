@@ -15,7 +15,6 @@ import pvzclone.model.impl.Pair;
  * Its bounds are declared inside {@link GamePanel}
  * 
  * @see GamePanel
- * @author Marco Marrelli
  */
 @SuppressFBWarnings(value = {
         "EI_EXPOSE_REP2"

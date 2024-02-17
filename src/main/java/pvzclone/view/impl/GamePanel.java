@@ -29,8 +29,6 @@ import pvzclone.model.impl.Pair;
 
 /**
  * Panel used in the Gameplay Section.
- * 
- * @author Marco Marrelli
  */
 @SuppressFBWarnings(value = {
         "SE_TRANSIENT_FIELD_NOT_RESTORED",

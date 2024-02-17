@@ -2,8 +2,6 @@ package pvzclone.model.api;
 
 /**
  * This interface models a Level.
- * 
- * @author Marco Marrelli
  */
 public interface Level {
     /**

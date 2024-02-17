@@ -9,8 +9,6 @@ import pvzclone.model.api.EntitiesFactory;
 
 /**
  * This class contains methods to create Sun entities.
- * 
- * @author Sofia Caberletti
  */
 public final class SunsFactory implements EntitiesFactory {
     private static final int SPEED_Y_AXIS = 4;

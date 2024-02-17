@@ -20,9 +20,6 @@ import pvzclone.view.api.View;
 
 /**
  * Implementation of the View.
- * 
- * @author Sofia Caberletti
- * @author Marco Marrelli
  */
 public final class SwingViewImpl implements View {
     /** Application Width. */

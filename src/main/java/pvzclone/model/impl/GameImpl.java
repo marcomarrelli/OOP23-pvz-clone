@@ -103,8 +103,6 @@ public final class GameImpl implements Game {
     /**
      * Method that updates the positions of every entity
      * present in the game.
-     * 
-     * @author Sofia Caberletti
      */
     private void moveEntities() {
         for (final var zombie : this.zombies) {
@@ -208,8 +206,6 @@ public final class GameImpl implements Game {
      * This method checks all of the collisions.
      * If a zombie is in the same position of the plant then it should eat it.
      * If a bullet collides with a zombie.
-     * 
-     * @author Zanchini Margherita
      */
     private void checkCollision() {
         final Set<Zombie> zombieTemp = new HashSet<>();
@@ -268,7 +264,6 @@ public final class GameImpl implements Game {
      * And then we check if the plant is still alive after the damage received.
      * If not we remove it from the list of all the plants.
      * 
-     * @author Zanchini Margherita
      * @param zombie the zombie that eats the plant
      * @param plant  the plant that is eaten by the zombie
      */
@@ -284,8 +279,6 @@ public final class GameImpl implements Game {
     /**
      * Method that checks all the plants that need to shoot
      * and if they have to shoot creates a new bullet.
-     * 
-     * @authore Zanchini Margherita
      */
     private void plantsShoot() {
         for (final Plant plant : plants) {

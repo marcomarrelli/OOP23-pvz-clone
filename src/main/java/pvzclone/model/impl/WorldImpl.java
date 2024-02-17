@@ -6,8 +6,6 @@ import pvzclone.model.api.World;
 
 /**
  * Implementation of the World Interface.
- * 
- * @author Sofia Caberletti
  */
 public final class WorldImpl implements World {
 

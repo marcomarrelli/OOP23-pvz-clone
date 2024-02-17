@@ -6,8 +6,6 @@ import java.util.ArrayList;
 
 /**
  * Class used for Managing Levels in the Game.
- * 
- * @author Marco Marrelli
  */
 public final class LevelsManager {
     private static final int MIN_LEVELS = 1;

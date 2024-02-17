@@ -12,8 +12,6 @@ import pvzclone.model.impl.SunImpl;
 
 /**
  * This class contains tests for the Sun entity.
- * 
- * @author Sofia Caberletti.
  */
 final class SunTest {
     private static final String NAME = "Sun";

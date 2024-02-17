@@ -4,8 +4,6 @@ import pvzclone.model.api.Plant;
 
 /**
  * class that implements Plant interface.
- * 
- * @author Zanchini Margherita
  */
 
 public final class PlantImpl implements Plant {

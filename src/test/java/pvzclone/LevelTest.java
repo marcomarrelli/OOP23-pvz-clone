@@ -16,8 +16,6 @@ import pvzclone.model.impl.LevelsManager;
 
 /**
  * Level, LevelImpl and LevelsManager Tests.
- * 
- * @author Marco Marrelli
  */
 class LevelTest {
     private static final int BELOW_MIN_LEVEL = -1;

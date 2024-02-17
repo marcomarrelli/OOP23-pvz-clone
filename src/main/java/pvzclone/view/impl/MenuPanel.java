@@ -15,8 +15,6 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 /**
  * Panel used in the starting Menu Section.
- * 
- * @author Sofia Caberletti
  */
 @SuppressFBWarnings(value = {
         "DM_EXIT",
