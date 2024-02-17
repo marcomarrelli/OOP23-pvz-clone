@@ -25,7 +25,7 @@ public class LevelPanel extends GenericPanel {
     private static final int FONT_SIZE = 24;
     private static final int LAYOUT_HGAP = 20;
     private static final int LAYOUT_VGAP = 50;
-    private static final String BUTTON_TEXTURE = "src/main/resources/images/tombstoneTexture.jpg";
+    private static final String BUTTON_TEXTURE = "images/tombstoneTexture.jpg";
     private static final Dimension MENU_BUTTON_DIMENSION = new Dimension(
             SwingViewImpl.APPLICATION_WIDTH / 6, SwingViewImpl.APPLICATION_HEIGHT / 8);
     private final transient SwingViewImpl parent;
@@ -48,7 +48,7 @@ public class LevelPanel extends GenericPanel {
 
         this.setLayout(new FlowLayout(FlowLayout.CENTER, LAYOUT_HGAP,
                 SwingViewImpl.APPLICATION_HEIGHT / 2 - LAYOUT_VGAP));
-        final ImageIcon texture = new ImageIcon(BUTTON_TEXTURE);
+        final ImageIcon texture = new ImageIcon(ClassLoader.getSystemResource(BUTTON_TEXTURE));
 
         for (int i = 0; i < levelCount; i++) {
             final int numberOfTheLevel = i;

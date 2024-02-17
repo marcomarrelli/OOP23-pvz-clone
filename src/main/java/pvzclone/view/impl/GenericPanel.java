@@ -31,7 +31,7 @@ public abstract class GenericPanel extends JPanel {
      */
     public GenericPanel(final SwingViewImpl parent, final String backgroundSource) {
         this.parent = parent;
-        this.background = new ImageIcon(backgroundSource).getImage();
+        this.background = new ImageIcon(ClassLoader.getSystemResource(backgroundSource)).getImage();
         this.setLayout(null);
         this.setBackground(Color.BLACK);
         this.setSize(SwingViewImpl.APPLICATION_WIDTH, SwingViewImpl.APPLICATION_HEIGHT);
