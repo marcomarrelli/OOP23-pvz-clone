@@ -8,7 +8,11 @@ import pvzclone.model.api.Plant;
 
 public final class PlantImpl implements Plant {
 
-    private final int cost;
+    /**
+     * is the cost of the plant.
+     */
+    public static final int PLANT_COST = 100;
+
     private final double damage;
     private final String entityName;
     private final Pair<Integer, Integer> position;
@@ -24,11 +28,9 @@ public final class PlantImpl implements Plant {
      * @param entityName    is the name of the entity, for the plant is "plant"
      * @param position      is the position of the plant
      * @param cooldown      is the time between two attack of the plant
-     * @param cost          is the Sun cost of the plant
      */
     public PlantImpl(final double damage, final double remainingLife, final String entityName,
-            final Pair<Integer, Integer> position, final long cooldown, final int cost) {
-        this.cost = cost;
+            final Pair<Integer, Integer> position, final long cooldown) {
         this.damage = damage;
         this.remainingLife = remainingLife;
         this.entityName = entityName;
@@ -84,7 +86,7 @@ public final class PlantImpl implements Plant {
 
     @Override
     public int getPlantCost() {
-        return this.cost;
+        return PlantImpl.PLANT_COST;
     }
 
 }

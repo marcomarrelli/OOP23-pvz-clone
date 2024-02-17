@@ -20,9 +20,8 @@ final class PlantTest {
     private static final String NAME = "plant";
     private static final Pair<Integer, Integer> POS = new Pair<>(0, 0);
     private static final long COOLDOWN = 3000;
-    private static final int COST = 100;
 
-    private final Plant plant = new PlantImpl(DAMAGE, LIFE, NAME, POS, COOLDOWN, COST);
+    private final Plant plant = new PlantImpl(DAMAGE, LIFE, NAME, POS, COOLDOWN);
 
     @Test
     void isPlantAliveWithCorrectValues() {
@@ -32,7 +31,6 @@ final class PlantTest {
         assertEquals(NAME, plant.getEntityName());
         assertEquals(POS, plant.getPosition());
         assertEquals(COOLDOWN, plant.getCooldown());
-        assertEquals(COST, plant.getPlantCost());
     }
 
     @Test

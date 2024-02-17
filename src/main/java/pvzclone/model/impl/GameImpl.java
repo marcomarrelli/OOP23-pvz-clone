@@ -33,7 +33,6 @@ public final class GameImpl implements Game {
     private static final int DELTA_TIME_FIRST_ZOMBIE = 4000;
 
     // Base plant
-    private static final int PLANT_COST = 20;
     private static final int DAMAGE_BASE_PLANT = 20;
     private static final int LIFE_BASE_PLANT = 100;
     private static final int COOLDOWN_BASE_PLANT = 3000;
@@ -192,9 +191,9 @@ public final class GameImpl implements Game {
 
     @Override
     public boolean createPlant(final Pair<Integer, Integer> position) {
-        if (this.gameState.getSunScore() >= PLANT_COST) {
+        if (this.gameState.getSunScore() >= PlantImpl.PLANT_COST) {
             final PlantImpl newPlant = new PlantImpl(DAMAGE_BASE_PLANT, LIFE_BASE_PLANT, "Plant", position,
-                    COOLDOWN_BASE_PLANT, PLANT_COST);
+                    COOLDOWN_BASE_PLANT);
             plants.add(newPlant);
             this.gameState.decSunScore(newPlant.getPlantCost());
             return true;

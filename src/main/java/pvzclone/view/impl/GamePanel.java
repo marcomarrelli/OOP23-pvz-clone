@@ -26,6 +26,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import pvzclone.model.api.Entities;
 import pvzclone.model.api.Sun;
 import pvzclone.model.impl.Pair;
+import pvzclone.model.impl.PlantImpl;
 
 /**
  * Panel used in the Gameplay Section.
@@ -129,7 +130,7 @@ public final class GamePanel extends GenericPanel {
         plantCardButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(final ActionEvent e) {
-                if (parent.getController().getSunScore() >= 100) {
+                if (parent.getController().getSunScore() >= PlantImpl.PLANT_COST) {
                     userIsPlanting = !userIsPlanting;
                     if (userIsPlanting) {
                         showGrid();
