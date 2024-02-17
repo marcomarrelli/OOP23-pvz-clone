@@ -60,11 +60,6 @@ public final class ZombieImpl implements Zombie {
     }
 
     @Override
-    public double getXShift() {
-        return this.xShift;
-    }
-
-    @Override
     public long getCooldown() {
         return this.cooldown;
     }

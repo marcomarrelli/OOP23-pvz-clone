@@ -36,7 +36,6 @@ final class ZombieTest {
         assertTrue(zombie.isAlive());
         assertEquals(MAX_LIFE, zombie.getRemainingLife());
         assertEquals(ATK, zombie.getDamage());
-        assertEquals(X_SHIFT, zombie.getXShift());
         assertEquals(COOLDOWN, zombie.getCooldown());
         assertEquals("Zombie", zombie.getEntityName());
     }

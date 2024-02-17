@@ -10,11 +10,6 @@ public interface Zombie extends ActiveEntities {
     void moveLeft();
 
     /**
-     * @return delta, the shift of the Zombie in X axis.
-     */
-    double getXShift();
-
-    /**
      * Sets the boolean based on whether the Zombie can move or not.
      * 
      * @param canGo true if Zombie can move, false otherwise.
