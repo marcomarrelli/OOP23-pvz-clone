@@ -51,11 +51,6 @@ public final class SunImpl implements Sun {
     }
 
     @Override
-    public double getSpeed() {
-        return this.speedYAxis;
-    }
-
-    @Override
     public void moveDown() {
         this.position = new Pair<>(this.position.getX(), this.position.getY() + this.speedYAxis);
         if (this.position.getY() + IMAGE_HEIGHT >= SCREEN_BOTTOM) {

@@ -29,7 +29,6 @@ final class SunTest {
         assertTrue(sun.isAlive());
         assertEquals(NAME, sun.getEntityName());
         assertEquals(POSITION, sun.getPosition());
-        assertEquals(SPEED, sun.getSpeed());
     }
 
     @Test
