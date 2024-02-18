@@ -17,6 +17,7 @@ Il gruppo si pone come obiettivo quello di realizzare un clone (demake) del famo
 - Sistema di Posizionamento della Pianta (Click)
 - Sistema di Generazione degli Zombies
 - Sistema per le Orde di Zombies
+- Applicazione Resizable
 
 ### Lista di Funzionalità Opzionali Non Raggiunte:
 - Pianta Girasole (per Sistema dei Soli)
