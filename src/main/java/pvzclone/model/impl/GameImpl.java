@@ -11,7 +11,6 @@ import pvzclone.model.api.Plant;
 import pvzclone.model.api.Sun;
 import pvzclone.model.api.World;
 import pvzclone.model.api.Zombie;
-import pvzclone.view.impl.SwingViewImpl;
 
 import java.util.HashSet;
 import java.util.Random;
@@ -226,29 +225,20 @@ public final class GameImpl implements Game {
                         zombie.setCanGo(true);
                     }
                 }));
-        this.plants = plantTemp;
 
-        for (final Bullet bullet : bullets) {
-            for (final Zombie zombie : zombies) {
-                final int bulletX = bullet.getPosition().getX();
-                final int bulletY = bullet.getPosition().getY();
-                final int zombieX = zombie.getPosition().getX();
-                final int zombieY = zombie.getPosition().getY();
-
-                if ((bulletY == zombieY + DELTA_Y_PLANT || bulletY == zombieY + DELTA_Y_PLANT - 3)
-                        && bulletX >= zombieX - DELTA_ZOMBIE) {
+        bullets.forEach(bullet -> zombies.stream()
+                .filter(zombie -> (bullet.getPosition().getY() == zombie.getPosition().getY() + DELTA_Y_PLANT
+                        || bullet.getPosition().getY() == zombie.getPosition().getY() + DELTA_Y_PLANT - 3)
+                        && bullet.getPosition().getX() >= zombie.getPosition().getX() - DELTA_ZOMBIE)
+                .forEach(zombie -> {
                     zombie.receiveDamage(bullet.getDamage());
                     bulletTemp.remove(bullet);
                     if (!zombie.isAlive()) {
                         zombieTemp.remove(zombie);
                         this.gameState.incKilledZombies();
                     }
-                }
-            }
-            if (bullet.getPosition().getX() > SwingViewImpl.APPLICATION_WIDTH) {
-                bulletTemp.remove(bullet);
-            }
-        }
+                }));
+
         this.bullets = bulletTemp;
         this.plants = plantTemp;
         this.zombies = zombieTemp;
