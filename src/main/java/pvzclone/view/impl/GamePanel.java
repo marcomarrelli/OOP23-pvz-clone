@@ -261,14 +261,15 @@ public final class GamePanel extends GenericPanel {
      * @return image of the entity.
      */
     private ImageIcon getEntityImage(final Entities entity) {
-        return new ImageIcon(
-                switch (entity.getEntityName()) {
-                    case "Plant" -> PLANT_IMAGE;
-                    case "Zombie" -> ZOMBIE_IMAGE;
-                    case "Bullet" -> BULLET_IMAGE;
-                    case "Sun" -> SUN_IMAGE;
-                    default -> throw new IllegalArgumentException("Unexpected value: " + entity.getClass().getName());
-                });
+        final String resource = switch (entity.getEntityName()) {
+            case "Plant" -> PLANT_IMAGE;
+            case "Zombie" -> ZOMBIE_IMAGE;
+            case "Bullet" -> BULLET_IMAGE;
+            case "Sun" -> SUN_IMAGE;
+            default -> throw new IllegalArgumentException("Unexpected value: " + entity.getClass().getName());
+        };
+
+        return new ImageIcon(ClassLoader.getSystemResource(resource));
     }
 
     /**
