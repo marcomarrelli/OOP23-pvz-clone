@@ -1,6 +1,7 @@
 package pvzclone.model.impl;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import pvzclone.model.api.Bullet;
@@ -174,17 +175,20 @@ public final class GameImpl implements Game {
      */
     private void createWave() {
         final int totZombies = this.world.getLevel().getZombieCount();
-        final int totzombieWave = this.world.getLevel().getZombieCountInWave();
+        final int totZombieWave = this.world.getLevel().getZombieCountInWave();
 
-        if (this.gameState.getZombiesGenerated() >= totZombies - totzombieWave
+        if (this.gameState.getZombiesGenerated() >= totZombies - totZombieWave
                 && this.wavePassed < this.world.getLevel().getZombieWaveCount()) {
             this.canSingleZombieGenerate = false;
-            this.wavePassed = this.wavePassed + 1;
-            final Set<Entities> newWave = this.zombiesFactory.createEntities(totzombieWave);
-            for (final Entities singleZombieInWave : newWave) {
-                this.zombies.add((Zombie) singleZombieInWave);
-                this.gameState.incZombiesGenerated();
-            }
+            this.wavePassed++;
+
+            final Set<Zombie> newWave = zombiesFactory.createEntities(totZombieWave)
+                    .stream()
+                    .map(entity -> (Zombie) entity)
+                    .collect(Collectors.toSet());
+
+            this.zombies.addAll(newWave);
+            this.gameState.incZombiesGenerated();
         }
     }
 
