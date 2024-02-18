@@ -213,24 +213,21 @@ public final class GameImpl implements Game {
         bulletTemp.addAll(bullets);
         zombieTemp.addAll(zombies);
         plantTemp.addAll(plants);
-        for (final Zombie zombie : zombies) {
-            for (final Plant plant : plants) {
-                final int plantX = plant.getPosition().getX();
-                final int plantY = plant.getPosition().getY();
-                final int zombieX = zombie.getPosition().getX();
-                final int zombieY = zombie.getPosition().getY();
 
-                if ((plantY == zombieY + DELTA_Y_PLANT || plantY == zombieY + DELTA_Y_PLANT - 3)
-                        && zombieX <= plantX + DELTA_PLANT) {
+        zombies.forEach(zombie -> plants.stream()
+                .filter(plant -> (plant.getPosition().getY() == zombie.getPosition().getY() + DELTA_Y_PLANT
+                        || plant.getPosition().getY() == zombie.getPosition().getY() + DELTA_Y_PLANT - 3)
+                        && zombie.getPosition().getX() <= plant.getPosition().getX() + DELTA_PLANT)
+                .forEach(plant -> {
                     zombieEatPlant(zombie, plant);
                     zombie.setCanGo(false);
                     if (!plant.isAlive()) {
                         plantTemp.remove(plant);
                         zombie.setCanGo(true);
                     }
-                }
-            }
-        }
+                }));
+        this.plants = plantTemp;
+
         for (final Bullet bullet : bullets) {
             for (final Zombie zombie : zombies) {
                 final int bulletX = bullet.getPosition().getX();
@@ -280,21 +277,16 @@ public final class GameImpl implements Game {
      * and if they have to shoot creates a new bullet.
      */
     private void plantsShoot() {
-        for (final Plant plant : plants) {
-            for (final Zombie zombie : zombies) {
-                if (plant.getPosition().getY() == zombie.getPosition().getY() + DELTA_Y_PLANT
-                        || plant.getPosition().getY() == zombie.getPosition().getY() + DELTA_Y_PLANT - 3) {
-                    final long plantLastAttack = plant.getLastTimeAttack();
-                    final long currentTime = System.currentTimeMillis();
-                    if (currentTime - plantLastAttack > plant.getCooldown()) {
-                        bullets.add(new BulletImpl(BULLET_SPEED, plant.getDamage(),
-                                new Pair<>(plant.getPosition().getX() + DELTA_X_BULLET, plant.getPosition().getY()),
-                                "Bullet"));
-                        plant.setLastTimeAttack(currentTime);
-                    }
-                }
-            }
-        }
+        plants.stream().filter(plant -> System.currentTimeMillis() - plant.getLastTimeAttack() > plant.getCooldown())
+                .forEach(plant -> zombies.stream()
+                        .filter(zombie -> plant.getPosition().getY() == zombie.getPosition().getY() + DELTA_Y_PLANT
+                                || plant.getPosition().getY() == zombie.getPosition().getY() + DELTA_Y_PLANT - 3)
+                        .forEach(zombie -> {
+                            bullets.add(new BulletImpl(BULLET_SPEED, plant.getDamage(),
+                                    new Pair<>(plant.getPosition().getX() + DELTA_X_BULLET, plant.getPosition().getY()),
+                                    "Bullet"));
+                            plant.setLastTimeAttack(System.currentTimeMillis());
+                        }));
     }
 
     @Override
